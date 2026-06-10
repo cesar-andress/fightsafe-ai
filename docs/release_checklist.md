@@ -4,7 +4,7 @@
 
 Use this checklist for the **first public software release** of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts (`../fusion2026`, `../sinica2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in `/home/cesar/papers/bibliography.bib`.
+Companion LaTeX manuscripts (`../fusion2026`, `../eswa2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in `/home/cesar/papers/bibliography.bib`.
 
 ---
 
@@ -106,7 +106,7 @@ No citation-key changes are required if you only replace the DOI in `bibliograph
 | Manuscript | File |
 |------------|------|
 | Information Fusion | `../fusion2026/declarations.tex` |
-| JAS / TapKO | `../sinica2026/main.tex` |
+| ESWA / TapKO | `../eswa2026/main.tex` |
 | FightSafe-Bench | `../sports/main.tex` |
 
 All use `\bibliography{../../bibliography}`.
@@ -141,8 +141,8 @@ cd ../fusion2026
 make -C ../fightsafe-ai fusion-pdf
 # or: pdflatex main && bibtex main && pdflatex main && pdflatex main
 
-# sinica2026 (IEEEtran)
-cd ../sinica2026
+# eswa2026 (IEEEtran)
+cd ../eswa2026
 latexmk -pdf -interaction=nonstopmode main.tex
 
 # sports (IEEEtran)
@@ -154,7 +154,7 @@ Verify:
 
 - No undefined citations for `fightsafe_ai_2026`
 - Bibliography lists the Zenodo DOI (not `XXXXXXX`)
-- PDFs build: `fusion2026/main.pdf`, `sinica2026/main.pdf`, `sports/main.pdf`
+- PDFs build: `fusion2026/main.pdf`, `eswa2026/main.pdf`, `sports/main.pdf`
 
 Smoke-test reproducibility against the released tag:
 

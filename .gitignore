@@ -1,5 +1,5 @@
 # FightSafe AI — commit source, configs, docs, and small curated data; ignore local media & runs.
-# Companion LaTeX manuscripts live in sibling directories (../fusion2026, ../sinica2026, ../sports).
+# Companion LaTeX manuscripts live in sibling directories (../fusion2026, ../eswa2026, ../sports).
 # Compiled PDF at repo root (local build; exceeds default pre-commit size check when tracked).
 paper.pdf
 # Git archive / local bundle exports (see docs/clean-project-archive.md); exceed hook maxkb.

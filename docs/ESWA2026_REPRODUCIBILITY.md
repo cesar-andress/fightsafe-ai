@@ -1,12 +1,12 @@
-# sinica2026 reproducibility guide
+# eswa2026 reproducibility guide
 
 Post-submission documentation for the JAS / TapKO HITL manuscript. Documentation-only; no software or metric changes beyond what **v0.1.3** already ships.
 
 Paper-specific instructions for reproducing the TapKO / HITL workflow demonstration reported in:
 
-**Human Supervisory Control for Explainable Escalation of AI-Generated Safety Alerts Under Partial Observability**
+**A Traceable Machine-Side Alert Ranking and Audit Specification for Human Oversight**
 
-LaTeX sources: `../sinica2026/` (monorepo layout: `papers/sinica2026/`).
+LaTeX sources: `../eswa2026/` (monorepo layout: `papers/eswa2026/`).
 
 General installation, environment variables, and cross-manuscript notes: [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md).
 
@@ -26,7 +26,7 @@ General installation, environment variables, and cross-manuscript notes: [`REPRO
 
 Reproduce the **`jedi_submissions` diagnostic pilot**: pipeline traceability, evaluator exports, and manuscript Tables I–II (`tapko_pilot_results`, `tapko_pilot_per_class`). This is **not** headline accuracy validation; draft reference intervals are research bookkeeping only (see [`data/README.md`](../data/README.md)).
 
-**Evaluator matching defaults** (fixed in the reported pilot; also used by `scripts/reproduce_sinica2026.sh`):
+**Evaluator matching defaults** (fixed in the reported pilot; also used by `scripts/reproduce_eswa2026.sh`):
 
 | Parameter | Value |
 |-----------|-------|
@@ -60,10 +60,10 @@ Optional PDF rebuild: TeX Live with `pdflatex` and `bibtex`.
 | Path | Description |
 |------|-------------|
 | `data/tapko/annotations/jedi_submissions.json` | Draft TapKO reference windows (10 intervals) |
-| `data/repro/sinica2026/reference/tapko_predictions.json` | Reference detector export (`jedi_submissions`) |
-| `data/repro/sinica2026/reference/tapko_results.csv` | Reference evaluator metrics |
-| `data/repro/sinica2026/reference/tapko_error_analysis.md` | Reference error category counts |
-| `data/repro/sinica2026/reference/tapko_manifest.json` | Optional manifest (copied in reference mode when present) |
+| `data/repro/eswa2026/reference/tapko_predictions.json` | Reference detector export (`jedi_submissions`) |
+| `data/repro/eswa2026/reference/tapko_results.csv` | Reference evaluator metrics |
+| `data/repro/eswa2026/reference/tapko_error_analysis.md` | Reference error category counts |
+| `data/repro/eswa2026/reference/tapko_manifest.json` | Optional manifest (copied in reference mode when present) |
 
 ### External (full pipeline only)
 
@@ -75,13 +75,13 @@ Override paths when needed:
 
 | Variable | Default |
 |----------|---------|
-| `SINICA_DIR` | `../sinica2026` |
+| `ESWA_DIR` | `../eswa2026` |
 | `TAPKO_VIDEO` | `data/tapko/videos/jedi_submissions.mp4` |
 | `TAPKO_ANNOTATIONS` | `data/tapko/annotations/jedi_submissions.json` |
 | `REPRO_USE_REFERENCE` | `0` |
-| `SINICA_DETECT_DIR` | `outputs/tapko/jedi_submissions` |
-| `SINICA_EVAL_DIR` | `outputs/tapko/jedi_submissions_eval` |
-| `SINICA_REPRO_DIR` | `outputs/repro/sinica2026` |
+| `ESWA_DETECT_DIR` | `outputs/tapko/jedi_submissions` |
+| `ESWA_EVAL_DIR` | `outputs/tapko/jedi_submissions_eval` |
+| `ESWA_REPRO_DIR` | `outputs/repro/eswa2026` |
 
 ---
 
@@ -92,13 +92,13 @@ Run from the **repository root** (`fightsafe-ai/`).
 ### Full pipeline (requires local video)
 
 ```bash
-make reproduce-sinica
+make reproduce-eswa
 ```
 
 Equivalent:
 
 ```bash
-bash scripts/reproduce_sinica2026.sh
+bash scripts/reproduce_eswa2026.sh
 ```
 
 This runs, in order:
@@ -106,31 +106,31 @@ This runs, in order:
 1. `fightsafe tapko-validate-annotations --annotations data/tapko/annotations/jedi_submissions.json`
 2. `fightsafe tapko-detect --source data/tapko/videos/jedi_submissions.mp4 --output-dir outputs/tapko/jedi_submissions --fps 30 --pose-backend mediapipe`
 3. `fightsafe tapko-evaluate --annotations data/tapko/annotations/jedi_submissions.json --predictions outputs/tapko/jedi_submissions/tapko_predictions.json --output-dir outputs/tapko/jedi_submissions_eval --tolerance-seconds 0.5 --match-mode family`
-4. `python scripts/export_sinica2026_tables.py --install --sinica-dir ../sinica2026` (paths resolved by the script from evaluator outputs)
-5. Optional: compile `../sinica2026/main.pdf` when `pdflatex` is available
-6. `python scripts/verify_paper_outputs.py --paper sinica`
+4. `python scripts/export_eswa2026_tables.py --install --eswa-dir ../eswa2026` (paths resolved by the script from evaluator outputs)
+5. Optional: compile `../eswa2026/main.pdf` when `pdflatex` is available
+6. `python scripts/verify_paper_outputs.py --paper eswa`
 
 ### Reference mode (no video)
 
 When the source video is unavailable, bundled reference predictions regenerate the manuscript tables and metrics:
 
 ```bash
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_sinica2026.sh
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
 ```
 
 Reference mode:
 
-1. Copies `data/repro/sinica2026/reference/tapko_predictions.json` (and `tapko_manifest.json` when present) into `outputs/tapko/jedi_submissions/`
-2. Copies `data/repro/sinica2026/reference/tapko_results.csv` into `outputs/tapko/jedi_submissions_eval/` when present
+1. Copies `data/repro/eswa2026/reference/tapko_predictions.json` (and `tapko_manifest.json` when present) into `outputs/tapko/jedi_submissions/`
+2. Copies `data/repro/eswa2026/reference/tapko_results.csv` into `outputs/tapko/jedi_submissions_eval/` when present
 3. Re-runs `fightsafe tapko-evaluate` if no evaluator CSV is available
 4. Exports and installs LaTeX tables, then runs verification
 
-`make reproduce-all` invokes sinica reproduction in reference mode automatically when the video file is missing (`scripts/reproduce_all.sh`).
+`make reproduce-all` invokes eswa reproduction in reference mode automatically when the video file is missing (`scripts/reproduce_all.sh`).
 
 ### Export tables only
 
 ```bash
-python scripts/export_sinica2026_tables.py --install --sinica-dir ../sinica2026
+python scripts/export_eswa2026_tables.py --install --eswa-dir ../eswa2026
 ```
 
 Requires existing evaluator outputs at `outputs/tapko/jedi_submissions_eval/tapko_results.csv` and `outputs/tapko/jedi_submissions/tapko_predictions.json`.
@@ -140,13 +140,13 @@ Requires existing evaluator outputs at `outputs/tapko/jedi_submissions_eval/tapk
 ```bash
 make verify-repro
 # or:
-python scripts/verify_paper_outputs.py --paper sinica
+python scripts/verify_paper_outputs.py --paper eswa
 ```
 
 ### Compile manuscript PDF (optional)
 
 ```bash
-cd ../sinica2026 && pdflatex main && bibtex main && pdflatex main && pdflatex main
+cd ../eswa2026 && pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
 
 ---
@@ -165,11 +165,11 @@ cd ../sinica2026 && pdflatex main && bibtex main && pdflatex main && pdflatex ma
 
 | Path | Description |
 |------|-------------|
-| `outputs/repro/sinica2026/tables/tapko_pilot_results.tex` | Regenerated pilot results table |
-| `outputs/repro/sinica2026/tables/tapko_pilot_per_class.tex` | Regenerated per-class table |
-| `outputs/repro/sinica2026/tapko_results.csv` | Copy of evaluator CSV |
-| `outputs/repro/sinica2026/tapko_error_analysis.md` | Copy of error analysis (when produced) |
-| `outputs/repro/sinica2026/main.pdf` | Copy of compiled manuscript (when `pdflatex` succeeds) |
+| `outputs/repro/eswa2026/tables/tapko_pilot_results.tex` | Regenerated pilot results table |
+| `outputs/repro/eswa2026/tables/tapko_pilot_per_class.tex` | Regenerated per-class table |
+| `outputs/repro/eswa2026/tapko_results.csv` | Copy of evaluator CSV |
+| `outputs/repro/eswa2026/tapko_error_analysis.md` | Copy of error analysis (when produced) |
+| `outputs/repro/eswa2026/main.pdf` | Copy of compiled manuscript (when `pdflatex` succeeds) |
 
 Architecture figures (`figures/fig*_tikz.tex`) are LaTeX/TikZ sources compiled inside the PDF; no software run is required to regenerate them.
 
@@ -177,18 +177,18 @@ Architecture figures (`figures/fig*_tikz.tex`) are LaTeX/TikZ sources compiled i
 
 ## Generated manuscript tables
 
-With `--install`, `scripts/export_sinica2026_tables.py` copies regenerated fragments into the manuscript tree:
+With `--install`, `scripts/export_eswa2026_tables.py` copies regenerated fragments into the manuscript tree:
 
 | Manuscript path | Label |
 |-----------------|-------|
-| `../sinica2026/tables/tapko_pilot_results.tex` | `tab:tapko_pilot_results` |
-| `../sinica2026/tables/tapko_pilot_per_class.tex` | `tab:tapko_pilot_per_class` |
+| `../eswa2026/tables/tapko_pilot_results.tex` | `tab:tapko_pilot_results` |
+| `../eswa2026/tables/tapko_pilot_per_class.tex` | `tab:tapko_pilot_per_class` |
 
 ---
 
 ## Expected metrics (micro row, draft references)
 
-Verification compares the reproduced `micro` row in `tapko_results.csv` against `data/repro/sinica2026/reference/tapko_results.csv`:
+Verification compares the reproduced `micro` row in `tapko_results.csv` against `data/repro/eswa2026/reference/tapko_results.csv`:
 
 | Metric | Value |
 |--------|-------|
@@ -213,7 +213,7 @@ Verification compares the reproduced `micro` row in `tapko_results.csv` against 
 
 ## See also
 
-- [`README.md`](../README.md) — installation and sinica2026 quick reference
+- [`README.md`](../README.md) — installation and eswa2026 quick reference
 - [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) — all companion manuscripts
 - [`data/repro/README.md`](../data/repro/README.md) — reference snapshot policy
 - [`scripts/README.md`](../scripts/README.md) — script index

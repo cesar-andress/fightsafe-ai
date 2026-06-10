@@ -7,7 +7,7 @@ This document maps each companion manuscript to the software commands, input dat
 ```
 papers/fightsafe-ai/          ← this repository (software)
 papers/fusion2026/            ← Information Fusion manuscript
-papers/sinica2026/            ← TapKO / HITL manuscript
+papers/eswa2026/            ← TapKO / HITL manuscript
 papers/sports/                ← FightSafe-Bench manuscript
 ```
 
@@ -21,12 +21,12 @@ Override paths with environment variables (see [Environment variables](#environm
 cd fightsafe-ai
 pip install -e ".[dev]"
 
-# All three papers (reference mode for sinica when video is absent)
+# All three papers (reference mode for eswa when video is absent)
 make reproduce-all
 
 # Or individually
 make reproduce-fusion
-make reproduce-sinica
+make reproduce-eswa
 make reproduce-sports
 
 # Verify bundled reference snapshots
@@ -40,7 +40,7 @@ make verify-repro
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `FUSION_DIR` | `../fusion2026` | Information Fusion LaTeX root |
-| `SINICA_DIR` | `../sinica2026` | TapKO / HITL LaTeX root |
+| `ESWA_DIR` | `../eswa2026` | TapKO / HITL LaTeX root |
 | `SPORTS_DIR` | `../sports` | FightSafe-Bench LaTeX root |
 | `REPO_ROOT` | auto | Software repository root |
 | `REPRO_OUTPUT_ROOT` | `outputs/repro` | Generated reproduction artefacts |
@@ -102,26 +102,26 @@ python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
 
 ---
 
-## sinica2026 — TapKO / HITL workflow demonstration
+## eswa2026 — TapKO / HITL workflow demonstration
 
 ### Scientific artefacts
 
 | Artefact | Manuscript path | Reproduced by | Expected output |
 |----------|-----------------|---------------|-----------------|
-| Pilot results table | `tables/tapko_pilot_results.tex` | `scripts/export_sinica2026_tables.py --install` | `outputs/repro/sinica2026/tables/tapko_pilot_results.tex` |
-| Per-class table | `tables/tapko_pilot_per_class.tex` | same | `outputs/repro/sinica2026/tables/tapko_pilot_per_class.tex` |
+| Pilot results table | `tables/tapko_pilot_results.tex` | `scripts/export_eswa2026_tables.py --install` | `outputs/repro/eswa2026/tables/tapko_pilot_results.tex` |
+| Per-class table | `tables/tapko_pilot_per_class.tex` | same | `outputs/repro/eswa2026/tables/tapko_pilot_per_class.tex` |
 | Evaluator CSV | (supporting) | `fightsafe tapko-evaluate` | `outputs/tapko/jedi_submissions_eval/tapko_results.csv` |
 | Error analysis | cited in text | evaluator | `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` |
 | Architecture figures | `figures/fig*_tikz.tex` | LaTeX/TikZ (no code run) | compiled in PDF |
-| PDF | `main.pdf` | `reproduce_sinica2026.sh` | `outputs/repro/sinica2026/main.pdf` |
+| PDF | `main.pdf` | `reproduce_eswa2026.sh` | `outputs/repro/eswa2026/main.pdf` |
 
 ### Bundled inputs
 
 | Path | Description |
 |------|-------------|
 | `data/tapko/annotations/jedi_submissions.json` | Draft reference windows (10 intervals) |
-| `data/repro/sinica2026/reference/tapko_predictions.json` | Reference detector export (verification mode) |
-| `data/repro/sinica2026/reference/tapko_results.csv` | Reference evaluator metrics |
+| `data/repro/eswa2026/reference/tapko_predictions.json` | Reference detector export (verification mode) |
+| `data/repro/eswa2026/reference/tapko_results.csv` | Reference evaluator metrics |
 
 ### External inputs
 
@@ -133,13 +133,13 @@ python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
 
 ```bash
 # Full pipeline (requires video)
-bash scripts/reproduce_sinica2026.sh
+bash scripts/reproduce_eswa2026.sh
 
 # Without video — reference predictions + table sync
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_sinica2026.sh
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
 
 # Export tables only
-python scripts/export_sinica2026_tables.py --install --sinica-dir ../sinica2026
+python scripts/export_eswa2026_tables.py --install --eswa-dir ../eswa2026
 ```
 
 ### Expected metrics (micro row, draft references)
@@ -192,7 +192,7 @@ python scripts/verify_paper_outputs.py --paper all
 Checks:
 
 - fusion: ablation CSV completeness
-- sinica: reproduced metrics vs `data/repro/sinica2026/reference/tapko_results.csv`
+- eswa: reproduced metrics vs `data/repro/eswa2026/reference/tapko_results.csv`
 - sports: `dataset_statistics.json` present
 
 ---
@@ -205,7 +205,7 @@ outputs/repro/
 │   ├── tables/           # regenerated ablation TeX
 │   ├── figures/          # copies of ablation PDF/PNG
 │   └── main.pdf          # optional PDF copy
-├── sinica2026/
+├── eswa2026/
 │   ├── tables/           # tapko_pilot_*.tex
 │   ├── tapko_results.csv
 │   └── main.pdf
@@ -222,5 +222,5 @@ outputs/repro/
 - `data/README.md` — large media download policy
 - `scripts/README.md` — script index
 - `README.md` — installation and citation
-- [`SINICA2026_REPRODUCIBILITY.md`](SINICA2026_REPRODUCIBILITY.md) — sinica2026 paper-specific reproduction
-- [`SINICA2026_TRACEABILITY_MATRIX.md`](SINICA2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for sinica2026
+- [`ESWA2026_REPRODUCIBILITY.md`](ESWA2026_REPRODUCIBILITY.md) — eswa2026 paper-specific reproduction
+- [`ESWA2026_TRACEABILITY_MATRIX.md`](ESWA2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for eswa2026

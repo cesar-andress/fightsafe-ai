@@ -20,12 +20,12 @@ FightSafe AI is a **research prototype**. It produces interpretable, auditable *
 
 ## Research outputs
 
-Three companion manuscripts share terminology but target different scientific objects. LaTeX sources live in sibling directories when using the monorepo layout (`../fusion2026`, `../sinica2026`, `../sports`).
+Three companion manuscripts share terminology but target different scientific objects. LaTeX sources live in sibling directories when using the monorepo layout (`../fusion2026`, `../eswa2026`, `../sports`).
 
 | Manuscript | Directory | Scientific focus | Software entry points |
 |------------|-----------|------------------|------------------------|
 | **Information Fusion** | `../fusion2026/` | Multi-source temporal fusion, mask ablations, BoxingVI interval evaluation | `make reproduce-fusion`, `fightsafe risk-ablation-all` |
-| **JAS / TapKO HITL** | `../sinica2026/` | Human supervisory control, audit traces, TapKO workflow demonstration | `make reproduce-sinica`, `fightsafe tapko-detect` |
+| **ESWA / TapKO HITL** | `../eswa2026/` | Human supervisory control, audit traces, TapKO workflow demonstration | `make reproduce-eswa`, `fightsafe tapko-detect` |
 | **FightSafe-Bench** | `../sports/` | Benchmark dataset design, annotation protocol, baseline tasks | `make reproduce-sports`, `scripts/build_fightsafe_bench.py` |
 
 ---
@@ -111,7 +111,7 @@ All reproduction targets are available via `make`:
 
 ```bash
 make reproduce-fusion    # fusion2026 manuscript assets + PDF (when data present)
-make reproduce-sinica    # sinica2026 TapKO pilot pipeline
+make reproduce-eswa    # eswa2026 TapKO pilot pipeline
 make reproduce-sports    # sports / FightSafe-Bench dataset exports
 make reproduce-all       # run all three (best-effort; skips missing data)
 ```
@@ -150,34 +150,34 @@ python ../fusion2026/scripts/regenerate_figures.py
 
 Precomputed LaTeX fragments and figures are already committed under `../fusion2026/tables/` and `../fusion2026/figures/` for PDF-only builds.
 
-### 2. sinica2026 (TapKO / HITL workflow demonstration)
+### 2. eswa2026 (TapKO / HITL workflow demonstration)
 
-**Manuscript:** *Human Supervisory Control for Explainable Escalation of AI-Generated Safety Alerts Under Partial Observability* (`../sinica2026/`)
+**Manuscript:** *A Traceable Machine-Side Alert Ranking and Audit Specification for Human Oversight* (`../eswa2026/`)
 
 **Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**.
 
 **Goal:** Reproduce the `jedi_submissions` diagnostic pilot (pipeline traceability, not headline accuracy).
 
-Paper-specific guide: [`docs/SINICA2026_REPRODUCIBILITY.md`](docs/SINICA2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/SINICA2026_TRACEABILITY_MATRIX.md`](docs/SINICA2026_TRACEABILITY_MATRIX.md)
+Paper-specific guide: [`docs/ESWA2026_REPRODUCIBILITY.md`](docs/ESWA2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/ESWA2026_TRACEABILITY_MATRIX.md`](docs/ESWA2026_TRACEABILITY_MATRIX.md)
 
 **Prerequisites:**
 
 1. Draft annotations (included): `data/tapko/annotations/jedi_submissions.json`
 2. Source video (not in Git, ~200 MB): download to `data/tapko/videos/jedi_submissions.mp4` — see [`data/README.md`](data/README.md). The instructional clip `jedi_submissions` is not redistributed because of rights restrictions.
-3. Reference predictions (verification without video): `data/repro/sinica2026/reference/tapko_predictions.json` and `data/repro/sinica2026/reference/tapko_results.csv`
+3. Reference predictions (verification without video): `data/repro/eswa2026/reference/tapko_predictions.json` and `data/repro/eswa2026/reference/tapko_results.csv`
 
 **Reproduction commands** (from repository root):
 
 ```bash
 # Full pipeline (requires local video)
-bash scripts/reproduce_sinica2026.sh
-# equivalent: make reproduce-sinica
+bash scripts/reproduce_eswa2026.sh
+# equivalent: make reproduce-eswa
 
 # Reference mode — bundled predictions when the video is unavailable
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_sinica2026.sh
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
 ```
 
-Reference mode copies bundled detector/evaluator exports from `data/repro/sinica2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
+Reference mode copies bundled detector/evaluator exports from `data/repro/eswa2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
 
 **Expected outputs:**
 
@@ -186,11 +186,11 @@ Reference mode copies bundled detector/evaluator exports from `data/repro/sinica
 | `outputs/tapko/jedi_submissions/tapko_predictions.json` | Detector export (337 candidate intervals) |
 | `outputs/tapko/jedi_submissions_eval/tapko_results.csv` | Evaluator metrics (micro / per-class) |
 | `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` | Error taxonomy digest |
-| `../sinica2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
-| `../sinica2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
-| `outputs/repro/sinica2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
+| `../eswa2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
+| `../eswa2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
+| `outputs/repro/eswa2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
 
-Verification: `python scripts/verify_paper_outputs.py --paper sinica` (micro row: TP=1, FP=336, FN=9).
+Verification: `python scripts/verify_paper_outputs.py --paper eswa` (micro row: TP=1, FP=336, FN=9).
 
 Manual steps:
 
@@ -209,7 +209,7 @@ fightsafe tapko-evaluate \
 Compile the manuscript:
 
 ```bash
-cd ../sinica2026 && pdflatex main && bibtex main && pdflatex main && pdflatex main
+cd ../eswa2026 && pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
 
 ### 3. sports (FightSafe-Bench)
@@ -281,7 +281,7 @@ If you use this software, please cite the Zenodo archive and the GitHub reposito
 Cite the relevant manuscript when using methods or results from that line of work:
 
 - **Fusion:** *Explainable Multi-Source Temporal Information Fusion for Combat-Sports Safety Intelligence* (`../fusion2026/`)
-- **HITL / TapKO:** *Human Supervisory Control for Explainable Escalation of AI-Generated Safety Alerts Under Partial Observability* (`../sinica2026/`)
+- **HITL / TapKO:** *A Traceable Machine-Side Alert Ranking and Audit Specification for Human Oversight* (`../eswa2026/`)
 - **Benchmark:** *FightSafe-Bench: A Benchmark for Temporal Safety Event Detection under Partial Observability* (`../sports/`)
 
 ---

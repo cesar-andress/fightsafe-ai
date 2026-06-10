@@ -19,7 +19,7 @@ fs_require_file() {
 }
 
 fs_mkdir_outputs() {
-  mkdir -p "$FUSION_REPRO_DIR" "$SINICA_REPRO_DIR" "$SPORTS_REPRO_DIR"
+  mkdir -p "$FUSION_REPRO_DIR" "$ESWA_REPRO_DIR" "$SPORTS_REPRO_DIR"
 }
 
 if [[ -n "${FIGHTSAFE_COMMON_LOADED:-}" ]]; then
@@ -36,13 +36,13 @@ export REPO_ROOT
 
 # Companion manuscript directories (monorepo layout)
 export FUSION_DIR="${FUSION_DIR:-$REPO_ROOT/../fusion2026}"
-export SINICA_DIR="${SINICA_DIR:-$REPO_ROOT/../sinica2026}"
+export ESWA_DIR="${ESWA_DIR:-$REPO_ROOT/../eswa2026}"
 export SPORTS_DIR="${SPORTS_DIR:-$REPO_ROOT/../sports}"
 
 # Reproducibility output roots (generated artefacts; gitignored)
 export REPRO_OUTPUT_ROOT="${REPRO_OUTPUT_ROOT:-$REPO_ROOT/outputs/repro}"
 export FUSION_REPRO_DIR="${FUSION_REPRO_DIR:-$REPRO_OUTPUT_ROOT/fusion2026}"
-export SINICA_REPRO_DIR="${SINICA_REPRO_DIR:-$REPRO_OUTPUT_ROOT/sinica2026}"
+export ESWA_REPRO_DIR="${ESWA_REPRO_DIR:-$REPRO_OUTPUT_ROOT/eswa2026}"
 export SPORTS_REPRO_DIR="${SPORTS_REPRO_DIR:-$REPRO_OUTPUT_ROOT/sports}"
 
 # Reference snapshots shipped in Git (verification without large media)

@@ -23,13 +23,13 @@ run_step() {
   fi
 }
 
-# sinica first when video missing: reference mode for table sync
+# eswa first when video missing: reference mode for table sync
 if [[ ! -f "$TAPKO_VIDEO" && "${REPRO_USE_REFERENCE:-1}" != "0" ]]; then
   export REPRO_USE_REFERENCE=1
 fi
 
 run_step "fusion2026" bash "$SCRIPT_DIR/reproduce_fusion2026.sh"
-run_step "sinica2026" bash "$SCRIPT_DIR/reproduce_sinica2026.sh"
+run_step "eswa2026" bash "$SCRIPT_DIR/reproduce_eswa2026.sh"
 run_step "sports" bash "$SCRIPT_DIR/reproduce_sports.sh"
 
 echo ""

@@ -14,15 +14,15 @@ abstract: >-
   interpretable temporal risk fusion, TapKO candidate detection, and benchmark
   evaluation under partial observability. Research prototype — not a medical device.
 authors:
-  - family-names: Martin Moncunill
-    given-names: David
-    email: david.martinm@ucjc.edu
-    affiliation: Camilo Jose Cela University
   - family-names: Andrés
     given-names: César
     email: cesar.andress@ucjc.edu
     orcid: "https://orcid.org/0009-0001-8968-3404"
     affiliation: "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
+  - family-names: Martin Moncunill
+    given-names: David
+    email: david.martinm@ucjc.edu
+    affiliation: Camilo Jose Cela University
 keywords:
   - combat sports
   - information fusion
@@ -34,10 +34,10 @@ preferred-citation:
   type: software
   title: "FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring"
   authors:
-    - family-names: Martin Moncunill
-      given-names: David
     - family-names: Andrés
       given-names: César
+    - family-names: Martin Moncunill
+      given-names: David
   year: 2026
   version: 0.1.3
   doi: 10.5281/zenodo.20622869

@@ -23,7 +23,7 @@ def _approx_equal(a: float, b: float, tol: float = 1e-3) -> bool:
     return abs(a - b) <= tol
 
 
-def verify_sinica(results_csv: Path, reference_csv: Path) -> list[str]:
+def verify_eswa(results_csv: Path, reference_csv: Path) -> list[str]:
     errors: list[str] = []
     if not results_csv.is_file():
         return [f"Missing reproduced CSV: {results_csv}"]
@@ -33,15 +33,15 @@ def verify_sinica(results_csv: Path, reference_csv: Path) -> list[str]:
     repro = {r["scope"]: r for r in _read_csv_rows(results_csv) if r.get("scope") == "micro"}
     ref = {r["scope"]: r for r in _read_csv_rows(reference_csv) if r.get("scope") == "micro"}
     if "micro" not in repro or "micro" not in ref:
-        return ["micro row missing in sinica tapko_results.csv"]
+        return ["micro row missing in eswa tapko_results.csv"]
 
     r, g = repro["micro"], ref["micro"]
     for key in ("tp", "fp", "fn"):
         if r.get(key) != g.get(key):
-            errors.append(f"sinica {key}: got {r.get(key)} expected {g.get(key)}")
+            errors.append(f"eswa {key}: got {r.get(key)} expected {g.get(key)}")
     for key in ("precision", "recall", "f1", "false_positives_per_minute"):
         if not _approx_equal(float(r[key]), float(g[key]), tol=1e-4):
-            errors.append(f"sinica {key}: got {r[key]} expected {g[key]}")
+            errors.append(f"eswa {key}: got {r[key]} expected {g[key]}")
     return errors
 
 
@@ -78,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
     repro_root = root / "data/repro"
 
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--paper", choices=("fusion", "sinica", "sports", "all"), default="all")
+    p.add_argument("--paper", choices=("fusion", "eswa", "sports", "all"), default="all")
     args = p.parse_args(argv)
 
     all_errors: list[str] = []
@@ -88,17 +88,17 @@ def main(argv: list[str] | None = None) -> int:
             verify_fusion_ablation(root / "runs/case_studies/ablation_summary/ablation_all_runs.csv")
         )
 
-    if args.paper in ("sinica", "all"):
+    if args.paper in ("eswa", "all"):
         repro_csv = root / "outputs/tapko/jedi_submissions_eval/tapko_results.csv"
-        ref_csv = repro_root / "sinica2026/reference/tapko_results.csv"
+        ref_csv = repro_root / "eswa2026/reference/tapko_results.csv"
         if not repro_csv.is_file():
             # Reference-only check when video not re-run
             if ref_csv.is_file():
-                print("sinica: using reference snapshot only (no fresh eval outputs).")
+                print("eswa: using reference snapshot only (no fresh eval outputs).")
             else:
-                all_errors.append("sinica: no reproduced or reference tapko_results.csv")
+                all_errors.append("eswa: no reproduced or reference tapko_results.csv")
         else:
-            all_errors.extend(verify_sinica(repro_csv, ref_csv))
+            all_errors.extend(verify_eswa(repro_csv, ref_csv))
 
     if args.paper in ("sports", "all"):
         all_errors.extend(verify_sports_stats(root / "data/FightSafeBench/dataset_statistics.json"))

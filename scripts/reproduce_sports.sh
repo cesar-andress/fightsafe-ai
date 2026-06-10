@@ -27,7 +27,7 @@ if [[ -f "$POSE_CSV" ]]; then
     --output "$SPORTS_REPRO_DIR/benchmark_features.csv"
 else
   echo "NOTE: pose_keypoints.csv not found ($POSE_CSV)."
-  echo "      Run reproduce_sinica2026.sh first, or set BENCHMARK_POSE_CSV=..."
+  echo "      Run reproduce_eswa2026.sh first, or set BENCHMARK_POSE_CSV=..."
 fi
 
 if command -v pdflatex >/dev/null 2>&1 && [[ -f "$SPORTS_DIR/main.tex" ]]; then
