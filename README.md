@@ -234,7 +234,7 @@ If you use this software, please cite the Zenodo archive and the GitHub reposito
 
 ```bibtex
 @software{fightsafe_ai_2026,
-  author       = {Martin Moncunill, David and S{\'a}nchez, C{\'e}sar Andr{\'e}s},
+  author       = {Martin Moncunill, David and Andr{\'e}s, C{\'e}sar},
   title        = {FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring},
   year         = {2026},
   publisher    = {Zenodo},
@@ -261,13 +261,13 @@ Cite the relevant manuscript when using methods or results from that line of wor
 
 MIT License — see [`LICENSE`](LICENSE).
 
-Copyright (c) 2026 David Martin Moncunill, César Andrés Sánchez, Camilo José Cela University (UCJC), Spain.
+Copyright (c) 2026 David Martin Moncunill, César Andrés, Camilo José Cela University (UCJC), Spain.
 
 ---
 
 ## Authors
 
 David Martin Moncunill — david.martinm@ucjc.edu (corresponding)  
-César Andrés Sánchez — cesar.andress@ucjc.edu  
+César Andrés — cesar.andress@ucjc.edu ([ORCID 0009-0001-8968-3404](https://orcid.org/0009-0001-8968-3404))  
 
 CRIA-BDHS Research Group, Camilo José Cela University, Madrid, Spain.
