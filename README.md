@@ -238,7 +238,7 @@ If you use this software, please cite the Zenodo archive and the GitHub reposito
   title        = {FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring},
   year         = {2026},
   publisher    = {Zenodo},
-  version      = {0.1.2},
+  version      = {0.1.3},
   doi          = {10.5281/zenodo.20622869},
   url          = {https://doi.org/10.5281/zenodo.20622869}
 }

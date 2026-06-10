@@ -1,2 +1,2 @@
 video_id,n_ground_truth_punches,n_predicted_qualified,true_positives,false_positives,false_negatives,precision,recall,f1,mean_detection_latency_seconds,mean_abs_detection_latency_seconds,iou_threshold,tolerance_seconds,annotation_path,predictions_path,n_matches
-V10,2,9,2,7,0,0.222222,1.000000,0.363636,0.383333,0.383333,0.010000,0.500000,data/boxingvi/annotations/V10.xlsx,outputs/evaluation/boxingvi_batch/boxingvi_predictions_V10.json,2
+V10,2,5,2,3,0,0.400000,1.000000,0.571429,0.350000,0.350000,0.010000,0.500000,/home/cesar/papers/fightsafe-ai/legacy/fightsafe-ai/data/boxingvi/annotations/V10.xlsx,/home/cesar/papers/fightsafe-ai/fightsafe-ai/outputs/repro/fusion2026/statistics/baselines_run/full_fusion/boxingvi_predictions_V10.json,2

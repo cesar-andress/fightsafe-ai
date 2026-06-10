@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fightsafe-ai"
-version = "0.1.2"
+version = "0.1.3"
 description = "Modular decision-support toolkit for combat sports safety: video, pose, biomechanics, and heuristic risk signals (not a medical device; not autonomous officiating)."
 readme = "README.md"
 license = { text = "MIT" }

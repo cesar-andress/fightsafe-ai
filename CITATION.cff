@@ -3,7 +3,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as follows."
 title: "FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring"
 type: software
-version: 0.1.2
+version: 0.1.3
 date-released: 2026-06-10
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
@@ -39,6 +39,6 @@ preferred-citation:
     - family-names: Andrés
       given-names: César
   year: 2026
-  version: 0.1.2
+  version: 0.1.3
   doi: 10.5281/zenodo.20622869
   url: "https://github.com/cesar-andress/fightsafe-ai"
