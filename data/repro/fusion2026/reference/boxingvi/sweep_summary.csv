@@ -1,5 +1,5 @@
 strike_percentile,input_dir,TP,FP,FN,micro_precision,micro_recall,micro_f1,macro_precision,macro_recall,macro_f1,mean_latency
-85,/home/cesar/youtube/fightsafe-ai/outputs/evaluation/boxingvi_batch_p85,686,2336,261,0.227002,0.724393,0.345679,0.408067,0.620303,0.401225,0.170439
-90,/home/cesar/youtube/fightsafe-ai/outputs/evaluation/boxingvi_batch_p90,665,2243,282,0.228680,0.702218,0.345006,0.401598,0.589338,0.392433,0.166056
-95,/home/cesar/youtube/fightsafe-ai/outputs/evaluation/boxingvi_batch_p95,625,2054,322,0.233296,0.659979,0.344732,0.389658,0.506609,0.338442,0.214916
-97,/home/cesar/youtube/fightsafe-ai/outputs/evaluation/boxingvi_batch_p97,611,1954,336,0.238207,0.645195,0.347950,0.385960,0.491810,0.325470,0.239489
+85,outputs/evaluation/boxingvi_batch_p85,686,2336,261,0.227002,0.724393,0.345679,0.408067,0.620303,0.401225,0.170439
+90,outputs/evaluation/boxingvi_batch_p90,665,2243,282,0.228680,0.702218,0.345006,0.401598,0.589338,0.392433,0.166056
+95,outputs/evaluation/boxingvi_batch_p95,625,2054,322,0.233296,0.659979,0.344732,0.389658,0.506609,0.338442,0.214916
+97,outputs/evaluation/boxingvi_batch_p97,611,1954,336,0.238207,0.645195,0.347950,0.385960,0.491810,0.325470,0.239489
