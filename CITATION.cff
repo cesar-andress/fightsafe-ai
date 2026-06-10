@@ -8,6 +8,7 @@ date-released: 2026-06-10
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
+doi: 10.5281/zenodo.20622869
 abstract: >-
   Open-source decision-support software for combat-sports safety monitoring:
   interpretable temporal risk fusion, TapKO candidate detection, and benchmark
@@ -38,4 +39,5 @@ preferred-citation:
       given-names: Cesar Andres
   year: 2026
   version: 0.1.0
+  doi: 10.5281/zenodo.20622869
   url: "https://github.com/cesar-andress/fightsafe-ai"

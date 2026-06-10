@@ -7,7 +7,7 @@ Open-source **decision-support** software for **combat-sports safety monitoring*
 | Resource | URL |
 |----------|-----|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
-| Zenodo archive | `https://doi.org/10.5281/zenodo.XXXXXXX` *(placeholder — assign after deposit)* |
+| Zenodo archive | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
 | Companion manuscripts | See [Research outputs](#research-outputs) below |
 
 ---
@@ -228,7 +228,7 @@ Pre-commit hooks: `pre-commit install` then `make pre-commit`.
 
 ## Citation
 
-If you use this software, please cite the Zenodo archive (DOI assigned at first release) and the GitHub repository. Companion manuscripts use the same BibTeX key `fightsafe_ai_2026` in the shared bibliography at `../../bibliography.bib` (monorepo layout).
+If you use this software, please cite the Zenodo archive and the GitHub repository. Companion manuscripts use the same BibTeX key `fightsafe_ai_2026` in the shared bibliography at `../../bibliography.bib` (monorepo layout).
 
 ### Software (this repository)
 
@@ -239,14 +239,13 @@ If you use this software, please cite the Zenodo archive (DOI assigned at first 
   year         = {2026},
   publisher    = {Zenodo},
   version      = {0.1.0},
-  doi          = {10.5281/zenodo.XXXXXXX},
-  url          = {https://github.com/cesar-andress/fightsafe-ai}
+  doi          = {10.5281/zenodo.20622869},
+  url          = {https://doi.org/10.5281/zenodo.20622869}
 }
 ```
 
 - GitHub reads [`CITATION.cff`](CITATION.cff) for the **Cite this repository** button.
-- Replace `XXXXXXX` with the Zenodo DOI after [release v0.1.0](docs/release_checklist.md).
-- Step-by-step release and DOI update procedure: [`docs/release_checklist.md`](docs/release_checklist.md).
+- Release workflow documentation: [`docs/release_checklist.md`](docs/release_checklist.md).
 
 ### Companion manuscripts
 
