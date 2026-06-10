@@ -1,0 +1,233 @@
+# FightSafe AI — commit source, configs, docs, and small curated data; ignore local media & runs.
+# Companion LaTeX manuscripts live in sibling directories (../fusion2026, ../sinica2026, ../sports).
+# Compiled PDF at repo root (local build; exceeds default pre-commit size check when tracked).
+paper.pdf
+# Git archive / local bundle exports (see docs/clean-project-archive.md); exceed hook maxkb.
+*.zip
+
+# --- Python
+__pycache__/
+*.pyc
+*.py[cod]
+*$py.class
+.eggs/
+
+# --- Environments
+.venv/
+venv/
+ENV/
+env/
+.env
+.env.*
+!.env.example
+!.env.sample
+.python-version
+.tool-versions
+.direnv/
+.envrc
+!.envrc.example
+
+# --- Testing / coverage / typecheck (never commit caches or coverage dumps)
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.lcov
+junit.xml
+test-results/
+.cache/
+.hypothesis/
+.tox/
+.nox/
+
+# --- Build
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+pip-log.txt
+pip-wheel-metadata/
+*.whl
+develop-eggs/
+sdist/
+wheels/
+
+# --- IDE
+.vscode/
+.idea/
+.cursor/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+*.swp
+*~
+.project
+.pydevproject
+.settings/
+
+# --- OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Logs
+logs/
+log/
+*.log
+*.log.*
+x.log
+
+# --- Optional top-level media folders (local only; not source)
+/videos/
+data/tapko/videos/*
+!data/tapko/videos/.gitkeep
+
+# --- Data (local acquisition / clips / frames / processed — not source code)
+# Keep only empty dirs (and gitkeep); ignore all generated or downloaded content, including nestings.
+data/raw/**
+!data/raw/.gitkeep
+data/clips/**
+!data/clips/.gitkeep
+data/frames/**
+!data/frames/.gitkeep
+data/processed/**
+!data/processed/.gitkeep
+data/annotations/local/**
+!data/annotations/local/.gitkeep
+
+# --- Runs / outputs / reports (pipeline, QA, illustrative YouTube case-study artefacts; never commit)
+# Downloaded {YouTube} media, per-case run roots, CSV/JSON/MP4/overlay/reports: all under runs/**
+# and covered by `*.mp4` / `*.json` path rules; do not commit local case-study or demo outputs.
+# We ignore children of these dirs, not the dirs themselves, so per-dir .gitkeep can be tracked.
+outputs/**
+!outputs/.gitkeep
+runs/**
+!runs/.gitkeep
+reports/**
+!reports/.gitkeep
+# Redundant with the above, but makes intent clear for diffs and tooling:
+runs/**/*.csv
+runs/**/*.json
+outputs/**/*.csv
+outputs/**/*.json
+reports/**/*.csv
+reports/**/*.json
+
+# --- Models / checkpoints (downloaded weights; not source)
+models/**
+!models/.gitkeep
+checkpoints/**
+!checkpoints/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.safetensors
+*.ckpt
+*.npy
+*.npz
+*.onnxdata
+
+# --- Video / images (root or anywhere: ignore large/binary media)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.m4v
+*.flv
+*.wmv
+*.jpg
+*.jpeg
+*.png
+*.gif
+# Allow small, committed static assets under standard doc paths:
+!docs/figures/**
+!docs/**/*.svg
+!paper/figures/**
+!paper/**/*.svg
+# Curated source for the document (not generated LaTeX build products):
+!paper/tables/**
+!paper/references.bib
+!paper/main.tex
+# We do NOT use repo-wide `*.json` or `*.csv` — those would break configs/ and package.json
+# and mask tracked examples. Use runs/**, outputs/**, and reports/** rules above for artefacts.
+!configs/**
+!examples/**/*.json
+!package.json
+!package-lock.json
+
+# --- LaTeX build products (keep source *.tex, references.bib, figures/, tables/)
+# Do not ignore: paper/tables/**, paper/references.bib, paper/main.tex, paper2/sections/**, paper2/references.bib
+# PDFs: ignore LaTeX outputs next to sources; optional release PDFs may live in paper/releases/ or paper2/releases/
+#       (nested paths are not matched by paper/*.pdf — add explicit ! only if you adopt that layout).
+
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.lof
+paper/*.lot
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/*.nav
+paper/*.snm
+paper/main.pdf
+paper/*.pdf
+
+# paper2 (Q1 / TapKO LaTeX): same artifact set as paper/
+paper2/*.aux
+paper2/*.bbl
+paper2/*.blg
+paper2/*.log
+paper2/*.out
+paper2/*.toc
+paper2/*.lof
+paper2/*.lot
+paper2/*.fls
+paper2/*.fdb_latexmk
+paper2/*.synctex.gz
+paper2/*.nav
+paper2/*.snm
+paper2/main.pdf
+paper2/*.pdf
+
+# --- Notebooks: keep .ipynb source; ignore checkpoints
+**/.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Node (e.g. commitlint)
+node_modules/
+
+# --- Secrets (never commit)
+*.pem
+*.key
+*.crt
+secrets/
+.secrets/
+credentials/
+**/*.local.json
+**/secrets.yaml
+**/secrets.yml
+local.yaml
+local.yml
+config.local.yaml
+config.local.yml
+settings.local.json
+
+# --- Scratch
+tmp/
+temp/
+downloads/
+frames/
+.Python

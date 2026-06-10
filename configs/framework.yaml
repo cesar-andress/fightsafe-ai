@@ -1,0 +1,28 @@
+# FightSafe research framework — component selection (optional).
+# The MVP pipeline defaults to MediaPipe pose if not overridden in code or CLI.
+#
+# pose.backend: mediapipe | mock | yolo | rtmpose (aliases: yolo_pose, mmpose)
+# pose.device: auto | cpu | cuda | cuda:0 | mps   (used by yolo / rtmpose Torch backends)
+# pose.yolo.model: Ultralytics weights name (e.g. yolo11n-pose.pt)
+# pose.rtmpose.pose2d: MMPose model alias for MMPoseInferencer
+
+pose:
+  backend: mediapipe
+  device: auto
+  yolo:
+    model: yolo11n-pose.pt
+  rtmpose:
+    pose2d: rtmpose-m_8xb256-210e_coco-256x192
+
+tracking:
+  enabled: false
+
+action:
+  enabled: false
+
+anomaly:
+  fall_detection: true
+  inactivity: true
+
+llm:
+  explainability: optional

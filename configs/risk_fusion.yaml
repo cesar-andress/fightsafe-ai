@@ -1,0 +1,68 @@
+# Formal interpretable multi-signal risk fusion (FightSafe AI)
+# Decision-support only — not medical diagnosis, not autonomous officiating.
+#
+# Loads alongside MVP ``configs/risk_rules.yaml`` (rule physics); this file fixes fusion weights,
+# level bands, interaction boosts, and smoothing metadata for experiments and ablations.
+
+signal_weights:
+  fast_downward_motion: 0.0828
+  large_torso_angle: 0.0828
+  prolonged_low_posture: 0.0828
+  high_instability: 0.0828
+  post_fall_low_movement: 0.0828
+  low_guard: 0.0736
+  facing_away: 0.0736
+  reaction_delay_after_impact: 0.0736
+  loss_of_control: 0.086
+  clear_danger_fall: 0.086
+  intervention_urgent: 0.0952
+  high_risk_guard_strike: 0.06
+  limb_anomaly: 0.08
+  surrender_gesture: 0.06
+  vlm_review_hint: 0.0
+
+level_thresholds:
+  medium_min: 0.25
+  high_min: 0.5
+  critical_min: 0.75
+
+interaction_rules:
+  - name: low_guard_instability_medium_tendency
+    required_signals: [low_guard, high_instability]
+    boost: 0.06
+    rationale: "Low guard together with instability tends toward loss-of-control review (MEDIUM band)."
+    signal_threshold: 0.08
+  - name: facing_away_instability_elevated
+    required_signals: [facing_away, high_instability]
+    boost: 0.07
+    rationale: "Turned away plus instability elevates concern toward MEDIUM/HIGH review."
+    signal_threshold: 0.08
+  - name: low_guard_inbound_strike_review
+    required_signals: [low_guard, high_risk_guard_strike]
+    boost: 0.07
+    rationale: "Low guard with inbound strike proxy tends toward HIGH-band strike-exposure review."
+    signal_threshold: 0.08
+  - name: fall_like_and_inactivity_critical_tendency
+    required_signals: [clear_danger_fall, post_fall_low_movement]
+    boost: 0.10
+    rationale: "Fall-like motion combined with sustained low movement warrants urgent human review framing."
+    signal_threshold: 0.08
+  - name: surrender_like_critical_candidate_review
+    required_signals: [surrender_gesture]
+    boost: 0.12
+    rationale: "Surrender-like heuristic is a candidate tap-out cue — requires human confirmation."
+    signal_threshold: 0.25
+  - name: limb_anomaly_instability_high_review
+    required_signals: [limb_anomaly, high_instability]
+    boost: 0.08
+    rationale: "Limb anomaly proxy with instability surfaces HIGH-band candidate review (non-clinical)."
+    signal_threshold: 0.08
+
+interaction_signal_threshold: 0.08
+
+minimum_event_duration_seconds: 0.5
+smoothing_window_frames: 3
+
+vlm:
+  can_boost_deterministic_risk: false
+  max_boost: 0.0

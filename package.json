@@ -1,0 +1,12 @@
+{
+  "name": "fightsafe-ai-tooling",
+  "private": true,
+  "description": "Node-only dev deps for commitlint; Python package is defined in pyproject.toml.",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

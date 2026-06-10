@@ -1,0 +1,10 @@
+{
+  "format_version": "1.0",
+  "case_id": null,
+  "source_reference": null,
+  "clip_start_time": null,
+  "clip_end_time": null,
+  "video": "runs/case_studies/case_a_knockdown/input_clip_h264.mp4",
+  "time_unit": "seconds",
+  "events": []
+}

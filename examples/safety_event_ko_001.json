@@ -1,0 +1,14 @@
+{
+  "clip_id": "ko_001",
+  "event_id": "event_001",
+  "start_time": 12.4,
+  "end_time": 15.1,
+  "max_risk_score": 0.91,
+  "event_level": "CRITICAL",
+  "triggered_rules": [
+    "fast_downward_motion",
+    "large_torso_angle",
+    "prolonged_low_posture",
+    "low_movement_after_fall"
+  ]
+}

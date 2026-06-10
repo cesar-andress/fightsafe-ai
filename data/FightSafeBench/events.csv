@@ -1,0 +1,4 @@
+event_id,alumno_id,video_url,video_id,start_time,end_time,event_class,visibility_tier,confidence,comments,source_file
+jedi_submissions_e0001,alumno_001,https://www.youtube.com/watch?v=ALEeReC3u5Y,jedi_submissions,83.0,88.0,hand_tap,V1,high,Three clear mat taps during armbar.,jedi_submissions_alumno001.xlsx
+jedi_submissions_e0002,alumno_001,https://www.youtube.com/watch?v=ALEeReC3u5Y,jedi_submissions,130.0,136.0,hand_tap,V0,medium,Americana finish; single decisive tap.,jedi_submissions_alumno001.xlsx
+jedi_submissions_e0003,alumno_002,https://www.youtube.com/watch?v=ALEeReC3u5Y,jedi_submissions,310.0,315.0,hard_negative_instructional_pause,V0,high,Coach freeze — no submission.,jedi_submissions_alumno001.xlsx

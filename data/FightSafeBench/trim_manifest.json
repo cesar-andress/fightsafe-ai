@@ -1,0 +1,369 @@
+{
+  "manifest_version": "1.0",
+  "schema_id": "fightsafe_ai.benchmark.trim_manifest",
+  "benchmark": "FightSafe-Bench",
+  "generated_at_utc": "2026-06-01T15:30:00+00:00",
+  "generated_by": "scripts/coordinator_review (frame inspection + ffprobe)",
+  "notes": "Students must annotate only inside annotate_window for each video_id. Times are seconds on the local reference file (continuous timeline). Do not label excluded regions.",
+  "reference_files": {
+    "selection_report": "paper3/video_selection_report.md",
+    "assignment_plan": "paper3/annotator_assignment_plan.md",
+    "annotation_template": "paper3/FightSafeBench_Annotation_Template_v1.xlsx"
+  },
+  "videos": [
+    {
+      "video_id": "jedi_submissions",
+      "source_url": "https://www.youtube.com/watch?v=ALEeReC3u5Y",
+      "source_title": "The First 10 Bjj Submissions You Should Learn",
+      "local_reference_path": "data/tapko/videos/jedi_submissions.mp4",
+      "duration_sec": 705.62,
+      "fps_nominal": 30.0,
+      "resolution": "1920x1080",
+      "ruleset_profile": "instructional_grappling",
+      "suitability_grade": "A",
+      "assigned_primary_annotator": "student_1",
+      "annotate_window": {
+        "start_sec": 60.0,
+        "end_sec": 648.0,
+        "rationale": "Skip vlogger intro (0–59 s) including non-instructional montage; stop before outro talking-head ('Update') from ~650 s."
+      },
+      "exclude_regions": [
+        {
+          "start_sec": 0.0,
+          "end_sec": 59.9,
+          "reason": "Intro monologue and competition B-roll — not instructional tap demos"
+        },
+        {
+          "start_sec": 648.0,
+          "end_sec": 705.62,
+          "reason": "Outro / call-to-action — no grappling labels"
+        }
+      ],
+      "suggested_segments": [
+        {
+          "label": "technique_01_armbar",
+          "start_sec": 78.0,
+          "end_sec": 92.0,
+          "expected_classes": ["hand_tap", "hard_negative_instructional_pause"],
+          "notes": "Transcript hint 83–88 s — confirm tap visually"
+        },
+        {
+          "label": "technique_02_americana",
+          "start_sec": 125.0,
+          "end_sec": 140.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 130–136 s"
+        },
+        {
+          "label": "technique_03_kimura",
+          "start_sec": 188.0,
+          "end_sec": 205.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 192–201 s"
+        },
+        {
+          "label": "technique_04_triangle",
+          "start_sec": 250.0,
+          "end_sec": 265.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 254–260 s"
+        },
+        {
+          "label": "technique_05_darce",
+          "start_sec": 318.0,
+          "end_sec": 332.0,
+          "expected_classes": ["hand_tap", "foot_tap"],
+          "notes": "Transcript hint 322–328 s"
+        },
+        {
+          "label": "technique_06_bow_and_arrow",
+          "start_sec": 378.0,
+          "end_sec": 392.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 383–387 s"
+        },
+        {
+          "label": "technique_07_rnc",
+          "start_sec": 428.0,
+          "end_sec": 442.0,
+          "expected_classes": ["hand_tap", "verbal_submission"],
+          "notes": "Transcript hint 432–438 s; audio only if clear"
+        },
+        {
+          "label": "technique_08_arm_triangle",
+          "start_sec": 475.0,
+          "end_sec": 490.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 480–486 s"
+        },
+        {
+          "label": "technique_09_ankle_lock",
+          "start_sec": 524.0,
+          "end_sec": 540.0,
+          "expected_classes": ["foot_tap"],
+          "notes": "Transcript hint 529–536 s"
+        },
+        {
+          "label": "technique_10_x_choke",
+          "start_sec": 582.0,
+          "end_sec": 595.0,
+          "expected_classes": ["hand_tap"],
+          "notes": "Transcript hint 586–590 s"
+        },
+        {
+          "label": "between_techniques_hard_negatives",
+          "start_sec": 60.0,
+          "end_sec": 648.0,
+          "expected_classes": [
+            "hard_negative_instructional_pause",
+            "hard_negative_defensive_shell",
+            "hard_negative_grappling_transition",
+            "hard_negative_ambiguous_motion"
+          ],
+          "notes": "Label coach freezes and non-surrender hand contact between demos"
+        }
+      ],
+      "expected_yield": {
+        "intervals_min": 28,
+        "intervals_max": 40,
+        "visibility_v0_pct": 60,
+        "visibility_v1_pct": 30,
+        "visibility_v2_vx_pct": 10
+      }
+    },
+    {
+      "video_id": "case_d_post_choke_confusion",
+      "source_url": "https://www.youtube.com/shorts/cLZr1MbEz0o",
+      "source_title": "Fighter Tries to Take Down Referee After Being Choked Out",
+      "local_reference_path": "runs/case_studies/case_d_post_choke_confusion/input_clip_h264.mp4",
+      "duration_sec": 15.04,
+      "fps_nominal": 30.0,
+      "resolution": "720x1280",
+      "ruleset_profile": "competitive_mma",
+      "suitability_grade": "B",
+      "assigned_primary_annotator": "student_2",
+      "annotate_window": {
+        "start_sec": 0.0,
+        "end_sec": 15.0,
+        "rationale": "Full Short is one continuous choke → release → post-event arc; no title card at t=0."
+      },
+      "exclude_regions": [],
+      "suggested_segments": [
+        {
+          "label": "choke_application",
+          "start_sec": 0.0,
+          "end_sec": 6.0,
+          "expected_classes": ["defensive_breakdown"],
+          "notes": "Head-and-arm / RNC lock-in; optional narrow window"
+        },
+        {
+          "label": "post_release_inactivity",
+          "start_sec": 6.0,
+          "end_sec": 12.0,
+          "expected_classes": ["post_impact_inactivity"],
+          "notes": "Disorientation after choke — no medical labels"
+        },
+        {
+          "label": "recovery_or_hard_negative",
+          "start_sec": 12.0,
+          "end_sec": 15.0,
+          "expected_classes": ["hard_negative_recovery_after_impact", "hard_negative_defensive_shell"],
+          "notes": "Re-orientation vs continued compromise"
+        }
+      ],
+      "expected_yield": {
+        "intervals_min": 3,
+        "intervals_max": 5,
+        "visibility_v0_pct": 50,
+        "visibility_v1_pct": 45,
+        "visibility_v2_vx_pct": 5
+      }
+    },
+    {
+      "video_id": "case_e_manifest_superiority",
+      "source_url": "https://www.youtube.com/shorts/GmDvxvhHv40",
+      "source_title": "This Late Stoppage is WHY The Referee Is No Longer Working In The UFC",
+      "local_reference_path": "runs/case_studies/case_e_manifest_superiority/input_clip.mp4",
+      "duration_sec": 30.0,
+      "fps_nominal": 30.0,
+      "resolution": "1080x1920",
+      "ruleset_profile": "competitive_mma",
+      "suitability_grade": "B",
+      "assigned_primary_annotator": "student_3",
+      "annotate_window": {
+        "start_sec": 9.5,
+        "end_sec": 27.0,
+        "rationale": "Skip title cards 0–9 s ('BACK IN 2018', fighter intro); stop before end-card/outro after ground sequence."
+      },
+      "exclude_regions": [
+        {
+          "start_sec": 0.0,
+          "end_sec": 9.4,
+          "reason": "Social Short title overlays — no fight labels"
+        },
+        {
+          "start_sec": 27.0,
+          "end_sec": 30.0,
+          "reason": "Outro / end slate"
+        }
+      ],
+      "suggested_segments": [
+        {
+          "label": "takedown_to_top_control",
+          "start_sec": 9.5,
+          "end_sec": 14.0,
+          "expected_classes": ["hard_negative_grappling_transition"],
+          "notes": "Slam / top position entry"
+        },
+        {
+          "label": "ground_and_pound_dominance",
+          "start_sec": 14.0,
+          "end_sec": 22.0,
+          "expected_classes": ["defensive_breakdown", "post_impact_inactivity"],
+          "notes": "Overlap calibration window 12–22 s uses core of this span"
+        },
+        {
+          "label": "late_stoppage_context",
+          "start_sec": 22.0,
+          "end_sec": 27.0,
+          "expected_classes": ["post_impact_inactivity", "hard_negative_defensive_shell"],
+          "notes": "Stoppage delay — observable motion only"
+        }
+      ],
+      "expected_yield": {
+        "intervals_min": 4,
+        "intervals_max": 6,
+        "visibility_v0_pct": 35,
+        "visibility_v1_pct": 40,
+        "visibility_v2_vx_pct": 25
+      }
+    },
+    {
+      "video_id": "case_f_referee_errors",
+      "source_url": "https://www.youtube.com/watch?v=XYABi_3IFFU",
+      "source_title": "BIGGEST Referee Mistakes in MMA - Part 1",
+      "local_reference_path": "runs/case_studies/case_f_referee_errors/input_clip_h264.mp4",
+      "duration_sec": 45.0,
+      "fps_nominal": 23.976,
+      "resolution": "1920x1080",
+      "ruleset_profile": "competitive_mma",
+      "suitability_grade": "B",
+      "assigned_primary_annotator": "student_3",
+      "annotate_window": {
+        "start_sec": 25.0,
+        "end_sec": 44.5,
+        "rationale": "Single UFC fence segment (Teixeira vs Blachowicz): exclude meme (t≈4 s), title (t≈14 s), and weigh-in (t≈22 s)."
+      },
+      "exclude_regions": [
+        {
+          "start_sec": 0.0,
+          "end_sec": 24.9,
+          "reason": "Meme insert, compilation title card, face-off — not in-cage action"
+        },
+        {
+          "start_sec": 44.5,
+          "end_sec": 45.0,
+          "reason": "Montage transition to next clip"
+        }
+      ],
+      "suggested_segments": [
+        {
+          "label": "fence_clinch_damage",
+          "start_sec": 25.0,
+          "end_sec": 32.0,
+          "expected_classes": ["knockdown_proxy", "post_impact_inactivity"],
+          "notes": "Visible facial damage; clinch by fence"
+        },
+        {
+          "label": "striking_exchange",
+          "start_sec": 32.0,
+          "end_sec": 38.0,
+          "expected_classes": ["defensive_breakdown", "hard_negative_defensive_shell"],
+          "notes": "High-impact strikes; active vs collapsed guard"
+        },
+        {
+          "label": "referee_proximity_continued_action",
+          "start_sec": 38.0,
+          "end_sec": 44.5,
+          "expected_classes": ["post_impact_inactivity", "hard_negative_recovery_after_impact"],
+          "notes": "Late intervention context — label visible motion only"
+        }
+      ],
+      "expected_yield": {
+        "intervals_min": 4,
+        "intervals_max": 7,
+        "visibility_v0_pct": 40,
+        "visibility_v1_pct": 45,
+        "visibility_v2_vx_pct": 15
+      }
+    }
+  ],
+  "overlap_calibration": [
+    {
+      "overlap_id": "OVL_001",
+      "video_id": "jedi_submissions",
+      "start_sec": 83.0,
+      "end_sec": 88.0,
+      "purpose": "Submission tap calibration — armbar",
+      "annotators": ["student_1", "student_2"]
+    },
+    {
+      "overlap_id": "OVL_002",
+      "video_id": "jedi_submissions",
+      "start_sec": 130.0,
+      "end_sec": 136.0,
+      "purpose": "Submission tap boundary precision — americana",
+      "annotators": ["student_1", "student_2"]
+    },
+    {
+      "overlap_id": "OVL_003",
+      "video_id": "jedi_submissions",
+      "start_sec": 305.0,
+      "end_sec": 315.0,
+      "purpose": "Instructional freeze vs false vulnerability (cross-ruleset)",
+      "annotators": ["student_1", "student_3"]
+    },
+    {
+      "overlap_id": "OVL_004",
+      "video_id": "case_d_post_choke_confusion",
+      "start_sec": 0.0,
+      "end_sec": 15.0,
+      "purpose": "Full post-choke arc agreement",
+      "annotators": ["student_2", "student_3"]
+    },
+    {
+      "overlap_id": "OVL_005",
+      "video_id": "case_e_manifest_superiority",
+      "start_sec": 12.0,
+      "end_sec": 22.0,
+      "purpose": "Ground-and-pound dominance segment",
+      "annotators": ["student_2", "student_3"]
+    }
+  ],
+  "rejected_videos": [
+    {
+      "video_id": "case_a_knockdown",
+      "source_url": "https://www.youtube.com/watch?v=IkFGHAntLrw",
+      "grade": "D",
+      "reason": "Knockout compilation; local excerpt too short; poor pose visibility"
+    },
+    {
+      "video_id": "case_b_tap",
+      "source_url": "https://www.youtube.com/shorts/cPPOU_hPfUY",
+      "grade": "C",
+      "reason": "Misaligned content (judo reaction Short); not assigned in v1.0 pilot"
+    },
+    {
+      "video_id": "case_c_limb_anomaly",
+      "source_url": "https://www.youtube.com/shorts/C6IWYm7h7V8",
+      "grade": "D",
+      "reason": "Reaction overlay; 81% V3; medical narrative — excluded"
+    }
+  ],
+  "spreadsheet_defaults": {
+    "annotator_version": "v1.0",
+    "review_status": "pending",
+    "source_split": "pilot",
+    "event_id": ""
+  }
+}

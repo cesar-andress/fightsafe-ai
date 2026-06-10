@@ -1,0 +1,48 @@
+# Validates commit messages on pull requests (Conventional Commits).
+# Fails the check if any commit in the PR does not pass commitlint.
+# Human-readable rules: docs/commit-convention.md
+
+name: Commitlint
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+    branches: [main]
+
+concurrency:
+  group: commitlint-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  commitlint:
+    name: Commit messages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install commitlint
+        run: npm ci
+
+      - name: Validate PR commits (Conventional Commits)
+        # Exits non-zero on failure so the PR check fails. --from: exclusive; --to: inclusive.
+        run: |
+          npx commitlint \
+            --config commitlint.config.js \
+            --from "${{ github.event.pull_request.base.sha }}" \
+            --to "${{ github.event.pull_request.head.sha }}" \
+            --verbose

@@ -1,0 +1,54 @@
+{
+  "benchmark": "FightSafe-Bench",
+  "generated_at_utc": "2026-06-01T13:10:08+00:00",
+  "source_spreadsheets": [
+    "jedi_submissions_alumno001.xlsx"
+  ],
+  "videos": 1,
+  "events": 3,
+  "events_per_video": {
+    "jedi_submissions": 3
+  },
+  "event_class_counts": {
+    "hand_tap": 2,
+    "hard_negative_instructional_pause": 1
+  },
+  "visibility_distribution": {
+    "V0": 2,
+    "V1": 1
+  },
+  "confidence_distribution": {
+    "high": 2,
+    "medium": 1
+  },
+  "annotator_counts": {
+    "alumno_001": 2,
+    "alumno_002": 1
+  },
+  "validation_schema": {
+    "event_class": [
+      "defensive_breakdown",
+      "foot_tap",
+      "hand_tap",
+      "hard_negative_ambiguous_motion",
+      "hard_negative_defensive_shell",
+      "hard_negative_grappling_transition",
+      "hard_negative_instructional_pause",
+      "hard_negative_recovery_after_impact",
+      "knockdown_proxy",
+      "post_impact_inactivity",
+      "verbal_submission"
+    ],
+    "visibility_tier": [
+      "V0",
+      "V1",
+      "V2",
+      "VX"
+    ],
+    "confidence": [
+      "high",
+      "low",
+      "medium"
+    ]
+  }
+}

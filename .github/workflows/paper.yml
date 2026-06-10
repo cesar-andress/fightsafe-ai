@@ -1,0 +1,64 @@
+# FightSafe AI — LaTeX: build fusion2026/main.pdf when the manuscript directory is present.
+
+name: Paper (LaTeX)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: paper-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  fusion-pdf:
+    name: build fusion2026 PDF
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for fusion manuscript
+        id: fusion
+        run: |
+          if [[ -f ../fusion2026/main.tex ]]; then
+            echo "dir=../fusion2026" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip when manuscript unavailable
+        if: steps.fusion.outputs.skip == 'true'
+        run: |
+          echo "fusion2026/main.tex not found — skipping LaTeX build."
+          echo "In the monorepo layout, place fusion2026/ next to this repository."
+
+      - name: Install TeX Live (minimal)
+        if: steps.fusion.outputs.skip != 'true'
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-pictures
+
+      - name: Build fusion2026 PDF
+        if: steps.fusion.outputs.skip != 'true'
+        run: make fusion-pdf FUSION_DIR="${{ steps.fusion.outputs.dir }}"
+
+      - name: Upload PDF
+        if: steps.fusion.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: fusion2026-main-pdf
+          path: ${{ steps.fusion.outputs.dir }}/main.pdf
+          if-no-files-found: error

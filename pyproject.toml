@@ -1,0 +1,317 @@
+# FightSafe AI — PEP 621 (setuptools); no setup.py
+# See docs/engineering-standards.md for contributor workflow.
+
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fightsafe-ai"
+version = "0.1.0"
+description = "Modular decision-support toolkit for combat sports safety: video, pose, biomechanics, and heuristic risk signals (not a medical device; not autonomous officiating)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12,<3.13"
+authors = [
+  { name = "David Martin Moncunill", email = "david.martinm@ucjc.edu" },
+  { name = "César Andrés Sánchez", email = "cesar.andress@ucjc.edu" },
+]
+keywords = [
+  "sports",
+  "safety",
+  "pose-estimation",
+  "mediapipe",
+  "video",
+  "biomechanics",
+  "pydantic",
+  "ruff",
+  "mypy",
+  "typer",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Typing :: Typed",
+]
+dependencies = [
+  "typer>=0.12.0",
+  "pydantic>=2.0",
+  "pyyaml>=6.0",
+  "numpy>=1.26",
+  "pandas>=2.0",
+  "opencv-python-headless>=4.8",
+  # BlazePose via MediaPipe Tasks (PoseLandmarker); model ``.task`` cached on first use.
+  "mediapipe>=0.10.0",
+  "yt-dlp>=2024.1.0",
+  "requests>=2.31.0",
+  "matplotlib>=3.8",
+  # FFmpeg Python bindings (used by video clip cutting); requires ffmpeg CLI on PATH
+  "ffmpeg-python>=0.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+  "ruff>=0.8.0",
+  "mypy>=1.0",
+  "pre-commit>=4.0",
+  "types-PyYAML",
+  "types-requests",
+  "pandas-stubs>=2.0",
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+  "httpx>=0.27.0",
+  "openpyxl>=3.1.0",
+  "types-openpyxl",
+  # SQLAlchemy: optional at runtime (`[db]`) but required for mypy on ``fightsafe_ai.db.*``.
+  "sqlalchemy>=2.0",
+]
+notebooks = [
+  "jupyter>=1.0",
+  "ipykernel>=6.0",
+]
+api = [
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+]
+db = [
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg[binary]>=3.2",
+]
+# ONNX Runtime with CUDA EP + NVIDIA inference (install CUDA-enabled PyTorch from pytorch.org separately).
+gpu = [
+  "onnxruntime-gpu>=1.17.0",
+  # NVML Python bindings (``import pynvml``) for live dashboard GPU stats; optional at runtime.
+  "nvidia-ml-py>=12.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/cesar-andress/fightsafe-ai"
+Documentation = "https://github.com/cesar-andress/fightsafe-ai#readme"
+Repository = "https://github.com/cesar-andress/fightsafe-ai"
+
+[project.scripts]
+# Typer application object (callable); see ``main()`` in cli.py for a thin wrapper
+fightsafe = "fightsafe_ai.cli:app"
+
+# --- build / layout: src, import name fightsafe_ai --------------------------------
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+fightsafe_ai = ["py.typed", "api/static/*.html", "api/static/*.css", "api/static/*.js"]
+
+# Pytest discovery/options live in pytest.ini (single source of truth; avoids ignoring pyproject).
+
+# --- coverage -------------------------------------------------------------------
+
+[tool.coverage.run]
+branch = false
+source_pkgs = ["fightsafe_ai"]
+relative_files = true
+parallel = false
+omit = [
+  "*/tests/*",
+  "*/__init__.py",
+  "*/__main__.py",
+  "*/conftest.py",
+  "*/site-packages/*",
+  "**/__version__.py",
+]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+precision = 1
+fail_under = 74
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+  "\\.\\.\\.",
+  "@abstractmethod",
+]
+
+# --- ruff: format + lint, line length 100 --------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle
+  "F",   # pyflakes
+  "W",   # pycodestyle warnings
+  "I",   # isort
+  "UP",  # pyupgrade
+  "B",   # bugbear
+  "C4",  # comprehensions
+  "SIM", # simplify
+  "TCH", # type-checking imports
+  "RUF", # ruff
+  "T20", # print
+  "PIE", # misc
+  "RSE", # raise
+  "RET", # return
+  "YTT", # sys.version
+  "S",   # bandit
+  "N",   # pep8-naming
+  "PT",  # pytest
+  "PGH", # pygrep
+  "PERF",
+  "PL",  # pylint
+]
+ignore = [
+  "E501",  # line length (handled by ruff format; long URLs/docstrings)
+  "PLR0913",
+  "PLR2004",
+  "PLC0415",  # lazy imports in CLI / optional code paths
+  "TC003",
+  "PLR0915",
+  "S101",
+  "T201",
+  "S310",
+  "RUF001",
+  "RUF002",
+  "PLR0124",
+  "TC001",
+  "TC002",
+  "PLR0911",
+  "PLR0912",
+  "PLW0603",
+  "PERF401",
+  "SIM105",
+  "SIM108",
+  "N802",
+  "RET504",
+]
+fixable = ["ALL"]
+unfixable = []
+preview = false
+exclude = [".eggs", ".git", ".mypy_cache", ".ruff_cache", ".venv", "build", "dist", "node_modules", "third_party", "fightsafe-ai-frontend*"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 20
+
+[tool.ruff.lint.isort]
+known-first-party = ["fightsafe_ai"]
+force-single-line = false
+lines-after-imports = 2
+combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+  "S101",
+  "PLR2004",
+  "T201",
+  "PT011",
+  "PT018",
+]
+"**/cli.py" = [
+  "T201",
+  "B008",
+]
+"src/fightsafe_ai/case_studies/clip.py" = [
+  "S603",
+  "S607",
+]
+"src/fightsafe_ai/video/cutter.py" = [
+  "S603",
+  "S607",
+]
+"src/fightsafe_ai/video/downloader.py" = [
+  "S603",
+]
+"tools/check_paper_update.py" = [
+  "S603",
+  "S607",
+]
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[tool.ruff.format]
+line-ending = "auto"
+quote-style = "double"
+docstring-code-format = true
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+# Black-compatible settings (CI uses ``ruff format``; editors may still invoke Black).
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+# --- mypy (strict; tests and third party relaxed via overrides) ----------------
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "src"
+plugins = ["pydantic.mypy"]
+warn_unreachable = true
+show_error_codes = true
+namespace_packages = true
+explicit_package_bases = true
+exclude = [
+  "(^|/)conftest\\.py$",
+  "^.venv/",
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "mediapipe.*",
+  "cv2.*",
+  "ffmpeg",
+  "ffmpeg.*",
+  "typer",
+  "torch",
+  "torch.*",
+  "onnxruntime",
+  "onnxruntime.*",
+  "mmengine.*",
+  "mmpose.*",
+  "mmpose",
+]
+ignore_missing_imports = true
+
+# FastAPI surface uses runtime imports assigned to module-level names; mypy cannot treat them as types.
+[[tool.mypy.overrides]]
+module = ["fightsafe_ai.api.app"]
+ignore_errors = true
+
+# DB REST router registers handlers inside ``register_db_routes`` (nested decorators).
+[[tool.mypy.overrides]]
+module = ["fightsafe_ai.db.routes"]
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = [
+  "tests",
+  "tests.*",
+  "tests.*.*",
+  "tests.*.*.*",
+]
+strict = false
+disallow_untyped_defs = false
+check_untyped_defs = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true

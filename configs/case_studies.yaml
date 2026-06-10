@@ -1,0 +1,77 @@
+# FightSafe AI — illustrative YouTube case studies (local use only; not a benchmark dataset)
+# Re-run: fightsafe run-case-studies --config configs/case_studies.yaml
+# Outputs: runs/case_studies/<output_dir>/ and global summaries under runs/case_studies/
+#
+# start_time / end_time: null = use full downloaded clip (after re-mux to input_clip.mp4);
+#  if both set, FFmpeg cuts [start, end) before the pipeline. Use timecodes as in
+#  fightsafe demo-youtube (e.g. "0", "120" or "1:30").
+#
+# Trimming (repeatability): All cases ship with start_time/end_time null so the full Short or
+# clip downloads first. After manual inspection of content and boundaries, set non-null
+# start/end here to trim to annotation-relevant segments only. Until trimmed, exploratory
+# semantics remain noisy and outputs remain candidate review targets—not validation labels.
+
+version: "1.1"
+base_dir: "runs/case_studies"
+
+case_studies:
+  - case_id: "cs_knockdown_001"
+    title: "Boxing knockouts compilation (illustrative)"
+    url: "https://www.youtube.com/watch?v=IkFGHAntLrw"
+    expected_focus: "knockdown / loss of control / fall-like events (expected focus — human confirmation required)"
+    output_dir: "cs_knockdown_001"
+    notes: "Local demonstration only; not redistributed; candidate signals for review, not ground truth. Maps to paper case A (knockdown-like)."
+    start_time: null
+    end_time: null
+
+  - case_id: "cs_surrender_001"
+    title: "Surrender missed by referee / tap gesture"
+    url: "https://www.youtube.com/shorts/cPPOU_hPfUY?feature=share"
+    expected_focus: "surrender or tap gesture (review target; VLM/LLM outputs are not ground truth)"
+    output_dir: "cs_surrender_001"
+    notes: "Short; optional trim later for annotation windows. Maps to paper case B (surrender-like)."
+    start_time: null
+    end_time: null
+
+  - case_id: "cs_limb_001"
+    title: "Fighter with apparent leg injury (illustrative)"
+    url: "https://www.youtube.com/shorts/C6IWYm7h7V8?feature=share"
+    expected_focus: "limb anomaly / abnormal lower-limb behavior (candidate signal only)"
+    output_dir: "cs_limb_001"
+    notes: "Heuristic risk may flag instability; no clinical claim without manual review. Maps to paper case C (limb-anomaly-like)."
+    start_time: null
+    end_time: null
+
+  - case_id: "case_d_post_choke_confusion"
+    title: "Post-choke confusion / disorientation-like behavior (illustrative Short)"
+    url: "https://www.youtube.com/shorts/cLZr1MbEz0o"
+    expected_focus: "post-choke confusion / disorientation-like behavior / post-event unsafe continuation (candidate review framing only)"
+    output_dir: "case_d_post_choke_confusion"
+    notes: >
+      Candidate post-event confusion review target. Do not claim unconsciousness detection.
+      Do not claim cognitive-state recognition. Output_dir case_d_post_choke_confusion; trim
+      after manual inspection if needed.
+    start_time: null
+    end_time: null
+
+  - case_id: "case_e_manifest_superiority"
+    title: "Manifest superiority / one-sided dominance (illustrative Short)"
+    url: "https://www.youtube.com/shorts/GmDvxvhHv40"
+    expected_focus: "manifest superiority / defensive incapacity / one-sided dominance scenario (review framing only)"
+    output_dir: "case_e_manifest_superiority"
+    notes: >
+      Candidate sustained dominance / defensive incapacity review target. The system does not
+      decide stoppage or replace referees. Trim after manual inspection if needed.
+    start_time: null
+    end_time: null
+
+  - case_id: "case_f_referee_errors"
+    title: "Referee oversight / delayed intervention (illustrative clip)"
+    url: "https://www.youtube.com/watch?v=XYABi_3IFFU"
+    expected_focus: "referee oversight / missed intervention / delayed human response review (framing only)"
+    output_dir: "case_f_referee_errors"
+    notes: >
+      Candidate referee-oversight review scenario. Do not claim referee error detection.
+      Trim after manual inspection if needed.
+    start_time: null
+    end_time: null

@@ -1,0 +1,52 @@
+# FightSafe AI — default application settings
+# Override paths or values per environment; optional env vars can be applied in app code.
+
+project:
+  name: fightsafe-ai
+  output_dir: ./outputs
+
+video:
+  # Target sampling rate when extracting frames from a source video
+  extract_fps: 10
+  # Extractor writes frame_000001.jpg, frame_000002.jpg, … (see frame_extractor.py)
+  frame_format: jpg
+  frame_prefix: frame_
+
+pose:
+  provider: mediapipe
+  static_image_mode: true
+  model_complexity: 1
+  min_detection_confidence: 0.5
+  min_tracking_confidence: 0.5
+  # Subset of body regions to export in keypoint CSVs (see pose module)
+  export_regions:
+    - head
+    - torso
+    - hips
+    - legs
+
+features:
+  rolling_window: 5
+  ground_y_threshold: 0.82
+  # Landmarks used for rolling stability variance (MediaPipe names, lower_case)
+  stability_landmarks:
+    - left_shoulder
+    - right_shoulder
+    - left_hip
+    - right_hip
+    - left_knee
+    - right_knee
+    - left_ankle
+    - right_ankle
+
+visualization:
+  skeleton:
+    line_bgr: [80, 220, 80]
+    joint_bgr: [240, 240, 240]
+    line_thickness: 3
+    joint_radius: 4
+  risk:
+    border_thickness: 16
+    overlay_strength: 0.22
+    label_risk_score: "Risk: {score:.2f}"
+    label_risk_flag: "RISK DETECTED"

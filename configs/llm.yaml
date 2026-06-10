@@ -1,0 +1,47 @@
+# FightSafe AI — optional local LLM (Ollama) for post-hoc text only.
+# Computer vision and rule-based risk detection are authoritative. This file does NOT
+# enable any medical or clinical use; keep humans in the loop.
+#
+# This layer never replaces the pose or risk engine; it only helps narrate structured
+# outputs for analysts and researchers.
+
+# --- Ollama: local server (install from https://ollama.com) -----------------
+ollama:
+  # If false, callers skip HTTP generation and use deterministic / rule-based text only.
+  # Set to true when Ollama is running and you want optional narrative (still not used for risk/pose).
+  enabled: false
+
+  # No trailing path; the client POSTs to: {base_url}/api/generate
+  base_url: "http://localhost:11434"
+
+  # Model as installed locally (e.g. `ollama pull llama3.1`)
+  model: "llama3.1"
+
+  # Stochasticity for the completion (0 = more deterministic, higher = more variable).
+  temperature: 0.2
+
+  # HTTP timeout in seconds for each /api/generate call (set higher on slow hardware).
+  timeout_seconds: 3000
+
+  # Optional vision-language (VLM) event review: frames are sent to Ollama's /api/chat
+  # with a multimodal model. Output is JSON interpretability only; it does not change
+  # pose, features, or deterministic risk scores. See `fightsafe_ai.llm.vision_reviewer`.
+  vision_model: "qwen2.5vl:7b"
+  enable_vlm_review: false
+  # Cap how many on-disk frame paths are sent per event (reduces tokens and latency).
+  max_frames_per_event: 4
+
+# --- Explanation style (used by prompt templates and non-LLM fallbacks) -----
+explanations:
+  # When true, heuristics that fired (e.g. rule id list) are included in the narrative
+  # when that data is present in the event dict. Set false to omit rule names in copy.
+  include_triggered_rules: true
+
+  # When true, append a clear non-clinical / decision-support disclaimer to explanations.
+  include_safety_disclaimer: true
+
+  # Minimum event risk level (LOW, MEDIUM, HIGH, CRITICAL) that triggers a strong
+  # recommendation for human review of the source video. "HIGH" means:
+  # recommend review for that level and all more severe (here: HIGH, CRITICAL).
+  # Use "CRITICAL" to only urge review on the worst band, or "NONE" to never add that nudge.
+  recommend_human_review_threshold: "HIGH"

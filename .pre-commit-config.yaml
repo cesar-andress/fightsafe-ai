@@ -1,0 +1,77 @@
+# Strict local quality gate (aligns with `make ci` for Python checks).
+# Install: pip install pre-commit  (also provided by `pip install -e ".[dev]"`)
+#         pre-commit install
+# Full run: pre-commit run --all-files
+#
+# Blocks: Ruff formatting drift, Ruff lint, Mypy errors, failing tests (unit+integration,
+#         coverage floor), private keys, and files above the size limit; normalizes
+#         whitespace/EOF; validates YAML/TOML/JSON syntax on committed files.
+
+default_install_hook_types: [pre-commit]
+default_language_version:
+  python: python3.12
+default_stages: [pre-commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(htmlcov/|\.coverage)
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=500]
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.12
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        args: [--config, pyproject.toml]
+        types_or: [python, pyi]
+      - id: ruff-format
+        name: ruff format (check)
+        args: [--check, --config, pyproject.toml]
+        types_or: [python, pyi]
+
+  # Use ``python3.12 -m …`` so hooks pick up the same interpreter as ``make ci``
+  # (project venv / dev deps). Bare ``mypy`` or ``python`` on PATH often resolves to
+  # the system install (missing stubs, wrong version) or fails when ``python`` is absent.
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: python3.12
+        language: system
+        pass_filenames: false
+        always_run: true
+        require_serial: true
+        args:
+          - -m
+          - mypy
+          - --config-file
+          - pyproject.toml
+          - --show-error-codes
+          - src
+          - tests
+
+      - id: pytest-coverage
+        name: pytest (unit + integration, coverage gate)
+        entry: python3.12
+        language: system
+        pass_filenames: false
+        always_run: true
+        require_serial: true
+        args:
+          - -m
+          - pytest
+          - tests/unit
+          - tests/integration
+          - --cov=src/fightsafe_ai
+          - --cov-report=term-missing
+          - --cov-report=xml
+          - --cov-fail-under=74

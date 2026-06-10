@@ -1,0 +1,38 @@
+{
+  "title": "FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring",
+  "description": "Open-source research software for interpretable temporal risk fusion, TapKO candidate detection, and benchmark evaluation under partial observability. Companion to three manuscripts (Information Fusion, JAS TapKO HITL, FightSafe-Bench). Not a medical device.",
+  "upload_type": "software",
+  "publication_date": "2026-06-10",
+  "creators": [
+    {
+      "name": "Martin Moncunill, David",
+      "affiliation": "Camilo Jose Cela University",
+      "orcid": "0000-0000-0000-0000"
+    },
+    {
+      "name": "Sanchez, Cesar Andres",
+      "affiliation": "Camilo Jose Cela University",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "keywords": [
+    "combat sports",
+    "information fusion",
+    "human-in-the-loop",
+    "pose estimation",
+    "temporal event detection",
+    "decision support",
+    "video understanding"
+  ],
+  "license": "MIT",
+  "version": "0.1.0",
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "10.5281/zenodo.XXXXXXX",
+      "scheme": "doi",
+      "resource_type": "publication-article"
+    }
+  ],
+  "notes": "Replace placeholder ORCIDs and related DOIs before Zenodo deposit. Large video data are not bundled; see data/README.md."
+}

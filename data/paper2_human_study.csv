@@ -1,0 +1,5 @@
+participant_id,clip_id,condition,event_present,event_type,event_found,review_time_seconds,confidence_1_5,workload_1_5,false_escalations,notes
+P01,C01,video_only,1,tap,1,72,4,3,0,"detected tap late"
+P01,C01,fightsafe_assist,1,tap,1,43,5,2,0,"alert helped focus review"
+P01,C02,video_only,0,none,0,60,3,3,1,"suspected event"
+P01,C02,fightsafe_assist,0,none,0,35,4,2,0,"no escalation"

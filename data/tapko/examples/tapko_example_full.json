@@ -1,0 +1,50 @@
+{
+  "format_version": "1.0",
+  "schema_id": "fightsafe_ai.tapko_annotation",
+  "annotations": [
+    {
+      "video_id": "adcc_session_a_r3",
+      "source_uri": "file:///data/adcc/session_a_round3.mp4",
+      "start_time": 310.0,
+      "end_time": 312.8,
+      "event_type": "submission_signal.verbal_tap",
+      "visibility": "partial",
+      "occlusion_level": "light",
+      "actor_id": "competitor_12",
+      "target_id": "competitor_05",
+      "confidence": 0.78,
+      "notes": "Mouth visible; broadcast mix unclear — confirm against cage mic channel.",
+      "rater_id": "rater_02",
+      "requires_audio": true
+    },
+    {
+      "video_id": "adcc_session_a_r3",
+      "source_uri": "file:///data/adcc/session_a_round3.mp4",
+      "start_time": 450.0,
+      "end_time": 453.5,
+      "event_type": "negative.normal_scramble",
+      "visibility": "clear",
+      "occlusion_level": "none",
+      "actor_id": "competitor_12",
+      "confidence": 0.88,
+      "notes": "Hard negative: rapid hand movements resemble tap but are framing during scramble.",
+      "rater_id": "rater_02",
+      "requires_audio": false
+    },
+    {
+      "video_id": "mma_card_xy_main",
+      "source_uri": "https://example.org/replays/card_xy_main_cut.mp4",
+      "start_time": 602.1,
+      "end_time": 608.0,
+      "event_type": "extreme_vulnerability.ko_collapse",
+      "visibility": "poor",
+      "occlusion_level": "moderate",
+      "actor_id": "fighter_a",
+      "target_id": null,
+      "confidence": 0.65,
+      "notes": "Collapse after strike sequence; cutaway partially obscures landing.",
+      "rater_id": "rater_11",
+      "requires_audio": false
+    }
+  ]
+}

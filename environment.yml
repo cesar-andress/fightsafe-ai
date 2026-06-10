@@ -1,0 +1,12 @@
+# Conda environment for FightSafe AI (Python 3.12)
+# Usage: conda env create -f environment.yml && conda activate fightsafe-ai && pip install -e ".[dev]"
+
+name: fightsafe-ai
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - ffmpeg
+  - pip:
+      - -e .[dev]

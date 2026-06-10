@@ -1,0 +1,21 @@
+{
+  "format_version": "1.0",
+  "schema_id": "fightsafe_ai.tapko_annotation",
+  "annotations": [
+    {
+      "video_id": "match_2026_03_clip_v3",
+      "source_uri": "s3://bucket/fightsafe/clips/match_2026_03_v3.mp4",
+      "start_time": 124.5,
+      "end_time": 125.2,
+      "event_type": "submission_signal.hand_tap",
+      "visibility": "clear",
+      "occlusion_level": "none",
+      "actor_id": "athlete_blue_corner",
+      "target_id": "athlete_red_corner",
+      "confidence": 0.92,
+      "notes": "Three palm strikes on mat; referee moves in same second.",
+      "rater_id": "rater_07",
+      "requires_audio": false
+    }
+  ]
+}
