@@ -152,16 +152,45 @@ Precomputed LaTeX fragments and figures are already committed under `../fusion20
 
 ### 2. sinica2026 (TapKO / HITL workflow demonstration)
 
+**Manuscript:** *Human Supervisory Control for Explainable Escalation of AI-Generated Safety Alerts Under Partial Observability* (`../sinica2026/`)
+
+**Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**.
+
 **Goal:** Reproduce the `jedi_submissions` diagnostic pilot (pipeline traceability, not headline accuracy).
+
+Paper-specific guide: [`docs/SINICA2026_REPRODUCIBILITY.md`](docs/SINICA2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/SINICA2026_TRACEABILITY_MATRIX.md`](docs/SINICA2026_TRACEABILITY_MATRIX.md)
 
 **Prerequisites:**
 
 1. Draft annotations (included): `data/tapko/annotations/jedi_submissions.json`
-2. Source video (not in Git, ~200 MB): download to `data/tapko/videos/jedi_submissions.mp4` — see [`data/README.md`](data/README.md)
+2. Source video (not in Git, ~200 MB): download to `data/tapko/videos/jedi_submissions.mp4` — see [`data/README.md`](data/README.md). The instructional clip `jedi_submissions` is not redistributed because of rights restrictions.
+3. Reference predictions (verification without video): `data/repro/sinica2026/reference/tapko_predictions.json` and `data/repro/sinica2026/reference/tapko_results.csv`
+
+**Reproduction commands** (from repository root):
 
 ```bash
-make reproduce-sinica
+# Full pipeline (requires local video)
+bash scripts/reproduce_sinica2026.sh
+# equivalent: make reproduce-sinica
+
+# Reference mode — bundled predictions when the video is unavailable
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_sinica2026.sh
 ```
+
+Reference mode copies bundled detector/evaluator exports from `data/repro/sinica2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
+
+**Expected outputs:**
+
+| Path | Description |
+|------|-------------|
+| `outputs/tapko/jedi_submissions/tapko_predictions.json` | Detector export (337 candidate intervals) |
+| `outputs/tapko/jedi_submissions_eval/tapko_results.csv` | Evaluator metrics (micro / per-class) |
+| `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` | Error taxonomy digest |
+| `../sinica2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
+| `../sinica2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
+| `outputs/repro/sinica2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
+
+Verification: `python scripts/verify_paper_outputs.py --paper sinica` (micro row: TP=1, FP=336, FN=9).
 
 Manual steps:
 

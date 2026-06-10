@@ -222,3 +222,5 @@ outputs/repro/
 - `data/README.md` — large media download policy
 - `scripts/README.md` — script index
 - `README.md` — installation and citation
+- [`SINICA2026_REPRODUCIBILITY.md`](SINICA2026_REPRODUCIBILITY.md) — sinica2026 paper-specific reproduction
+- [`SINICA2026_TRACEABILITY_MATRIX.md`](SINICA2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for sinica2026
