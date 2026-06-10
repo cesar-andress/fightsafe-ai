@@ -1,13 +1,13 @@
 # CFF 1.2.0 — https://citation-file-format.org
 cff-version: 1.2.0
 message: "If you use this software, please cite it as follows."
-title: FightSafe AI
+title: "FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring"
 type: software
 version: 0.1.0
+date-released: 2026-06-10
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
-doi: 10.5281/zenodo.XXXXXXX
 abstract: >-
   Open-source decision-support software for combat-sports safety monitoring:
   interpretable temporal risk fusion, TapKO candidate detection, and benchmark
@@ -17,12 +17,10 @@ authors:
     given-names: David
     email: david.martinm@ucjc.edu
     affiliation: Camilo Jose Cela University
-    orcid: "https://orcid.org/0000-0000-0000-0000"
   - family-names: Sanchez
     given-names: Cesar Andres
     email: cesar.andress@ucjc.edu
     affiliation: Camilo Jose Cela University
-    orcid: "https://orcid.org/0000-0000-0000-0000"
 keywords:
   - combat sports
   - information fusion
@@ -32,7 +30,7 @@ keywords:
   - decision support
 preferred-citation:
   type: software
-  title: FightSafe AI
+  title: "FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring"
   authors:
     - family-names: Martin Moncunill
       given-names: David
@@ -40,5 +38,4 @@ preferred-citation:
       given-names: Cesar Andres
   year: 2026
   version: 0.1.0
-  doi: 10.5281/zenodo.XXXXXXX
   url: "https://github.com/cesar-andress/fightsafe-ai"

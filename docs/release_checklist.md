@@ -175,7 +175,23 @@ REPRO_USE_REFERENCE=1 bash scripts/reproduce_all.sh
 make verify-repro
 ```
 
-`CITATION.cff` must pass schema validation. Placeholder DOIs are acceptable **before** Zenodo deposit; they must be replaced in step 5.
+`CITATION.cff` must pass schema validation.
+
+**Zenodo GitHub integration rules (do not skip):**
+
+- If both `.zenodo.json` and `CITATION.cff` exist, Zenodo uses **only** `.zenodo.json` for archiving.
+- Do **not** commit placeholder DOIs (`10.5281/zenodo.XXXXXXX`) or placeholder ORCIDs (`0000-0000-0000-0000`) in either file — Zenodo rejects them and the release fails (often reported as *Extra metadata load failed*).
+- Omit `doi` / `orcid` until real values exist; Zenodo mints the DOI when the release succeeds.
+- Use `"license": "mit"` (lowercase) in `.zenodo.json` per [Zenodo JSON documentation](https://help.zenodo.org/docs/github/describe-software/zenodo-json/).
+
+---
+
+## Troubleshooting a failed Zenodo archive
+
+1. Open the repository **Zenodo** panel on GitHub → select the failed release → **Errors** tab.
+2. *Extra metadata load failed* → fix `.zenodo.json` (invalid JSON, ORCID, DOI, or license values).
+3. *Citation metadata load failed* → fix `CITATION.cff` (only if `.zenodo.json` is absent).
+4. Merge metadata fixes to `main`, then publish a **new** GitHub release (e.g. `v0.1.1`); reusing a failed tag usually does not re-trigger ingestion.
 
 ---
 
