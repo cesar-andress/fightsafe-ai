@@ -8,7 +8,7 @@ labels: [bug]
 ## Environment
 
 - **OS** (e.g. Ubuntu 24.04, macOS 14, Windows 11):
-- **FightSafe AI version or commit** (e.g. `0.1.0`, or `abc1234` from `git rev-parse --short HEAD`):
+- **FightSafe AI version or commit** (e.g. `0.1.2`, or `abc1234` from `git rev-parse --short HEAD`):
 - **How you run** (e.g. venv, Docker, `pip install -e .`):
 
 ## Python version
