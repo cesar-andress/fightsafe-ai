@@ -12,13 +12,13 @@ Madrid, Spain
 
 # Architecture
 
-**Documentation note:** FightSafe AI is a **research prototype for decision support**, not a certified medical or officiating system. It targets **combat sports** video with **real-time risk estimation**, **event-level safety alerts**, and **human-in-the-loop feedback**; it does **not** certify medical safety, replace referees, or provide validated knockout detection.
+**Documentation note:** FightSafe AI is a **research software artifact** for traceability and auditability, not a certified medical or officiating system. It targets **combat sports** video with **event-level safety alert exports** and **protocol-defined evaluation**; it does **not** certify medical safety, replace referees, or claim validated human–AI collaboration without an explicit logged study.
 
 FightSafe AI is structured as a **modular research toolkit**: each stage has a narrow responsibility, explicit inputs/outputs, and stable join keys (typically **frame index** and **time** derived from video frame rate). Configuration is declared in YAML under `configs/`; researchers can run batch workflows through the `fightsafe` CLI or compose stages programmatically via `fightsafe_ai`.
 
 This document explains the **logical architecture** (including stages that may be implemented outside the core package today, e.g., clip cutting via external tools) and the **design rationale** for **human-in-the-loop** operation rather than autonomous officiating.
 
-**Terminology (consistent with the README and paper):** **real-time risk estimation**, **event-level safety alerts** (candidate intervals merged on the `EventBus`), **human-in-the-loop feedback** (structured reviewer input), and **decision support** (signals for humans—not autonomous stoppage).
+**Terminology (consistent with the README and paper):** **event-level safety alerts** (candidate intervals merged on the `EventBus`), **export traceability** (schema-typed tuples and manifests), **confirmation-gate semantics** (metadata flags and specification-level routing), and **protocol-defined bookkeeping** (evaluator CSV under frozen matching defaults—not operator-outcome evaluation).
 
 ---
 

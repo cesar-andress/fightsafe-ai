@@ -1,8 +1,8 @@
 # FightSafe AI — research framework
 
-**Documentation note:** FightSafe AI is a **research prototype for decision support**, not a certified medical or officiating system.
+**Documentation note:** FightSafe AI is a **research software artifact** for traceability, auditability, and governance-oriented alert exports—not a certified medical or officiating system.
 
-FightSafe is a **modular decision support** stack for **combat sports** safety intelligence. It emphasizes **real-time risk estimation**, **event-level safety alerts**, and **human-in-the-loop feedback**. It does **not** replace referees or medical staff, certify clinical safety, or provide validated knockout detection. Outputs are signals for **human-in-the-loop** review, research, and training workflows.
+FightSafe is a **modular research stack** for **combat sports** safety monitoring. It emphasizes **event-level safety alert exports**, **schema-typed candidate tuples**, and **specified review-interface metadata** (`requires_human_confirmation`). It does **not** replace referees or medical staff, certify clinical safety, or claim operator benefit or deployment readiness without separate logged studies.
 
 ## Design principles
 

@@ -12,7 +12,7 @@ Madrid, Spain
 
 # Contributing to FightSafe AI
 
-Thank you for taking time to improve this project. FightSafe AI is an **open-source, research-oriented** toolkit for studying **safety-related cues** in **combat sports** video (**real-time risk estimation**, **event-level safety alerts**, **decision support**). **FightSafe AI is a research prototype for decision support, not a certified medical or officiating system.** Contributions that strengthen **reproducibility**, **clarity of assumptions**, and **responsible use** are especially welcome.
+Thank you for taking time to improve this project. FightSafe AI is an **open-source, research-oriented** toolkit for studying **safety-related cues** in **combat sports** video (**event-level safety alerts**, **export traceability**, **protocol-defined bookkeeping**). **FightSafe AI is a research prototype for traceability and auditability, not a certified medical or officiating system.** Contributions that strengthen **reproducibility**, **clarity of assumptions**, and **responsible use** are especially welcome.
 
 ---
 

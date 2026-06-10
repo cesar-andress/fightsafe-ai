@@ -16,9 +16,9 @@ Small CSV/JSON files shipped with the repository so verification scripts can run
 
 These document software exports used during manuscript development. They do not replace re-running `make fusion-all` when `data/boxingvi/skeleton/` is available.
 
-## eswa2026
+## jss2026 (traceability stress test)
 
-`eswa2026/reference/`
+`eswa2026/reference/` — internal folder name at artifact creation (v0.1.3).
 
 | File | Description |
 |------|-------------|

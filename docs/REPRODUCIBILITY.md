@@ -7,7 +7,7 @@ This document maps each companion manuscript to the software commands, input dat
 ```
 papers/fightsafe-ai/          ← this repository (software)
 papers/fusion2026/            ← Information Fusion manuscript
-papers/eswa2026/            ← TapKO / HITL manuscript
+papers/jss2026/            ← traceability architecture manuscript (JSS)
 papers/sports/                ← FightSafe-Bench manuscript
 ```
 
@@ -40,7 +40,7 @@ make verify-repro
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `FUSION_DIR` | `../fusion2026` | Information Fusion LaTeX root |
-| `ESWA_DIR` | `../eswa2026` | TapKO / HITL LaTeX root |
+| `ESWA_DIR` | `../jss2026` (override; scripts default `../eswa2026`) | Traceability / JSS LaTeX root |
 | `SPORTS_DIR` | `../sports` | FightSafe-Bench LaTeX root |
 | `REPO_ROOT` | auto | Software repository root |
 | `REPRO_OUTPUT_ROOT` | `outputs/repro` | Generated reproduction artefacts |
@@ -102,7 +102,7 @@ python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
 
 ---
 
-## eswa2026 — TapKO / HITL workflow demonstration
+## jss2026 — machine-side traceability stress test
 
 ### Scientific artefacts
 
@@ -114,6 +114,8 @@ python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
 | Error analysis | cited in text | evaluator | `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` |
 | Architecture figures | `figures/fig*_tikz.tex` | LaTeX/TikZ (no code run) | compiled in PDF |
 | PDF | `main.pdf` | `reproduce_eswa2026.sh` | `outputs/repro/eswa2026/main.pdf` |
+
+Set `ESWA_DIR=../jss2026` when installing tables into the active manuscript tree.
 
 ### Bundled inputs
 
@@ -139,7 +141,7 @@ bash scripts/reproduce_eswa2026.sh
 REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
 
 # Export tables only
-python scripts/export_eswa2026_tables.py --install --eswa-dir ../eswa2026
+python scripts/export_eswa2026_tables.py --install --eswa-dir ../jss2026
 ```
 
 ### Expected metrics (micro row, draft references)
@@ -222,5 +224,5 @@ outputs/repro/
 - `data/README.md` — large media download policy
 - `scripts/README.md` — script index
 - `README.md` — installation and citation
-- [`ESWA2026_REPRODUCIBILITY.md`](ESWA2026_REPRODUCIBILITY.md) — eswa2026 paper-specific reproduction
-- [`ESWA2026_TRACEABILITY_MATRIX.md`](ESWA2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for eswa2026
+- [`JSS2026_REPRODUCIBILITY.md`](JSS2026_REPRODUCIBILITY.md) — jss2026 paper-specific reproduction
+- [`JSS2026_TRACEABILITY_MATRIX.md`](JSS2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for jss2026

@@ -24,7 +24,7 @@ We state **six** principal contributions, phrased to be **specific** and **techn
 
 6. **Interpretable rules with an optional, score-preserving LLM path.** A local (e.g. Ollama) LLM may narrate or template explanations from the *same* structured fields (features, triggered rules, event windows) with template fallback when the LLM is unavailable; numeric risk, level bands, and merging rules are not altered by the LLM. The integration contribution is (i) governability of the deterministic core and (ii) downstream narration that reuses exposed semantics rather than substituting opaque prose—without asserting that LLM text is exhaustive or factual beyond the supplied tables.
 
-**For reviewers:** Defend novelty as the *conjunction* of: a multilevel governable risk framework; named pre-critical and safety-oriented cues; strictly bounded special heuristics (surrender, limb anomaly); a recommendation-only HITL alert contract; and optional local LLM narration grounded in the same tables—within one reproducible codebase and with explicit non-claims on medicine and match authority. Cite prior work in sports XAI, pose-based review, and constrained LLM use in decision support.
+**For reviewers:** Defend novelty as the *conjunction* of: a multilevel governable risk framework; named pre-critical and safety-oriented cues; strictly bounded special heuristics (surrender, limb anomaly); schema-typed alert exports with confirmation-gate metadata; and optional local LLM narration grounded in the same tables—within one reproducible codebase and with explicit non-claims on medicine, match authority, operator benefit, and deployment readiness.
 
 ---
 

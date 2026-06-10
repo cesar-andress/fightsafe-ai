@@ -16,7 +16,7 @@ This document states **strict rules** for what must **not** enter version contro
 
 **Scope:** everyone with commit access, contributors, and anyone publishing forks or copies of the software.
 
-**Product scope:** FightSafe AI is **research software for decision support**—not a certified medical device or officiating system. Documentation and issues must **not** imply certified safety, referee replacement, or validated knockout detection unless backed by an explicit, peer-reviewed study cited in context.
+**Product scope:** FightSafe AI is **research software for traceability and auditability**—not a certified medical device or officiating system. Documentation and issues must **not** imply certified safety, referee replacement, operator performance improvement, or deployment readiness unless backed by an explicit, peer-reviewed study cited in context.
 
 ---
 

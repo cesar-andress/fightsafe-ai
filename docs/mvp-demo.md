@@ -8,7 +8,7 @@ César Andrés Sánchez (cesar.andress@ucjc.edu)
 
 ---
 
-FightSafe AI is a **research prototype for decision support**, not a certified medical or officiating system; outputs are **real-time risk estimation** and **event-level safety alerts** for **human-in-the-loop feedback**.
+FightSafe AI is a **research software artifact** for traceability and auditability, not a certified medical or officiating system; outputs are **event-level safety alert exports** and **evaluator bookkeeping** under protocol defaults—not claims of operator benefit.
 
 This guide shows how to run the **end-to-end MVP pipeline** (frames → pose → features → interpretable risk → **event-level safety alerts** / overlay video → Markdown report) on a **local combat sports video clip**.
 

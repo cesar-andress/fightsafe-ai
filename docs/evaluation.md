@@ -1,6 +1,6 @@
 # Evaluation metrics (FightSafe AI)
 
-**Documentation note:** FightSafe AI is a **research prototype for decision support**; high metric scores on a private split do **not** imply certified medical safety, replacement of referees, or validated knockout detection without an explicit protocol and independent review.
+**Documentation note:** FightSafe AI is a **research software artifact** for traceability and auditability; high metric scores on a private split do **not** imply certified medical safety, replacement of referees, operator benefit, or deployment readiness without an explicit protocol and independent review.
 
 This document explains how **offline** evaluation helpers in `fightsafe_ai.evaluation` should be used in research. The code does **not** perform automated benchmark submission; it provides **definitions** and **pure functions** so that teams can report metrics consistently for **real-time risk estimation** and **event-level safety alerts** against curated labels.
 

@@ -7,7 +7,7 @@ Reproduction and dataset utilities for FightSafe AI.
 | Script | Manuscript | Description |
 |--------|------------|-------------|
 | `reproduce_fusion2026.sh` | `../fusion2026/` | BoxingVI batch eval, LaTeX assets, PDF |
-| `reproduce_eswa2026.sh` | `../eswa2026/` | TapKO `jedi_submissions` pilot |
+| `reproduce_eswa2026.sh` | `../jss2026/` | TapKO `jedi_submissions` machine-side stress test |
 | `reproduce_sports.sh` | `../sports/` | FightSafe-Bench CSV/JSON exports |
 | `reproduce_all.sh` | all three | Best-effort; continues on missing data |
 

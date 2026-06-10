@@ -1,10 +1,10 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v0.1.2` (Zenodo concept DOI `10.5281/zenodo.20622869`).
+**Current release:** `v0.1.3` (Zenodo DOI `10.5281/zenodo.20622869`).
 
-Use this checklist for the **first public software release** of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
+Use this checklist for public software releases of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts (`../fusion2026`, `../eswa2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in `/home/cesar/papers/bibliography.bib`.
+Companion LaTeX manuscripts (`../fusion2026`, `../jss2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography.
 
 ---
 
@@ -46,7 +46,7 @@ On GitHub: **Releases → Draft a new release**
 | Tag | `v0.1.2` *(current)* or next semver (e.g. `v0.1.3`) |
 | Target | `main` |
 | Title | `v0.1.2 — …` *(match the tag)* |
-| Description | Summarize scope: decision-support software, reproducibility scripts, curated reference data; link companion manuscripts; note large videos are external (see `data/README.md`). |
+| Description | Summarize scope: traceability and auditability software, reproducibility scripts, bundled reference exports; machine-side stress test only (reviewer/gate logs not reported); link companion manuscripts; note large videos are external (see `data/README.md`). |
 
 Optional local tag (if you prefer the CLI):
 
@@ -106,7 +106,7 @@ No citation-key changes are required if you only replace the DOI in `bibliograph
 | Manuscript | File |
 |------------|------|
 | Information Fusion | `../fusion2026/declarations.tex` |
-| ESWA / TapKO | `../eswa2026/main.tex` |
+| JSS / traceability | `../jss2026/main.tex` |
 | FightSafe-Bench | `../sports/main.tex` |
 
 All use `\bibliography{../../bibliography}`.
@@ -141,9 +141,9 @@ cd ../fusion2026
 make -C ../fightsafe-ai fusion-pdf
 # or: pdflatex main && bibtex main && pdflatex main && pdflatex main
 
-# eswa2026 (IEEEtran)
-cd ../eswa2026
-latexmk -pdf -interaction=nonstopmode main.tex
+# jss2026 (Elsevier elsarticle)
+cd ../jss2026
+bash build.sh
 
 # sports (IEEEtran)
 cd ../sports
@@ -154,13 +154,13 @@ Verify:
 
 - No undefined citations for `fightsafe_ai_2026`
 - Bibliography lists the Zenodo DOI (not `XXXXXXX`)
-- PDFs build: `fusion2026/main.pdf`, `eswa2026/main.pdf`, `sports/main.pdf`
+- PDFs build: `fusion2026/main.pdf`, `jss2026/main.pdf`, `sports/main.pdf`
 
 Smoke-test reproducibility against the released tag:
 
 ```bash
 cd ../fightsafe-ai
-git checkout v0.1.2   # optional: pin to current release
+git checkout v0.1.3   # optional: pin to current release
 REPRO_USE_REFERENCE=1 make reproduce-all
 make verify-repro
 ```
