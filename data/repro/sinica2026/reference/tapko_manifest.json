@@ -1,0 +1,12 @@
+{
+  "schema_id": "fightsafe_ai.tapko_detect_manifest",
+  "video_id": "jedi_submissions",
+  "source_video": "/home/cesar/youtube/fightsafe-ai/data/tapko/videos/jedi_submissions.mp4",
+  "fps": 30.0,
+  "pose_source": "extracted",
+  "pose_csv": "/home/cesar/youtube/fightsafe-ai/outputs/tapko/jedi_submissions/pose_keypoints.csv",
+  "n_frames": 20085,
+  "n_tap_candidates": 139,
+  "n_vulnerability_candidates": 198,
+  "predictions_json": "tapko_predictions.json"
+}

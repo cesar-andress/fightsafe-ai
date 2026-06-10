@@ -107,11 +107,16 @@ outputs/**
 !outputs/.gitkeep
 runs/**
 !runs/.gitkeep
+!runs/case_studies/
+!runs/case_studies/ablation_summary/
+!runs/case_studies/ablation_summary/**
 reports/**
 !reports/.gitkeep
 # Redundant with the above, but makes intent clear for diffs and tooling:
 runs/**/*.csv
+!runs/case_studies/ablation_summary/**/*.csv
 runs/**/*.json
+!runs/case_studies/ablation_summary/**/*.json
 outputs/**/*.csv
 outputs/**/*.json
 reports/**/*.csv

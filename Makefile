@@ -5,7 +5,7 @@
 	coverage pre-commit ci clean \
 	fusion-pdf fusion-assets fusion-all fusion-all-force fusion-clean \
 	reproduce-fusion reproduce-sinica reproduce-sports reproduce-all \
-	check-paper-update
+	verify-repro check-paper-update
 
 PYTHON ?= python3.12
 PIP := $(PYTHON) -m pip
@@ -134,6 +134,9 @@ reproduce-sports:
 
 reproduce-all:
 	bash scripts/reproduce_all.sh
+
+verify-repro:
+	$(PYTHON) scripts/verify_paper_outputs.py --paper all
 
 ## --- maintenance ---------------------------------------------------------------
 

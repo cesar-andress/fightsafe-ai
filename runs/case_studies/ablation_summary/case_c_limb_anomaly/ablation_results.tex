@@ -1,0 +1,14 @@
+\begin{tabular}{lrrrrrr}
+\toprule
+mode & max\_risk\_score & mean\_risk\_score & number\_of\_candidate\_events & risk\_event\_density & percentage\_high\_or\_critical\_frames & earliest\_high\_or\_critical\_timestamp \\
+\midrule
+biomechanics\_only & 0.6667 & 0.3167 & 1 & 0.0588 & 1.1765 & 4.5000 \\
+posture\_only & 0.3338 & 0.3272 & 0 & 0.0000 & 0.0000 & --- \\
+anomaly\_only & 0.6296 & 0.0410 & 1 & 0.0588 & 0.5882 & 4.6000 \\
+biomechanics\_plus\_posture & 0.5600 & 0.3807 & 1 & 0.0588 & 1.1765 & 4.5000 \\
+full\_fusion & 0.6432 & 0.3964 & 8 & 0.4706 & 6.4706 & 0.7000 \\
+full\_fusion\_without\_interactions & 0.5032 & 0.3092 & 1 & 0.0588 & 0.5882 & 4.6000 \\
+full\_fusion\_with\_surrender\_disabled & 0.6432 & 0.3964 & 8 & 0.4706 & 6.4706 & 0.7000 \\
+full\_fusion\_with\_limb\_anomaly\_disabled & 0.5200 & 0.3843 & 1 & 0.0588 & 0.5882 & 4.6000 \\
+\bottomrule
+\end{tabular}

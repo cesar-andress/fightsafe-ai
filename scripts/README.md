@@ -11,7 +11,15 @@ Reproduction and dataset utilities for FightSafe AI.
 | `reproduce_sports.sh` | `../sports/` | FightSafe-Bench CSV/JSON exports |
 | `reproduce_all.sh` | all three | Best-effort; continues on missing data |
 
-Makefile equivalents: `make reproduce-fusion`, `make reproduce-sinica`, `make reproduce-sports`, `make reproduce-all`.
+Makefile equivalents: `make reproduce-fusion`, `make reproduce-sinica`, `make reproduce-sports`, `make reproduce-all`, `make verify-repro`.
+
+| Helper script | Role |
+|---------------|------|
+| `export_fusion2026_assets.py` | Ablation tables/figures from bundled CSV |
+| `export_sinica2026_tables.py` | TapKO pilot tables from evaluator CSV |
+| `verify_paper_outputs.py` | Check metrics against `data/repro/` snapshots |
+
+Full artefact map: [`docs/REPRODUCIBILITY.md`](../docs/REPRODUCIBILITY.md).
 
 ## Asset generation (fusion2026)
 

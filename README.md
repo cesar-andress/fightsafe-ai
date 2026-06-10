@@ -76,7 +76,7 @@ fightsafe tapko-evaluate \
   --output-dir outputs/tapko/run_eval/
 ```
 
-See [`docs/architecture.md`](docs/architecture.md), [`docs/evaluation.md`](docs/evaluation.md), and [`docs/troubleshooting.md`](docs/troubleshooting.md).
+See [`docs/architecture.md`](docs/architecture.md), [`docs/evaluation.md`](docs/evaluation.md), [`docs/troubleshooting.md`](docs/troubleshooting.md), and the full [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) guide.
 
 ---
 

@@ -1,0 +1,6 @@
+scope,label,tp,fp,fn,precision,recall,f1,f2,mean_onset_latency_sec,mean_abs_onset_latency_sec,false_positives_per_minute,total_video_duration_min
+micro,,1,336,9,0.002967359050445104,0.1,0.005763688760806917,0.013262599469496022,2.5,2.5,30.113523202549292,11.157777777777778
+macro,,,,,0.010101010101010102,0.03333333333333333,0.01550387596899225,0.0228310502283105,,,,
+per_class,extreme_vulnerability.no_intelligent_defense,0,198,0,0.0,0.0,0.0,0.0,,,,
+per_class,submission_signal.foot_tap,0,106,0,0.0,0.0,0.0,0.0,,,,
+per_class,submission_signal.hand_tap,1,32,9,0.030303030303030304,0.1,0.04651162790697675,0.0684931506849315,,,,
