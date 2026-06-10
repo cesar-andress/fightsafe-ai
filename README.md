@@ -87,7 +87,7 @@ fightsafe-ai/
 ├── src/fightsafe_ai/     # Python package (CLI, fusion, TapKO, evaluation)
 ├── configs/              # YAML fusion rules, case-study definitions
 ├── data/                 # Small curated samples; large media downloaded separately
-├── docs/                 # Architecture, evaluation, dataset policy
+├── docs/                 # Architecture, evaluation, release checklist, dataset policy
 ├── scripts/              # Reproduction helpers and dataset builders
 ├── tools/                # LaTeX table/figure generators for fusion manuscript
 ├── tests/                # Unit, integration, and e2e tests
@@ -228,12 +228,14 @@ Pre-commit hooks: `pre-commit install` then `make pre-commit`.
 
 ## Citation
 
+If you use this software, please cite the Zenodo archive (DOI assigned at first release) and the GitHub repository. Companion manuscripts use the same BibTeX key `fightsafe_ai_2026` in the shared bibliography at `../../bibliography.bib` (monorepo layout).
+
 ### Software (this repository)
 
 ```bibtex
 @software{fightsafe_ai_2026,
   author       = {Martin Moncunill, David and S{\'a}nchez, C{\'e}sar Andr{\'e}s},
-  title        = {FightSafe AI},
+  title        = {FightSafe AI: Decision-Support Software for Combat-Sports Safety Monitoring},
   year         = {2026},
   publisher    = {Zenodo},
   version      = {0.1.0},
@@ -242,7 +244,9 @@ Pre-commit hooks: `pre-commit install` then `make pre-commit`.
 }
 ```
 
-GitHub also reads [`CITATION.cff`](CITATION.cff). Replace `XXXXXXX` with the Zenodo DOI after deposit.
+- GitHub reads [`CITATION.cff`](CITATION.cff) for the **Cite this repository** button.
+- Replace `XXXXXXX` with the Zenodo DOI after [release v0.1.0](docs/release_checklist.md).
+- Step-by-step release and DOI update procedure: [`docs/release_checklist.md`](docs/release_checklist.md).
 
 ### Companion manuscripts
 
