@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export eswa2026 TapKO pilot tables from tapko_results.csv."""
+"""Export iswa2026 TapKO pilot tables from tapko_results.csv."""
 
 from __future__ import annotations
 
@@ -129,7 +129,7 @@ def main(argv: list[str] | None = None) -> int:
     root = _repo_root()
     default_csv = root / "outputs/tapko/jedi_submissions_eval/tapko_results.csv"
     default_pred = root / "outputs/tapko/jedi_submissions/tapko_predictions.json"
-    default_out = root / "outputs/repro/eswa2026/tables"
+    default_out = root / "outputs/repro/iswa2026/tables"
 
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--results-csv", type=Path, default=default_csv)
@@ -138,9 +138,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument(
         "--install",
         action="store_true",
-        help="Also copy tables into ESWA_DIR/tables/ (default: ../eswa2026).",
+        help="Also copy tables into ISWA_DIR/tables/ (default: ../iswa2026).",
     )
-    p.add_argument("--eswa-dir", type=Path, default=Path("../eswa2026"))
+    p.add_argument("--iswa-dir", type=Path, default=Path("../iswa2026"))
     p.add_argument("--video-id", default="jedi_submissions")
     args = p.parse_args(argv)
 
@@ -162,10 +162,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Wrote {per_class_tex}")
 
     if args.install:
-        eswa_tables = (args.eswa_dir if args.eswa_dir.is_absolute() else root / args.eswa_dir) / "tables"
-        eswa_tables.mkdir(parents=True, exist_ok=True)
+        iswa_tables = (args.iswa_dir if args.iswa_dir.is_absolute() else root / args.iswa_dir) / "tables"
+        iswa_tables.mkdir(parents=True, exist_ok=True)
         for src in (results_tex, per_class_tex):
-            dest = eswa_tables / src.name
+            dest = iswa_tables / src.name
             dest.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
             print(f"Installed {dest}")
 

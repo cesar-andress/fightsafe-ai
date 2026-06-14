@@ -4,7 +4,7 @@
 
 Use this checklist for public software releases of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts (`../fusion2026`, `../jss2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography.
+Companion LaTeX manuscripts (`../fusion2026`, `../iswa2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography.
 
 ---
 
@@ -46,7 +46,7 @@ On GitHub: **Releases → Draft a new release**
 | Tag | `v0.1.2` *(current)* or next semver (e.g. `v0.1.3`) |
 | Target | `main` |
 | Title | `v0.1.2 — …` *(match the tag)* |
-| Description | Summarize scope: traceability and auditability software, reproducibility scripts, bundled reference exports; machine-side stress test only (reviewer/gate logs not reported); link companion manuscripts; note large videos are external (see `data/README.md`). |
+| Description | Summarize scope: traceability and auditability software, reproducibility scripts, bundled reference exports; machine-side protocol demonstration only (reviewer/gate logs not reported); link companion manuscripts; note large videos are external (see `data/README.md`). |
 
 Optional local tag (if you prefer the CLI):
 
@@ -89,13 +89,13 @@ Edit `/home/cesar/papers/bibliography.bib` — entry key **`fightsafe_ai_2026`**
 ```bibtex
 @misc{fightsafe_ai_2026,
   author       = {Mart{\'i}n Moncunill, David and S{\'a}nchez, C{\'e}sar Andr{\'e}s},
-  title        = {FightSafe {AI}: Decision-Support Software for Combat-Sports Safety Monitoring},
+  title        = {FightSafe {AI}: Traceability and Auditability Software for Safety-Alert Review Workflows},
   year         = {2026},
-  version      = {0.1.2},
+  version      = {0.1.3},
   howpublished = {Zenodo},
   doi          = {10.5281/zenodo.<ASSIGNED>},
   url          = {https://doi.org/10.5281/zenodo.<ASSIGNED>},
-  note         = {Open-source research software; GitHub release v0.1.2}
+  note         = {Open-source research software; GitHub release v0.1.3; protocol demonstration machine-side only}
 }
 ```
 
@@ -106,7 +106,7 @@ No citation-key changes are required if you only replace the DOI in `bibliograph
 | Manuscript | File |
 |------------|------|
 | Information Fusion | `../fusion2026/declarations.tex` |
-| JSS / traceability | `../jss2026/main.tex` |
+| Traceability | `../iswa2026/main.tex` |
 | FightSafe-Bench | `../sports/main.tex` |
 
 All use `\bibliography{../../bibliography}`.
@@ -141,8 +141,8 @@ cd ../fusion2026
 make -C ../fightsafe-ai fusion-pdf
 # or: pdflatex main && bibtex main && pdflatex main && pdflatex main
 
-# jss2026 (Elsevier elsarticle)
-cd ../jss2026
+# iswa2026 (Elsevier elsarticle)
+cd ../iswa2026
 bash build.sh
 
 # sports (IEEEtran)
@@ -154,7 +154,7 @@ Verify:
 
 - No undefined citations for `fightsafe_ai_2026`
 - Bibliography lists the Zenodo DOI (not `XXXXXXX`)
-- PDFs build: `fusion2026/main.pdf`, `jss2026/main.pdf`, `sports/main.pdf`
+- PDFs build: `fusion2026/main.pdf`, `iswa2026/main.pdf`, `sports/main.pdf`
 
 Smoke-test reproducibility against the released tag:
 

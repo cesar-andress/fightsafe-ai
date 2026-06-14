@@ -3,7 +3,7 @@
 **Authors:** David Martin Moncunill, César Andrés Sánchez
 **Affiliation:** Camilo José Cela University (UCJC), Madrid, Spain
 
-*This draft follows the Introduction–Methods–Results–Discussion (IMRaD) structure. For the active JSS traceability manuscript, prefer the README and [`JSS2026_REPRODUCIBILITY.md`](JSS2026_REPRODUCIBILITY.md) framing: **software traceability**, **auditability**, and **protocol-defined bookkeeping**—not operator-outcome or deployment-readiness claims. FightSafe AI is described here as a **research software artifact** for **highlighting candidate safety-relevant intervals** in combat-sports video. It is **not** a medical device, does **not** diagnose injury or concussion, and is **not** a substitute for qualified medical staff, officials, or governing-body procedures.*
+*This draft follows the Introduction–Methods–Results–Discussion (IMRaD) structure. For the active traceability manuscript (`../iswa2026/`), prefer the README and [`ISWA2026_REPRODUCIBILITY.md`](ISWA2026_REPRODUCIBILITY.md) framing: **software traceability**, **auditability**, and **protocol-defined bookkeeping**—not operator-outcome or deployment-readiness claims. FightSafe AI is described here as a **research software artifact** for **highlighting candidate safety-relevant intervals** in combat-sports video. It is **not** a medical device, does **not** diagnose injury or concussion, and is **not** a substitute for qualified medical staff, officials, or governing-body procedures.*
 
 ---
 

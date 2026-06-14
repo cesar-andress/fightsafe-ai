@@ -1,6 +1,6 @@
 {
   "title": "FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows",
-  "description": "Research software artifact for machine-generated alert export, software traceability, auditability, protocol-defined bookkeeping, and governance constraints. Release v0.1.3 bundles TapKO reference exports and reproduction scripts; reported stress test is machine-side only. Companion to manuscripts on information fusion, traceability architecture (JSS), and FightSafe-Bench. Not a medical device.",
+  "description": "Research software for alert-candidate export traceability, auditability, protocol-defined bookkeeping, and governance requirements in safety-alert review workflows. Release v0.1.3 bundles TapKO reference exports and reproduction scripts; reported protocol demonstration is machine-side only (reviewer and gate records not logged). Not a validated operator-facing product; no deployment-readiness claim. Companion to manuscripts on information fusion, traceability architecture, and FightSafe-Bench. Not a medical device.",
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",

@@ -4,7 +4,7 @@
 .PHONY: install format lint typecheck test test-unit test-integration test-e2e \
 	coverage pre-commit ci clean \
 	fusion-pdf fusion-assets fusion-all fusion-all-force fusion-clean \
-	reproduce-fusion reproduce-eswa reproduce-sports reproduce-all \
+	reproduce-fusion reproduce-iswa reproduce-sports reproduce-all \
 	verify-repro check-paper-update
 
 PYTHON ?= python3.12
@@ -13,7 +13,7 @@ export PYTHONPATH := $(abspath src):$(abspath .)
 
 # Companion manuscript directories (monorepo layout: sibling folders)
 FUSION_DIR ?= ../fusion2026
-ESWA_DIR ?= ../eswa2026
+ISWA_DIR ?= ../iswa2026
 SPORTS_DIR ?= ../sports
 
 RUFF_CFG := --config pyproject.toml
@@ -122,10 +122,10 @@ fusion-clean:
 reproduce-fusion:
 	bash scripts/reproduce_fusion2026.sh
 
-## --- eswa2026 (TapKO / HITL manuscript) ------------------------------------
+## --- iswa2026 (TapKO / traceability manuscript) ------------------------------------
 
-reproduce-eswa:
-	bash scripts/reproduce_eswa2026.sh
+reproduce-iswa:
+	bash scripts/reproduce_iswa2026.sh
 
 ## --- sports (FightSafe-Bench manuscript) -------------------------------------
 

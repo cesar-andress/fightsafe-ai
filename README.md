@@ -1,8 +1,8 @@
 # FightSafe AI
 
-A research software artifact implementing machine-generated alert export, traceability, auditability, protocol-defined bookkeeping, and governance constraints for safety-alert review workflows.
+**FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows**
 
-Open-source software for **combat-sports safety monitoring**: monocular video → pose → interpretable features → temporal fusion → schema-typed alert-candidate exports for **specified human-oversight** review paths.
+Research software for alert-candidate export traceability, auditability, protocol-defined bookkeeping, and governance requirements in safety-alert review workflows.
 
 **Not** a medical device, clinical diagnostic tool, or autonomous officiating system.
 
@@ -16,31 +16,32 @@ Open-source software for **combat-sports safety monitoring**: monocular video �
 
 ## Scope of the Artifact
 
-This repository ships **research software** for export generation, traceability bookkeeping, and governance-oriented metadata—not a validated operator-facing product.
+This repository ships **research software** for export generation, traceability bookkeeping, and governance-oriented metadata.
 
-- **Reviewer decisions** (`H_{t,k}`) were **not** logged in the reported machine-side stress test.
-- **Gate outcomes** (`O_{t,k}`) were **not** logged in the reported run.
-- The published stress test (**v0.1.3**, `jedi_submissions` clip) is **machine-side only**: detector exports, evaluator CSV, protocol error tags, and manuscript tables under frozen matching defaults.
+- **Not** a validated operator-facing product.
+- **No** claim of improved human decisions or reduced operator workload.
+- **No** deployment-readiness claim.
+- The reported **machine-side traceability protocol demonstration** is **machine-side only**: detector exports, evaluator CSV, protocol error tags, and manuscript tables under frozen matching defaults; **reviewer decisions** (`H_{t,k}`) and **gate outcomes** (`O_{t,k}`) were **not** logged.
 - The artifact **supports future audit-schema exercises** (append-only candidate, state, decision, and gate record types) but does not claim confirmation-gate execution, operator benefit, or deployment readiness without separate logged studies.
 
-Script and directory names such as `reproduce_eswa2026.sh` and `data/repro/eswa2026/` reflect the **project-internal paper folder name at artifact creation**; the active traceability manuscript targets the *Journal of Systems and Software* (`../jss2026/`).
+Reproducibility scripts and bundled reference exports use the `iswa2026` identifier aligned with the traceability manuscript (`../iswa2026/`).
 
 ---
 
 ## Scope and disclaimer
 
-FightSafe AI is a **reproducible research prototype**. It produces interpretable, auditable **candidate** exports for specified review workflows. Qualified humans retain authority over stoppages, medical response, and competitive outcomes. The software does **not** claim improved human decisions, reduced operator workload, or validated human–AI collaboration unless backed by a separate logged study.
+FightSafe AI is a **reproducible research prototype**. It produces interpretable, auditable **candidate** exports for specified review workflows. Qualified humans retain authority over stoppages, medical response, and competitive outcomes. See [Scope of the Artifact](#scope-of-the-artifact) for protocol-demonstration limits and non-claims on operator benefit, workload, or deployment readiness.
 
 ---
 
 ## Research outputs
 
-Three companion manuscripts share terminology but target different scientific objects. LaTeX sources live in sibling directories when using the monorepo layout (`../fusion2026`, `../jss2026`, `../sports`).
+Three companion manuscripts share terminology but target different scientific objects. LaTeX sources live in sibling directories when using the monorepo layout (`../fusion2026`, `../iswa2026`, `../sports`).
 
 | Manuscript | Directory | Scientific focus | Software entry points |
 |------------|-----------|------------------|------------------------|
 | **Information Fusion** | `../fusion2026/` | Multi-source temporal fusion, mask ablations, BoxingVI interval evaluation | `make reproduce-fusion`, `fightsafe risk-ablation-all` |
-| **JSS / traceability architecture** | `../jss2026/` | Formal specification, traceability architecture, audit schemas, machine-side stress test | `make reproduce-eswa`, `fightsafe tapko-detect` |
+| **Traceability architecture** | `../iswa2026/` | Formal specification, traceability architecture, audit schemas, machine-side protocol demonstration | `make reproduce-iswa`, `fightsafe tapko-detect` |
 | **FightSafe-Bench** | `../sports/` | Benchmark dataset design, annotation protocol, baseline tasks | `make reproduce-sports`, `scripts/build_fightsafe_bench.py` |
 
 ---
@@ -126,7 +127,7 @@ All reproduction targets are available via `make`:
 
 ```bash
 make reproduce-fusion    # fusion2026 manuscript assets + PDF (when data present)
-make reproduce-eswa      # JSS traceability stress test (TapKO pilot pipeline)
+make reproduce-iswa      # traceability protocol demonstration (TapKO pilot pipeline)
 make reproduce-sports    # sports / FightSafe-Bench dataset exports
 make reproduce-all       # run all three (best-effort; skips missing data)
 ```
@@ -165,37 +166,37 @@ python ../fusion2026/scripts/regenerate_figures.py
 
 Precomputed LaTeX fragments and figures are already committed under `../fusion2026/tables/` and `../fusion2026/figures/` for PDF-only builds.
 
-### 2. jss2026 (machine-side traceability stress test)
+### 2. iswa2026 (machine-side traceability protocol demonstration)
 
-**Manuscript:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../jss2026/`)
+**Manuscript:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../iswa2026/`)
 
 **Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**.
 
-**Goal:** Reproduce the `jedi_submissions` machine-side stress test (export traceability and protocol-defined bookkeeping, not operator-outcome evaluation).
+**Goal:** Reproduce the `jedi_submissions` machine-side protocol demonstration (export traceability and protocol-defined bookkeeping, not operator-outcome evaluation).
 
-Paper-specific guide: [`docs/JSS2026_REPRODUCIBILITY.md`](docs/JSS2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/JSS2026_TRACEABILITY_MATRIX.md`](docs/JSS2026_TRACEABILITY_MATRIX.md)
+Paper-specific guide: [`docs/ISWA2026_REPRODUCIBILITY.md`](docs/ISWA2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/ISWA2026_TRACEABILITY_MATRIX.md`](docs/ISWA2026_TRACEABILITY_MATRIX.md)
 
 **Prerequisites:**
 
 1. Draft annotations (included): `data/tapko/annotations/jedi_submissions.json`
 2. Source video (not in Git, ~200 MB): download to `data/tapko/videos/jedi_submissions.mp4` — see [`data/README.md`](data/README.md). The instructional clip `jedi_submissions` is not redistributed because of rights restrictions.
-3. Reference predictions (verification without video): `data/repro/eswa2026/reference/tapko_predictions.json` and `data/repro/eswa2026/reference/tapko_results.csv`
+3. Reference predictions (verification without video): `data/repro/iswa2026/reference/tapko_predictions.json` and `data/repro/iswa2026/reference/tapko_results.csv`
 
 **Reproduction commands** (from repository root):
 
 ```bash
 # Full pipeline (requires local video)
-bash scripts/reproduce_eswa2026.sh
-# equivalent: make reproduce-eswa
+bash scripts/reproduce_iswa2026.sh
+# equivalent: make reproduce-iswa
 
 # Reference mode — bundled predictions when the video is unavailable
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_iswa2026.sh
 
-# Point table export at the JSS manuscript directory (script default may be ../eswa2026)
-ESWA_DIR=../jss2026 bash scripts/reproduce_eswa2026.sh
+# Point table export at the traceability manuscript directory (default: ../iswa2026)
+ISWA_DIR=../iswa2026 bash scripts/reproduce_iswa2026.sh
 ```
 
-Reference mode copies bundled detector/evaluator exports from `data/repro/eswa2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
+Reference mode copies bundled detector/evaluator exports from `data/repro/iswa2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
 
 **Expected outputs:**
 
@@ -204,11 +205,11 @@ Reference mode copies bundled detector/evaluator exports from `data/repro/eswa20
 | `outputs/tapko/jedi_submissions/tapko_predictions.json` | Detector export (337 candidate intervals) |
 | `outputs/tapko/jedi_submissions_eval/tapko_results.csv` | Evaluator metrics (micro / per-class) |
 | `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` | Error taxonomy digest |
-| `../jss2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
-| `../jss2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
-| `outputs/repro/eswa2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
+| `../iswa2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
+| `../iswa2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
+| `outputs/repro/iswa2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
 
-Verification: `python scripts/verify_paper_outputs.py --paper eswa` (micro row: TP=1, FP=336, FN=9).
+Verification: `python scripts/verify_paper_outputs.py --paper iswa` (micro row: TP=1, FP=336, FN=9).
 
 Manual steps:
 
@@ -227,7 +228,7 @@ fightsafe tapko-evaluate \
 Compile the manuscript:
 
 ```bash
-cd ../jss2026 && bash build.sh
+cd ../iswa2026 && bash build.sh
 ```
 
 ### 3. sports (FightSafe-Bench)
@@ -299,7 +300,7 @@ If you use this software, please cite the Zenodo archive and the GitHub reposito
 Cite the relevant manuscript when using methods or results from that line of work:
 
 - **Fusion:** *Explainable Multi-Source Temporal Information Fusion for Combat-Sports Safety Intelligence* (`../fusion2026/`)
-- **Traceability / JSS:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../jss2026/`)
+- **Traceability:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../iswa2026/`)
 - **Benchmark:** *FightSafe-Bench: A Benchmark for Temporal Safety Event Detection under Partial Observability* (`../sports/`)
 
 ---

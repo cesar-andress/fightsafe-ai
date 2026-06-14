@@ -16,9 +16,9 @@ Small CSV/JSON files shipped with the repository so verification scripts can run
 
 These document software exports used during manuscript development. They do not replace re-running `make fusion-all` when `data/boxingvi/skeleton/` is available.
 
-## jss2026 (traceability stress test)
+## iswa2026 (traceability protocol demonstration)
 
-`eswa2026/reference/` — internal folder name at artifact creation (v0.1.3).
+`iswa2026/reference/` — reproducibility bundle for the traceability manuscript.
 
 | File | Description |
 |------|-------------|
@@ -26,14 +26,14 @@ These document software exports used during manuscript development. They do not 
 | `tapko_results.csv` | Reference evaluator metrics |
 | `tapko_error_analysis.md` | Error category counts |
 
-Use with `REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh` when the source video is not downloaded.
+Use with `REPRO_USE_REFERENCE=1 bash scripts/reproduce_iswa2026.sh` when the source video is not downloaded.
 
 ## Regenerating references
 
 After a verified full reproduction run, maintainers may refresh these files:
 
 ```bash
-cp outputs/tapko/jedi_submissions_eval/tapko_results.csv data/repro/eswa2026/reference/
+cp outputs/tapko/jedi_submissions_eval/tapko_results.csv data/repro/iswa2026/reference/
 cp outputs/evaluation/boxingvi_batch/boxingvi_results_all.csv data/repro/fusion2026/reference/boxingvi/
 ```
 

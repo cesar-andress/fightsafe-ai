@@ -1,5 +1,7 @@
 # Reproducibility guide
 
+**Software artifact:** *FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows* (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**).
+
 This document maps each companion manuscript to the software commands, input data, and expected outputs in this repository.
 
 **Layout assumption (monorepo):**
@@ -7,7 +9,7 @@ This document maps each companion manuscript to the software commands, input dat
 ```
 papers/fightsafe-ai/          ← this repository (software)
 papers/fusion2026/            ← Information Fusion manuscript
-papers/jss2026/            ← traceability architecture manuscript (JSS)
+papers/iswa2026/            ← traceability architecture manuscript
 papers/sports/                ← FightSafe-Bench manuscript
 ```
 
@@ -21,12 +23,12 @@ Override paths with environment variables (see [Environment variables](#environm
 cd fightsafe-ai
 pip install -e ".[dev]"
 
-# All three papers (reference mode for eswa when video is absent)
+# All three papers (reference mode for iswa when video is absent)
 make reproduce-all
 
 # Or individually
 make reproduce-fusion
-make reproduce-eswa
+make reproduce-iswa
 make reproduce-sports
 
 # Verify bundled reference snapshots
@@ -40,7 +42,7 @@ make verify-repro
 | Variable | Default | Purpose |
 |----------|---------|---------|
 | `FUSION_DIR` | `../fusion2026` | Information Fusion LaTeX root |
-| `ESWA_DIR` | `../jss2026` (override; scripts default `../eswa2026`) | Traceability / JSS LaTeX root |
+| `ISWA_DIR` | `../iswa2026` | Traceability manuscript LaTeX root |
 | `SPORTS_DIR` | `../sports` | FightSafe-Bench LaTeX root |
 | `REPO_ROOT` | auto | Software repository root |
 | `REPRO_OUTPUT_ROOT` | `outputs/repro` | Generated reproduction artefacts |
@@ -102,28 +104,28 @@ python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
 
 ---
 
-## jss2026 — machine-side traceability stress test
+## iswa2026 — machine-side traceability protocol demonstration
 
 ### Scientific artefacts
 
 | Artefact | Manuscript path | Reproduced by | Expected output |
 |----------|-----------------|---------------|-----------------|
-| Pilot results table | `tables/tapko_pilot_results.tex` | `scripts/export_eswa2026_tables.py --install` | `outputs/repro/eswa2026/tables/tapko_pilot_results.tex` |
-| Per-class table | `tables/tapko_pilot_per_class.tex` | same | `outputs/repro/eswa2026/tables/tapko_pilot_per_class.tex` |
+| Pilot results table | `tables/tapko_pilot_results.tex` | `scripts/export_iswa2026_tables.py --install` | `outputs/repro/iswa2026/tables/tapko_pilot_results.tex` |
+| Per-class table | `tables/tapko_pilot_per_class.tex` | same | `outputs/repro/iswa2026/tables/tapko_pilot_per_class.tex` |
 | Evaluator CSV | (supporting) | `fightsafe tapko-evaluate` | `outputs/tapko/jedi_submissions_eval/tapko_results.csv` |
 | Error analysis | cited in text | evaluator | `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` |
 | Architecture figures | `figures/fig*_tikz.tex` | LaTeX/TikZ (no code run) | compiled in PDF |
-| PDF | `main.pdf` | `reproduce_eswa2026.sh` | `outputs/repro/eswa2026/main.pdf` |
+| PDF | `main.pdf` | `reproduce_iswa2026.sh` | `outputs/repro/iswa2026/main.pdf` |
 
-Set `ESWA_DIR=../jss2026` when installing tables into the active manuscript tree.
+Set `ISWA_DIR=../iswa2026` when installing tables into the active manuscript tree.
 
 ### Bundled inputs
 
 | Path | Description |
 |------|-------------|
 | `data/tapko/annotations/jedi_submissions.json` | Draft reference windows (10 intervals) |
-| `data/repro/eswa2026/reference/tapko_predictions.json` | Reference detector export (verification mode) |
-| `data/repro/eswa2026/reference/tapko_results.csv` | Reference evaluator metrics |
+| `data/repro/iswa2026/reference/tapko_predictions.json` | Reference detector export (verification mode) |
+| `data/repro/iswa2026/reference/tapko_results.csv` | Reference evaluator metrics |
 
 ### External inputs
 
@@ -135,13 +137,13 @@ Set `ESWA_DIR=../jss2026` when installing tables into the active manuscript tree
 
 ```bash
 # Full pipeline (requires video)
-bash scripts/reproduce_eswa2026.sh
+bash scripts/reproduce_iswa2026.sh
 
 # Without video — reference predictions + table sync
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_eswa2026.sh
+REPRO_USE_REFERENCE=1 bash scripts/reproduce_iswa2026.sh
 
 # Export tables only
-python scripts/export_eswa2026_tables.py --install --eswa-dir ../jss2026
+python scripts/export_iswa2026_tables.py --install --iswa-dir ../iswa2026
 ```
 
 ### Expected metrics (micro row, draft references)
@@ -194,7 +196,7 @@ python scripts/verify_paper_outputs.py --paper all
 Checks:
 
 - fusion: ablation CSV completeness
-- eswa: reproduced metrics vs `data/repro/eswa2026/reference/tapko_results.csv`
+- iswa: reproduced metrics vs `data/repro/iswa2026/reference/tapko_results.csv`
 - sports: `dataset_statistics.json` present
 
 ---
@@ -207,7 +209,7 @@ outputs/repro/
 │   ├── tables/           # regenerated ablation TeX
 │   ├── figures/          # copies of ablation PDF/PNG
 │   └── main.pdf          # optional PDF copy
-├── eswa2026/
+├── iswa2026/
 │   ├── tables/           # tapko_pilot_*.tex
 │   ├── tapko_results.csv
 │   └── main.pdf
@@ -224,5 +226,5 @@ outputs/repro/
 - `data/README.md` — large media download policy
 - `scripts/README.md` — script index
 - `README.md` — installation and citation
-- [`JSS2026_REPRODUCIBILITY.md`](JSS2026_REPRODUCIBILITY.md) — jss2026 paper-specific reproduction
-- [`JSS2026_TRACEABILITY_MATRIX.md`](JSS2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for jss2026
+- [`ISWA2026_REPRODUCIBILITY.md`](ISWA2026_REPRODUCIBILITY.md) — iswa2026 paper-specific reproduction
+- [`ISWA2026_TRACEABILITY_MATRIX.md`](ISWA2026_TRACEABILITY_MATRIX.md) — manuscript-to-artifact map for iswa2026

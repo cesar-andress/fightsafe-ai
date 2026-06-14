@@ -7,16 +7,16 @@ Reproduction and dataset utilities for FightSafe AI.
 | Script | Manuscript | Description |
 |--------|------------|-------------|
 | `reproduce_fusion2026.sh` | `../fusion2026/` | BoxingVI batch eval, LaTeX assets, PDF |
-| `reproduce_eswa2026.sh` | `../jss2026/` | TapKO `jedi_submissions` machine-side stress test |
+| `reproduce_iswa2026.sh` | `../iswa2026/` | TapKO `jedi_submissions` machine-side protocol demonstration |
 | `reproduce_sports.sh` | `../sports/` | FightSafe-Bench CSV/JSON exports |
 | `reproduce_all.sh` | all three | Best-effort; continues on missing data |
 
-Makefile equivalents: `make reproduce-fusion`, `make reproduce-eswa`, `make reproduce-sports`, `make reproduce-all`, `make verify-repro`.
+Makefile equivalents: `make reproduce-fusion`, `make reproduce-iswa`, `make reproduce-sports`, `make reproduce-all`, `make verify-repro`.
 
 | Helper script | Role |
 |---------------|------|
 | `export_fusion2026_assets.py` | Ablation tables/figures from bundled CSV |
-| `export_eswa2026_tables.py` | TapKO pilot tables from evaluator CSV |
+| `export_iswa2026_tables.py` | TapKO pilot tables from evaluator CSV |
 | `verify_paper_outputs.py` | Check metrics against `data/repro/` snapshots |
 
 Full artefact map: [`docs/REPRODUCIBILITY.md`](../docs/REPRODUCIBILITY.md).

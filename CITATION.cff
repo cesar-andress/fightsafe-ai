@@ -10,12 +10,12 @@ repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
 doi: 10.5281/zenodo.20622869
 abstract: >-
-  Research software artifact for machine-generated alert export, software
-  traceability, auditability, protocol-defined bookkeeping, and governance
-  constraints in safety-alert review workflows. Includes TapKO candidate
-  detection, bundled reference exports, and reproduction scripts (v0.1.3).
-  Research prototype — not a medical device; reported stress test is
-  machine-side only (reviewer and gate records not logged).
+  Research software for alert-candidate export traceability, auditability,
+  protocol-defined bookkeeping, and governance requirements in safety-alert
+  review workflows. Includes TapKO candidate detection, bundled reference
+  exports, and reproduction scripts (v0.1.3). Not a validated operator-facing
+  product; reported protocol demonstration is machine-side only (reviewer and gate
+  records not logged).
 authors:
   - family-names: Andrés
     given-names: César
