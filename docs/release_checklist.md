@@ -1,6 +1,6 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v0.1.3` (Zenodo DOI `10.5281/zenodo.20622869`).
+**Current release:** `v0.1.4` (Zenodo DOI `10.5281/zenodo.20622869`).
 
 Use this checklist for public software releases of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
 
@@ -43,16 +43,16 @@ On GitHub: **Releases → Draft a new release**
 
 | Field | Value |
 |-------|--------|
-| Tag | `v0.1.2` *(current)* or next semver (e.g. `v0.1.3`) |
+| Tag | `v0.1.4` |
 | Target | `main` |
-| Title | `v0.1.2 — …` *(match the tag)* |
+| Title | `v0.1.4 — ISWA 2026 reproducibility artifact alignment` |
 | Description | Summarize scope: traceability and auditability software, reproducibility scripts, bundled reference exports; machine-side protocol demonstration only (reviewer/gate logs not reported); link companion manuscripts; note large videos are external (see `data/README.md`). |
 
 Optional local tag (if you prefer the CLI):
 
 ```bash
-git tag -a v0.1.2 -m "Describe the release in one line."
-git push origin v0.1.2
+git tag -a v0.1.4 -m "ISWA 2026 reproducibility artifact alignment."
+git push origin v0.1.4
 ```
 
 Then publish the release on GitHub so Zenodo picks it up.
@@ -91,11 +91,11 @@ Edit `/home/cesar/papers/bibliography.bib` — entry key **`fightsafe_ai_2026`**
   author       = {Mart{\'i}n Moncunill, David and S{\'a}nchez, C{\'e}sar Andr{\'e}s},
   title        = {FightSafe {AI}: Traceability and Auditability Software for Safety-Alert Review Workflows},
   year         = {2026},
-  version      = {0.1.3},
+  version      = {0.1.4},
   howpublished = {Zenodo},
   doi          = {10.5281/zenodo.<ASSIGNED>},
   url          = {https://doi.org/10.5281/zenodo.<ASSIGNED>},
-  note         = {Open-source research software; GitHub release v0.1.3; protocol demonstration machine-side only}
+  note         = {Open-source research software; GitHub release v0.1.4; protocol demonstration machine-side only}
 }
 ```
 
@@ -127,7 +127,7 @@ git push origin main
 
 Commit the shared bibliography separately in the monorepo if it is version-controlled at `/home/cesar/papers/`.
 
-Optionally add a **post-release git tag** only if your workflow requires a commit after Zenodo assignment; the GitHub release tag (e.g. `v0.1.2`) should remain the archived snapshot.
+Optionally add a **post-release git tag** only if your workflow requires a commit after Zenodo assignment; the GitHub release tag (e.g. `v0.1.4`) should remain the archived snapshot.
 
 ---
 
@@ -160,7 +160,7 @@ Smoke-test reproducibility against the released tag:
 
 ```bash
 cd ../fightsafe-ai
-git checkout v0.1.3   # optional: pin to current release
+git checkout v0.1.4   # optional: pin to current release
 REPRO_USE_REFERENCE=1 make reproduce-all
 make verify-repro
 ```
@@ -202,6 +202,6 @@ make verify-repro
 | Artifact | Citation key / identifier |
 |----------|---------------------------|
 | Software (Zenodo + GitHub) | `fightsafe_ai_2026` |
-| GitHub release tag | `v0.1.2` |
-| CFF version field | `0.1.2` |
+| GitHub release tag | `v0.1.4` |
+| CFF version field | `0.1.4` |
 | Shared BibTeX file | `/home/cesar/papers/bibliography.bib` |

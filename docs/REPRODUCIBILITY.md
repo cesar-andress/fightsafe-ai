@@ -1,6 +1,6 @@
 # Reproducibility guide
 
-**Software artifact:** *FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows* (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**).
+**Software artifact:** *FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows* (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.4**).
 
 This document maps each companion manuscript to the software commands, input data, and expected outputs in this repository.
 

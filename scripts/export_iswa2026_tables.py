@@ -10,9 +10,9 @@ from pathlib import Path
 
 
 CLASS_SHORT = {
-    "extreme_vulnerability.no_intelligent_defense": ("NID", r"\path{extreme_vulnerability.no_intelligent_defense}"),
-    "submission_signal.foot_tap": ("FT", r"\path{submission_signal.foot_tap}"),
-    "submission_signal.hand_tap": ("HT", r"\path{submission_signal.hand_tap}"),
+    "extreme_vulnerability.no_intelligent_defense": ("NID", r"\SlugNID{}"),
+    "submission_signal.foot_tap": ("FT", r"\SlugFT{}"),
+    "submission_signal.hand_tap": ("HT", r"\SlugHT{}"),
 }
 
 
@@ -57,8 +57,8 @@ def write_pilot_results_tex(rows: list[dict[str, str]], out: Path, *, video_id: 
         "\\toprule\n"
         "\\textbf{Metric} & \\textbf{Value} \\\\\n"
         "\\midrule\n"
-        f"Video ID & {_texttt(video_id)} \\\\\n"
-        f"Duration (min) & ${duration:.4f}$ \\\\\n"
+        "Video ID & \\PilotVideoID{} \\\\\n"
+        "Duration (min) & \\StressTestDurationTable{} \\\\\n"
         f"Annotated candidate windows & ${n_refs}$ \\\\\n"
         f"Predicted candidates & ${n_candidates}$ \\\\\n"
         f"TP & {_i(micro.get('tp'))} \\\\\n"
@@ -95,7 +95,7 @@ def write_per_class_tex(rows: list[dict[str, str]], out: Path) -> None:
     body = (
         "\\begin{table}[t]\n"
         "\\centering\n"
-        "\\caption{Per-channel supervisory load (draft references; FightSafe-TapKO prototype export).}\n"
+        "\\caption{Per-channel supervisory load (draft references; \\FSProtoInst{} export).}\n"
         "\\label{tab:tapko_pilot_per_class}\n"
         "\\small\n"
         "\\setlength{\\tabcolsep}{4pt}\n"

@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fightsafe-ai"
-version = "0.1.3"
+version = "0.1.4"
 description = "Research software for alert-candidate export traceability, auditability, protocol-defined bookkeeping, and governance requirements in safety-alert review workflows (not a validated operator product; not a medical device)."
 readme = "README.md"
 license = { text = "MIT" }

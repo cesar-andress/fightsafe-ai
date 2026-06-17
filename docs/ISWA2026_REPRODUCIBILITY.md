@@ -1,6 +1,6 @@
 # iswa2026 reproducibility guide
 
-Documentation for the traceability-architecture manuscript (*Information Systems and e-Business Management*). Documentation-only; no software or metric changes beyond what **v0.1.3** already ships.
+Documentation for the ISWA 2026 traceability manuscript (*Information Systems and e-Business Management*). Documentation-only; release **v0.1.4** ships the aligned reproducibility bundle.
 
 Paper-specific instructions for reproducing the **machine-side traceability protocol demonstration** reported in:
 
@@ -17,9 +17,9 @@ General installation, environment variables, and cross-manuscript notes: [`REPRO
 | Field | Value |
 |-------|-------|
 | Artifact title | **FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows** |
-| Repository release | **v0.1.3** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
+| Repository release | **v0.1.4** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
 | Zenodo DOI | [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
-| GitHub tag | `v0.1.3` (see [`docs/release_checklist.md`](release_checklist.md)) |
+| GitHub tag | `v0.1.4` (see [`docs/release_checklist.md`](release_checklist.md)) |
 
 Reproducibility entry points: `reproduce_iswa2026.sh`, bundled reference exports under `data/repro/iswa2026/`, and manuscript tables installed to `../iswa2026/tables/`.
 

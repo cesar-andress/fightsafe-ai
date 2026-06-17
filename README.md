@@ -24,7 +24,7 @@ This repository ships **research software** for export generation, traceability 
 - The reported **machine-side traceability protocol demonstration** is **machine-side only**: detector exports, evaluator CSV, protocol error tags, and manuscript tables under frozen matching defaults; **reviewer decisions** (`H_{t,k}`) and **gate outcomes** (`O_{t,k}`) were **not** logged.
 - The artifact **supports future audit-schema exercises** (append-only candidate, state, decision, and gate record types) but does not claim confirmation-gate execution, operator benefit, or deployment readiness without separate logged studies.
 
-Reproducibility scripts and bundled reference exports use the `iswa2026` identifier aligned with the traceability manuscript (`../iswa2026/`).
+Reproducibility scripts and bundled reference exports use the **ISWA 2026** identifier (`iswa2026`) aligned with the traceability manuscript (`../iswa2026/`).
 
 ---
 
@@ -170,7 +170,7 @@ Precomputed LaTeX fragments and figures are already committed under `../fusion20
 
 **Manuscript:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../iswa2026/`)
 
-**Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.3**.
+**Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.4**.
 
 **Goal:** Reproduce the `jedi_submissions` machine-side protocol demonstration (export traceability and protocol-defined bookkeeping, not operator-outcome evaluation).
 
@@ -286,7 +286,7 @@ If you use this software, please cite the Zenodo archive and the GitHub reposito
   title        = {FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows},
   year         = {2026},
   publisher    = {Zenodo},
-  version      = {0.1.3},
+  version      = {0.1.4},
   doi          = {10.5281/zenodo.20622869},
   url          = {https://doi.org/10.5281/zenodo.20622869}
 }
