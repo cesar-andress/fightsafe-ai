@@ -1,69 +1,49 @@
 # FightSafe AI
 
-**v1.0.0 — EAAI reproducibility release**
+**v1.0.0 — canonical EAAI reproducibility artefact**
 
-Paper-specific artefact for:
+Research software for interpretable multi-source temporal event pipelines, with an accompanying manuscript for *Engineering Applications of Artificial Intelligence* (EAAI):
 
 *Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study*
-(*Engineering Applications of Artificial Intelligence*)
 
-| Path | Contents |
-|------|----------|
-| `release/eaai_zenodo_staging/` | Tier A Zenodo staging package (canonical CSVs, figures/tables, checksums, configs, aggregation code) |
-| `paper1/` | Manuscript sources + `main.pdf` |
-| `src/fightsafe_ai/evaluation/aggregation_schemes.py` | Equal / weighted / max aggregators with availability masking |
+This GitHub repository **is** the official v1.0.0 artefact. There is no nested staging or release subdirectory.
 
-Canonical checkpoint identifier: `run_20260730_005150`.  
-Tier A: regenerate tables/figures from frozen CSVs. Tier B (`features_cache`) is not redistributed with the public package.  
-See `release/eaai_zenodo_staging/README.md` for commands.
-
----
-
-# FightSafe AI (general software)
-
-**FightSafe AI: research software for interpretable temporal event pipelines and related review-workflow studies**
-
-Research software for multi-source temporal pipelines, export traceability, and governance-oriented metadata.
-
-**Not** a medical device, clinical diagnostic tool, or autonomous officiating system.
-
-| Resource | URL |
-|----------|-----|
+| Resource | Location |
+|----------|----------|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
-| Zenodo archive (prior concept) | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
-| Companion manuscripts | See [Research outputs](#research-outputs) below |
+| Zenodo DOI | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
+| Tag | `v1.0.0` |
+
+**Not** a medical device, clinical diagnostic tool, autonomous officiating system, or deployment-ready safety product.
 
 ---
 
-## Scope of the Artifact
+## Engineering problem
 
-This repository ships **research software** and the **EAAI Tier A reproducibility package** under `release/eaai_zenodo_staging/`.
+Perception modules emit soft channel confidences at uneven reliability; channels may be unavailable; and review workflows need intervals that remain inspectable. FightSafe AI separates held-fixed perception features from interpretable aggregation, optional interaction rules, score banding and temporal consolidation, with an explicit availability mask \(\alpha\) distinct from zero-valued evidence.
 
-- **Not** a validated operator-facing product or safety-certified system.
-- **No** claim of improved human decisions or reduced operator workload.
-- **No** deployment-readiness claim.
-- Prior ISWA-oriented protocol demos remain in the repository history; the **v1.0.0** tag targets the EAAI manuscript release.
-
-Reproducibility for the EAAI paper uses the package under `release/eaai_zenodo_staging/` (Tier A). Optional Tier B re-execution requires approved feature caches that are not shipped in this tag.
+The EAAI case study freezes perception, varies aggregation / interaction / synthetic availability encoding, and reports protocol-limited findings on BoxingVI punch/impact *proxy* labels (canonical checkpoint `run_20260730_005150`).
 
 ---
 
-## Scope and disclaimer
+## Repository layout
 
-FightSafe AI is a **reproducible research prototype**. It produces interpretable, auditable **candidate** exports for specified review workflows. Qualified humans retain authority over stoppages, medical response, and competitive outcomes. See [Scope of the Artifact](#scope-of-the-artifact) for protocol-demonstration limits and non-claims on operator benefit, workload, or deployment readiness.
+```
+README.md, CITATION.cff, LICENSE, CHANGELOG.md, NOTICE_DATA.md
+pyproject.toml, .zenodo.json, environment.yml, requirements.txt
 
----
-
-## Research outputs
-
-Three companion manuscripts share terminology but target different scientific objects. LaTeX sources live in sibling directories when using the monorepo layout (`../fusion2026`, `../iswa2026`, `../sports`).
-
-| Manuscript | Directory | Scientific focus | Software entry points |
-|------------|-----------|------------------|------------------------|
-| **EAAI (this tag)** | `paper1/` + `release/eaai_zenodo_staging/` | Availability-aware temporal event pipeline; aggregation / interaction / synthetic missingness | `python release/eaai_zenodo_staging/scripts/generate_assets.py`; Tier A verify scripts |
-| **Information Fusion** | `../fusion2026/` | Multi-source temporal fusion, mask ablations, BoxingVI interval evaluation | `make reproduce-fusion`, `fightsafe risk-ablation-all` |
-| **Traceability architecture** | `../iswa2026/` | Formal specification, traceability architecture, audit schemas, machine-side protocol demonstration | `make reproduce-iswa`, `fightsafe tapko-detect` |
-| **FightSafe-Bench** | `../sports/` | Benchmark dataset design, annotation protocol, baseline tasks | `make reproduce-sports`, `scripts/build_fightsafe_bench.py` |
+src/fightsafe_ai/          # Python package
+tests/                     # unit / integration / e2e tests
+configs/                   # YAML rules and weights (incl. risk_fusion.yaml)
+scripts/                   # EAAI asset regeneration and Tier A validation
+annotations/               # BoxingVI punch-interval proxies + case-study labels
+canonical_results/         # frozen CSVs/matrices for run_20260730_005150
+checksums/                 # SHA-256 manifests for the public tree
+optional_tier_b/           # strike baselines; features_cache NOT redistributed
+paper/                     # EAAI manuscript sources + PDF
+docs/                      # architecture and reproducibility notes
+environment/               # Tier A freeze notes
+```
 
 ---
 
@@ -74,17 +54,10 @@ Three companion manuscripts share terminology but target different scientific ob
 ```bash
 git clone https://github.com/cesar-andress/fightsafe-ai.git
 cd fightsafe-ai
+git checkout v1.0.0
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -U pip wheel
-pip install -e ".[dev]"
-```
-
-Alternative environment file:
-
-```bash
-conda env create -f environment.yml
-conda activate fightsafe-ai
 pip install -e ".[dev]"
 ```
 
@@ -97,249 +70,94 @@ make test-unit
 
 ---
 
-## Quick start
+## Tier A reproducibility (EAAI)
+
+Tier A regenerates and verifies manuscript tables/figures from **frozen** canonical CSVs. It does **not** re-run perception or require skeleton keypoints / raw video / `features_cache`.
 
 ```bash
-# Offline pipeline on a local clip
-fightsafe run-pipeline --video path/to/clip.mp4 --output runs/demo/
+# Regenerate paper figures and LaTeX tables from canonical_results/
+python3.12 scripts/generate_eaai_assets.py
 
-# TapKO candidate detection (offline)
-fightsafe tapko-detect --source path/to/clip.mp4 --output-dir outputs/tapko/run/ --fps 30
+# Verify package checksums
+python3.12 scripts/verify_checksums.py
 
-# TapKO evaluation against annotations
-fightsafe tapko-evaluate \
-  --annotations data/tapko/annotations/jedi_submissions.json \
-  --predictions outputs/tapko/run/tapko_predictions.json \
-  --output-dir outputs/tapko/run_eval/
+# End-to-end Tier A checks (imports, numbers, regeneration, tests, manuscript build)
+python3.12 scripts/validate_tier_a.py
+
+# Aggregation unit tests
+PYTHONPATH=src python3.12 -m pytest tests/unit/test_aggregation_schemes.py -q
 ```
 
-See [`docs/architecture.md`](docs/architecture.md), [`docs/evaluation.md`](docs/evaluation.md), [`docs/troubleshooting.md`](docs/troubleshooting.md), and the full [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) guide.
-
----
-
-## Repository structure
-
-```
-fightsafe-ai/
-├── paper1/               # EAAI manuscript sources + compiled main.pdf
-├── release/eaai_zenodo_staging/  # Tier A reproducibility package (v1.0.0)
-├── src/fightsafe_ai/     # Python package (CLI, fusion, TapKO, evaluation)
-├── configs/              # YAML fusion rules, case-study definitions
-├── data/                 # Small curated samples; large media downloaded separately
-├── docs/                 # Architecture, evaluation, release checklist, dataset policy
-├── scripts/              # Reproduction helpers and dataset builders
-├── tools/                # LaTeX table/figure generators for fusion manuscript
-├── tests/                # Unit, integration, and e2e tests
-├── examples/             # Minimal JSON examples
-├── annotations/          # Case-study interval labels (clips A–F)
-├── Makefile              # install, test, ci, reproduce-* targets
-├── pyproject.toml        # Package metadata and dependencies
-├── requirements.txt      # Minimal runtime pins for CI/containers
-├── environment.yml       # Conda environment specification
-├── CITATION.cff          # Software citation metadata (Zenodo-ready)
-├── .zenodo.json          # Zenodo deposition metadata
-└── LICENSE               # MIT License
-```
-
-Generated at runtime (ignored by Git): `outputs/`, `runs/`, `.venv/`, caches. Author-only audits under `paper1/internal/` are gitignored.
-
----
-
-## Reproducing experiments
-
-All reproduction targets are available via `make`:
-
-```bash
-make reproduce-fusion    # fusion2026 manuscript assets + PDF (when data present)
-make reproduce-iswa      # traceability protocol demonstration (TapKO pilot pipeline)
-make reproduce-sports    # sports / FightSafe-Bench dataset exports
-make reproduce-all       # run all three (best-effort; skips missing data)
-```
-
-Or run the shell scripts directly under `scripts/`.
-
-### 1. fusion2026 (Information Fusion)
-
-**Goal:** Regenerate ablation tables, BoxingVI evaluation tables, figures, and compile `../fusion2026/main.pdf`.
-
-**Prerequisites:**
-
-1. BoxingVI annotations (included): `data/boxingvi/annotations/`
-2. BoxingVI skeleton keypoints (~50 MB, not in Git): place under `data/boxingvi/skeleton/` per [`data/README.md`](data/README.md)
-3. Case-study ablation exports (optional for full table regeneration): `runs/case_studies/ablation_summary/ablation_all_runs.csv` — generate with case-study clips and `fightsafe risk-ablation-all`
-4. TeX Live (`pdflatex`, `bibtex`, `elsarticle` class)
-
-```bash
-# Assets only (tables + figures into ../fusion2026)
-make fusion-assets
-
-# Full pipeline: tests + BoxingVI batch eval + assets + PDF
-make reproduce-fusion
-
-# Force recomputation of BoxingVI predictions
-make fusion-all-force
-```
-
-Key CLI commands used internally:
-
-```bash
-fightsafe risk-ablation-all --base-dir runs/case_studies --summary-dir runs/case_studies/ablation_summary
-python scripts/generate_paper_assets.py --paper-dir ../fusion2026
-python ../fusion2026/scripts/regenerate_figures.py
-```
-
-Precomputed LaTeX fragments and figures are already committed under `../fusion2026/tables/` and `../fusion2026/figures/` for PDF-only builds.
-
-### 2. iswa2026 (machine-side traceability protocol demonstration)
-
-**Manuscript:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../iswa2026/`)
-
-**Software archive:** Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.4**.
-
-**Goal:** Reproduce the `jedi_submissions` machine-side protocol demonstration (export traceability and protocol-defined bookkeeping, not operator-outcome evaluation).
-
-Paper-specific guide: [`docs/ISWA2026_REPRODUCIBILITY.md`](docs/ISWA2026_REPRODUCIBILITY.md) · traceability matrix: [`docs/ISWA2026_TRACEABILITY_MATRIX.md`](docs/ISWA2026_TRACEABILITY_MATRIX.md)
-
-**Prerequisites:**
-
-1. Draft annotations (included): `data/tapko/annotations/jedi_submissions.json`
-2. Source video (not in Git, ~200 MB): download to `data/tapko/videos/jedi_submissions.mp4` — see [`data/README.md`](data/README.md). The instructional clip `jedi_submissions` is not redistributed because of rights restrictions.
-3. Reference predictions (verification without video): `data/repro/iswa2026/reference/tapko_predictions.json` and `data/repro/iswa2026/reference/tapko_results.csv`
-
-**Reproduction commands** (from repository root):
-
-```bash
-# Full pipeline (requires local video)
-bash scripts/reproduce_iswa2026.sh
-# equivalent: make reproduce-iswa
-
-# Reference mode — bundled predictions when the video is unavailable
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_iswa2026.sh
-
-# Point table export at the traceability manuscript directory (default: ../iswa2026)
-ISWA_DIR=../iswa2026 bash scripts/reproduce_iswa2026.sh
-```
-
-Reference mode copies bundled detector/evaluator exports from `data/repro/iswa2026/reference/`, regenerates manuscript Tables I–II, and verifies metrics against the reference CSV. It does **not** re-run pose inference on withheld video.
-
-**Expected outputs:**
-
-| Path | Description |
-|------|-------------|
-| `outputs/tapko/jedi_submissions/tapko_predictions.json` | Detector export (337 candidate intervals) |
-| `outputs/tapko/jedi_submissions_eval/tapko_results.csv` | Evaluator metrics (micro / per-class) |
-| `outputs/tapko/jedi_submissions_eval/tapko_error_analysis.md` | Error taxonomy digest |
-| `../iswa2026/tables/tapko_pilot_results.tex` | Table I (`tab:tapko_pilot_results`) |
-| `../iswa2026/tables/tapko_pilot_per_class.tex` | Table II (`tab:tapko_pilot_per_class`) |
-| `outputs/repro/iswa2026/` | Repro bundle (tables, CSV copy, optional PDF copy) |
-
-Verification: `python scripts/verify_paper_outputs.py --paper iswa` (micro row: TP=1, FP=336, FN=9).
-
-Manual steps:
-
-```bash
-fightsafe tapko-validate-annotations --annotations data/tapko/annotations/jedi_submissions.json
-fightsafe tapko-detect \
-  --source data/tapko/videos/jedi_submissions.mp4 \
-  --output-dir outputs/tapko/jedi_submissions --fps 30 --pose-backend mediapipe
-fightsafe tapko-evaluate \
-  --annotations data/tapko/annotations/jedi_submissions.json \
-  --predictions outputs/tapko/jedi_submissions/tapko_predictions.json \
-  --output-dir outputs/tapko/jedi_submissions_eval \
-  --tolerance-seconds 0.5 --match-mode family
-```
+Canonical path: `canonical_results/run_20260730_005150/`.
 
 Compile the manuscript:
 
 ```bash
-cd ../iswa2026 && bash build.sh
+cd paper
+latexmk -pdf -interaction=nonstopmode main.tex
+# bibliography: bibtex main   (not bibtex main.aux)
 ```
-
-### 3. sports (FightSafe-Bench)
-
-**Goal:** Rebuild benchmark CSV/JSON exports from annotation spreadsheets and extract per-frame features.
-
-**Prerequisites:** Annotation spreadsheets in `data/FightSafeBench/annotations/` (sample included).
-
-```bash
-make reproduce-sports
-```
-
-Manual steps:
-
-```bash
-python scripts/build_fightsafe_bench.py \
-  --input-dir data/FightSafeBench/annotations \
-  --output-dir data/FightSafeBench \
-  --summary-path ../sports/dataset_summary.md
-python scripts/extract_benchmark_features.py
-```
-
-The sports manuscript (`../sports/main.tex`) is a **skeleton** with placeholder (TBD) result tables; dataset statistics are real but the full benchmark corpus is not yet locked.
 
 ---
 
-## Data policy
+## Restricted data (not redistributed)
 
-Large videos, skeleton exports, and experiment runs are **excluded from Git** to keep the repository Zenodo-friendly. See [`data/README.md`](data/README.md) for download instructions, checksums, and redistribution notes.
+See `NOTICE_DATA.md`. Excluded from this repository:
+
+- raw BoxingVI video / frames;
+- BoxingVI skeleton keypoints;
+- derived `features_cache/*.pkl` (Tier B).
+
+Strike baselines under `optional_tier_b/inputs/strike_baselines/` are included for combined-timeline interpretation.
 
 ---
 
-## Development
+## Testing
 
 ```bash
-make install      # editable install with dev extras
-make ci           # ruff + mypy + pytest (74% coverage floor)
-make format       # apply ruff formatter
-make lint         # ruff check
+make test-unit
+# or
+pytest tests/unit -q
 ```
 
-Pre-commit hooks: `pre-commit install` then `make pre-commit`.
+---
+
+## Limitations (summary)
+
+- \(n{=}10\) BoxingVI stems; limited statistical power;
+- pooled metrics dominated by stem V6;
+- combined timeline includes a fixed strike component;
+- natural availability \(\alpha{\equiv}1\); missingness results are synthetic;
+- proxy punch/impact labels, not clinical ground truth;
+- not a deployment or operator-outcome study.
+
+Full limits are stated in the manuscript.
 
 ---
 
 ## Citation
 
-If you use this software, please cite the Zenodo archive and the GitHub repository. Companion manuscripts use the same BibTeX key `fightsafe_ai_2026` in the shared bibliography at `../../bibliography.bib` (monorepo layout).
-
-### Software (this repository)
-
 ```bibtex
-@software{fightsafe_ai_2026,
-  author       = {Martin Moncunill, David and Andr{\'e}s, C{\'e}sar},
-  title        = {FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows},
+@misc{fightsafe_ai_2026,
+  author       = {Andr\'{e}s, C\'{e}sar and Martin Moncunill, David},
+  title        = {{FightSafe AI}: Decision-Support Software for Combat-Sports Safety Monitoring},
   year         = {2026},
-  publisher    = {Zenodo},
-  version      = {0.1.4},
+  howpublished = {Zenodo},
+  version      = {1.0.0},
   doi          = {10.5281/zenodo.20622869},
   url          = {https://doi.org/10.5281/zenodo.20622869}
 }
 ```
 
-- GitHub reads [`CITATION.cff`](CITATION.cff) for the **Cite this repository** button.
-- Release workflow documentation: [`docs/release_checklist.md`](docs/release_checklist.md).
-
-### Companion manuscripts
-
-Cite the relevant manuscript when using methods or results from that line of work:
-
-- **Fusion:** *Explainable Multi-Source Temporal Information Fusion for Combat-Sports Safety Intelligence* (`../fusion2026/`)
-- **Traceability:** *A Formal Traceability Architecture and Auditable Human-Oversight Specification for Machine-Generated Safety Alerts* (`../iswa2026/`)
-- **Benchmark:** *FightSafe-Bench: A Benchmark for Temporal Safety Event Detection under Partial Observability* (`../sports/`)
+Also see `CITATION.cff`.
 
 ---
 
-## License
+## Licence
 
-MIT License — see [`LICENSE`](LICENSE).
+MIT License — see `LICENSE`.
 
 Copyright (c) 2026 David Martin Moncunill, César Andrés, Camilo José Cela University (UCJC), Spain.
 
----
-
-## Authors
-
-David Martin Moncunill — david.martinm@ucjc.edu (corresponding)  
 César Andrés — cesar.andress@ucjc.edu ([ORCID 0009-0001-8968-3404](https://orcid.org/0009-0001-8968-3404))  
-
-CRIA-BDHS Research Group, Camilo José Cela University, Madrid, Spain.
+David Martin Moncunill — david.martinm@ucjc.edu

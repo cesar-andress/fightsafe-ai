@@ -1,10 +1,12 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v0.1.4` (Zenodo DOI `10.5281/zenodo.20622869`).
+**Current release:** `v1.0.0` (Zenodo DOI [`10.5281/zenodo.20622869`](https://doi.org/10.5281/zenodo.20622869)).
 
-Use this checklist for public software releases of FightSafe AI. Complete the steps in order. All documentation updates must stay in **English**.
+The **GitHub repository root** is the canonical FightSafe AI v1.0.0 research artefact. There is no nested Zenodo staging directory.
 
-Companion LaTeX manuscripts (`../fusion2026`, `../iswa2026`, `../sports`) cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography.
+Use this checklist for public software releases. All documentation updates must stay in **English**.
+
+Companion LaTeX manuscripts outside this repository (`../fusion2026`, `../iswa2026`, `../sports`) may cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography. The EAAI manuscript lives in `paper/` inside this repository.
 
 ---
 
@@ -22,186 +24,93 @@ git push origin main
 Confirm on GitHub:
 
 - Default branch is `main`
-- `README.md`, `CITATION.cff`, `LICENSE`, and `docs/REPRODUCIBILITY.md` render correctly
-- No secrets, private paths, or large media files are tracked (see [`security-and-data-policy.md`](security-and-data-policy.md))
+- `README.md`, `CITATION.cff`, `LICENSE`, `NOTICE_DATA.md`, and `docs/REPRODUCIBILITY.md` render correctly
+- No secrets, private paths, restricted video/skeleton data, or `features_cache` binaries are tracked
 
 ---
 
-## 2. Enable Zenodo for the GitHub repository
+## 2. Zenodo GitHub integration
 
 1. Sign in to [Zenodo](https://zenodo.org/) with your GitHub account.
-2. Open **Account → GitHub** and grant Zenodo access to the `cesar-andress/fightsafe-ai` repository.
-3. Toggle **ON** for that repository so Zenodo can archive new GitHub releases.
+2. Open **Account → GitHub** and grant Zenodo access to `cesar-andress/fightsafe-ai`.
+3. Ensure the repository toggle is **ON** so Zenodo can archive GitHub releases.
 
-Zenodo will create a new deposition automatically when you publish a GitHub release (step 3).
+For v1.0.0 the version DOI is already assigned: `10.5281/zenodo.20622869`. Keep `.zenodo.json` and `CITATION.cff` aligned with that DOI.
 
 ---
 
-## 3. Create a GitHub release
-
-On GitHub: **Releases → Draft a new release**
+## 3. Create or update the GitHub release
 
 | Field | Value |
 |-------|--------|
-| Tag | `v0.1.4` |
-| Target | `main` |
-| Title | `v0.1.4 — ISWA 2026 reproducibility artifact alignment` |
-| Description | Summarize scope: traceability and auditability software, reproducibility scripts, bundled reference exports; machine-side protocol demonstration only (reviewer/gate logs not reported); link companion manuscripts; note large videos are external (see `data/README.md`). |
-
-Optional local tag (if you prefer the CLI):
+| Tag | `v1.0.0` |
+| Target | final commit on `main` |
+| Title | `FightSafe v1.0.0 — EAAI Reproducibility Artefact` |
+| Description | Repository root is the canonical artefact; link Zenodo DOI; point to root `README.md` for Tier A; note restricted-data exclusions |
 
 ```bash
-git tag -a v0.1.4 -m "ISWA 2026 reproducibility artifact alignment."
-git push origin v0.1.4
+git tag -a v1.0.0 -m "FightSafe v1.0.0 — canonical EAAI reproducibility artefact"
+git push origin v1.0.0
+gh release create v1.0.0 --title "FightSafe v1.0.0 — EAAI Reproducibility Artefact" --notes-file -
 ```
 
-Then publish the release on GitHub so Zenodo picks it up.
+---
+
+## 4. Metadata files (must stay consistent)
+
+| File | Required fields |
+|------|-----------------|
+| [`CITATION.cff`](../CITATION.cff) | `version: 1.0.0`, `doi: "10.5281/zenodo.20622869"` |
+| [`README.md`](../README.md) | Version badge/table, citation block, Zenodo URL |
+| [`.zenodo.json`](../.zenodo.json) | `version`, creators, licence, related identifiers, description of the **repository itself** |
+| [`pyproject.toml`](../pyproject.toml) / [`src/fightsafe_ai/__version__.py`](../src/fightsafe_ai/__version__.py) | `1.0.0` |
+| [`CHANGELOG.md`](../CHANGELOG.md) | `[1.0.0]` entry |
+
+Do **not** commit placeholder DOIs (`10.5281/zenodo.PENDING` / `XXXXXXX`) or placeholder ORCIDs.
 
 ---
 
-## 4. Get the Zenodo DOI
-
-1. Wait for Zenodo to finish processing the GitHub release (usually minutes).
-2. Open the new Zenodo record linked from the GitHub release or your Zenodo profile.
-3. Copy the **concept DOI** (recommended for software that will receive follow-up releases), e.g. `10.5281/zenodo.1234567`.
-4. Copy the **version-specific DOI** for the release tag if you need to pin an exact archive snapshot.
-
-Record both DOIs in your lab notes. The concept DOI is the stable identifier for citations across versions.
-
----
-
-## 5. Update CITATION.cff, README.md, and the shared BibTeX entry
-
-Replace every `10.5281/zenodo.XXXXXXX` placeholder with the assigned DOI.
-
-### Software repository (`fightsafe-ai/`)
-
-| File | What to update |
-|------|----------------|
-| [`CITATION.cff`](../CITATION.cff) | Top-level `doi` and `preferred-citation.doi` |
-| [`README.md`](../README.md) | Zenodo URL in the resource table and BibTeX block under [Citation](../README.md#citation) |
-| [`.zenodo.json`](../.zenodo.json) | `related_identifiers` placeholder (and ORCIDs if real values are available) |
-
-### Shared bibliography (monorepo parent)
-
-Edit `/home/cesar/papers/bibliography.bib` — entry key **`fightsafe_ai_2026`** (do not rename; all papers use this key):
-
-```bibtex
-@misc{fightsafe_ai_2026,
-  author       = {Mart{\'i}n Moncunill, David and Andr{\'e}s, C{\'e}sar},
-  title        = {FightSafe {AI}: Traceability and Auditability Software for Safety-Alert Review Workflows},
-  year         = {2026},
-  version      = {0.1.4},
-  howpublished = {Zenodo},
-  doi          = {10.5281/zenodo.<ASSIGNED>},
-  url          = {https://doi.org/10.5281/zenodo.<ASSIGNED>},
-  note         = {Open-source research software; GitHub release v0.1.4; protocol demonstration machine-side only}
-}
-```
-
-### Papers that cite `fightsafe_ai_2026`
-
-No citation-key changes are required if you only replace the DOI in `bibliography.bib`:
-
-| Manuscript | File |
-|------------|------|
-| Information Fusion | `../fusion2026/declarations.tex` |
-| Traceability | `../iswa2026/main.tex` |
-| FightSafe-Bench | `../sports/main.tex` |
-
-All use `\bibliography{../../bibliography}`.
-
----
-
-## 6. Commit DOI updates
-
-In the software repository:
+## 5. Pre-release validation
 
 ```bash
-cd /path/to/fightsafe-ai
-# edit CITATION.cff, README.md, .zenodo.json
-git add CITATION.cff README.md .zenodo.json docs/release_checklist.md
-git commit -m "Update Zenodo DOI and version metadata after release."
-git push origin main
+cffconvert --validate -i CITATION.cff   # if available
+python3.12 scripts/verify_checksums.py
+python3.12 scripts/validate_tier_a.py
+python3.12 -m pytest tests/unit/test_aggregation_schemes.py -q
 ```
 
-Commit the shared bibliography separately in the monorepo if it is version-controlled at `/home/cesar/papers/`.
-
-Optionally add a **post-release git tag** only if your workflow requires a commit after Zenodo assignment; the GitHub release tag (e.g. `v0.1.4`) should remain the archived snapshot.
+Expected: Tier A `overall: PASS`; checksums match; no nested `release/` tree.
 
 ---
 
-## 7. Recompile all papers
+## 6. Companion manuscripts (optional monorepo)
 
-From each manuscript directory (or use the reproduction Makefile targets):
+Recompile external companion papers if they cite this software entry, and ensure bibliography DOIs match `10.5281/zenodo.20622869` / version `1.0.0`.
 
-```bash
-# fusion2026 (Elsevier elsarticle)
-cd ../fusion2026
-make -C ../fightsafe-ai fusion-pdf
-# or: pdflatex main && bibtex main && pdflatex main && pdflatex main
-
-# iswa2026 (Elsevier elsarticle)
-cd ../iswa2026
-bash build.sh
-
-# sports (IEEEtran)
-cd ../sports
-latexmk -pdf -interaction=nonstopmode main.tex
-```
-
-Verify:
-
-- No undefined citations for `fightsafe_ai_2026`
-- Bibliography lists the Zenodo DOI (not `XXXXXXX`)
-- PDFs build: `fusion2026/main.pdf`, `iswa2026/main.pdf`, `sports/main.pdf`
-
-Smoke-test reproducibility against the released tag:
+EAAI manuscript (in-repo):
 
 ```bash
-cd ../fightsafe-ai
-git checkout v0.1.4   # optional: pin to current release
-REPRO_USE_REFERENCE=1 make reproduce-all
-make verify-repro
+python3.12 scripts/generate_eaai_assets.py
+cd paper && latexmk -pdf -interaction=nonstopmode main.tex
+# bibliography: bibtex main   (not bibtex main.aux)
 ```
 
 ---
 
-## Pre-release validation (before step 1)
+## Zenodo notes
 
-Run once before the first push:
-
-```bash
-cffconvert --validate -i CITATION.cff
-REPRO_USE_REFERENCE=1 bash scripts/reproduce_all.sh
-make verify-repro
-```
-
-`CITATION.cff` must pass schema validation.
-
-**Zenodo GitHub integration rules (do not skip):**
-
-- If both `.zenodo.json` and `CITATION.cff` exist, Zenodo uses **only** `.zenodo.json` for archiving.
-- Do **not** commit placeholder DOIs (`10.5281/zenodo.XXXXXXX`) or placeholder ORCIDs (`0000-0000-0000-0000`) in either file — Zenodo rejects them and the release fails (often reported as *Extra metadata load failed*).
-- Omit `doi` / `orcid` until real values exist; Zenodo mints the DOI when the release succeeds.
-- Use `"license": "mit"` (lowercase) in `.zenodo.json` per [Zenodo JSON documentation](https://help.zenodo.org/docs/github/describe-software/zenodo-json/).
-
----
-
-## Troubleshooting a failed Zenodo archive
-
-1. Open the repository **Zenodo** panel on GitHub → select the failed release → **Errors** tab.
-2. *Extra metadata load failed* → fix `.zenodo.json` (invalid JSON, ORCID, DOI, or license values).
-3. *Citation metadata load failed* → fix `CITATION.cff` (only if `.zenodo.json` is absent).
-4. Merge metadata fixes to `main`, then publish a **new** GitHub release (e.g. `v0.1.1`); reusing a failed tag usually does not re-trigger ingestion.
+- If both `.zenodo.json` and `CITATION.cff` exist, Zenodo uses **only** `.zenodo.json` for GitHub-triggered archiving.
+- Use `"license": "mit"` (lowercase) in `.zenodo.json`.
+- Describe the **repository root**, not a nested ZIP or staging folder, as the canonical project.
 
 ---
 
 ## Quick reference
 
-| Artifact | Citation key / identifier |
-|----------|---------------------------|
-| Software (Zenodo + GitHub) | `fightsafe_ai_2026` |
-| GitHub release tag | `v0.1.4` |
-| CFF version field | `0.1.4` |
-| Shared BibTeX file | `/home/cesar/papers/bibliography.bib` |
+| Artifact | Identifier |
+|----------|------------|
+| Software (Zenodo + GitHub) | `fightsafe_ai_2026` / DOI `10.5281/zenodo.20622869` |
+| GitHub release tag | `v1.0.0` |
+| CFF / package version | `1.0.0` |
+| Canonical scientific run | `canonical_results/run_20260730_005150/` |
+| EAAI manuscript | `paper/` |

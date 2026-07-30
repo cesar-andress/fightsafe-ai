@@ -1,9 +1,4 @@
-# FightSafe AI — commit source, configs, docs, and small curated data; ignore local media & runs.
-# Companion LaTeX manuscripts live in sibling directories (../fusion2026, ../iswa2026, ../sports).
-# Compiled PDF at repo root (local build; exceeds default pre-commit size check when tracked).
-paper.pdf
-# Git archive / local bundle exports (see docs/clean-project-archive.md); exceed hook maxkb.
-*.zip
+# FightSafe AI — commit source, configs, docs, and curated data; ignore local media & runs.
 
 # --- Python
 __pycache__/
@@ -27,7 +22,7 @@ env/
 .envrc
 !.envrc.example
 
-# --- Testing / coverage / typecheck (never commit caches or coverage dumps)
+# --- Testing / coverage / typecheck
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -42,6 +37,7 @@ test-results/
 .hypothesis/
 .tox/
 .nox/
+validation/
 
 # --- Build
 dist/
@@ -56,7 +52,7 @@ develop-eggs/
 sdist/
 wheels/
 
-# --- IDE
+# --- IDE / OS
 .vscode/
 .idea/
 .cursor/
@@ -65,11 +61,6 @@ wheels/
 *.code-workspace
 *.swp
 *~
-.project
-.pydevproject
-.settings/
-
-# --- OS
 .DS_Store
 Thumbs.db
 Desktop.ini
@@ -81,13 +72,12 @@ log/
 *.log.*
 x.log
 
-# --- Optional top-level media folders (local only; not source)
+# --- Optional top-level media
 /videos/
 data/tapko/videos/*
 !data/tapko/videos/.gitkeep
 
-# --- Data (local acquisition / clips / frames / processed — not source code)
-# Keep only empty dirs (and gitkeep); ignore all generated or downloaded content, including nestings.
+# --- Data (local acquisition)
 data/raw/**
 !data/raw/.gitkeep
 data/clips/**
@@ -99,10 +89,7 @@ data/processed/**
 data/annotations/local/**
 !data/annotations/local/.gitkeep
 
-# --- Runs / outputs / reports (pipeline, QA, illustrative YouTube case-study artefacts; never commit)
-# Downloaded {YouTube} media, per-case run roots, CSV/JSON/MP4/overlay/reports: all under runs/**
-# and covered by `*.mp4` / `*.json` path rules; do not commit local case-study or demo outputs.
-# We ignore children of these dirs, not the dirs themselves, so per-dir .gitkeep can be tracked.
+# --- Runs / outputs
 outputs/**
 !outputs/.gitkeep
 runs/**
@@ -112,17 +99,8 @@ runs/**
 !runs/case_studies/ablation_summary/**
 reports/**
 !reports/.gitkeep
-# Redundant with the above, but makes intent clear for diffs and tooling:
-runs/**/*.csv
-!runs/case_studies/ablation_summary/**/*.csv
-runs/**/*.json
-!runs/case_studies/ablation_summary/**/*.json
-outputs/**/*.csv
-outputs/**/*.json
-reports/**/*.csv
-reports/**/*.json
 
-# --- Models / checkpoints (downloaded weights; not source)
+# --- Models / checkpoints
 models/**
 !models/.gitkeep
 checkpoints/**
@@ -138,9 +116,8 @@ checkpoints/**
 *.ckpt
 *.npy
 *.npz
-*.onnxdata
 
-# --- Video / images (root or anywhere: ignore large/binary media)
+# --- Video / images (allow paper figures PDFs; ignore PNGs)
 *.mp4
 *.mov
 *.avi
@@ -153,27 +130,11 @@ checkpoints/**
 *.jpeg
 *.png
 *.gif
-# Allow small, committed static assets under standard doc paths:
 !docs/figures/**
 !docs/**/*.svg
-!paper/figures/**
-!paper/**/*.svg
-# Curated source for the document (not generated LaTeX build products):
-!paper/tables/**
-!paper/references.bib
-!paper/main.tex
-# We do NOT use repo-wide `*.json` or `*.csv` — those would break configs/ and package.json
-# and mask tracked examples. Use runs/**, outputs/**, and reports/** rules above for artefacts.
-!configs/**
-!examples/**/*.json
-!package.json
-!package-lock.json
+!paper/figures/**/*.pdf
 
-# --- LaTeX build products (keep source *.tex, references.bib, figures/, tables/)
-# Do not ignore: paper/tables/**, paper/references.bib, paper/main.tex, paper2/sections/**, paper2/references.bib
-# PDFs: ignore LaTeX outputs next to sources; optional release PDFs may live in paper/releases/ or paper2/releases/
-#       (nested paths are not matched by paper/*.pdf — add explicit ! only if you adopt that layout).
-
+# --- Paper LaTeX auxiliaries
 paper/*.aux
 paper/*.bbl
 paper/*.blg
@@ -187,34 +148,20 @@ paper/*.fdb_latexmk
 paper/*.synctex.gz
 paper/*.nav
 paper/*.snm
-paper/main.pdf
-paper/*.pdf
+paper/*.spl
+paper/internal/
+paper/zenodo_release/
+paper/reports/
 
-# paper2 (Q1 / TapKO LaTeX): same artifact set as paper/
-paper2/*.aux
-paper2/*.bbl
-paper2/*.blg
-paper2/*.log
-paper2/*.out
-paper2/*.toc
-paper2/*.lof
-paper2/*.lot
-paper2/*.fls
-paper2/*.fdb_latexmk
-paper2/*.synctex.gz
-paper2/*.nav
-paper2/*.snm
-paper2/main.pdf
-paper2/*.pdf
+# --- Obsolete nested release scaffolding
+release/
+eaai_zenodo_staging/
+zenodo_release/
 
-# --- Notebooks: keep .ipynb source; ignore checkpoints
-**/.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# --- Node (e.g. commitlint)
+# --- Node
 node_modules/
 
-# --- Secrets (never commit)
+# --- Secrets
 *.pem
 *.key
 *.crt
@@ -237,23 +184,5 @@ downloads/
 frames/
 .Python
 
-# --- EAAI author-only / local clutter (not part of the public v1.0.0 package)
-paper1/internal/
-release/internal/
-paper1/zenodo_release/
-paper1/reports/
-paper1/figures/*.png
-release/eaai_zenodo_staging/figures/*.png
-
-# Staging package local validation / TeX clutter
-release/eaai_zenodo_staging/validation/
-release/eaai_zenodo_staging/.pytest_cache/
-release/eaai_zenodo_staging/manuscript/*.aux
-release/eaai_zenodo_staging/manuscript/*.bbl
-release/eaai_zenodo_staging/manuscript/*.blg
-release/eaai_zenodo_staging/manuscript/*.fdb_latexmk
-release/eaai_zenodo_staging/manuscript/*.fls
-release/eaai_zenodo_staging/manuscript/*.log
-release/eaai_zenodo_staging/manuscript/*.out
-release/eaai_zenodo_staging/manuscript/*.spl
-release/eaai_zenodo_staging/**/__pycache__/
+# --- Tier B restricted caches
+optional_tier_b/inputs/features_cache/*.pkl

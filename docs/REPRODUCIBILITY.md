@@ -1,29 +1,54 @@
 # Reproducibility guide
 
-**Software artifact:** *FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows* (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869), release **v0.1.4**).
+**Software artifact:** FightSafe AI **v1.0.0** (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869)).
 
-This document maps each companion manuscript to the software commands, input data, and expected outputs in this repository.
+This repository **root** is the official reproducibility artefact. Canonical EAAI results live under `canonical_results/run_20260730_005150/`. Restricted video, skeleton keypoints and `features_cache` binaries are **not** redistributed (see `NOTICE_DATA.md`).
 
-**Layout assumption (monorepo):**
+This document also maps older companion manuscripts (outside this repo) to software commands where applicable.
+
+**Layout assumption (monorepo siblings, optional):**
 
 ```
-papers/fightsafe-ai/          ← this repository (software)
-papers/fusion2026/            ← Information Fusion manuscript
-papers/iswa2026/            ← traceability architecture manuscript
-papers/sports/                ← FightSafe-Bench manuscript
+papers/fightsafe-ai/fightsafe-ai/   ← this GitHub repository (canonical v1.0.0)
+papers/fightsafe-ai/fusion2026/     ← Information Fusion manuscript
+papers/fightsafe-ai/iswa2026/       ← traceability architecture manuscript
+papers/fightsafe-ai/sports/         ← FightSafe-Bench manuscript
 ```
 
 Override paths with environment variables (see [Environment variables](#environment-variables)).
 
 ---
 
-## Quick start
+## EAAI Tier A (canonical, from repository root)
+
+```bash
+pip install -e ".[dev]"
+python3.12 scripts/verify_checksums.py
+python3.12 scripts/generate_eaai_assets.py
+python3.12 scripts/validate_tier_a.py
+cd paper && latexmk -pdf -interaction=nonstopmode main.tex
+# bibliography step inside latexmk / manually: bibtex main
+```
+
+| Artefact | Path |
+|----------|------|
+| Frozen run | `canonical_results/run_20260730_005150/` |
+| Derived analysis CSVs | `canonical_results/analysis/` |
+| Manuscript | `paper/` |
+| Checksums | `checksums/SHA256SUMS` |
+| Public annotations | `annotations/boxingvi/` |
+
+Do **not** retrain models or alter frozen metrics. Tier A regenerates tables/figures from the frozen CSVs only.
+
+---
+
+## Quick start (companion papers)
 
 ```bash
 cd fightsafe-ai
 pip install -e ".[dev]"
 
-# All three papers (reference mode for iswa when video is absent)
+# Companion papers (reference mode for iswa when video is absent)
 make reproduce-all
 
 # Or individually

@@ -1,21 +1,22 @@
 # CFF 1.2.0 — https://citation-file-format.org
 cff-version: 1.2.0
 message: "If you use this software, please cite it as follows."
-title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
+title: "FightSafe AI — EAAI reproducibility artefact (availability-aware temporal event pipeline)"
 type: software
 version: 1.0.0
 date-released: 2026-07-30
 license: MIT
+doi: "10.5281/zenodo.20622869"
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
-url: "https://github.com/cesar-andress/fightsafe-ai"
+url: "https://doi.org/10.5281/zenodo.20622869"
 abstract: >-
-  FightSafe AI research software and paper-specific reproducibility artefact for the
+  FightSafe AI v1.0.0 research software and canonical reproducibility artefact for the
   EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit
-  Channel Availability: A Combat-Sports Case Study”. Includes Tier A verification and
-  regeneration of reported tables and figures from frozen canonical result files
-  (run_20260730_005150), configs, aggregation schemes with explicit availability masking,
-  environment metadata and checksums. Not a safety-certified system; not a state-of-the-art
-  detector claim; not a medical device. Synthetic missingness only.
+  Channel Availability: A Combat-Sports Case Study”. The GitHub repository is the official
+  package: Tier A verification and regeneration of reported tables and figures from frozen
+  canonical result files (run_20260730_005150), configs, aggregation schemes with explicit
+  availability masking, environment metadata and checksums. Not a safety-certified system;
+  not a state-of-the-art detector claim; not a medical device. Synthetic missingness only.
 authors:
   - family-names: Andrés
     given-names: César
@@ -36,7 +37,7 @@ keywords:
   - decision support
 preferred-citation:
   type: software
-  title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
+  title: "FightSafe AI — EAAI reproducibility artefact (availability-aware temporal event pipeline)"
   authors:
     - family-names: Andrés
       given-names: César
@@ -44,4 +45,5 @@ preferred-citation:
       given-names: David
   year: 2026
   version: 1.0.0
-  url: "https://github.com/cesar-andress/fightsafe-ai"
+  doi: "10.5281/zenodo.20622869"
+  url: "https://doi.org/10.5281/zenodo.20622869"
