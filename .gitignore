@@ -2,10 +2,17 @@
 
 # --- Python
 __pycache__/
-*.pyc
 *.py[cod]
 *$py.class
+*.so
+.Python
 .eggs/
+*.egg
+*.egg-info/
+*.egg-info
+MANIFEST
+pip-log.txt
+pip-wheel-metadata/
 
 # --- Environments
 .venv/
@@ -39,18 +46,13 @@ test-results/
 .nox/
 validation/
 
-# --- Build
+# --- Build / packaging
 dist/
 build/
-*.egg-info/
-*.egg
-MANIFEST
-pip-log.txt
-pip-wheel-metadata/
-*.whl
 develop-eggs/
 sdist/
 wheels/
+*.whl
 
 # --- IDE / OS
 .vscode/
@@ -72,12 +74,18 @@ log/
 *.log.*
 x.log
 
+# --- Scratch / temp
+tmp/
+temp/
+downloads/
+frames/
+
 # --- Optional top-level media
 /videos/
+
+# --- Data (local acquisition; keep tracked .gitkeep placeholders)
 data/tapko/videos/*
 !data/tapko/videos/.gitkeep
-
-# --- Data (local acquisition)
 data/raw/**
 !data/raw/.gitkeep
 data/clips/**
@@ -89,7 +97,7 @@ data/processed/**
 data/annotations/local/**
 !data/annotations/local/.gitkeep
 
-# --- Runs / outputs
+# --- Runs / outputs (generated; curated ablation under runs/case_studies is tracked)
 outputs/**
 !outputs/.gitkeep
 runs/**
@@ -100,7 +108,7 @@ runs/**
 reports/**
 !reports/.gitkeep
 
-# --- Models / checkpoints
+# --- Models / checkpoints / binary caches
 models/**
 !models/.gitkeep
 checkpoints/**
@@ -117,7 +125,7 @@ checkpoints/**
 *.npy
 *.npz
 
-# --- Video / images (allow paper figures PDFs; ignore PNGs)
+# --- Video / images (allow paper figure PDFs and docs SVG/PNG figures)
 *.mp4
 *.mov
 *.avi
@@ -134,7 +142,7 @@ checkpoints/**
 !docs/**/*.svg
 !paper/figures/**/*.pdf
 
-# --- Paper LaTeX auxiliaries
+# --- Paper LaTeX auxiliaries (keep intentionally versioned main.pdf / figures)
 paper/*.aux
 paper/*.bbl
 paper/*.blg
@@ -149,14 +157,27 @@ paper/*.synctex.gz
 paper/*.nav
 paper/*.snm
 paper/*.spl
+paper/*.run.xml
+paper/*.bcf
 paper/internal/
 paper/zenodo_release/
 paper/reports/
+
+# Generic LaTeX aux anywhere under paper/
+paper/**/*.aux
+paper/**/*.bbl
+paper/**/*.blg
+paper/**/*.fdb_latexmk
+paper/**/*.fls
+paper/**/*.synctex.gz
+paper/**/*.out
+paper/**/*.toc
 
 # --- Obsolete nested release scaffolding
 release/
 eaai_zenodo_staging/
 zenodo_release/
+legacy/
 
 # --- Node
 node_modules/
@@ -177,12 +198,10 @@ config.local.yaml
 config.local.yml
 settings.local.json
 
-# --- Scratch
-tmp/
-temp/
-downloads/
-frames/
-.Python
-
 # --- Tier B restricted caches
 optional_tier_b/inputs/features_cache/*.pkl
+
+# --- Notebooks (local scratch; none shipped in v1.0.0)
+notebooks/
+.ipynb_checkpoints/
+*.ipynb

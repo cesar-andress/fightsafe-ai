@@ -54,7 +54,7 @@ from fightsafe_ai.risk.rules import (  # noqa: E402
 
 CACHE_DIR = SOFT / "optional_tier_b" / "inputs" / "features_cache"
 CACHED_FULL = SOFT / "optional_tier_b" / "inputs" / "strike_baselines"
-ANN_ROOT = SOFT / "annotations" / "boxingvi_root"
+ANN_ROOT = SOFT / "data" / "boxingvi"
 FUSION_YAML = SOFT / "configs" / "risk_fusion.yaml"
 RULES_YAML = SOFT / "configs" / "risk_rules.yaml"
 
