@@ -1,10 +1,12 @@
 #!/usr/bin/env python3.12
 """Verify SHA-256 checksums for the release package."""
+
 from __future__ import annotations
 
 import hashlib
 import sys
 from pathlib import Path
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SUMS = ROOT / "checksums" / "SHA256SUMS"
@@ -24,8 +26,8 @@ def main() -> int:
         return 2
     bad = 0
     checked = 0
-    for line in SUMS.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
+    for raw_line in SUMS.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
         if not line or line.startswith("#"):
             continue
         digest, rel = line.split(None, 1)

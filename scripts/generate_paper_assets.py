@@ -101,7 +101,7 @@ def _try_quantitative_observations_tex(
     tool = _REPO_ROOT / "tools" / "generate_quantitative_observations_tex.py"
     if not tool.is_file():
         return False
-    proc = subprocess.run(  # noqa: S603 — fixed repo tool path and argv
+    proc = subprocess.run(
         [
             sys.executable,
             str(tool),

@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import matplotlib
 
@@ -250,7 +250,7 @@ def plot_risk_timeline(
 
     use_frame = bool(np.any(np.isin(levels, list(want))))
 
-    with rc_context(_ACADEMIC_RC):
+    with rc_context(cast("Any", _ACADEMIC_RC)):
         fig, ax = plt.subplots(figsize=(9, 3.5), layout="constrained")
         if use_frame:
             for t0, t1, lv in _consecutive_risk_spans(t, levels, want):
@@ -367,7 +367,7 @@ def plot_events_timeline(
 
     h = max(2.4, 0.42 * max(len(events), 1) + 0.9)
 
-    with rc_context(_ACADEMIC_RC):
+    with rc_context(cast("Any", _ACADEMIC_RC)):
         fig, ax = plt.subplots(figsize=(9, h), layout="constrained")
         if not events:
             ax.set_xlabel("Time (s)")
@@ -508,7 +508,7 @@ def plot_pose_coverage(
     covered = int(np.nansum(y))
     n = len(y)
 
-    with rc_context(_ACADEMIC_RC):
+    with rc_context(cast("Any", _ACADEMIC_RC)):
         fig, ax = plt.subplots(figsize=(9, 2.4), layout="constrained")
         ax.fill_between(
             t,

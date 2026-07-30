@@ -74,6 +74,7 @@ from fightsafe_ai.evaluation import (
     events_json_to_windows,
     annotation_file_to_ground_truth_windows,
 )
+
 pred = events_json_to_windows("runs/demo/events.json")
 ref = annotation_file_to_ground_truth_windows("annotations/demo_annotations.json")
 r = evaluate_event_prediction(

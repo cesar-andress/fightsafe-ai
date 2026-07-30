@@ -9,6 +9,7 @@ Protocol justified from legacy paper1 ``run_aggregation_comparison.py``:
 - BoxingVI timeline merge=8; evaluate subset=full_fusion;
 - IoU=0.01; tolerance=0.5s.
 """
+
 from __future__ import annotations
 
 import copy
@@ -25,6 +26,7 @@ from typing import Any, Literal
 
 import numpy as np
 import pandas as pd
+
 
 SOFT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SOFT / "src"))
@@ -51,6 +53,7 @@ from fightsafe_ai.risk.rules import (  # noqa: E402
     build_rule_components,
     load_interpretable_risk_config,
 )
+
 
 CACHE_DIR = SOFT / "optional_tier_b" / "inputs" / "features_cache"
 CACHED_FULL = SOFT / "optional_tier_b" / "inputs" / "strike_baselines"
@@ -202,7 +205,9 @@ def score_video(
     return fused, levels, counts, frames_aff
 
 
-def merge_timeline_events(events: list[dict[str, Any]], *, fps: float, merge_frames: int) -> list[dict[str, Any]]:
+def merge_timeline_events(
+    events: list[dict[str, Any]], *, fps: float, merge_frames: int
+) -> list[dict[str, Any]]:
     gap_sec = max(0.0, float(merge_frames) / float(fps))
     candidates: list[dict[str, Any]] = []
     for ev in events:
@@ -405,13 +410,17 @@ def classify_failures(video_id, method, gt_windows, pred_events, er):
     # Match by onset times from EventMatchDelay
     for m in getattr(raw, "matches", []) or []:
         for gi, w in enumerate(gt_windows):
-            if abs(float(w.start) - float(m.ref_start)) < 1e-9 and abs(float(w.end) - float(m.ref_end)) < 1e-9:
+            if (
+                abs(float(w.start) - float(m.ref_start)) < 1e-9
+                and abs(float(w.end) - float(m.ref_end)) < 1e-9
+            ):
                 matched_gt.add(gi)
                 break
         for pi, ev in enumerate(pred_events):
-            if abs(float(ev.get("start_time", -1)) - float(m.pred_start)) < 1e-9 and abs(
-                float(ev.get("end_time", -1)) - float(m.pred_end)
-            ) < 1e-9:
+            if (
+                abs(float(ev.get("start_time", -1)) - float(m.pred_start)) < 1e-9
+                and abs(float(ev.get("end_time", -1)) - float(m.pred_end)) < 1e-9
+            ):
                 matched_pred.add(pi)
                 break
         latency = float(m.onset_delay_seconds)
@@ -469,7 +478,7 @@ def classify_failures(video_id, method, gt_windows, pred_events, er):
                     "pred_end": float(ev.get("end_time", float("nan"))),
                 }
             )
-    for gi, w in enumerate(gt_windows):
+    for _gi, w in enumerate(gt_windows):
         hits = [
             pi
             for pi, ev in enumerate(pred_events)
@@ -491,9 +500,11 @@ def classify_failures(video_id, method, gt_windows, pred_events, er):
                     "n_fragments": len(hits),
                 }
             )
-    for pi, ev in enumerate(pred_events):
+    for _pi, ev in enumerate(pred_events):
         ps, pe = float(ev.get("start_time", -1)), float(ev.get("end_time", -1))
-        hits = [gi for gi, w in enumerate(gt_windows) if not (pe < float(w.start) or ps > float(w.end))]
+        hits = [
+            gi for gi, w in enumerate(gt_windows) if not (pe < float(w.start) or ps > float(w.end))
+        ]
         if len(hits) >= 2:
             rows.append(
                 {
@@ -575,8 +586,12 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
             fps=FPS,
             num_skeleton_frames=len(feat),
         )
-        cached_by_vid[vid] = json.loads((CACHED_FULL / f"boxingvi_predictions_{vid}.json").read_text(encoding="utf-8"))
-        log(f"  {vid}: frames={len(feat)} gt_windows={len(gt_by_vid[vid])} strikes={len(cached_by_vid[vid].get('strike_events') or [])}")
+        cached_by_vid[vid] = json.loads(
+            (CACHED_FULL / f"boxingvi_predictions_{vid}.json").read_text(encoding="utf-8")
+        )
+        log(
+            f"  {vid}: frames={len(feat)} gt_windows={len(gt_by_vid[vid])} strikes={len(cached_by_vid[vid].get('strike_events') or [])}"
+        )
 
     log("Building matrices…")
     mats: dict[str, pd.DataFrame] = {}
@@ -642,14 +657,18 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
                     COL_RISK_LEVEL: levels,
                 }
             )
-            trace_dir = out / ("interactions" if exp == "interactions" else "aggregation") / "traces"
+            trace_dir = (
+                out / ("interactions" if exp == "interactions" else "aggregation") / "traces"
+            )
             trace_dir.mkdir(parents=True, exist_ok=True)
             rdf.to_csv(trace_dir / f"{vid}_{tag}_scores.csv", index=False)
         events_risk = events_from_scores(scores, levels)
         events_merged = build_full_fusion_events(events_risk, cached_by_vid[vid])
         er, _ = eval_events(events_merged, gt_by_vid[vid])
         if write_pred:
-            pdir = pred_subdir or (out / ("interactions" if exp == "interactions" else "aggregation") / "preds" / tag)
+            pdir = pred_subdir or (
+                out / ("interactions" if exp == "interactions" else "aggregation") / "preds" / tag
+            )
             write_pred_json(
                 pdir / f"pred_{vid}_{tag}.json",
                 vid,
@@ -679,7 +698,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
                 "n_interaction_firings": int(sum(counts.values())),
                 "frames_with_firing": frames_aff,
                 "mean_score": float(scores.mean()),
-                "pct_high_critical": float(np.mean((levels == "HIGH") | (levels == "CRITICAL")) * 100.0),
+                "pct_high_critical": float(
+                    np.mean((levels == "HIGH") | (levels == "CRITICAL")) * 100.0
+                ),
             }
         )
         return counts, frames_aff, scores
@@ -768,7 +789,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
                             c_use, a_use = carr[vid], a_d
                         else:
                             c_use, a_use = naive_zero_arrays(carr[vid], aarr[vid], a_d)
-                    scores, levels, _, _ = score_video(c_use, a_use, fcfg, "weighted", collect_firings=False)
+                    scores, levels, _, _ = score_video(
+                        c_use, a_use, fcfg, "weighted", collect_firings=False
+                    )
                     events_risk = events_from_scores(scores, levels)
                     events_merged = build_full_fusion_events(events_risk, cached_by_vid[vid])
                     er, _ = eval_events(events_merged, gt_by_vid[vid])
@@ -885,7 +908,11 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
     dd = pd.DataFrame(dropout_rows)
     ddv = dd[dd.video_id != "__MICRO_MACRO__"]
     for p in (0.1, 0.3, 0.5):
-        ex = ddv[(ddv["p"] == p) & (ddv["mode"] == "explicit_alpha0")].groupby("video_id")["f1"].mean()
+        ex = (
+            ddv[(ddv["p"] == p) & (ddv["mode"] == "explicit_alpha0")]
+            .groupby("video_id")["f1"]
+            .mean()
+        )
         nv = ddv[(ddv["p"] == p) & (ddv["mode"] == "naive_zero")].groupby("video_id")["f1"].mean()
         common = sorted(set(ex.index) & set(nv.index))
         diff = np.array([float(ex[v] - nv[v]) for v in common])
@@ -908,7 +935,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
         tag = f"{scheme}_intON"
         for vid in VIDEOS:
             all_fail.extend(
-                classify_failures(vid, tag, gt_by_vid[vid], method_events[(tag, vid)], method_er[(tag, vid)])
+                classify_failures(
+                    vid, tag, gt_by_vid[vid], method_events[(tag, vid)], method_er[(tag, vid)]
+                )
             )
     for vid in VIDEOS:
         all_fail.extend(
@@ -933,7 +962,13 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
     if w_ok:
         parts.append(
             pd.DataFrame(
-                [{"video_id": w_ok[0], "method": "weighted_intON", "failure_type": "successful_case_context"}]
+                [
+                    {
+                        "video_id": w_ok[0],
+                        "method": "weighted_intON",
+                        "failure_type": "successful_case_context",
+                    }
+                ]
             )
         )
     pd.concat(parts, ignore_index=True).to_csv(out / "failures" / "review_subset.csv", index=False)
@@ -943,7 +978,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
     s2, _, _, _ = score_video(carr["V2"], aarr["V2"], fcfg, "weighted", collect_firings=False)
     repro_ok = bool(np.allclose(s1, s2))
     total_firings = int(
-        pv[(pv.experiment == "interactions") & (pv.interactions == "on")]["n_interaction_firings"].sum()
+        pv[(pv.experiment == "interactions") & (pv.interactions == "on")][
+            "n_interaction_firings"
+        ].sum()
     )
     runtime = time.time() - t0
     (out / "environment" / "repro_check.json").write_text(
@@ -961,7 +998,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
     )
 
     gs = subprocess.check_output(["git", "-C", str(SOFT), "status", "--porcelain=v1"], text=True)
-    commit = subprocess.check_output(["git", "-C", str(SOFT), "rev-parse", "HEAD"], text=True).strip()
+    commit = subprocess.check_output(
+        ["git", "-C", str(SOFT), "rev-parse", "HEAD"], text=True
+    ).strip()
     branch = subprocess.check_output(
         ["git", "-C", str(SOFT), "branch", "--show-current"], text=True
     ).strip()
@@ -969,7 +1008,9 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
         f"branch={branch}\ncommit={commit}\nstatus:\n{gs}", encoding="utf-8"
     )
     (out / "environment" / "pip_freeze.txt").write_text(
-        subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True, stderr=subprocess.DEVNULL),
+        subprocess.check_output(
+            [sys.executable, "-m", "pip", "freeze"], text=True, stderr=subprocess.DEVNULL
+        ),
         encoding="utf-8",
     )
 
@@ -1026,7 +1067,7 @@ Matches legacy ``paper1_pre_rewrite_.../scripts/run_aggregation_comparison.py`` 
 
 **{verdict}**
 
-{chr(10).join('- ' + r for r in reasons)}
+{chr(10).join("- " + r for r in reasons)}
 
 ## 2. Git / inspection state
 

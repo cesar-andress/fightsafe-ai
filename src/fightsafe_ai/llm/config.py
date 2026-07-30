@@ -120,7 +120,9 @@ def _parse_ollama(o: Any) -> OllamaClientConfig:
         base_url=str(o.get("base_url", DEFAULT_OLLAMA_URL)).rstrip("/"),
         model=str(o.get("model", DEFAULT_MODEL)),
         temperature=float(o.get("temperature", DEFAULT_TEMPERATURE)),
-        timeout=float(o.get("timeout_seconds", o.get("timeout", DEFAULT_TIMEOUT))),
+        timeout=float(
+            o.get("timeout_seconds", o.get("timeout", DEFAULT_TIMEOUT)) or DEFAULT_TIMEOUT
+        ),
         vision_model=str(def_vm) if str(def_vm).strip() else OllamaClientConfig().vision_model,
         enable_vlm_review=_as_bool(o.get("enable_vlm_review", False), False),
         max_frames_per_event=_as_int(mfe, OllamaClientConfig().max_frames_per_event),

@@ -16,7 +16,7 @@ def _sig(name: str, confidence: float, weight: float = 1.0) -> RiskSignal:
         confidence=confidence,
         weight=weight,
         polarity="risk_increasing",
-        group="pose",
+        group="biomechanics",
     )
 
 

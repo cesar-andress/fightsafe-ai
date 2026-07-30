@@ -12,7 +12,7 @@ from __future__ import annotations
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Final, Literal, TypedDict
+from typing import Any, Final, Literal, TypedDict, assert_never
 
 import numpy as np
 
@@ -185,7 +185,7 @@ def _category_for_action(action_type: ActionType) -> EventCategory:
         ActionType.DEFENSIVE_INCAPACITY,
     ):
         return EventCategory.IMBALANCE
-    return EventCategory.UNKNOWN
+    assert_never(action_type)
 
 
 def _risk_explanation(raw_level: str, score: float, triggered: list[str]) -> str:

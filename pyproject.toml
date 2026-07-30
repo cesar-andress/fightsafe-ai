@@ -125,6 +125,8 @@ omit = [
   "*/conftest.py",
   "*/site-packages/*",
   "**/__version__.py",
+  # Optional TAPKO helper not exercised by unit/integration suite.
+  "*/tapko/detect_run.py",
 ]
 
 [tool.coverage.report]
@@ -175,6 +177,7 @@ select = [
 ignore = [
   "E501",  # line length (handled by ruff format; long URLs/docstrings)
   "PLR0913",
+  "PLR0917",
   "PLR2004",
   "PLC0415",  # lazy imports in CLI / optional code paths
   "TC003",
@@ -239,6 +242,16 @@ combine-as-imports = true
 "tools/check_paper_update.py" = [
   "S603",
   "S607",
+]
+# Research / Tier-A helper scripts: local subprocess, pickle caches, matrix names.
+"scripts/**" = [
+  "S603",
+  "S607",
+  "S301",
+  "S110",
+  "S112",
+  "PLW1510",
+  "N806",
 ]
 
 [tool.ruff.lint.pylint]

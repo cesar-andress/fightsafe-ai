@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.12
 """Validate Tier A reproducibility from the repository root."""
+
 from __future__ import annotations
 
 import hashlib
@@ -9,6 +10,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+
 
 ROOT = Path(__file__).resolve().parents[1]
 VAL = ROOT / "validation"
@@ -60,7 +62,7 @@ def main() -> int:
     if cp.returncode != 0:
         failed = True
 
-    env = dict(**{k: v for k, v in __import__("os").environ.items()})
+    env = dict(__import__("os").environ)
     env["PYTHONPATH"] = str(ROOT / "src")
     imp = subprocess.run(
         [
@@ -120,7 +122,9 @@ def main() -> int:
         checks["approx_explicit_0.509"] = abs(ex - 0.509) < 5e-4
         checks["approx_naive_0.471"] = abs(nv - 0.471) < 5e-4
         p_int = float(
-            paired.loc[paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"].iloc[0]
+            paired.loc[
+                paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"
+            ].iloc[0]
         )
         checks["paired_int_p"] = abs(p_int - numbers["paired_int_p"]) < 1e-12
         log("numerical_checks.json", json.dumps({k: bool(v) for k, v in checks.items()}, indent=2))
@@ -169,15 +173,18 @@ def main() -> int:
                     break
             else:
                 results["regenerated_tables"] = "PASS"
-            fig_ok = all((PAPER / "figures" / n).is_file() for n in [
-                "fig_aggregation.pdf",
-                "fig_architecture.pdf",
-                "fig_dropout.pdf",
-                "fig_failures.pdf",
-                "fig_interactions.pdf",
-                "fig_per_video.pdf",
-                "fig_video_contribution.pdf",
-            ])
+            fig_ok = all(
+                (PAPER / "figures" / n).is_file()
+                for n in [
+                    "fig_aggregation.pdf",
+                    "fig_architecture.pdf",
+                    "fig_dropout.pdf",
+                    "fig_failures.pdf",
+                    "fig_interactions.pdf",
+                    "fig_per_video.pdf",
+                    "fig_video_contribution.pdf",
+                ]
+            )
             results["regenerated_figures"] = "PASS" if fig_ok else "FAIL"
             if not fig_ok:
                 failed = True
@@ -211,7 +218,18 @@ def main() -> int:
         failed = True
 
     abs_hits = []
-    skip_suffixes = {".pdf", ".png", ".xlsx", ".ods", ".parquet", ".pkl", ".pyc", ".csv", ".fls", ".fdb_latexmk"}
+    skip_suffixes = {
+        ".pdf",
+        ".png",
+        ".xlsx",
+        ".ods",
+        ".parquet",
+        ".pkl",
+        ".pyc",
+        ".csv",
+        ".fls",
+        ".fdb_latexmk",
+    }
     for p in ROOT.rglob("*"):
         if not p.is_file():
             continue
@@ -242,9 +260,13 @@ def main() -> int:
             text = p.read_text(encoding="utf-8", errors="ignore")
         except Exception:
             continue
-        if re.search(r"(?<!REDACTED_LOCAL_EDITABLE: -e )(?<!<)/home/cesar/[A-Za-z0-9_./-]+", text):
-            if "/home/cesar" in text and "REDACTED" not in text and "<LOCAL_HOME" not in text:
-                abs_hits.append(rel)
+        if (
+            re.search(r"(?<!REDACTED_LOCAL_EDITABLE: -e )(?<!<)/home/cesar/[A-Za-z0-9_./-]+", text)
+            and "/home/cesar" in text
+            and "REDACTED" not in text
+            and "<LOCAL_HOME" not in text
+        ):
+            abs_hits.append(rel)
     log("absolute_path_hits.txt", "\n".join(abs_hits) if abs_hits else "NONE\n")
     results["absolute_paths"] = "PASS" if not abs_hits else f"FAIL {abs_hits[:10]}"
     if abs_hits:

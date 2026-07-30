@@ -25,7 +25,7 @@ def _try_import_pynvml() -> bool:
     if _pynvml is not None or _pynvml_import_error is not None:
         return _pynvml is not None
     try:
-        import pynvml  # type: ignore[import-untyped]
+        import pynvml  # type: ignore[import-not-found]
 
         _pynvml = pynvml
         return True

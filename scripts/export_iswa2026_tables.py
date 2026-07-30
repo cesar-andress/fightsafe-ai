@@ -41,9 +41,10 @@ def _i(value: str | None) -> str:
     return str(int(float(value)))
 
 
-def write_pilot_results_tex(rows: list[dict[str, str]], out: Path, *, video_id: str, n_candidates: int) -> None:
+def write_pilot_results_tex(
+    rows: list[dict[str, str]], out: Path, *, video_id: str, n_candidates: int
+) -> None:
     micro = next(r for r in rows if r.get("scope") == "micro")
-    duration = float(micro.get("total_video_duration_min") or 0.0)
     n_refs = 10  # draft reference windows in jedi_submissions.json (documented in paper)
 
     body = (
@@ -103,9 +104,7 @@ def write_per_class_tex(rows: list[dict[str, str]], out: Path) -> None:
         "\\toprule\n"
         "\\textbf{Class} & \\textbf{TP} & \\textbf{FP} & \\textbf{FN} & "
         "\\textbf{P} & \\textbf{R} & \\textbf{F1} \\\\\n"
-        "\\midrule\n"
-        + "\n".join(lines)
-        + "\n"
+        "\\midrule\n" + "\n".join(lines) + "\n"
         "\\bottomrule\n"
         "\\end{tabular}\n\n"
         "\\vspace{0.12em}\n"
@@ -162,7 +161,9 @@ def main(argv: list[str] | None = None) -> int:
     print(f"Wrote {per_class_tex}")
 
     if args.install:
-        iswa_tables = (args.iswa_dir if args.iswa_dir.is_absolute() else root / args.iswa_dir) / "tables"
+        iswa_tables = (
+            args.iswa_dir if args.iswa_dir.is_absolute() else root / args.iswa_dir
+        ) / "tables"
         iswa_tables.mkdir(parents=True, exist_ok=True)
         for src in (results_tex, per_class_tex):
             dest = iswa_tables / src.name

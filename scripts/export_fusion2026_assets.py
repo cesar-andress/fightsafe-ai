@@ -66,8 +66,14 @@ def main(argv: list[str] | None = None) -> int:
     case_a = root / "runs/case_studies/ablation_summary/case_a_knockdown"
     for src_name, dest_name in (
         ("risk_series_full_fusion.csv", "risk_series_full_fusion.csv"),
-        ("risk_series_full_fusion_without_interactions.csv", "risk_series_full_fusion_without_interactions.csv"),
-        ("risk_series_full_fusion_with_limb_anomaly_disabled.csv", "risk_series_full_fusion_with_limb_anomaly_disabled.csv"),
+        (
+            "risk_series_full_fusion_without_interactions.csv",
+            "risk_series_full_fusion_without_interactions.csv",
+        ),
+        (
+            "risk_series_full_fusion_with_limb_anomaly_disabled.csv",
+            "risk_series_full_fusion_with_limb_anomaly_disabled.csv",
+        ),
     ):
         src = case_a / src_name
         if src.is_file():

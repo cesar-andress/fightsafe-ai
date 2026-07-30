@@ -17,6 +17,7 @@ from fightsafe_ai.risk.formal_model import (
     compute_pre_interaction_score,
 )
 
+
 AggregationScheme = Literal["weighted", "equal", "reliability_discounted", "max"]
 
 SCHEME_ORDER: tuple[AggregationScheme, ...] = (
@@ -157,10 +158,10 @@ def compute_fused_risk_with_scheme(
 
 
 __all__ = [
-    "AggregationScheme",
     "DECREASING_ATTENUATION",
     "SCHEME_LABELS",
     "SCHEME_ORDER",
+    "AggregationScheme",
     "compute_fused_risk_with_scheme",
     "compute_pre_interaction_with_scheme",
 ]

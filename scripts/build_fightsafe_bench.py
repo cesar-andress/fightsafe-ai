@@ -176,7 +176,9 @@ def validate_row(
     start = _parse_time(row["start_time"])
     end = _parse_time(row["end_time"])
     if start is None:
-        issues.append(ValidationIssue(source_file, row_number, "start_time must be a finite number"))
+        issues.append(
+            ValidationIssue(source_file, row_number, "start_time must be a finite number")
+        )
     elif start < 0:
         issues.append(ValidationIssue(source_file, row_number, "start_time must be >= 0"))
     if end is None:
@@ -539,7 +541,9 @@ def main(argv: list[str] | None = None) -> int:
     if result.issues:
         print(f"Validation failed with {len(result.issues)} issue(s):", file=sys.stderr)
         for issue in result.issues:
-            loc = f"{issue.source_file}:{issue.row_number}" if issue.row_number else issue.source_file
+            loc = (
+                f"{issue.source_file}:{issue.row_number}" if issue.row_number else issue.source_file
+            )
             print(f"  [{loc}] {issue.message}", file=sys.stderr)
         return 1
 

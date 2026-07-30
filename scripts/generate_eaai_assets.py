@@ -4,6 +4,7 @@
 LaTeX lives in the sibling manuscript workspace ``../paper1`` (or ``FIGHTSAFE_PAPER1_DIR``).
 This software repository does not ship manuscript sources.
 """
+
 from __future__ import annotations
 
 import json
@@ -12,11 +13,13 @@ from pathlib import Path
 
 import matplotlib
 
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import yaml
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CANON = ROOT / "canonical_results" / "run_20260730_005150"
@@ -109,7 +112,7 @@ def write_tex_table(
     )
     for r in rows:
         lines.append(" & ".join(r) + " \\\\")
-    lines.extend([f"\\bottomrule", f"\\end{{{env}}}"])
+    lines.extend(["\\bottomrule", f"\\end{{{env}}}"])
     if notes:
         lines.append(f"\\\\[2pt]\\footnotesize {notes}")
     lines.extend(["\\end{table}", ""])
@@ -123,7 +126,7 @@ def fig_save(name: str) -> None:
 
 
 def architecture_figure() -> None:
-    fig, ax = plt.subplots(figsize=(10.2, 4.2))
+    _fig, ax = plt.subplots(figsize=(10.2, 4.2))
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 4)
     ax.axis("off")
@@ -140,8 +143,15 @@ def architecture_figure() -> None:
     box(6.5, 1.4, 1.6, 1.2, "Combined\ntimeline", fc="#EDEDED")
     box(8.3, 1.4, 1.5, 1.2, "Matcher\nIoU / tol.", fc="#EDEDED")
     for x0, x1, y in [(1.8, 2.1, 2.0), (3.9, 4.2, 2.0), (6.2, 6.5, 2.0), (8.1, 8.3, 2.0)]:
-        ax.annotate("", xy=(x1, y), xytext=(x0, y), arrowprops=dict(arrowstyle="->", color="#333"))
-    ax.annotate("", xy=(5.2, 2.35), xytext=(5.2, 2.6), arrowprops=dict(arrowstyle="-", color="#1F4E79"))
+        ax.annotate(
+            "", xy=(x1, y), xytext=(x0, y), arrowprops={"arrowstyle": "->", "color": "#333"}
+        )
+    ax.annotate(
+        "",
+        xy=(5.2, 2.35),
+        xytext=(5.2, 2.6),
+        arrowprops={"arrowstyle": "-", "color": "#1F4E79"},
+    )
     ax.plot([5.2, 5.2], [1.55, 2.35], color="#1F4E79", lw=1)
     ax.plot([5.2, 6.5], [2.0, 2.0], color="#333", lw=1)
     ax.text(5.2, 3.55, "Fixed vs varied components (canonical protocol)", ha="center", fontsize=10)
@@ -160,8 +170,6 @@ def main() -> None:
     lovo = pd.read_csv(ANALYSIS / "lovo_micro_f1_weighted.csv")
     match = pd.read_csv(ANALYSIS / "matching_sensitivity.csv")
     timelines = pd.read_csv(ANALYSIS / "timeline_components.csv")
-    drop_vid = pd.read_csv(ANALYSIS / "dropout_per_video_means.csv")
-
     fusion = yaml.safe_load((SOFT / "configs" / "risk_fusion.yaml").read_text())
     weights = fusion["signal_weights"]
     bands = fusion["level_thresholds"]
@@ -187,7 +195,7 @@ def main() -> None:
     agg = agg.sort_values("ord")
     write_tex_table(
         TAB / "tab_aggregation.tex",
-        "Aggregation on the combined timeline with interactions ON (pooled micro-P/R/F1; macro-F1 with bootstrap 95\% CI).",
+        r"Aggregation on the combined timeline with interactions ON (pooled micro-P/R/F1; macro-F1 with bootstrap 95\% CI).",
         "tab:aggregation",
         ["Method", "Micro-P", "Micro-R", "Micro-F1", "Macro-F1", "Macro-F1 95\\% CI"],
         [
@@ -201,7 +209,7 @@ def main() -> None:
             ]
             for _, r in agg.iterrows()
         ],
-        notes="Max is an aggressive single-channel stress test, not a competitive external baseline."
+        notes="Max is an aggressive single-channel stress test, not a competitive external baseline.",
     )
 
     # ---- Interactions ----
@@ -226,7 +234,6 @@ def main() -> None:
         notes="H/C\\%: mean HIGH/CRITICAL frame share. Paired $p{\\approx}0.048$ ($n{=}10$).",
     )
 
-
     # ---- Firings summary (main compact) ----
     on = firings[firings.interactions == "on"]
     rule_tot = (
@@ -240,14 +247,10 @@ def main() -> None:
         "Interaction-rule firing incidences with interactions ON (frame-level totals across videos).",
         "tab:firings",
         ["Rule", "Total firing incidences"],
-        [
-            [short_rule(r.rule_name), str(int(r.fire_count))]
-            for _, r in rule_tot.iterrows()
-        ]
+        [[short_rule(r.rule_name), str(int(r.fire_count))] for _, r in rule_tot.iterrows()]
         + [["surrender\\_like (inactive)", "0"], ["fall\\_like+inactivity", "0"]],
         notes="Frame-level firing incidences; \\texttt{surrender\\_gesture} channel absent.",
     )
-
 
     # ---- Dropout ----
     mm = dropout[dropout.video_id == "__MICRO_MACRO__"]
@@ -301,7 +304,7 @@ def main() -> None:
     }
     write_tex_table(
         TAB / "tab_paired.tex",
-        "Paired video-level comparisons (mean $\Delta$F1, Cliff's $\delta$, two-sided permutation $p$).",
+        r"Paired video-level comparisons (mean $\Delta$F1, Cliff's $\delta$, two-sided permutation $p$).",
         "tab:paired",
         ["Comparison", "$n$", "Mean $\\Delta$F1", "Cliff $\\delta$", "$p$"],
         [
@@ -321,7 +324,9 @@ def main() -> None:
     # Use weighted intON as reference n_pred from summary
     n_pred_ref = {
         "equal_intON": float(agg.loc[agg.method == "equal", "mean_n_pred_events"].iloc[0] * 10),
-        "weighted_intON": float(agg.loc[agg.method == "weighted", "mean_n_pred_events"].iloc[0] * 10),
+        "weighted_intON": float(
+            agg.loc[agg.method == "weighted", "mean_n_pred_events"].iloc[0] * 10
+        ),
         "max_intON": float(agg.loc[agg.method == "max", "mean_n_pred_events"].iloc[0] * 10),
         "weighted_intOFF": float(
             inter.loc[inter.interactions == "off", "mean_n_pred_events"].iloc[0] * 10
@@ -330,7 +335,9 @@ def main() -> None:
     # failure_counts is long format? check
     fc = fails.copy()
     if "method" in fc.columns and "failure_type" in fc.columns:
-        pivot = fc.pivot_table(index="method", columns="failure_type", values="count", aggfunc="sum").fillna(0)
+        pivot = fc.pivot_table(
+            index="method", columns="failure_type", values="count", aggfunc="sum"
+        ).fillna(0)
     else:
         pivot = fc
     # Write rates table for main methods
@@ -345,7 +352,7 @@ def main() -> None:
         merged = float(pivot.loc[method].get("merged_distinct_events", 0))
         fail_rows.append(
             [
-                method.replace("_intON", "").replace("_intOFF", " (int.\ off)").replace("_", " "),
+                method.replace("_intON", "").replace("_intOFF", r" (int.\ off)").replace("_", " "),
                 str(int(npred)) if npred == npred else "---",
                 str(int(fp)),
                 str(int(fn)),
@@ -412,7 +419,7 @@ def main() -> None:
             ]
             for _, r in match.iterrows()
         ],
-        notes="Does not replace the canonical protocol (IoU$=$0.01, tolerance$=$0.5\\,s)."
+        notes="Does not replace the canonical protocol (IoU$=$0.01, tolerance$=$0.5\\,s).",
     )
     write_tex_table(
         SUPP / "tab_si_timelines.tex",
@@ -421,9 +428,11 @@ def main() -> None:
         ["Timeline", "Micro-F1", "P", "R", "TP", "FP", "FN", "\\#pred"],
         [
             [
-                {"events": "Combined", "events_risk_only": "Risk-only", "strike_events": "Strike-only"}[
-                    r.timeline
-                ],
+                {
+                    "events": "Combined",
+                    "events_risk_only": "Risk-only",
+                    "strike_events": "Strike-only",
+                }[r.timeline],
                 fmt(r.micro_f1, 3),
                 fmt(r.precision, 3),
                 fmt(r.recall, 3),
@@ -434,7 +443,7 @@ def main() -> None:
             ]
             for _, r in timelines.iterrows()
         ],
-        notes="Strike path is held fixed across aggregation methods; risk path is re-aggregated."
+        notes="Strike path is held fixed across aggregation methods; risk path is re-aggregated.",
     )
 
     # Channel SI table (compact; source/availability moved to notes)
@@ -495,7 +504,10 @@ def main() -> None:
             ["Combined merge (frames)", "8"],
             ["Matcher IoU threshold", "0.01"],
             ["Matcher temporal tolerance (s)", "0.5"],
-            ["Band mins (M/H/C)", f"{bands['medium_min']} / {bands['high_min']} / {bands['critical_min']}"],
+            [
+                "Band mins (M/H/C)",
+                f"{bands['medium_min']} / {bands['high_min']} / {bands['critical_min']}",
+            ],
             ["Evaluation timeline", "Combined"],
             ["Strike component", "Fixed baseline cache"],
             ["Bootstrap $B$", "1000 (video-level)"],
@@ -503,7 +515,6 @@ def main() -> None:
         colspec=r"l >{\raggedright\arraybackslash}X",
         tabularx=True,
     )
-
 
     # numbers.json for provenance
     numbers = {
@@ -514,16 +525,24 @@ def main() -> None:
         "macro_f1_int_off": float(inter.loc[inter.interactions == "off", "macro_f1"].iloc[0]),
         "macro_f1_int_on": float(inter.loc[inter.interactions == "on", "macro_f1"].iloc[0]),
         "paired_int_p": float(
-            paired.loc[paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"].iloc[0]
+            paired.loc[
+                paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"
+            ].iloc[0]
         ),
         "v6_share_gt": float(contrib.loc[contrib.video_id == "V6", "share_gt"].iloc[0]),
         "v6_share_tp": float(contrib.loc[contrib.video_id == "V6", "share_tp"].iloc[0]),
         "dropout_p05_explicit": float(
             mm[(mm.p == 0.5) & (mm["mode"] == "explicit_alpha0")].micro_f1.mean()
         ),
-        "dropout_p05_naive": float(mm[(mm.p == 0.5) & (mm["mode"] == "naive_zero")].micro_f1.mean()),
-        "risk_only_f1": float(timelines.loc[timelines.timeline == "events_risk_only", "micro_f1"].iloc[0]),
-        "strike_only_f1": float(timelines.loc[timelines.timeline == "strike_events", "micro_f1"].iloc[0]),
+        "dropout_p05_naive": float(
+            mm[(mm.p == 0.5) & (mm["mode"] == "naive_zero")].micro_f1.mean()
+        ),
+        "risk_only_f1": float(
+            timelines.loc[timelines.timeline == "events_risk_only", "micro_f1"].iloc[0]
+        ),
+        "strike_only_f1": float(
+            timelines.loc[timelines.timeline == "strike_events", "micro_f1"].iloc[0]
+        ),
         "combined_f1": float(timelines.loc[timelines.timeline == "events", "micro_f1"].iloc[0]),
     }
     (TAB / "numbers.json").write_text(json.dumps(numbers, indent=2), encoding="utf-8")
@@ -542,8 +561,8 @@ def main() -> None:
     lo = [float(agg.loc[agg.method == m, "bootstrap_macro_f1_lo"].iloc[0]) for m in methods]
     hi = [float(agg.loc[agg.method == m, "bootstrap_macro_f1_hi"].iloc[0]) for m in methods]
     yerr = np.vstack([np.array(macro) - np.array(lo), np.array(hi) - np.array(macro)])
-    b1 = ax.bar(x - wbar / 2, micro, wbar, label="Micro-F1", color=C_W, hatch="///", edgecolor="black")
-    b2 = ax.bar(
+    ax.bar(x - wbar / 2, micro, wbar, label="Micro-F1", color=C_W, hatch="///", edgecolor="black")
+    ax.bar(
         x + wbar / 2,
         macro,
         wbar,
@@ -567,14 +586,12 @@ def main() -> None:
     fig, ax = plt.subplots(figsize=(7.2, 3.6))
     wpv = pv[(pv.experiment == "aggregation") & (pv.interactions == "on")]
     vids = [f"V{i}" for i in range(1, 11)]
-    for method, color, marker, hatch in [
+    for method, color, marker, _hatch in [
         ("equal", C_EQ, "o", "//"),
         ("weighted", C_W, "s", "\\\\"),
         ("max", C_MAX, "^", "xx"),
     ]:
-        ys = [
-            float(wpv[(wpv.method == method) & (wpv.video_id == v)].f1.iloc[0]) for v in vids
-        ]
+        ys = [float(wpv[(wpv.method == method) & (wpv.video_id == v)].f1.iloc[0]) for v in vids]
         ax.plot(vids, ys, marker=marker, color=color, label=method, lw=1.2)
     ax.set_ylim(0, 1.05)
     ax.set_ylabel("Per-video F1")
@@ -678,7 +695,9 @@ def main() -> None:
 
     # Contribution figure
     fig, ax = plt.subplots(figsize=(6.5, 3.5))
-    ax.bar(contrib.video_id, contrib.share_tp, color=C_W, edgecolor="black", label="Share of pooled TP")
+    ax.bar(
+        contrib.video_id, contrib.share_tp, color=C_W, edgecolor="black", label="Share of pooled TP"
+    )
     ax.plot(contrib.video_id, contrib.share_gt, "o--", color=C_MAX, label="Share of pooled GT")
     ax.set_ylabel("Proportion")
     ax.set_ylim(0, 1)

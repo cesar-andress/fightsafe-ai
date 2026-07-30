@@ -194,3 +194,4 @@ optional_tier_b/inputs/features_cache/*.pkl
 notebooks/
 .ipynb_checkpoints/
 *.ipynb
+.venv-ci/

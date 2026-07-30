@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-import sys
 from pathlib import Path
 
 
@@ -85,7 +84,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.paper in ("fusion", "all"):
         all_errors.extend(
-            verify_fusion_ablation(root / "runs/case_studies/ablation_summary/ablation_all_runs.csv")
+            verify_fusion_ablation(
+                root / "runs/case_studies/ablation_summary/ablation_all_runs.csv"
+            )
         )
 
     if args.paper in ("iswa", "all"):

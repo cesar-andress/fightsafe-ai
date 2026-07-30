@@ -61,6 +61,7 @@ Example (one region marked):
 4. **Use in evaluation** by loading the document in Python:
    ```python
    from fightsafe_ai.annotation import load_annotation_file
+
    doc = load_annotation_file("annotations/demo_annotations.json")
    for e in doc.events:
        print(e.start_time, e.end_time, e.event_type)
