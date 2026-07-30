@@ -288,7 +288,7 @@ def main() -> None:
     write_tex_table(
         TAB / "tab_dropout.tex",
         "Synthetic channel dropout under weighted aggregation "
-        "(pooled micro-F1/precision/recall; higher F1 is better; SD over seeds for $p{>}0$).",
+        "(pooled micro-F1/P/R; higher F1 is better; SD over seeds for $p{>}0$).",
         "tab:dropout",
         ["$p$", "Encoding", "Micro-F1", "SD", "Micro-P", "Micro-R"],
         rows,
