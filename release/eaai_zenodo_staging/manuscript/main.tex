@@ -37,10 +37,9 @@ Universidad Camilo Jos\'e Cela, Madrid, Spain}
 Multi-source temporal event detection for engineering decision support requires pipelines that remain interpretable when individual evidence channels are noisy or intermittently unavailable.
 This study evaluates a modular, availability-aware pipeline that separates held-fixed perception features, soft channel confidences~$c$, binary availability masks~$\alpha$, frame-wise aggregation, optional interaction-rule boosts, score banding, and temporal consolidation.
 Unavailable channels ($\alpha{=}0$) are treated as distinct from zero-valued evidence ($c{=}0$, $\alpha{=}1$).
-On BoxingVI stems V1--V10 ($n{=}10$) with punch/impact \emph{proxy} labels, under a frozen matching protocol and a \emph{combined timeline} in which only the risk component is re-aggregated while a strike component remains fixed, equal and weighted aggregation yield nearly identical pooled micro-F1 ($0.502$), whereas an aggressive max aggregation stress test collapses to micro-F1~$0.178$.
-Enabling configured interaction rules raises macro-F1 from $0.444$ to $0.567$ (paired permutation $p{=}0.048$; $n{=}10$), a protocol-limited effect.
-Under synthetic frame$\times$channel dropout at $p{=}0.5$, explicit availability masking remains near the no-dropout baseline (mean micro-F1~$0.509$) and is less degraded than naive zero-valued evidence ($0.471$); natural availability on these matrices is $\alpha{\equiv}1$.
-Pooled micro-F1 is strongly influenced by stem~V6 ($\approx$72\% of ground-truth events and $\approx$80\% of true positives).
+On BoxingVI ($n{=}10$) with punch/impact \emph{proxy} labels and a \emph{combined timeline} in which only the risk component is re-aggregated, equal and weighted aggregation yield nearly identical pooled micro-F1 ($0.502$), whereas max aggregation collapses to $0.178$.
+Configured interaction rules raise macro-F1 from $0.444$ to $0.567$ (paired permutation $p{=}0.048$), a protocol-limited effect.
+Under synthetic channel dropout at $p{=}0.5$, explicit availability masking ($0.509$) is less degraded than naive zero-valued evidence ($0.471$); natural availability on these matrices is $\alpha{\equiv}1$, and pooled metrics are dominated by one stem.
 The study is an engineering evaluation of pipeline levers: not a universal solution to partial observability, not a deployment-ready safety system, and not an external state-of-the-art detector comparison.
 \end{abstract}
 
@@ -57,7 +56,7 @@ interpretable AI \sep temporal event detection \sep channel availability \sep de
 
 Engineering AI systems that turn heterogeneous evidence into temporal intervals face a practical design problem before accuracy debates begin.
 In review workflows and offline analysis pipelines, perception stages emit soft channel confidences at different reliabilities; some channels may drop out; and downstream users need intervals that can be inspected channel by channel~\cite{duan2019ai,doshi2017towards,rudin2019interpretable}.
-When detectors, aggregators and consolidators are stacked without an explicit contract, comparisons become unfair, missing channels are silently treated as zero evidence, and negative ablation outcomes are discarded instead of informing design~\cite{pineau2021reproducibility,kapoor2023leakage}.
+When detectors, aggregators and consolidators are stacked without an explicit contract, comparisons become unfair, missing channels are silently treated as zero-valued evidence, and negative ablation outcomes are discarded instead of informing design~\cite{pineau2021reproducibility,kapoor2023leakage}.
 
 This manuscript targets \emph{Engineering Applications of Artificial Intelligence}, a venue that regularly publishes applied AI system evaluations and engineering analyses of learning pipelines~\cite{ganaie2022ensemble}.
 The systems problem is studied on BoxingVI~\cite{kumar2025boxingvi} through a controlled evaluation of an engineered artefact: modular stages, declared interfaces, controlled ablations and reported failure modes under a fixed protocol.
@@ -112,7 +111,7 @@ Frame-wise aggregation maps the active set $A_t=\{i:\alpha_{i,t}{=}1\}$ to a sco
 Optional interaction rules may add bounded boosts when all required channels jointly exceed thresholds.
 Scores map to bands $\{\mathrm{LOW},\mathrm{MEDIUM},\mathrm{HIGH},\mathrm{CRITICAL}\}$ with fixed cutoffs.
 A consolidator merges high-band risk runs into intervals, while a held-fixed strike detector contributes strike intervals independently.
-The \emph{combined timeline} merges risk and strike intervals (legacy implementation identifier: \texttt{full\_fusion}).
+The \emph{combined timeline} merges risk and strike intervals under the reference aggregation pipeline (software export identifier: \texttt{full\_fusion}).
 A matcher then compares predicted and reference intervals under fixed intersection-over-union (IoU) and temporal tolerance.
 Aggregation methods change only the risk component; the strike component is identical across methods; reported metrics use the combined timeline, so a shared strike mass can attenuate visible aggregation differences (Section~\ref{sec:res-timelines}).
 
@@ -168,12 +167,11 @@ Tier~A regeneration of tables and figures from frozen canonical CSVs is document
 \label{sec:res-v6}
 
 Table~\ref{tab:aggregation} and Figure~\ref{fig:aggregation} compare equal, weighted and max with interactions on.
-Equal and weighted remain nearly tied on pooled micro-F1, whereas max trades high precision for collapsed recall, consistent with near-ubiquitous high-band occupancy under single-channel domination.
+Equal and weighted remain nearly tied on pooled micro-F1, whereas max trades high precision for collapsed recall under single-channel domination of high bands.
 Paired tests (Table~\ref{tab:paired}) separate weighted from max but not from equal.
-Figure~\ref{fig:pervideo} shows per-video F1 under the shared protocol.
-These pooled summaries must be read together with strong video imbalance: stem~V6 accounts for most pooled ground-truth events and true positives under weighted aggregation (Supplementary Table~\ref{tab:si-video-contribution}; Figure~\ref{fig:video-contribution}).
-Leave-one-video-out recomputation of pooled micro-F1 from existing predictions shifts only modestly when V6 is excluded (Supplementary Table~\ref{tab:si-lovo}).
-Pooled micro-F1 is therefore not an equal-video average; macro-F1 and paired per-video analyses are emphasised when discussing general behaviour.
+Figure~\ref{fig:pervideo} shows substantial per-video heterogeneity under the shared protocol.
+These pooled summaries must be read with strong video imbalance: stem~V6 accounts for most pooled ground-truth events and true positives under weighted aggregation (Supplementary Table~\ref{tab:si-video-contribution}; Figure~\ref{fig:video-contribution}).
+Leave-one-video-out recomputation from existing predictions shifts only modestly when V6 is excluded (Supplementary Table~\ref{tab:si-lovo}), confirming that pooled micro-F1 is not an equal-video average; macro-F1 and paired per-video analyses are therefore emphasised for general behaviour.
 
 \input{tables/tab_aggregation}
 
@@ -202,8 +200,8 @@ Pooled micro-F1 is therefore not an equal-video average; macro-F1 and paired per
 \label{sec:res-int}
 
 Table~\ref{tab:interactions} and Figure~\ref{fig:interactions} compare weighted aggregation with interactions off versus on.
-Macro-F1 rises and mean predicted events and HIGH/CRITICAL occupancy increase.
-The paired mean $\Delta$F1 is positive with moderate Cliff~$\delta$ and a borderline permutation $p$ at $n{=}10$: evidence under the fixed protocol, sensitive to the small sample, not a general causal claim.
+Enabling rules increases macro-F1 together with predicted-event counts and HIGH/CRITICAL occupancy.
+The paired mean $\Delta$F1 is positive with moderate Cliff~$\delta$ and a borderline permutation $p$ at $n{=}10$: protocol evidence, not a general causal claim.
 Four of six configured rules fire; one cannot activate because \texttt{surrender\_gesture} is absent; one records zero firing incidences (Table~\ref{tab:firings}).
 
 \input{tables/tab_interactions}
@@ -262,27 +260,23 @@ These matching analyses are post-hoc and do not replace the canonical protocol.
 \label{sec:disc-dropout}
 \label{sec:limitations}
 
-Under this protocol, reweighting does not separate pooled micro-F1 from a uniform average.
-Once channels and consolidator are fixed, fine weight tuning may therefore be lower priority than validating interaction logic, availability contracts, consolidator parameters or label definitions, especially given V6 dominance and the fixed strike mass.
-Max is not proposed as a production default or external state-of-the-art baseline; it shows how allowing one channel to dominate can saturate high bands and collapse recall.
-No velocity-threshold or independent deep detector is claimed under matching provenance constraints; absence of such baselines is intentional honesty rather than omission of available comparable runs.
-Enabling configured interactions changes band occupancy, event counts and macro-F1, with exportable firing-incidence records.
-The borderline paired $p$ at $n{=}10$ and the lack of a pre-specified multiplicity correction mean the interaction result should be read as protocol evidence, not a general causal law.
+The near-tie between equal and weighted aggregation implies that, once channels and the consolidator are fixed, fine weight tuning is lower priority than validating interaction logic, availability contracts, consolidator settings or label definitions---especially when one video dominates pooled mass and a fixed strike component dilutes risk-only contrasts on the combined timeline.
+Max is retained only as a stress test: single-channel domination saturates high bands and collapses recall, so it is not a production default or an external state-of-the-art baseline.
+Absence of velocity-threshold or independent deep detectors under matching-provenance constraints is intentional honesty rather than omission of available comparable runs.
+Interaction enablement is best read as a protocol-limited lever with exportable firing-incidence records: useful for inspectability, but not a multiplicity-corrected causal claim at $n{=}10$.
 
 Industrial sensing and multimodal learning treat missing measurements as routine rather than exceptional~\cite{emmanuel2021missing,teh2020sensorquality,ma2021smil}.
-The synthetic contrast supports keeping an explicit $\alpha$ interface even when natural $\alpha{\equiv}1$ on the present matrices.
-Under this intervention, explicit masking did not reduce pooled micro-F1 and recorded a small increase relative to the no-dropout baseline.
-Descriptive exports show higher pooled recall together with more false positives, with large absolute TP/FP mass on V6 and per-video F1 gains on V4/V5.
-Candidate explanations include renormalisation under fewer active channels, altered merges with the fixed strike path and permissive matching; the frozen artefacts do not identify a single proven mechanism.
-Figure~\ref{fig:dropout} must not be read as evidence of graceful degradation under natural missingness.
+The practical implication is to keep an explicit $\alpha$ interface even when natural matrices are fully observed ($\alpha{\equiv}1$).
+Under synthetic dropout, naive zero-valued encoding is the more fragile contract; the modest explicit uptick relative to the no-dropout baseline is descriptive only and coincides with higher recall and false-positive mass rather than a proven robustness mechanism.
+Candidate explanations---renormalisation over fewer active channels, altered merges with the fixed strike path, and permissive matching---remain unresolved in the frozen artefacts, so Figure~\ref{fig:dropout} must not be read as graceful degradation under natural channel missingness.
 Near-ties, brittle baselines and unresolved mechanisms are retained because they reduce wasted tuning and clarify which pipeline stages deserve instrumentation~\cite{lipton2018mythos,pineau2021reproducibility,kapoor2023leakage}.
 
 Several limits follow directly from the frozen protocol.
 The sample comprises $n{=}10$ videos, so statistical power is limited and the interaction $p{=}0.048$ is borderline and multiplicity-unadjusted.
-V6 dominates pooled ground-truth and true-positive mass, so pooled micro-F1 is not an equal-video summary.
+Pooled micro-F1 is not an equal-video summary under V6 dominance.
 The combined timeline includes a fixed strike component that can attenuate risk-aggregation contrasts.
 Labels are punch/impact proxies rather than clinical or safety ground truth.
-Natural availability is $\alpha{\equiv}1$, missingness results are synthetic, and the small explicit micro-F1 increase is descriptive only.
+Natural availability is $\alpha{\equiv}1$; missingness results are synthetic; and the small explicit micro-F1 increase is descriptive only.
 Weights, thresholds and rules are hand-authored, so historical tuning leakage cannot be ruled out.
 The matcher is permissive (IoU threshold~$0.01$, $d_{\min}{=}0$) and stricter matching lowers F1 in post-hoc checks.
 There is no independent external dataset, operator study or deployment claim; one interaction rule cannot fire and another records zero firing incidences; and Tier~B full re-execution requires redistributable derived feature caches outside the public Tier~A artefact (Section~\ref{sec:reproducibility}).
@@ -292,7 +286,7 @@ There is no independent external dataset, operator study or deployment claim; on
 \label{sec:conclusion}
 
 An availability-aware, interpretable temporal event pipeline was evaluated on BoxingVI as an engineering case study with disclosed limits.
-Equal and weighted aggregation perform similarly; max is a brittle stress test; interaction rules show a protocol-limited effect; explicit availability masking is less degraded than naive zero-valued evidence under synthetic dropout only; and pooled metrics are dominated by one stem and shaped by a fixed strike component.
+Equal and weighted aggregation behave similarly; max is a brittle stress test; interaction rules show a protocol-limited effect; explicit availability masking is less fragile than naive zero-valued evidence under synthetic dropout only; and pooled metrics are dominated by one stem and shaped by a fixed strike component.
 These findings support an EAAI-oriented narrative in which inspectable contracts, controlled ablations and published negative results are central engineering contributions.
 
 \section*{Acknowledgements}
