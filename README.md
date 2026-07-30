@@ -144,12 +144,13 @@ Full limits are stated in the manuscript.
 ```bibtex
 @misc{fightsafe_ai_2026,
   author       = {Andr\'{e}s, C\'{e}sar and Martin Moncunill, David},
-  title        = {{FightSafe AI}: Decision-Support Software for Combat-Sports Safety Monitoring},
+  title        = {{FightSafe AI} --- {EAAI} reproducibility artefact (availability-aware temporal event pipeline)},
   year         = {2026},
-  howpublished = {Zenodo},
   version      = {1.0.0},
+  publisher    = {Zenodo},
   doi          = {10.5281/zenodo.21698326},
-  url          = {https://doi.org/10.5281/zenodo.21698326}
+  url          = {https://doi.org/10.5281/zenodo.21698326},
+  note         = {GitHub: https://github.com/cesar-andress/fightsafe-ai (tag v1.0.0)}
 }
 ```
 

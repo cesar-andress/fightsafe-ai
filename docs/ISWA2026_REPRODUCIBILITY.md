@@ -1,6 +1,10 @@
 # iswa2026 reproducibility guide
 
-Documentation for the ISWA 2026 traceability manuscript (*Information Systems and e-Business Management*). Documentation-only; release **v0.1.4** ships the aligned reproducibility bundle.
+Documentation for the ISWA 2026 traceability manuscript (*Information Systems and e-Business Management*).
+
+**Current canonical software artefact (this repository):** FightSafe AI **v1.0.0** — Zenodo DOI [`10.5281/zenodo.21698326`](https://doi.org/10.5281/zenodo.21698326), GitHub tag `v1.0.0`. Use that release for all new work and for citations of the public software package.
+
+A historical ISWA-aligned GitHub snapshot remains available as tag **`v0.1.4`** for provenance of that manuscript’s original reproducibility bundle; it must **not** be cited as the current EAAI/public artefact.
 
 Paper-specific instructions for reproducing the **machine-side traceability protocol demonstration** reported in:
 
@@ -16,10 +20,11 @@ General installation, environment variables, and cross-manuscript notes: [`REPRO
 
 | Field | Value |
 |-------|-------|
-| Artifact title | **FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows** |
-| Repository release | **v0.1.4** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
-| Zenodo DOI | [10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326) |
-| GitHub tag | `v0.1.4` (see [`docs/release_checklist.md`](release_checklist.md)) |
+| Canonical artefact title | **FightSafe AI — EAAI reproducibility artefact** (current public package) |
+| Current repository release | **v1.0.0** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
+| Zenodo DOI (current) | [10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326) |
+| GitHub tag (current) | `v1.0.0` (see [`docs/release_checklist.md`](release_checklist.md)) |
+| Historical ISWA snapshot tag | `v0.1.4` (provenance only; not the current citation) |
 
 Reproducibility entry points: `reproduce_iswa2026.sh`, bundled reference exports under `data/repro/iswa2026/`, and manuscript tables installed to `../iswa2026/tables/`.
 
