@@ -1,6 +1,6 @@
 # Experiments (FightSafe AI — MVP Protocol and Reporting Template)
 
-**Authors (context).** David Martin Moncunill, César Andrés Sánchez; Camilo José Cela University (UCJC), Madrid, Spain.
+**Authors (context).** David Martin Moncunill, César Andrés; Camilo José Cela University (UCJC), Madrid, Spain.
 
 **Important.** The FightSafe AI repository **does not ship evaluation videos or labels** (see `docs/dataset.md`). This document is a **template** for a realistic experiment section: **procedures, metrics, and ablation definitions** are specified; **numerical results and clip counts are not invented**—use **TBD** until you have real measurements, or omit quantitative subsections.
 

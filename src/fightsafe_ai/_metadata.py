@@ -13,7 +13,7 @@ from typing import Any
 
 AUTHOR_1_NAME = "David Martin Moncunill"
 AUTHOR_1_EMAIL = "david.martinm@ucjc.edu"
-AUTHOR_2_NAME = "César Andrés Sánchez"
+AUTHOR_2_NAME = "César Andrés"
 AUTHOR_2_EMAIL = "cesar.andress@ucjc.edu"
 
 # --- Affiliation (shared) ------------------------------------------------------
@@ -30,7 +30,7 @@ AUTHORS_BIBLIOGRAPHIC = f"{AUTHOR_1_NAME}; {AUTHOR_2_NAME}"
 AUTHORS_WITH_EMAILS = f"{AUTHOR_1_NAME} <{AUTHOR_1_EMAIL}>; {AUTHOR_2_NAME} <{AUTHOR_2_EMAIL}>"
 
 # Short form for footers and Typer epilog (single line, wrap-safe)
-AUTHORS_SHORT = "D. Martin-Moncunill, C. A. Sánchez"
+AUTHORS_SHORT = "D. Martin-Moncunill, C. Andrés"
 
 CLI_EPILOG = f"Authors: {AUTHORS_BIBLIOGRAPHIC} · {AFFILIATION_UNI}, {AFFILIATION_CITY}"
 

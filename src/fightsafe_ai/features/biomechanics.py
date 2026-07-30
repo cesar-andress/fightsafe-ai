@@ -5,7 +5,7 @@ Provides pure helpers for centers and torso angle, plus :func:`compute_biomechan
 for frame-wise metrics. :func:`compute_pose_features` loads CSV sources and augments with
 temporal statistics for the risk layer.
 
-Authorship: D. Martin-Moncunill, C. A. Sánchez (Camilo José Cela University, UCJC, Spain).
+Authorship: D. Martin-Moncunill, C. Andrés (Camilo José Cela University, UCJC, Spain).
 """
 
 from __future__ import annotations

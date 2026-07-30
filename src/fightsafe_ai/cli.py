@@ -5,7 +5,7 @@ AI-assisted safety detection for combat sports officiating.
 
 Authors:
 - David Martin Moncunill (david.martinm@ucjc.edu)
-- César Andrés Sánchez (cesar.andress@ucjc.edu)
+- César Andrés (cesar.andress@ucjc.edu)
 
 Affiliation:
 Camilo José Cela University (UCJC)
@@ -59,7 +59,7 @@ Primary commands:
   export-rtmpose-onnx   Export MMPose checkpoint to ONNX (optional mmengine/mmpose)
   (see --help for estimate-pose, compute-features, detect-risk, render-overlay, run-pipeline, …)
 
-Authors: D. Martin Moncunill, C. A. Sánchez (UCJC), Madrid, Spain
+Authors: D. Martin Moncunill, C. Andrés (UCJC), Madrid, Spain
 """.strip()
 
 app = typer.Typer(

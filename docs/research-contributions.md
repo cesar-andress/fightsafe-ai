@@ -2,7 +2,7 @@
 
 Draft for Q1-style manuscripts. Phrasing is intended to be **defensible** and **bounded**—appropriate for venues in computer vision, sports informatics, or human–machine systems.
 
-**Authors (context).** David Martin Moncunill, César Andrés Sánchez; Camilo José Cela University (UCJC), Madrid, Spain.
+**Authors (context).** David Martin Moncunill, César Andrés; Camilo José Cela University (UCJC), Madrid, Spain.
 
 **Scope.** FightSafe AI is a **decision-support** and **research** toolkit, not a medical device. Contributions concern methodology, system design, and review workflows—not clinical diagnosis, injury prediction, or autonomous officiation.
 

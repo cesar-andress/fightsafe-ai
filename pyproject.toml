@@ -14,7 +14,7 @@ license = { text = "MIT" }
 requires-python = ">=3.12,<3.13"
 authors = [
   { name = "David Martin Moncunill", email = "david.martinm@ucjc.edu" },
-  { name = "César Andrés Sánchez", email = "cesar.andress@ucjc.edu" },
+  { name = "César Andrés", email = "cesar.andress@ucjc.edu" },
 ]
 keywords = [
   "sports",

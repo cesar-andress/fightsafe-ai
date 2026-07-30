@@ -88,7 +88,7 @@ Edit `/home/cesar/papers/bibliography.bib` — entry key **`fightsafe_ai_2026`**
 
 ```bibtex
 @misc{fightsafe_ai_2026,
-  author       = {Mart{\'i}n Moncunill, David and S{\'a}nchez, C{\'e}sar Andr{\'e}s},
+  author       = {Mart{\'i}n Moncunill, David and Andr{\'e}s, C{\'e}sar},
   title        = {FightSafe {AI}: Traceability and Auditability Software for Safety-Alert Review Workflows},
   year         = {2026},
   version      = {0.1.4},

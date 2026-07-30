@@ -5,7 +5,7 @@ AI-assisted safety detection for combat sports officiating.
 
 Authors:
 - David Martin Moncunill (david.martinm@ucjc.edu)
-- César Andrés Sánchez (cesar.andress@ucjc.edu)
+- César Andrés (cesar.andress@ucjc.edu)
 
 Affiliation:
 Camilo José Cela University (UCJC)

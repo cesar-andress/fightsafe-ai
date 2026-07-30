@@ -1,6 +1,6 @@
 # FightSafe AI as a Q1-Level Research Framework
 
-**Authors (software):** David Martín Moncunill, César Andrés Sánchez
+**Authors (software):** David Martín Moncunill, César Andrés
 
 **Affiliation:** Camilo José Cela University (UCJC), Madrid, Spain
 
