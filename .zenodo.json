@@ -36,6 +36,12 @@
       "identifier": "https://arxiv.org/abs/2511.16524",
       "relation": "references",
       "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "10.5281/zenodo.20622868",
+      "relation": "isVersionOf",
+      "resource_type": "software",
+      "scheme": "doi"
     }
   ]
 }

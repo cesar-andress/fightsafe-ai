@@ -18,7 +18,7 @@ General installation, environment variables, and cross-manuscript notes: [`REPRO
 |-------|-------|
 | Artifact title | **FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows** |
 | Repository release | **v0.1.4** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
-| Zenodo DOI | [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
+| Zenodo DOI | [10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326) |
 | GitHub tag | `v0.1.4` (see [`docs/release_checklist.md`](release_checklist.md)) |
 
 Reproducibility entry points: `reproduce_iswa2026.sh`, bundled reference exports under `data/repro/iswa2026/`, and manuscript tables installed to `../iswa2026/tables/`.

@@ -11,7 +11,7 @@ This GitHub repository **is** the official v1.0.0 artefact. There is no nested s
 | Resource | Location |
 |----------|----------|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
-| Zenodo DOI | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
+| Zenodo DOI | [https://doi.org/10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326) |
 | Tag | `v1.0.0` |
 
 **Not** a medical device, clinical diagnostic tool, autonomous officiating system, or deployment-ready safety product.
@@ -144,8 +144,8 @@ Full limits are stated in the manuscript.
   year         = {2026},
   howpublished = {Zenodo},
   version      = {1.0.0},
-  doi          = {10.5281/zenodo.20622869},
-  url          = {https://doi.org/10.5281/zenodo.20622869}
+  doi          = {10.5281/zenodo.21698326},
+  url          = {https://doi.org/10.5281/zenodo.21698326}
 }
 ```
 

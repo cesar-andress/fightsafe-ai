@@ -10,7 +10,7 @@
 - Tier A regeneration via `scripts/generate_eaai_assets.py` and `scripts/validate_tier_a.py`.
 - BoxingVI punch-interval proxy annotations under `annotations/boxingvi/`.
 - Repository hygiene: removed obsolete ESWA/JSS doc stubs, exploration notebook, duplicate `annotations/boxingvi_root` shim, and unused `data/paper2_human_study.csv`; tightened `.gitignore`.
-- Zenodo DOI: https://doi.org/10.5281/zenodo.20622869
+- Official Zenodo version DOI for v1.0.0: https://doi.org/10.5281/zenodo.21698326 (concept DOI `10.5281/zenodo.20622868`; earlier deposit `10.5281/zenodo.20622869` is not the v1.0.0 artefact).
 
 ## Prior tags
 

@@ -1,6 +1,6 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v1.0.0` (Zenodo DOI [`10.5281/zenodo.20622869`](https://doi.org/10.5281/zenodo.20622869)).
+**Current release:** `v1.0.0` (Zenodo DOI [`10.5281/zenodo.21698326`](https://doi.org/10.5281/zenodo.21698326)).
 
 The **GitHub repository root** is the canonical FightSafe AI v1.0.0 research artefact. There is no nested Zenodo staging directory.
 
@@ -35,7 +35,7 @@ Confirm on GitHub:
 2. Open **Account → GitHub** and grant Zenodo access to `cesar-andress/fightsafe-ai`.
 3. Ensure the repository toggle is **ON** so Zenodo can archive GitHub releases.
 
-For v1.0.0 the version DOI is already assigned: `10.5281/zenodo.20622869`. Keep `.zenodo.json` and `CITATION.cff` aligned with that DOI.
+For v1.0.0 the version DOI is already assigned: `10.5281/zenodo.21698326`. Keep `.zenodo.json` and `CITATION.cff` aligned with that DOI.
 
 ---
 
@@ -60,7 +60,7 @@ gh release create v1.0.0 --title "FightSafe v1.0.0 — EAAI Reproducibility Arte
 
 | File | Required fields |
 |------|-----------------|
-| [`CITATION.cff`](../CITATION.cff) | `version: 1.0.0`, `doi: "10.5281/zenodo.20622869"` |
+| [`CITATION.cff`](../CITATION.cff) | `version: 1.0.0`, `doi: "10.5281/zenodo.21698326"` |
 | [`README.md`](../README.md) | Version badge/table, citation block, Zenodo URL |
 | [`.zenodo.json`](../.zenodo.json) | `version`, creators, licence, related identifiers, description of the **repository itself** |
 | [`pyproject.toml`](../pyproject.toml) / [`src/fightsafe_ai/__version__.py`](../src/fightsafe_ai/__version__.py) | `1.0.0` |
@@ -85,7 +85,7 @@ Expected: Tier A `overall: PASS`; checksums match; no nested `release/` tree.
 
 ## 6. Companion manuscripts (optional monorepo)
 
-Recompile external companion papers if they cite this software entry, and ensure bibliography DOIs match `10.5281/zenodo.20622869` / version `1.0.0`.
+Recompile external companion papers if they cite this software entry, and ensure bibliography DOIs match `10.5281/zenodo.21698326` / version `1.0.0`.
 
 EAAI manuscript (in-repo):
 
@@ -109,7 +109,7 @@ cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 
 | Artifact | Identifier |
 |----------|------------|
-| Software (Zenodo + GitHub) | `fightsafe_ai_2026` / DOI `10.5281/zenodo.20622869` |
+| Software (Zenodo + GitHub) | `fightsafe_ai_2026` / DOI `10.5281/zenodo.21698326` |
 | GitHub release tag | `v1.0.0` |
 | CFF / package version | `1.0.0` |
 | Canonical scientific run | `canonical_results/run_20260730_005150/` |

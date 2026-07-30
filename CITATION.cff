@@ -6,9 +6,9 @@ type: software
 version: 1.0.0
 date-released: 2026-07-30
 license: MIT
-doi: "10.5281/zenodo.20622869"
+doi: "10.5281/zenodo.21698326"
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
-url: "https://doi.org/10.5281/zenodo.20622869"
+url: "https://doi.org/10.5281/zenodo.21698326"
 abstract: >-
   FightSafe AI v1.0.0 research software and canonical reproducibility artefact for the
   EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit
@@ -45,5 +45,5 @@ preferred-citation:
       given-names: David
   year: 2026
   version: 1.0.0
-  doi: "10.5281/zenodo.20622869"
-  url: "https://doi.org/10.5281/zenodo.20622869"
+  doi: "10.5281/zenodo.21698326"
+  url: "https://doi.org/10.5281/zenodo.21698326"

@@ -1,6 +1,6 @@
 # Reproducibility guide
 
-**Software artifact:** FightSafe AI **v1.0.0** (Zenodo [10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869)).
+**Software artifact:** FightSafe AI **v1.0.0** (Zenodo [10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326)).
 
 This repository **root** is the official reproducibility artefact. Canonical EAAI results live under `canonical_results/run_20260730_005150/`. Restricted video, skeleton keypoints and `features_cache` binaries are **not** redistributed (see `NOTICE_DATA.md`).
 
