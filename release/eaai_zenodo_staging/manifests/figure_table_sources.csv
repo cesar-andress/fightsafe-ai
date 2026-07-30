@@ -1,0 +1,15 @@
+manuscript_item,output_file,generation_script,input_files,canonical_source,command
+fig:architecture,figures/fig_architecture.pdf,scripts/generate_assets.py,analysis/*;results/.../experiment_summary.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:aggregation,figures/fig_aggregation.pdf,scripts/generate_assets.py,results/.../experiment_summary.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:pervideo,figures/fig_per_video.pdf,scripts/generate_assets.py,results/.../per_video_metrics.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:video-contribution,figures/fig_video_contribution.pdf,scripts/generate_assets.py,analysis/per_video_contribution_weighted.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:interactions,figures/fig_interactions.pdf,scripts/generate_assets.py,results/.../experiment_summary.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:dropout,figures/fig_dropout.pdf,scripts/generate_assets.py,results/.../dropout_results.csv;analysis/dropout_per_video_means.csv,results/run_20260730_005150,python scripts/generate_assets.py
+fig:failures,figures/fig_failures.pdf,scripts/generate_assets.py,results/.../failure_counts.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:dataset,tables/tab_dataset.tex,scripts/generate_assets.py,results/.../matrices/matrix_meta.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:aggregation,tables/tab_aggregation.tex,scripts/generate_assets.py,results/.../experiment_summary.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:interactions,tables/tab_interactions.tex,scripts/generate_assets.py,results/.../experiment_summary.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:firings,tables/tab_firings.tex,scripts/generate_assets.py,results/.../interaction_rule_firings.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:dropout,tables/tab_dropout.tex,scripts/generate_assets.py,results/.../dropout_results.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:paired,tables/tab_paired.tex,scripts/generate_assets.py,results/.../paired_comparisons.csv,results/run_20260730_005150,python scripts/generate_assets.py
+tab:failures,tables/tab_failures.tex,scripts/generate_assets.py,results/.../failure_counts.csv,results/run_20260730_005150,python scripts/generate_assets.py

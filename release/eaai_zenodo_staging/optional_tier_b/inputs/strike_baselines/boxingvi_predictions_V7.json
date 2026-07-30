@@ -1,0 +1,273 @@
+{
+  "video_id": "V7",
+  "fps": 30.0,
+  "skeleton_path": "<NOT_REDISTRIBUTED>/skeleton/V7.npy",
+  "skeleton_shape": [
+    195,
+    25,
+    17,
+    2
+  ],
+  "rolling_window": 5,
+  "min_valid_keypoints": 5,
+  "frames_total": 195,
+  "frames_with_landmarks": 195,
+  "risk_rules_yaml": "configs/risk_rules.yaml",
+  "events": [
+    {
+      "event_id": 0,
+      "start_frame": "00000050",
+      "end_frame": "00000050",
+      "start_time": 1.6666666666666667,
+      "end_time": 2.1999999999999997,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.03333333333333344,
+      "score": 0.0
+    },
+    {
+      "event_id": 3,
+      "start_frame": "00000077",
+      "end_frame": "00000077",
+      "start_time": 2.566666666666667,
+      "end_time": 3.6666666666666665,
+      "max_risk_score": 6.201389900773984,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215,
+      "score": 6.201389900773984
+    },
+    {
+      "event_id": 8,
+      "start_frame": "00000119",
+      "end_frame": "00000119",
+      "start_time": 3.966666666666667,
+      "end_time": 4.0,
+      "max_risk_score": 0.85,
+      "event_level": "CRITICAL",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": "strike_00003",
+      "start_frame": "0132",
+      "end_frame": "0141",
+      "start_time": 4.4,
+      "end_time": 4.833333333333333,
+      "max_risk_score": 7.3937578702379145,
+      "score": 7.3937578702379145,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": 10,
+      "start_frame": "00000158",
+      "end_frame": "00000158",
+      "start_time": 5.266666666666667,
+      "end_time": 6.233333333333333,
+      "max_risk_score": 6.345563248528419,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215,
+      "score": 6.345563248528419
+    }
+  ],
+  "events_risk_only": [
+    {
+      "event_id": 0,
+      "start_frame": "00000050",
+      "end_frame": "00000050",
+      "start_time": 1.6666666666666667,
+      "end_time": 1.7000000000000002,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.03333333333333344
+    },
+    {
+      "event_id": 1,
+      "start_frame": "00000057",
+      "end_frame": "00000059",
+      "start_time": 1.9,
+      "end_time": 1.9666666666666666,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.06666666666666665
+    },
+    {
+      "event_id": 2,
+      "start_frame": "00000065",
+      "end_frame": "00000065",
+      "start_time": 2.1666666666666665,
+      "end_time": 2.1999999999999997,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 3,
+      "start_frame": "00000077",
+      "end_frame": "00000077",
+      "start_time": 2.566666666666667,
+      "end_time": 2.6,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 4,
+      "start_frame": "00000080",
+      "end_frame": "00000080",
+      "start_time": 2.6666666666666665,
+      "end_time": 2.6999999999999997,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 5,
+      "start_frame": "00000083",
+      "end_frame": "00000083",
+      "start_time": 2.7666666666666666,
+      "end_time": 2.8,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 6,
+      "start_frame": "00000091",
+      "end_frame": "00000091",
+      "start_time": 3.033333333333333,
+      "end_time": 3.0666666666666664,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 7,
+      "start_frame": "00000098",
+      "end_frame": "00000098",
+      "start_time": 3.2666666666666666,
+      "end_time": 3.3,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 8,
+      "start_frame": "00000119",
+      "end_frame": "00000119",
+      "start_time": 3.966666666666667,
+      "end_time": 4.0,
+      "max_risk_score": 0.85,
+      "event_level": "CRITICAL",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 9,
+      "start_frame": "00000144",
+      "end_frame": "00000144",
+      "start_time": 4.8,
+      "end_time": 4.833333333333333,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 10,
+      "start_frame": "00000158",
+      "end_frame": "00000158",
+      "start_time": 5.266666666666667,
+      "end_time": 5.3,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 11,
+      "start_frame": "00000163",
+      "end_frame": "00000163",
+      "start_time": 5.433333333333334,
+      "end_time": 5.466666666666667,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    },
+    {
+      "event_id": 12,
+      "start_frame": "00000169",
+      "end_frame": "00000169",
+      "start_time": 5.633333333333334,
+      "end_time": 5.666666666666667,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    }
+  ],
+  "anomaly_events": [],
+  "strike_events": [
+    {
+      "event_id": "strike_00001",
+      "start_frame": "0079",
+      "end_frame": "0088",
+      "start_time": 2.6333333333333333,
+      "end_time": 2.966666666666667,
+      "max_risk_score": 5.5536781239457245,
+      "score": 5.5536781239457245,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00002",
+      "start_frame": "0101",
+      "end_frame": "0109",
+      "start_time": 3.3666666666666667,
+      "end_time": 3.6666666666666665,
+      "max_risk_score": 6.201389900773984,
+      "score": 6.201389900773984,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00003",
+      "start_frame": "0132",
+      "end_frame": "0141",
+      "start_time": 4.4,
+      "end_time": 4.733333333333333,
+      "max_risk_score": 7.3937578702379145,
+      "score": 7.3937578702379145,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00004",
+      "start_frame": "0166",
+      "end_frame": "0186",
+      "start_time": 5.533333333333333,
+      "end_time": 6.233333333333333,
+      "max_risk_score": 6.345563248528419,
+      "score": 6.345563248528419,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    }
+  ],
+  "n_frames_risk": 195,
+  "full_fusion_timeline_merge_frames": 8
+}

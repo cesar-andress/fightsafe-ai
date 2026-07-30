@@ -1,0 +1,2 @@
+APPROVED FOR RELEASE — derived strike/anomaly baselines for combined-timeline interpretation.
+Lab absolute paths in metadata fields were scrubbed; event arrays unchanged.

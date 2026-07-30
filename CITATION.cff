@@ -1,21 +1,22 @@
 # CFF 1.2.0 — https://citation-file-format.org
 cff-version: 1.2.0
 message: "If you use this software, please cite it as follows."
-title: "FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows"
+title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
 type: software
-version: 0.1.4
-date-released: 2026-06-10
+version: 1.0.0
+date-released: 2026-07-30
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
-doi: 10.5281/zenodo.20622869
+doi: 10.5281/zenodo.PENDING
 abstract: >-
-  Research software for alert-candidate export traceability, auditability,
-  protocol-defined bookkeeping, and governance requirements in safety-alert
-  review workflows. Includes TapKO candidate detection, bundled reference
-  exports, and reproduction scripts (v0.1.4). Not a validated operator-facing
-  product; reported protocol demonstration is machine-side only (reviewer and gate
-  records not logged).
+  FightSafe AI research software and paper-specific reproducibility artefact for the
+  EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit
+  Channel Availability: A Combat-Sports Case Study”. Includes Tier A verification and
+  regeneration of reported tables and figures from frozen canonical result files
+  (run_20260730_005150), configs, aggregation schemes with explicit availability masking,
+  environment metadata and checksums. Not a safety-certified system; not a state-of-the-art
+  detector claim; not a medical device. Synthetic missingness only.
 authors:
   - family-names: Andrés
     given-names: César
@@ -25,25 +26,24 @@ authors:
   - family-names: Martin Moncunill
     given-names: David
     email: david.martinm@ucjc.edu
-    affiliation: Camilo Jose Cela University
+    affiliation: "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
 keywords:
-  - software architecture
-  - software traceability
-  - auditability
-  - requirements engineering
-  - governance
-  - reproducibility
-  - design science
+  - interpretable AI
   - temporal event detection
+  - channel availability
+  - engineering applications
+  - reproducibility
+  - combat sports
+  - decision support
 preferred-citation:
   type: software
-  title: "FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows"
+  title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
   authors:
     - family-names: Andrés
       given-names: César
     - family-names: Martin Moncunill
       given-names: David
   year: 2026
-  version: 0.1.4
-  doi: 10.5281/zenodo.20622869
+  version: 1.0.0
+  doi: 10.5281/zenodo.PENDING
   url: "https://github.com/cesar-andress/fightsafe-ai"

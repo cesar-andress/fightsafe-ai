@@ -1,0 +1,29 @@
+{
+  "canonical_run_id": "run_20260730_005150",
+  "aggregation_schemes_sha256": "4d19f0f69238c9afdf365b6baeae26986a2d7086fb2b24170f5b2ce5b6209281",
+  "result_files": [
+    "experiment_summary.csv",
+    "per_video_metrics.csv",
+    "paired_comparisons.csv",
+    "dropout_results.csv",
+    "failure_counts.csv",
+    "interaction_rule_firings.csv",
+    "matrices/matrix_meta.csv"
+  ],
+  "numbers_from_tables_json": {
+    "canon_relative": "legacy/eaai_checkpoint_2026/run_20260730_005150",
+    "micro_f1_equal": 0.5022244191794365,
+    "micro_f1_weighted": 0.5024777006937562,
+    "micro_f1_max": 0.1777362020579981,
+    "macro_f1_int_off": 0.4441412784999182,
+    "macro_f1_int_on": 0.5672802558865289,
+    "paired_int_p": 0.0481903619276144,
+    "v6_share_gt": 0.723336853220697,
+    "v6_share_tp": 0.7988165680473372,
+    "dropout_p05_explicit": 0.5089903437878696,
+    "dropout_p05_naive": 0.4708641351995115,
+    "risk_only_f1": 0.4101198402130492,
+    "strike_only_f1": 0.4664688427299703,
+    "combined_f1": 0.5024777006937562
+  }
+}

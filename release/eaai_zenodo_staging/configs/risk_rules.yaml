@@ -1,0 +1,127 @@
+# =============================================================================
+# FightSafe AI — transparent, rule-based combat risk scoring (MVP v1)
+# =============================================================================
+#
+# PURPOSE (decision-support only)
+#   - Tuning and visualization for human review of video segments.
+#   - NOT a medical device, NOT a clinical or injury diagnosis, NOT a substitute
+#     for qualified officials, medical staff, or governing-body rules.
+#
+# INDICATORS (YAML keys -> interpretable rules; see fightsafe_ai.risk.rules)
+#   - fast_downward_motion:         fast downward hip movement (fall / strong imbalance proxy)
+#   - large_torso_angle:            large absolute torso angle vs. vertical
+#   - prolonged_low_posture:        sustained low posture (rolling frame count in window)
+#   - high_instability:             rolling std-based instability (hip/head/torso)
+#   - post_fall_low_movement:       after sustained near-ground, very low head+hip speed
+#   - low_guard:                    hands low relative to head (guard_level 0–1 from pose)
+#   - facing_away:                  turned away / non-frontal (facing_away_score 0–1)
+#   - reaction_delay_after_impact: stillness after sudden deceleration (0–1)
+#   - loss_of_control:              (low_guard OR facing_away) AND instability — MEDIUM-tier
+#   - clear_danger_fall:            large_torso_angle AND fast_downward_motion — HIGH-tier (fall proxy)
+#   - high_risk_guard_strike:       low_guard AND strike_incoming_proxy — HIGH review (exposed + inbound)
+#   - intervention_urgent:          post_fall AND prolonged_low_posture — CRITICAL-tier
+#   - limb_anomaly:                 0–1 frame-wise limb/joint proxy (from features; not clinical)
+#
+# Risk levels (banding on weighted risk_score, see interpretable_aggregation):
+#   LOW — normal activity
+#   MEDIUM — potential loss of control (low guard / turning, instability)
+#   HIGH — clear danger (fall + strong imbalance)
+#   CRITICAL — immediate review (ground + no movement + low posture; decision-support only)
+#
+# Per-frame output: timestamp, risk_score [0,1], risk_level, triggered_rules
+#
+# Adjust weights and thresholds on YOUR data; defaults are for development only.
+
+# ---------------------------------------------------------------------------
+# Legacy blocks: used by fightsafe_ai.risk.engine.detect_risk_events
+# ---------------------------------------------------------------------------
+tilt_velocity:
+  torso_angle_threshold_deg: 28.0
+  hip_velocity_threshold: 0.45
+  tilt_velocity_angle_scale: 20.0
+  tilt_velocity_speed_scale: 1.0
+
+ground_contact:
+  near_ground_min_frames: 20
+
+erratic_motion:
+  variance_window: 9
+  variance_factor: 2.2
+  jerk_threshold: 3.5
+
+aggregation:
+  weight_tilt_velocity: 0.34
+  weight_ground: 0.33
+  weight_erratic: 0.33
+  risk_flag_threshold: 0.5
+
+# ---------------------------------------------------------------------------
+# Interpretable combat MVP: fightsafe_ai.risk.rules + fightsafe_ai.risk.scorer
+# ---------------------------------------------------------------------------
+# Positive hip_vertical_velocity = hip moving downward in image coordinates (y+).
+fast_downward_motion:
+  velocity_threshold: 0.45
+  velocity_scale: 0.9
+
+large_torso_angle:
+  abs_angle_threshold_deg: 28.0
+  excess_scale_deg: 40.0
+
+prolonged_low_posture:
+  min_frames_to_score: 4
+  full_risk_at_frames: 30
+
+high_instability:
+  instability_threshold: 0.04
+  excess_scale: 0.10
+
+# Near ground + sustained ground contact: flag when combined speed stays very low.
+# Heuristic for “on the ground and barely moving” — not a medical diagnosis.
+post_fall_low_movement:
+  min_near_ground_streak_frames: 8
+  max_combined_speed: 0.15
+  speed_buffer: 0.05
+
+# 0–1 feature columns from pose / temporal (see fightsafe_ai.features.biomechanics, temporal)
+low_guard:
+  level_threshold: 0.2
+  excess_scale: 0.35
+
+facing_away:
+  level_threshold: 0.2
+  excess_scale: 0.35
+
+reaction_delay_after_impact:
+  level_threshold: 0.2
+  excess_scale: 0.35
+
+# Wrist-midpoint speed (normalized / s) from consecutive frames → [0,1] in biomechanics.
+incoming_strike:
+  level_threshold: 0.15
+  excess_scale: 0.45
+
+# See fightsafe_ai.features.anomaly (heuristic; not a medical exam).
+limb_anomaly:
+  level_threshold: 0.2
+  excess_scale: 0.35
+
+interpretable_aggregation:
+  weight_fast_downward: 0.0828
+  weight_large_torso: 0.0828
+  weight_low_posture: 0.0828
+  weight_instability: 0.0828
+  weight_post_fall: 0.0828
+  weight_low_guard: 0.0736
+  weight_facing_away: 0.0736
+  weight_reaction_delay: 0.0736
+  weight_loss_of_control: 0.086
+  weight_clear_danger_fall: 0.086
+  weight_intervention_urgent: 0.0952
+  weight_high_risk_guard_strike: 0.06
+  weight_limb_anomaly: 0.08
+  # A rule appears in triggered_rules when its 0-1 component exceeds this.
+  trigger_epsilon: 0.08
+  # risk_level cutoffs on risk_score in [0, 1] (inclusive lower bound per band).
+  level_medium_min: 0.25
+  level_high_min: 0.5
+  level_critical_min: 0.75

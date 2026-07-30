@@ -1,30 +1,42 @@
 {
-  "title": "FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows",
-  "description": "Research software for alert-candidate export traceability, auditability, protocol-defined bookkeeping, and governance requirements in safety-alert review workflows. Release v0.1.4 bundles TapKO reference exports and reproduction scripts for the ISWA 2026 traceability manuscript; reported protocol demonstration is machine-side only (reviewer and gate records not logged). Not a validated operator-facing product; no deployment-readiness claim. Companion to manuscripts on information fusion, traceability architecture, and FightSafe-Bench. Not a medical device.",
+  "title": "FightSafe AI — EAAI reproducibility package: availability-aware interpretable temporal event pipeline (BoxingVI case study)",
+  "description": "Paper-specific reproducibility package for the EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study”. Tier A regenerates and verifies reported tables/figures from frozen canonical CSVs (run_20260730_005150). Includes configs, aggregation schemes with explicit availability masking, environment freeze and checksums. Not a safety-certified system; not a state-of-the-art detector claim; not a medical device. Synthetic missingness only.",
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "language": "eng",
+  "doi": "10.5281/zenodo.PENDING",
   "creators": [
-    {
-      "name": "Martin Moncunill, David",
-      "affiliation": "Camilo Jose Cela University"
-    },
     {
       "name": "Andrés, César",
       "orcid": "0009-0001-8968-3404",
       "affiliation": "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
+    },
+    {
+      "name": "Martin Moncunill, David",
+      "affiliation": "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
     }
   ],
   "keywords": [
-    "software architecture",
-    "software traceability",
-    "auditability",
-    "requirements engineering",
-    "governance",
+    "interpretable AI",
+    "temporal event detection",
+    "channel availability",
+    "engineering applications",
     "reproducibility",
-    "design science",
-    "temporal event detection"
+    "combat sports",
+    "decision support"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.20622869",
+      "relation": "isNewVersionOf",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://arxiv.org/abs/2511.16524",
+      "relation": "references",
+      "resource_type": "publication-preprint"
+    }
   ]
 }

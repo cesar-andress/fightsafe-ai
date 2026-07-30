@@ -1,0 +1,203 @@
+{
+  "video_id": "V10",
+  "fps": 30.0,
+  "skeleton_path": "<NOT_REDISTRIBUTED>/skeleton/V10.npy",
+  "skeleton_shape": [
+    152,
+    25,
+    17,
+    2
+  ],
+  "rolling_window": 5,
+  "min_valid_keypoints": 5,
+  "frames_total": 152,
+  "frames_with_landmarks": 151,
+  "risk_rules_yaml": "configs/risk_rules.yaml",
+  "events": [
+    {
+      "event_id": 0,
+      "start_frame": "00000005",
+      "end_frame": "00000007",
+      "start_time": 0.16666666666666666,
+      "end_time": 0.3333333333333333,
+      "max_risk_score": 3.34049222237689,
+      "event_level": "HIGH",
+      "duration_seconds": 0.06666666666666668,
+      "score": 3.34049222237689
+    },
+    {
+      "event_id": 1,
+      "start_frame": "00000026",
+      "end_frame": "00000027",
+      "start_time": 0.8666666666666667,
+      "end_time": 1.4,
+      "max_risk_score": 3.1597733793496867,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333326,
+      "score": 3.1597733793496867
+    },
+    {
+      "event_id": "strike_00003",
+      "start_frame": "0060",
+      "end_frame": "0060",
+      "start_time": 2.0,
+      "end_time": 2.033333333333333,
+      "max_risk_score": 2.819789880301684,
+      "score": 2.819789880301684,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": 3,
+      "start_frame": "00000081",
+      "end_frame": "00000081",
+      "start_time": 2.7,
+      "end_time": 2.966666666666667,
+      "max_risk_score": 2.8059991085816205,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215,
+      "score": 2.8059991085816205
+    },
+    {
+      "event_id": "strike_00005",
+      "start_frame": "0137",
+      "end_frame": "0151",
+      "start_time": 4.566666666666666,
+      "end_time": 5.066666666666666,
+      "max_risk_score": 4.443780893151308,
+      "score": 4.443780893151308,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    }
+  ],
+  "events_risk_only": [
+    {
+      "event_id": 0,
+      "start_frame": "00000005",
+      "end_frame": "00000007",
+      "start_time": 0.16666666666666666,
+      "end_time": 0.23333333333333334,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.06666666666666668
+    },
+    {
+      "event_id": 1,
+      "start_frame": "00000026",
+      "end_frame": "00000027",
+      "start_time": 0.8666666666666667,
+      "end_time": 0.9,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333326
+    },
+    {
+      "event_id": 2,
+      "start_frame": "00000032",
+      "end_frame": "00000032",
+      "start_time": 1.0666666666666667,
+      "end_time": 1.1,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.03333333333333344
+    },
+    {
+      "event_id": 3,
+      "start_frame": "00000081",
+      "end_frame": "00000081",
+      "start_time": 2.7,
+      "end_time": 2.7333333333333334,
+      "max_risk_score": 0.52,
+      "event_level": "HIGH",
+      "duration_seconds": 0.033333333333333215
+    }
+  ],
+  "anomaly_events": [],
+  "strike_events": [
+    {
+      "event_id": "strike_00001",
+      "start_frame": "0007",
+      "end_frame": "0009",
+      "start_time": 0.23333333333333334,
+      "end_time": 0.3333333333333333,
+      "max_risk_score": 3.34049222237689,
+      "score": 3.34049222237689,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00002",
+      "start_frame": "0040",
+      "end_frame": "0041",
+      "start_time": 1.3333333333333333,
+      "end_time": 1.4,
+      "max_risk_score": 3.1597733793496867,
+      "score": 3.1597733793496867,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00003",
+      "start_frame": "0060",
+      "end_frame": "0060",
+      "start_time": 2.0,
+      "end_time": 2.033333333333333,
+      "max_risk_score": 2.819789880301684,
+      "score": 2.819789880301684,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00004",
+      "start_frame": "0086",
+      "end_frame": "0088",
+      "start_time": 2.8666666666666667,
+      "end_time": 2.966666666666667,
+      "max_risk_score": 2.8059991085816205,
+      "score": 2.8059991085816205,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    },
+    {
+      "event_id": "strike_00005",
+      "start_frame": "0137",
+      "end_frame": "0151",
+      "start_time": 4.566666666666666,
+      "end_time": 5.066666666666666,
+      "max_risk_score": 4.443780893151308,
+      "score": 4.443780893151308,
+      "event_level": "HIGH",
+      "level": "HIGH",
+      "category": "impact",
+      "event_type": "boxingvi.strike_candidate",
+      "title": "Strike candidate",
+      "description": "Heuristic wrist-speed strike candidate (percentile=85.0 on non-zero smoothed scores; merge_gap\u22648 frames)."
+    }
+  ],
+  "n_frames_risk": 151,
+  "full_fusion_timeline_merge_frames": 8
+}

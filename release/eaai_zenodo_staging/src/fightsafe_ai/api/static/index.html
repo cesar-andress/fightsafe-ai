@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FightSafe Live</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-main">
+      <div class="brand-block">
+        <h1>FightSafe Live</h1>
+        <p class="tagline">Session overview — stream, alerts, and controls stay available after the clip ends.</p>
+      </div>
+      <div class="risk-hero" id="riskHeroBlock" aria-live="polite">
+        <span class="risk-hero-label">Current risk</span>
+        <span id="riskHero" class="risk-hero-value risk-hero-neutral">—</span>
+        <span id="riskRawBand" class="risk-hero-sub"></span>
+      </div>
+    </div>
+    <div class="metrics-strip" id="metricsStrip">
+      <div class="metric">
+        <span class="metric-label">Session</span>
+        <span id="sessionBadge" class="badge">idle</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Timestamp</span>
+        <span id="mediaTime">—</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Duration</span>
+        <span id="videoDuration">—</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Progress</span>
+        <span id="progressPct">—</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Frames</span>
+        <span id="frameProgress">—</span>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Events</span>
+        <span id="eventCount">0</span>
+      </div>
+      <div class="metric metric-highlight">
+        <span class="metric-label">FPS</span>
+        <span id="fpsVal">—</span>
+      </div>
+      <div class="metric metric-highlight">
+        <span class="metric-label">Latency</span>
+        <span id="latVal">—</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <div class="left-stack">
+    <section class="panel video-panel">
+      <div class="panel-heading">Processed stream</div>
+      <div class="video-wrap">
+        <img id="mjpeg" alt="live stream" src="/video/stream" />
+      </div>
+    </section>
+
+    <section class="panel gpu-panel" aria-labelledby="gpuPanelTitle">
+      <h2 id="gpuPanelTitle">GPU &amp; compute</h2>
+      <p class="gpu-note" id="gpuStatusNote" hidden></p>
+      <div class="gpu-rows">
+        <div class="gpu-row">
+          <span class="gpu-k">GPU</span>
+          <span class="gpu-v" id="gpuName">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">Utilization</span>
+          <span class="gpu-v" id="gpuUtil">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">VRAM</span>
+          <span class="gpu-v" id="gpuVram">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">Temperature</span>
+          <span class="gpu-v" id="gpuTemp">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">Power</span>
+          <span class="gpu-v" id="gpuPower">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">CUDA (torch)</span>
+          <span class="gpu-v" id="cudaAvail">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">Pose backend</span>
+          <span class="gpu-v" id="poseBackend">—</span>
+        </div>
+        <div class="gpu-row">
+          <span class="gpu-k">Device</span>
+          <span class="gpu-v" id="poseDevice">—</span>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <section class="panel events-panel">
+      <div class="panel-head-events">
+        <h2>Live events</h2>
+        <p class="panel-sub">Color indicates severity. Signals are decision-support cues — not official match outcomes or medical judgments.</p>
+        <p class="tapko-dashboard-note" role="note">
+          TapKO-style candidates (<code>submission_signal.*</code>, <code>extreme_vulnerability.*</code>) are <strong>decision-support signals only</strong>.
+          They are <strong>not</strong> official match outcomes, sanctioning-body rulings, or medical diagnoses; many clips require human confirmation.
+        </p>
+        <p id="eventsEmptyHint" class="events-empty-hint" hidden role="status">
+          No events detected yet. Try demo mode or higher sensitivity.
+        </p>
+      </div>
+      <div id="eventList" class="event-list"></div>
+    </section>
+  </main>
+
+  <footer class="bottom-panel">
+    <div class="completed-banner" id="completedBanner" hidden role="status">
+      <span class="completed-icon" aria-hidden="true">✓</span>
+      <div class="completed-text">
+        <strong>Session completed</strong>
+        <span class="completed-hint">Playback finished — this page stays open. Review alerts below or use Export. The server keeps running.</span>
+      </div>
+    </div>
+
+    <div class="timeline-block">
+      <div class="timeline-label-row">
+        <span class="timeline-title">Event timeline</span>
+        <span id="timelineRange" class="timeline-range">0:00 / —</span>
+      </div>
+      <div class="timeline-track" id="timelineTrack" role="group" aria-label="Video timeline and event markers">
+        <div class="timeline-fill" id="timelineFill"></div>
+        <div class="timeline-markers" id="timelineMarkers"></div>
+        <div class="timeline-playhead" id="timelinePlayhead"></div>
+      </div>
+      <div class="timeline-scale">
+        <span id="timelineScaleStart">0:00</span>
+        <span id="timelineScaleEnd">—</span>
+      </div>
+    </div>
+
+    <div class="controls-label">Session controls</div>
+    <div class="controls-row">
+      <button type="button" id="btnStart" class="btn-primary">Start</button>
+      <button type="button" id="btnPause">Pause</button>
+      <button type="button" id="btnResume">Resume</button>
+      <button type="button" id="btnStop">Stop</button>
+      <button type="button" id="btnExport">Export</button>
+      <button type="button" id="btnClear" class="btn-subtle" title="Clear in-memory events">Clear</button>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

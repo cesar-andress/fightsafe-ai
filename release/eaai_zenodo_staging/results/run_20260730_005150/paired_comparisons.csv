@@ -1,0 +1,7 @@
+comparison,n_videos,median_delta_f1,mean_delta_f1,cliffs_delta,permutation_pvalue_twosided,note
+weighted_minus_equal,10,0.0,0.0126764682976667,0.0,0.4891021795640872,n=10 limited power; video-level unit
+weighted_minus_max,10,0.3523660765937753,0.3324953399765972,0.8,0.0065986802639472,n=10 limited power; video-level unit
+weighted_intON_minus_intOFF,10,0.1076964461387112,0.1231389773866107,0.3999999999999999,0.0481903619276144,n=10 limited power; video-level unit
+explicit_minus_naive_p0.1,10,0.032357920060048034,0.028717680180919657,0.6000000000000001,0.017196560687862426,averaged over seeds per video
+explicit_minus_naive_p0.3,10,0.08235311207860763,0.06851220457090475,0.6000000000000001,0.07258548290341932,averaged over seeds per video
+explicit_minus_naive_p0.5,10,0.16890841920263838,0.12788165396669138,0.6000000000000001,0.03159368126374725,averaged over seeds per video

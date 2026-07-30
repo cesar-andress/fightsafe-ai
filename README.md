@@ -1,30 +1,50 @@
 # FightSafe AI
 
-**FightSafe AI: Traceability and Auditability Software for Safety-Alert Review Workflows**
+**v1.0.0 — EAAI reproducibility release**
 
-Research software for alert-candidate export traceability, auditability, protocol-defined bookkeeping, and governance requirements in safety-alert review workflows.
+Paper-specific artefact for:
+
+*Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study*
+(*Engineering Applications of Artificial Intelligence*)
+
+| Path | Contents |
+|------|----------|
+| `release/eaai_zenodo_staging/` | Tier A Zenodo staging package (canonical CSVs, figures/tables, checksums, configs, aggregation code) |
+| `paper1/` | Manuscript sources + `main.pdf` |
+| `src/fightsafe_ai/evaluation/aggregation_schemes.py` | Equal / weighted / max aggregators with availability masking |
+
+Canonical checkpoint identifier: `run_20260730_005150`.  
+Tier A: regenerate tables/figures from frozen CSVs. Tier B (`features_cache`) is not redistributed pending institutional approval.  
+See `release/eaai_zenodo_staging/README.md` for commands. Zenodo DOI: pending (`10.5281/zenodo.PENDING`).
+
+---
+
+# FightSafe AI (general software)
+
+**FightSafe AI: research software for interpretable temporal event pipelines and related review-workflow studies**
+
+Research software for multi-source temporal pipelines, export traceability, and governance-oriented metadata.
 
 **Not** a medical device, clinical diagnostic tool, or autonomous officiating system.
 
 | Resource | URL |
 |----------|-----|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
-| Zenodo archive | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
+| Zenodo archive (prior concept) | [https://doi.org/10.5281/zenodo.20622869](https://doi.org/10.5281/zenodo.20622869) |
 | Companion manuscripts | See [Research outputs](#research-outputs) below |
 
 ---
 
 ## Scope of the Artifact
 
-This repository ships **research software** for export generation, traceability bookkeeping, and governance-oriented metadata.
+This repository ships **research software** and the **EAAI Tier A reproducibility package** under `release/eaai_zenodo_staging/`.
 
-- **Not** a validated operator-facing product.
+- **Not** a validated operator-facing product or safety-certified system.
 - **No** claim of improved human decisions or reduced operator workload.
 - **No** deployment-readiness claim.
-- The reported **machine-side traceability protocol demonstration** is **machine-side only**: detector exports, evaluator CSV, protocol error tags, and manuscript tables under frozen matching defaults; **reviewer decisions** (`H_{t,k}`) and **gate outcomes** (`O_{t,k}`) were **not** logged.
-- The artifact **supports future audit-schema exercises** (append-only candidate, state, decision, and gate record types) but does not claim confirmation-gate execution, operator benefit, or deployment readiness without separate logged studies.
+- Prior ISWA-oriented protocol demos remain in the repository history; the **v1.0.0** tag targets the EAAI manuscript release.
 
-Reproducibility scripts and bundled reference exports use the **ISWA 2026** identifier (`iswa2026`) aligned with the traceability manuscript (`../iswa2026/`).
+Reproducibility for the EAAI paper uses the package under `release/eaai_zenodo_staging/` (Tier A). Optional Tier B re-execution requires approved feature caches that are not shipped in this tag.
 
 ---
 

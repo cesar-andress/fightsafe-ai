@@ -1,0 +1,15 @@
+{
+  "n_configured_rules": 6,
+  "n_rules_required_channels_present": 5,
+  "rule_names": [
+    "low_guard_instability_medium_tendency",
+    "facing_away_instability_elevated",
+    "low_guard_inbound_strike_review",
+    "fall_like_and_inactivity_critical_tendency",
+    "surrender_like_critical_candidate_review",
+    "limb_anomaly_instability_high_review"
+  ],
+  "missing_required_signals": [
+    "surrender_gesture"
+  ]
+}
