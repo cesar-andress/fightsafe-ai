@@ -90,7 +90,7 @@ def write_tex_table(
     lines = [
         "% Auto-generated from canonical checkpoint; do not hand-edit numbers.",
         "% Source: canonical_results/run_20260730_005150",
-        "\\begin{table}[t]",
+        "\\begin{table}[tbp]",
         "\\centering",
         "\\small",
         "\\setlength{\\tabcolsep}{4pt}",
@@ -170,7 +170,8 @@ def main() -> None:
     # ---- Dataset table ----
     write_tex_table(
         TAB / "tab_dataset.tex",
-        "BoxingVI stem statistics (held-fixed matrices).",
+        "BoxingVI stem statistics for the held-fixed feature matrices "
+        "(positive frames are punch/impact proxy labels; higher positive fraction means denser proxy intervals).",
         "tab:dataset",
         ["Video", "Frames", "Pos. frames", "Pos. fraction"],
         [
@@ -187,7 +188,8 @@ def main() -> None:
     agg = agg.sort_values("ord")
     write_tex_table(
         TAB / "tab_aggregation.tex",
-        "Aggregation on the combined timeline (interactions ON).",
+        "Aggregation comparison on the combined timeline with interactions ON "
+        "(pooled micro-precision/recall/F1 and video-level macro-F1 with bootstrap 95\\% CI; higher is better).",
         "tab:aggregation",
         ["Method", "Micro-P", "Micro-R", "Micro-F1", "Macro-F1", "Macro-F1 95\\% CI"],
         [
@@ -209,7 +211,8 @@ def main() -> None:
     inter = inter.sort_values("interactions")
     write_tex_table(
         TAB / "tab_interactions.tex",
-        "Interaction-rule ablation (weighted aggregation).",
+        "Interaction-rule ablation under weighted aggregation "
+        "(micro-F1 and macro-F1; mean predicted-event count; mean HIGH/CRITICAL frame share; higher F1 is better).",
         "tab:interactions",
         ["Int.", "Micro-F1", "Macro-F1", "95\\% CI", "\\#pred", "H/C\\%"],
         [
@@ -237,7 +240,8 @@ def main() -> None:
     )
     write_tex_table(
         TAB / "tab_firings.tex",
-        "Interaction-rule firing-incidence totals (interactions ON).",
+        "Interaction-rule firing-incidence totals with interactions ON "
+        "(frame-level counts across all videos; descriptive provenance, not a performance metric).",
         "tab:firings",
         ["Rule", "Total firing incidences"],
         [
@@ -283,7 +287,8 @@ def main() -> None:
                 )
     write_tex_table(
         TAB / "tab_dropout.tex",
-        "Synthetic dropout under weighted aggregation.",
+        "Synthetic channel dropout under weighted aggregation "
+        "(pooled micro-F1/precision/recall; higher F1 is better; SD over seeds for $p{>}0$).",
         "tab:dropout",
         ["$p$", "Encoding", "Micro-F1", "SD", "Micro-P", "Micro-R"],
         rows,
@@ -301,7 +306,8 @@ def main() -> None:
     }
     write_tex_table(
         TAB / "tab_paired.tex",
-        "Paired video-level comparisons.",
+        "Paired video-level comparisons "
+        "(mean $\\Delta$F1, Cliff's $\\delta$, permutation two-sided $p$; positive $\\Delta$F1 favours the first named method).",
         "tab:paired",
         ["Comparison", "$n$", "Mean $\\Delta$F1", "Cliff $\\delta$", "$p$"],
         [
@@ -355,7 +361,8 @@ def main() -> None:
         )
     write_tex_table(
         TAB / "tab_failures.tex",
-        "Failure taxonomy counts (shared matcher).",
+        "Failure taxonomy counts under the shared matcher "
+        "(approximate prediction cardinality, false positives/negatives, fragmentation and merged-interval errors; raw counts).",
         "tab:failures",
         ["Method", "Approx.\\#pred", "FP", "FN", "Fragment.", "Merged"],
         fail_rows,
@@ -365,7 +372,8 @@ def main() -> None:
     # ---- Contribution / LOVO SI ----
     write_tex_table(
         SUPP / "tab_si_video_contribution.tex",
-        "Per-video contribution (weighted, interactions ON).",
+        "Per-video contribution under weighted aggregation with interactions ON "
+        "(GT/TP/FP/FN counts; share of pooled GT and TP mass; per-video F1; higher F1 is better).",
         "tab:si-video-contribution",
         ["Video", "GT", "TP", "FP", "FN", "Share GT", "Share TP", "F1"],
         [
@@ -380,11 +388,13 @@ def main() -> None:
                 fmt(r.f1, 3),
             ]
             for _, r in contrib.iterrows()
-        ]
+        ],
+        notes="Descriptive imbalance diagnostics for pooled micro-F1 interpretation.",
     )
     write_tex_table(
         SUPP / "tab_si_lovo.tex",
-        "Leave-one-video-out pooled micro-F1.",
+        "Leave-one-video-out recomputation of pooled micro-F1 from existing predictions "
+        "(descriptive sensitivity; higher micro-F1 is better; not a new experimental run).",
         "tab:si-lovo",
         ["Excluded", "Pooled micro-F1", "TP", "FP", "FN"],
         [
@@ -395,7 +405,8 @@ def main() -> None:
     )
     write_tex_table(
         SUPP / "tab_si_matching.tex",
-        "Post-hoc matching sensitivity.",
+        "Post-hoc matching sensitivity on frozen weighted combined-timeline predictions "
+        "(micro-F1/precision/recall; higher F1 is better; does not replace the canonical matcher).",
         "tab:si-matching",
         ["IoU", "Tolerance (s)", "Micro-F1", "P", "R", "TP", "FP", "FN"],
         [
@@ -415,7 +426,8 @@ def main() -> None:
     )
     write_tex_table(
         SUPP / "tab_si_timelines.tex",
-        "Timeline components (weighted, interactions ON).",
+        "Timeline-component diagnostics under weighted aggregation with interactions ON "
+        "(combined vs risk-only vs strike-only; micro-F1/precision/recall; higher F1 is better).",
         "tab:si-timelines",
         ["Timeline", "Micro-F1", "P", "R", "TP", "FP", "FN", "\\#pred"],
         [
@@ -452,7 +464,8 @@ def main() -> None:
         )
     write_tex_table(
         SUPP / "tab_si_channels.tex",
-        "Channel inventory and fixed weights.",
+        "Channel inventory with fixed weights and related interaction rules "
+        "(configuration provenance for the frozen checkpoint).",
         "tab:si-channels",
         ["Channel", "Weight", "Related rules"],
         channel_rows,
@@ -462,7 +475,8 @@ def main() -> None:
     )
     write_tex_table(
         SUPP / "tab_si_rules.tex",
-        "Configured interaction rules.",
+        "Configured interaction rules with required channels, boosts and activation status "
+        "(configuration provenance; firing status is descriptive).",
         "tab:si-rules",
         ["Rule", "Channels", "Boost", "Thr.", "Status"],
         [
@@ -484,7 +498,8 @@ def main() -> None:
     )
     write_tex_table(
         SUPP / "tab_si_protocol.tex",
-        "Fixed temporal and matching parameters.",
+        "Fixed temporal consolidation and matching parameters used by the canonical protocol "
+        "(held constant across aggregation and interaction ablations).",
         "tab:si-protocol",
         ["Parameter", "Value"],
         [
