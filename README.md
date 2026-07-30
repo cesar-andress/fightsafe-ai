@@ -165,4 +165,4 @@ MIT License — see `LICENSE`.
 Copyright (c) 2026 David Martin Moncunill, César Andrés, Camilo José Cela University (UCJC), Spain.
 
 César Andrés — cesar.andress@ucjc.edu ([ORCID 0009-0001-8968-3404](https://orcid.org/0009-0001-8968-3404))  
-David Martin Moncunill — david.martinm@ucjc.edu
+David Martin Moncunill — david.martinm@ucjc.edu ([ORCID 0000-0003-2422-9005](https://orcid.org/0000-0003-2422-9005))

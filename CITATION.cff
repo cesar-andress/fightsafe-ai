@@ -26,6 +26,7 @@ authors:
   - family-names: Martin Moncunill
     given-names: David
     email: david.martinm@ucjc.edu
+    orcid: "https://orcid.org/0000-0003-2422-9005"
     affiliation: "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
 keywords:
   - interpretable AI
@@ -41,8 +42,10 @@ preferred-citation:
   authors:
     - family-names: Andrés
       given-names: César
+      orcid: "https://orcid.org/0009-0001-8968-3404"
     - family-names: Martin Moncunill
       given-names: David
+      orcid: "https://orcid.org/0000-0003-2422-9005"
   year: 2026
   version: 1.0.0
   doi: "10.5281/zenodo.21698326"
