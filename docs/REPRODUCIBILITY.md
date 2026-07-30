@@ -34,7 +34,8 @@ cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 |----------|------|
 | Frozen run | `canonical_results/run_20260730_005150/` |
 | Derived analysis CSVs | `canonical_results/analysis/` |
-| Manuscript | `paper/` |
+| Frozen numbers mirror | `canonical_results/analysis/numbers.json` |
+| Manuscript (LaTeX) | sibling `../paper1/` (not in this GitHub repo) |
 | Checksums | `checksums/SHA256SUMS` |
 | Public annotations | `annotations/boxingvi/` |
 

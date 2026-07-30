@@ -140,38 +140,27 @@ checkpoints/**
 *.gif
 !docs/figures/**
 !docs/**/*.svg
-!paper/figures/**/*.pdf
 
-# --- Paper LaTeX auxiliaries (keep intentionally versioned main.pdf / figures)
-paper/*.aux
-paper/*.bbl
-paper/*.blg
-paper/*.log
-paper/*.out
-paper/*.toc
-paper/*.lof
-paper/*.lot
-paper/*.fls
-paper/*.fdb_latexmk
-paper/*.synctex.gz
-paper/*.nav
-paper/*.snm
-paper/*.spl
-paper/*.run.xml
-paper/*.bcf
-paper/internal/
-paper/zenodo_release/
-paper/reports/
-
-# Generic LaTeX aux anywhere under paper/
-paper/**/*.aux
-paper/**/*.bbl
-paper/**/*.blg
-paper/**/*.fdb_latexmk
-paper/**/*.fls
-paper/**/*.synctex.gz
-paper/**/*.out
-paper/**/*.toc
+# --- Manuscript LaTeX is NOT part of this software repository.
+# Canonical manuscript workspace: sibling ../paper1 (monorepo).
+/paper/
+/paper1/
+*.tex
+*.bib
+*.bbl
+*.blg
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.spl
+*.run.xml
+*.bcf
 
 # --- Obsolete nested release scaffolding
 release/

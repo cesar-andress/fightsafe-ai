@@ -1,11 +1,13 @@
 #!/usr/bin/env python3.12
 """Generate EAAI manuscript figures and tables from the canonical checkpoint only.
 
-Paths are resolved relative to this repository workspace (no absolute machine paths).
+LaTeX lives in the sibling manuscript workspace ``../paper1`` (or ``FIGHTSAFE_PAPER1_DIR``).
+This software repository does not ship manuscript sources.
 """
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import matplotlib
@@ -20,9 +22,25 @@ ROOT = Path(__file__).resolve().parents[1]
 CANON = ROOT / "canonical_results" / "run_20260730_005150"
 SOFT = ROOT
 ANALYSIS = ROOT / "canonical_results" / "analysis"
-FIG = ROOT / "paper" / "figures"
-TAB = ROOT / "paper" / "tables"
-SUPP = ROOT / "paper" / "supplementary"
+
+
+def resolve_paper1() -> Path:
+    env = os.environ.get("FIGHTSAFE_PAPER1_DIR", "").strip()
+    if env:
+        return Path(env).expanduser().resolve()
+    sibling = (ROOT.parent / "paper1").resolve()
+    if sibling.is_dir():
+        return sibling
+    raise SystemExit(
+        "Manuscript workspace not found. Clone/place paper1 next to this repo "
+        f"(expected {sibling}) or set FIGHTSAFE_PAPER1_DIR."
+    )
+
+
+PAPER1 = resolve_paper1()
+FIG = PAPER1 / "figures"
+TAB = PAPER1 / "tables"
+SUPP = PAPER1 / "supplementary"
 for d in (FIG, TAB, SUPP, ANALYSIS):
     d.mkdir(parents=True, exist_ok=True)
 if not CANON.is_dir():
@@ -508,6 +526,7 @@ def main() -> None:
         "combined_f1": float(timelines.loc[timelines.timeline == "events", "micro_f1"].iloc[0]),
     }
     (TAB / "numbers.json").write_text(json.dumps(numbers, indent=2), encoding="utf-8")
+    (ANALYSIS / "numbers.json").write_text(json.dumps(numbers, indent=2) + "\n", encoding="utf-8")
 
     # ---- Figures ----
     architecture_figure()

@@ -6,7 +6,7 @@ The **GitHub repository root** is the canonical FightSafe AI v1.0.0 research art
 
 Use this checklist for public software releases. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts outside this repository (`../fusion2026`, `../iswa2026`, `../sports`) may cite the shared software entry `fightsafe_ai_2026` in the monorepo bibliography. The EAAI manuscript lives in `paper/` inside this repository.
+Companion LaTeX manuscripts outside this repository (`../fusion2026`, `../iswa2026`, `../sports`, `../paper1`) may cite the shared software entry. The EAAI manuscript lives in sibling `../paper1/` (not inside this GitHub software repository).
 
 ---
 
@@ -87,11 +87,11 @@ Expected: Tier A `overall: PASS`; checksums match; no nested `release/` tree.
 
 Recompile external companion papers if they cite this software entry, and ensure bibliography DOIs match `10.5281/zenodo.21698326` / version `1.0.0`.
 
-EAAI manuscript (in-repo):
+EAAI manuscript (sibling `../paper1/`):
 
 ```bash
 python3.12 scripts/generate_eaai_assets.py
-cd paper && latexmk -pdf -interaction=nonstopmode main.tex
+cd ../paper1 && latexmk -pdf -interaction=nonstopmode main.tex
 # bibliography: bibtex main   (not bibtex main.aux)
 ```
 
@@ -113,4 +113,4 @@ cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 | GitHub release tag | `v1.0.0` |
 | CFF / package version | `1.0.0` |
 | Canonical scientific run | `canonical_results/run_20260730_005150/` |
-| EAAI manuscript | `paper/` |
+| EAAI manuscript | sibling `../paper1/` |

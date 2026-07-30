@@ -13,8 +13,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VAL = ROOT / "validation"
 VAL.mkdir(exist_ok=True)
-PAPER = ROOT / "paper"
 CANON = ROOT / "canonical_results" / "run_20260730_005150"
+
+
+def resolve_paper1() -> Path | None:
+    import os
+
+    env = os.environ.get("FIGHTSAFE_PAPER1_DIR", "").strip()
+    if env:
+        p = Path(env).expanduser().resolve()
+        return p if p.is_dir() else None
+    sibling = (ROOT.parent / "paper1").resolve()
+    return sibling if sibling.is_dir() else None
+
+
+PAPER = resolve_paper1()
 
 
 def log(name: str, text: str) -> None:
@@ -78,78 +91,112 @@ def main() -> int:
     summary = pd.read_csv(CANON / "experiment_summary.csv")
     paired = pd.read_csv(CANON / "paired_comparisons.csv")
     dropout = pd.read_csv(CANON / "dropout_results.csv")
-    numbers = json.loads((PAPER / "tables/numbers.json").read_text(encoding="utf-8"))
+    numbers_path = CANON.parent / "analysis" / "numbers.json"
+    if not numbers_path.is_file():
+        results["numerical_integrity"] = f"FAIL missing {numbers_path.relative_to(ROOT)}"
+        failed = True
+        numbers = {}
+    else:
+        numbers = json.loads(numbers_path.read_text(encoding="utf-8"))
 
     def get_micro(method: str) -> float:
         row = summary[(summary.experiment == "aggregation") & (summary.method == method)].iloc[0]
         return float(row.micro_f1)
 
-    checks = {
-        "equal_micro_f1": abs(get_micro("equal") - numbers["micro_f1_equal"]) < 1e-12,
-        "weighted_micro_f1": abs(get_micro("weighted") - numbers["micro_f1_weighted"]) < 1e-12,
-        "max_micro_f1": abs(get_micro("max") - numbers["micro_f1_max"]) < 1e-12,
-        "approx_equal_0.502": abs(get_micro("equal") - 0.502) < 5e-4,
-        "approx_weighted_0.502": abs(get_micro("weighted") - 0.502) < 5e-4,
-        "approx_max_0.178": abs(get_micro("max") - 0.178) < 5e-4,
-    }
-    mm = dropout[dropout.video_id == "__MICRO_MACRO__"]
-    ex = float(mm[(mm.p == 0.5) & (mm["mode"] == "explicit_alpha0")].micro_f1.mean())
-    nv = float(mm[(mm.p == 0.5) & (mm["mode"] == "naive_zero")].micro_f1.mean())
-    checks["dropout_explicit_p05"] = abs(ex - numbers["dropout_p05_explicit"]) < 1e-12
-    checks["dropout_naive_p05"] = abs(nv - numbers["dropout_p05_naive"]) < 1e-12
-    checks["approx_explicit_0.509"] = abs(ex - 0.509) < 5e-4
-    checks["approx_naive_0.471"] = abs(nv - 0.471) < 5e-4
-    p_int = float(
-        paired.loc[paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"].iloc[0]
-    )
-    checks["paired_int_p"] = abs(p_int - numbers["paired_int_p"]) < 1e-12
-    log("numerical_checks.json", json.dumps({k: bool(v) for k, v in checks.items()}, indent=2))
-    if not all(checks.values()):
-        results["numerical_integrity"] = "FAIL"
-        failed = True
-    else:
-        results["numerical_integrity"] = "PASS"
-
-    gen = subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "generate_eaai_assets.py")],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-    )
-    log("generate_assets.txt", gen.stdout + gen.stderr)
-    results["generate_assets"] = "PASS" if gen.returncode == 0 else "FAIL"
-    if gen.returncode != 0:
-        failed = True
-    else:
-        after_nums = json.loads((PAPER / "tables/numbers.json").read_text(encoding="utf-8"))
-        num_ok = all(
-            abs(float(after_nums[k]) - float(numbers[k])) < 1e-12
-            for k in numbers
-            if k != "canon_relative"
+    if numbers:
+        checks = {
+            "equal_micro_f1": abs(get_micro("equal") - numbers["micro_f1_equal"]) < 1e-12,
+            "weighted_micro_f1": abs(get_micro("weighted") - numbers["micro_f1_weighted"]) < 1e-12,
+            "max_micro_f1": abs(get_micro("max") - numbers["micro_f1_max"]) < 1e-12,
+            "approx_equal_0.502": abs(get_micro("equal") - 0.502) < 5e-4,
+            "approx_weighted_0.502": abs(get_micro("weighted") - 0.502) < 5e-4,
+            "approx_max_0.178": abs(get_micro("max") - 0.178) < 5e-4,
+        }
+        mm = dropout[dropout.video_id == "__MICRO_MACRO__"]
+        ex = float(mm[(mm.p == 0.5) & (mm["mode"] == "explicit_alpha0")].micro_f1.mean())
+        nv = float(mm[(mm.p == 0.5) & (mm["mode"] == "naive_zero")].micro_f1.mean())
+        checks["dropout_explicit_p05"] = abs(ex - numbers["dropout_p05_explicit"]) < 1e-12
+        checks["dropout_naive_p05"] = abs(nv - numbers["dropout_p05_naive"]) < 1e-12
+        checks["approx_explicit_0.509"] = abs(ex - 0.509) < 5e-4
+        checks["approx_naive_0.471"] = abs(nv - 0.471) < 5e-4
+        p_int = float(
+            paired.loc[paired.comparison == "weighted_intON_minus_intOFF", "permutation_pvalue_twosided"].iloc[0]
         )
-        results["regenerated_numbers"] = "PASS" if num_ok else "FAIL"
-        if not num_ok:
+        checks["paired_int_p"] = abs(p_int - numbers["paired_int_p"]) < 1e-12
+        log("numerical_checks.json", json.dumps({k: bool(v) for k, v in checks.items()}, indent=2))
+        if not all(checks.values()):
+            results["numerical_integrity"] = "FAIL"
             failed = True
-        agg_tex = (PAPER / "tables/tab_aggregation.tex").read_text(encoding="utf-8")
-        for token in ("0.502", "0.178"):
-            if token not in agg_tex:
-                results["regenerated_tables"] = f"FAIL missing {token}"
-                failed = True
-                break
         else:
-            results["regenerated_tables"] = "PASS"
-        fig_ok = all((PAPER / "figures" / n).is_file() for n in [
-            "fig_aggregation.pdf",
-            "fig_architecture.pdf",
-            "fig_dropout.pdf",
-            "fig_failures.pdf",
-            "fig_interactions.pdf",
-            "fig_per_video.pdf",
-            "fig_video_contribution.pdf",
-        ])
-        results["regenerated_figures"] = "PASS" if fig_ok else "FAIL"
-        if not fig_ok:
+            results["numerical_integrity"] = "PASS"
+
+    if PAPER is None:
+        results["generate_assets"] = "SKIP (paper1 not found; set FIGHTSAFE_PAPER1_DIR)"
+        results["regenerated_numbers"] = "SKIP"
+        results["regenerated_tables"] = "SKIP"
+        results["regenerated_figures"] = "SKIP"
+        results["manuscript_build"] = "SKIP (paper1 not found)"
+        results["supplementary_build"] = "SKIP"
+    else:
+        gen = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "generate_eaai_assets.py")],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        log("generate_assets.txt", gen.stdout + gen.stderr)
+        results["generate_assets"] = "PASS" if gen.returncode == 0 else "FAIL"
+        if gen.returncode != 0:
             failed = True
+        else:
+            after_nums = json.loads((PAPER / "tables/numbers.json").read_text(encoding="utf-8"))
+            # Keep frozen software-side copy in sync for GitHub-only checks
+            soft_nums = CANON.parent / "analysis" / "numbers.json"
+            soft_nums.write_text(json.dumps(after_nums, indent=2) + "\n", encoding="utf-8")
+            num_ok = all(
+                abs(float(after_nums[k]) - float(numbers[k])) < 1e-12
+                for k in numbers
+                if k != "canon_relative"
+            )
+            results["regenerated_numbers"] = "PASS" if num_ok else "FAIL"
+            if not num_ok:
+                failed = True
+            agg_tex = (PAPER / "tables/tab_aggregation.tex").read_text(encoding="utf-8")
+            for token in ("0.502", "0.178"):
+                if token not in agg_tex:
+                    results["regenerated_tables"] = f"FAIL missing {token}"
+                    failed = True
+                    break
+            else:
+                results["regenerated_tables"] = "PASS"
+            fig_ok = all((PAPER / "figures" / n).is_file() for n in [
+                "fig_aggregation.pdf",
+                "fig_architecture.pdf",
+                "fig_dropout.pdf",
+                "fig_failures.pdf",
+                "fig_interactions.pdf",
+                "fig_per_video.pdf",
+                "fig_video_contribution.pdf",
+            ])
+            results["regenerated_figures"] = "PASS" if fig_ok else "FAIL"
+            if not fig_ok:
+                failed = True
+
+        if shutil.which("latexmk"):
+            ms = subprocess.run(
+                ["latexmk", "-pdf", "-interaction=nonstopmode", "main.tex"],
+                cwd=PAPER,
+                capture_output=True,
+                text=True,
+            )
+            log("manuscript_build.txt", ms.stdout[-4000:] + "\n" + ms.stderr[-2000:])
+            results["manuscript_build"] = "PASS" if ms.returncode == 0 else "FAIL"
+            if ms.returncode != 0:
+                failed = True
+            results["supplementary_build"] = results["manuscript_build"]
+        else:
+            results["manuscript_build"] = "SKIP (latexmk not found)"
+            results["supplementary_build"] = "SKIP"
 
     test = subprocess.run(
         [sys.executable, "-m", "pytest", "tests/unit/test_aggregation_schemes.py", "-q"],
@@ -228,31 +275,14 @@ def main() -> int:
         "configs/risk_fusion.yaml",
         "configs/risk_rules.yaml",
         "canonical_results/run_20260730_005150/experiment_summary.csv",
+        "canonical_results/analysis/numbers.json",
         "checksums/SHA256SUMS",
-        "paper/main.tex",
-        "paper/main.pdf",
     ]
     missing = [m for m in mandatory if not (ROOT / m).is_file()]
     log("missing_files.txt", "\n".join(missing) if missing else "NONE\n")
     results["missing_files"] = "PASS" if not missing else f"FAIL {missing}"
     if missing:
         failed = True
-
-    if shutil.which("latexmk"):
-        ms = subprocess.run(
-            ["latexmk", "-pdf", "-interaction=nonstopmode", "main.tex"],
-            cwd=PAPER,
-            capture_output=True,
-            text=True,
-        )
-        log("manuscript_build.txt", ms.stdout[-4000:] + "\n" + ms.stderr[-2000:])
-        results["manuscript_build"] = "PASS" if ms.returncode == 0 else "FAIL"
-        if ms.returncode != 0:
-            failed = True
-        results["supplementary_build"] = results["manuscript_build"]
-    else:
-        results["manuscript_build"] = "SKIP (latexmk not found)"
-        results["supplementary_build"] = "SKIP"
 
     fc = list((ROOT / "optional_tier_b/inputs/features_cache").glob("*.pkl"))
     results["features_cache_absent"] = "PASS" if not fc else "FAIL"

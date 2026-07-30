@@ -40,10 +40,11 @@ annotations/               # BoxingVI punch-interval proxies + case-study labels
 canonical_results/         # frozen CSVs/matrices for run_20260730_005150
 checksums/                 # SHA-256 manifests for the public tree
 optional_tier_b/           # strike baselines; features_cache NOT redistributed
-paper/                     # EAAI manuscript sources + PDF
 docs/                      # architecture and reproducibility notes
 environment/               # Tier A freeze notes
 ```
+
+The EAAI LaTeX manuscript lives in the sibling monorepo directory `../paper1/` (not in this GitHub repository).
 
 ---
 
@@ -75,28 +76,31 @@ make test-unit
 Tier A regenerates and verifies manuscript tables/figures from **frozen** canonical CSVs. It does **not** re-run perception or require skeleton keypoints / raw video / `features_cache`.
 
 ```bash
-# Regenerate paper figures and LaTeX tables from canonical_results/
+# Regenerate manuscript figures/tables into sibling ../paper1/
 python3.12 scripts/generate_eaai_assets.py
 
 # Verify package checksums
 python3.12 scripts/verify_checksums.py
 
-# End-to-end Tier A checks (imports, numbers, regeneration, tests, manuscript build)
+# End-to-end Tier A checks (imports, numbers, regeneration, tests; builds paper1 if present)
 python3.12 scripts/validate_tier_a.py
 
 # Aggregation unit tests
 PYTHONPATH=src python3.12 -m pytest tests/unit/test_aggregation_schemes.py -q
 ```
 
-Canonical path: `canonical_results/run_20260730_005150/`.
+Canonical path: `canonical_results/run_20260730_005150/`.  
+Frozen numbers mirror: `canonical_results/analysis/numbers.json`.
 
-Compile the manuscript:
+Compile the manuscript (sibling workspace):
 
 ```bash
-cd paper
+cd ../paper1
 latexmk -pdf -interaction=nonstopmode main.tex
 # bibliography: bibtex main   (not bibtex main.aux)
 ```
+
+Override manuscript location with `FIGHTSAFE_PAPER1_DIR` if needed.
 
 ---
 
