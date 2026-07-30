@@ -60,6 +60,7 @@ Three companion manuscripts share terminology but target different scientific ob
 
 | Manuscript | Directory | Scientific focus | Software entry points |
 |------------|-----------|------------------|------------------------|
+| **EAAI (this tag)** | `paper1/` + `release/eaai_zenodo_staging/` | Availability-aware temporal event pipeline; aggregation / interaction / synthetic missingness | `python release/eaai_zenodo_staging/scripts/generate_assets.py`; Tier A verify scripts |
 | **Information Fusion** | `../fusion2026/` | Multi-source temporal fusion, mask ablations, BoxingVI interval evaluation | `make reproduce-fusion`, `fightsafe risk-ablation-all` |
 | **Traceability architecture** | `../iswa2026/` | Formal specification, traceability architecture, audit schemas, machine-side protocol demonstration | `make reproduce-iswa`, `fightsafe tapko-detect` |
 | **FightSafe-Bench** | `../sports/` | Benchmark dataset design, annotation protocol, baseline tasks | `make reproduce-sports`, `scripts/build_fightsafe_bench.py` |
@@ -120,6 +121,8 @@ See [`docs/architecture.md`](docs/architecture.md), [`docs/evaluation.md`](docs/
 
 ```
 fightsafe-ai/
+├── paper1/               # EAAI manuscript sources + compiled main.pdf
+├── release/eaai_zenodo_staging/  # Tier A reproducibility package (v1.0.0)
 ├── src/fightsafe_ai/     # Python package (CLI, fusion, TapKO, evaluation)
 ├── configs/              # YAML fusion rules, case-study definitions
 ├── data/                 # Small curated samples; large media downloaded separately
@@ -134,10 +137,11 @@ fightsafe-ai/
 ├── requirements.txt      # Minimal runtime pins for CI/containers
 ├── environment.yml       # Conda environment specification
 ├── CITATION.cff          # Software citation metadata (Zenodo-ready)
+├── .zenodo.json          # Zenodo deposition metadata
 └── LICENSE               # MIT License
 ```
 
-Generated at runtime (ignored by Git): `outputs/`, `runs/`, `.venv/`, caches.
+Generated at runtime (ignored by Git): `outputs/`, `runs/`, `.venv/`, caches. Author-only audits under `paper1/internal/` are gitignored.
 
 ---
 

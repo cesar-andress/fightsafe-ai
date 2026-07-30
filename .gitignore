@@ -236,3 +236,24 @@ temp/
 downloads/
 frames/
 .Python
+
+# --- EAAI author-only / local clutter (not part of the public v1.0.0 package)
+paper1/internal/
+release/internal/
+paper1/zenodo_release/
+paper1/reports/
+paper1/figures/*.png
+release/eaai_zenodo_staging/figures/*.png
+
+# Staging package local validation / TeX clutter
+release/eaai_zenodo_staging/validation/
+release/eaai_zenodo_staging/.pytest_cache/
+release/eaai_zenodo_staging/manuscript/*.aux
+release/eaai_zenodo_staging/manuscript/*.bbl
+release/eaai_zenodo_staging/manuscript/*.blg
+release/eaai_zenodo_staging/manuscript/*.fdb_latexmk
+release/eaai_zenodo_staging/manuscript/*.fls
+release/eaai_zenodo_staging/manuscript/*.log
+release/eaai_zenodo_staging/manuscript/*.out
+release/eaai_zenodo_staging/manuscript/*.spl
+release/eaai_zenodo_staging/**/__pycache__/

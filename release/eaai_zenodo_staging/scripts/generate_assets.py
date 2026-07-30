@@ -228,15 +228,15 @@ def main() -> None:
     )
     write_tex_table(
         TAB / "tab_firings.tex",
-        "Interaction-rule firing totals (interactions ON).",
+        "Interaction-rule firing-incidence totals (interactions ON).",
         "tab:firings",
-        ["Rule", "Total firings"],
+        ["Rule", "Total firing incidences"],
         [
             [short_rule(r.rule_name), str(int(r.fire_count))]
             for _, r in rule_tot.iterrows()
         ]
         + [["surrender\\_like (inactive)", "0"], ["fall\\_like+inactivity", "0"]],
-        notes="Frame-level firings; \\texttt{surrender\\_gesture} channel absent.",
+        notes="Frame-level firing incidences; \\texttt{surrender\\_gesture} channel absent.",
     )
 
 
@@ -465,7 +465,7 @@ def main() -> None:
                 (
                     "inactive"
                     if "surrender_gesture" in r["required_signals"]
-                    else ("0 firings" if r["name"].startswith("fall_like") else "fires")
+                    else ("0 incidences" if r["name"].startswith("fall_like") else "fires")
                 ),
             ]
             for r in rules
@@ -483,8 +483,8 @@ def main() -> None:
             ["Risk merge gap (frames)", "2"],
             ["Risk $d_{\\min}$ (s)", "0"],
             ["Combined merge (frames)", "8"],
-            ["Matcher IoU", "0.01"],
-            ["Matcher tolerance (s)", "0.5"],
+            ["Matcher IoU threshold", "0.01"],
+            ["Matcher temporal tolerance (s)", "0.5"],
             ["Band mins (M/H/C)", f"{bands['medium_min']} / {bands['high_min']} / {bands['critical_min']}"],
             ["Evaluation timeline", "Combined"],
             ["Strike component", "Fixed baseline cache"],

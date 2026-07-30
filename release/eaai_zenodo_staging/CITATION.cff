@@ -1,21 +1,21 @@
+# CFF 1.2.0 — https://citation-file-format.org
 cff-version: 1.2.0
-message: "If you use this reproducibility package, please cite it as follows."
+message: "If you use this software, please cite it as follows."
 title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
 type: software
-version: 0.2.0-eaai-rc1
+version: 1.0.0
 date-released: 2026-07-30
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
 abstract: >-
-  Paper-specific reproducibility artefact for the EAAI manuscript
-  "Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study".
-  Provides Tier A verification and regeneration of reported tables and figures
-  from frozen canonical result files (run_20260730_005150), configs, aggregation
-  implementations, environment metadata and checksums. Not a safety-certified
-  system; not a state-of-the-art detector claim; not a medical device. Synthetic
-  missingness only; natural channel availability is identity on the held-fixed
-  matrices.
+  FightSafe AI research software and paper-specific reproducibility artefact for the
+  EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit
+  Channel Availability: A Combat-Sports Case Study”. Includes Tier A verification and
+  regeneration of reported tables and figures from frozen canonical result files
+  (run_20260730_005150), configs, aggregation schemes with explicit availability masking,
+  environment metadata and checksums. Not a safety-certified system; not a state-of-the-art
+  detector claim; not a medical device. Synthetic missingness only.
 authors:
   - family-names: Andrés
     given-names: César
@@ -43,4 +43,5 @@ preferred-citation:
     - family-names: Martin Moncunill
       given-names: David
   year: 2026
-  version: 0.2.0-eaai-rc1
+  version: 1.0.0
+  url: "https://github.com/cesar-andress/fightsafe-ai"

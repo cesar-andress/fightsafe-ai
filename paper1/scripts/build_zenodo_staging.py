@@ -97,7 +97,6 @@ date-released: 2026-07-30
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
-doi: 10.5281/zenodo.PENDING
 abstract: >-
   Paper-specific reproducibility artefact for the EAAI manuscript
   "{PAPER_TITLE}".
@@ -135,8 +134,7 @@ preferred-citation:
       given-names: David
   year: 2026
   version: 0.2.0-eaai-rc1
-  doi: 10.5281/zenodo.PENDING
-""",
+  """,
     )
 
     write(
@@ -156,7 +154,6 @@ preferred-citation:
                 "license": "mit",
                 "version": "0.2.0-eaai-rc1",
                 "language": "eng",
-                "doi": "10.5281/zenodo.PENDING",
                 "creators": [
                     {
                         "name": "Andrés, César",
@@ -405,30 +402,32 @@ where = ["src"]
         src = PAPER / name
         if src.exists():
             write(ms / name, relativize_text(src.read_text(encoding="utf-8")))
-    # Point manuscript inputs at sibling dirs via relative includes — copy tables/figs into manuscript tree links
-    # Use symlink-free copies: adjust main.tex paths
-    tex = (ms / "main.tex").read_text(encoding="utf-8")
-    tex = tex.replace("tables/", "../tables/")
-    tex = tex.replace("figures/", "../figures/")
-    tex = tex.replace("supplementary/", "../supplementary/")
-    # Avoid double-prefix if already rewritten
-    tex = tex.replace("../tables/../tables/", "../tables/")
-    tex = tex.replace("../figures/../figures/", "../figures/")
-    tex = tex.replace("../supplementary/../supplementary/", "../supplementary/")
-    write(ms / "main.tex", tex)
+    # Same relative paths as paper1/: symlink package-root asset dirs into manuscript/
+    for link_name in ("figures", "tables", "supplementary"):
+        target = ms / link_name
+        if target.exists() or target.is_symlink():
+            target.unlink()
+        target.symlink_to(Path("..") / link_name)
+    if (PAPER / "main.pdf").is_file():
+        copy_file(PAPER / "main.pdf", ms / "main.pdf")
     write(
         ms / "BUILD.md",
         """# Manuscript build (optional)
 
-From package root:
+From this directory:
 
 ```bash
 cd manuscript
-latexmk -pdf -interaction=nonstopmode main.tex
+make
+# or: latexmk -pdf -interaction=nonstopmode main.tex
 ```
 
-Requires a TeX Live installation with `elsarticle`, `booktabs`, `tabularx`, `hyperref`, `microtype`.
+`figures/`, `tables/` and `supplementary/` are symlinks to the package-root directories so
+`\\includegraphics` / `\\input` paths match the `paper1/` layout.
+
+Requires TeX Live with `elsarticle`, `booktabs`, `tabularx`, `hyperref`, `microtype`.
 Auxiliary files are build artefacts and are not part of the deposit.
+The appendix is printed after the bibliography.
 """,
     )
 
@@ -703,7 +702,7 @@ unapproved feature caches, dashboards, Git history, LaTeX auxiliaries.
 - Tier B re-execution is not validated in this deposit.
 
 ## 16. Citation
-See `CITATION.cff`. Zenodo DOI placeholder: `10.5281/zenodo.PENDING`.
+See `CITATION.cff`. A Zenodo DOI will be assigned when the archive is published.
 """,
     )
 
@@ -719,13 +718,29 @@ def write_manifests_and_checksums() -> None:
     checksums.mkdir(exist_ok=True)
 
     files: list[Path] = []
+    skip_prefixes = (
+        "validation/",
+        ".pytest_cache/",
+        ".git/",
+    )
+    skip_parts = {"__pycache__"}
+    skip_suffixes = {".pyc", ".pyo", ".aux", ".bbl", ".blg", ".fls", ".fdb_latexmk", ".log", ".out", ".spl", ".synctex.gz"}
     for p in sorted(STAGING.rglob("*")):
         if not p.is_file():
             continue
+        # Do not follow / hash through broken or transient paths
         rel = p.relative_to(STAGING).as_posix()
-        if rel.startswith("validation/"):
+        if any(rel.startswith(pref) for pref in skip_prefixes):
             continue
-        if rel in {"checksums/SHA256SUMS"}:
+        if any(part in skip_parts for part in Path(rel).parts):
+            continue
+        if Path(rel).suffix in skip_suffixes:
+            continue
+        if rel in {"checksums/SHA256SUMS", "checksums/PACKAGE_MANIFEST.sha256"}:
+            continue
+        if rel.startswith(("manuscript/figures/", "manuscript/tables/", "manuscript/supplementary/")):
+            continue
+        if p.is_symlink():
             continue
         files.append(p)
 
@@ -786,7 +801,7 @@ def write_release_status(extra: dict) -> None:
 
 Canonical run: `{RUN_ID}`  
 Package version: `0.2.0-eaai-rc1`  
-DOI: `10.5281/zenodo.PENDING` (not published)
+Zenodo DOI: not yet published for this EAAI package.
 
 ## Spec checklist
 

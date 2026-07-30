@@ -10,3 +10,8 @@ Software version: `1.0.0`
 - **Tier A:** regenerate and verify tables and figures from frozen CSVs under `results/run_20260730_005150/`.
 - **Tier B:** optional experimental re-execution; requires feature caches that are not redistributed in this package.
 - Skeleton keypoints and raw video are not redistributed.
+
+## Manuscript packaging notes
+
+- Appendix follows the bibliography (Elsevier/EAAI order).
+- Tag `v1.0.0` points at this coherent software+paper snapshot.

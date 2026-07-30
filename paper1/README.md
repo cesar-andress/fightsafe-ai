@@ -8,16 +8,19 @@ LaTeX workspace for the manuscript targeting *Engineering Applications of Artifi
 
 ## Numerical source of truth
 
-`../legacy/eaai_checkpoint_2026/run_20260730_005150/`
+Canonical checkpoint identifier: `run_20260730_005150`  
+Frozen CSVs in this repository: `../release/eaai_zenodo_staging/results/run_20260730_005150/`
 
 ## Build
 
 ```bash
-/usr/bin/python3.12 scripts/generate_assets.py
+python3.12 scripts/generate_assets.py
 make
 ```
 
+Appendix tables are printed after the bibliography (`\appendix` follows `\bibliography{refs}`).
+
 ## Public reproducibility package
 
-See `../release/eaai_zenodo_staging/` (Tier A).
+See [`../release/eaai_zenodo_staging/`](../release/eaai_zenodo_staging/) (Tier A).  
 Tier B feature caches are not redistributed with the public artefact.

@@ -1,7 +1,3 @@
-.pytest_cache/.gitignore
-.pytest_cache/CACHEDIR.TAG
-.pytest_cache/README.md
-.pytest_cache/v/cache/nodeids
 CITATION.cff
 LICENSE
 NOTICE_DATA.md
@@ -66,7 +62,6 @@ manifests/files.txt
 manuscript/BUILD.md
 manuscript/Makefile
 manuscript/main.pdf
-manuscript/main.spl
 manuscript/main.tex
 manuscript/refs.bib
 optional_tier_b/README.md
