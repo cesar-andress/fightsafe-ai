@@ -35,9 +35,10 @@ fi
 export REPO_ROOT
 
 # Companion manuscript directories (monorepo layout)
-export FUSION_DIR="${FUSION_DIR:-$REPO_ROOT/../fusion2026}"
+export FUSION_DIR="${FUSION_DIR:-$REPO_ROOT/../legacy/fusion2026}"
 export ISWA_DIR="${ISWA_DIR:-$REPO_ROOT/../iswa2026}"
 export SPORTS_DIR="${SPORTS_DIR:-$REPO_ROOT/../sports}"
+export PAPER1_DIR="${PAPER1_DIR:-$REPO_ROOT/../paper1}"
 
 # Reproducibility output roots (generated artefacts; gitignored)
 export REPRO_OUTPUT_ROOT="${REPRO_OUTPUT_ROOT:-$REPO_ROOT/outputs/repro}"

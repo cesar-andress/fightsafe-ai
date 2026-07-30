@@ -61,6 +61,6 @@ Before requesting review, confirm the following (check every box that applies).
 - [ ] **No secrets** — No API keys, tokens, cookies, private paths, or other secrets were committed.
 - [ ] **No heavy / generated content** — No **datasets**, **videos**, or **generated** artifacts (build outputs, large binaries, `htmlcov/`, local exports) were committed; only what belongs in the repo.
 - [ ] **Documentation** — `README` / `docs/`, config comments, or docstrings were **updated** if the change affects how others use or maintain the code; or N/A is stated under *Summary* or *Changes*.
-- [ ] Updated `../fusion2026/main.tex` if this change affects architecture, methods, experiments, evaluation, or design decisions. (If not applicable, say so in the PR; see `docs/engineering-standards.md` Section 11 and `docs/contributing.md`.)
+- [ ] Updated `../paper1/main.tex` if this change affects architecture, methods, experiments, evaluation, or design decisions. (If not applicable, say so in the PR; see `docs/engineering-standards.md` Section 11 and `docs/contributing.md`.)
 - [ ] **Modularity** — The change is **modular and maintainable** (clear boundaries, not an unmaintainable one-off); noted under *Risks* if trade-offs exist.
 - [ ] **PR title** — The **PR title** follows [Conventional Commits](https://www.conventionalcommits.org/) and [docs/commit-convention.md](../docs/commit-convention.md) (e.g. `feat(scope): short imperative description`).

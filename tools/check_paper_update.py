@@ -11,11 +11,11 @@ from pathlib import Path
 
 
 SRC_PREFIX = "src/fightsafe_ai"
-DEFAULT_PAPER_FILE = "../fusion2026/main.tex"
+DEFAULT_PAPER_FILE = "../paper1/main.tex"
 WARN = (
     "check-paper-update: diff vs {base!r}: {src!r} changed but {paper!r} did not.\n"
     "  If the change is architectural, methodological, or design-related, update "
-    "the fusion manuscript main.tex (see docs/contributing.md, engineering-standards Section 11).\n"
+    "the EAAI manuscript main.tex (see docs/contributing.md, engineering-standards Section 11).\n"
     "  Files under {src!r}:\n{nfile}\n"
 )
 

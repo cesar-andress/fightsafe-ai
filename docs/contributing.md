@@ -25,7 +25,7 @@ Thank you for taking time to improve this project. FightSafe AI is an **open-sou
 
 For a high-level data flow, see [architecture.md](architecture.md). For direction of travel, see [roadmap.md](roadmap.md).
 
-The **Information Fusion manuscript** (`../fusion2026/main.tex` in the monorepo layout) must stay aligned with meaningful product and research changes; see **Section 11** in [engineering-standards.md](engineering-standards.md) for the normative rule, examples, and exceptions.
+The **EAAI manuscript** (`../paper1/main.tex` in the monorepo layout) must stay aligned with meaningful product and research changes; see **Section 11** in [engineering-standards.md](engineering-standards.md) for the normative rule, examples, and exceptions.
 
 ---
 
@@ -41,7 +41,7 @@ The **Information Fusion manuscript** (`../fusion2026/main.tex` in the monorepo 
 
 ### Paper / `main.tex` helper
 
-From the repository root, `make check-paper-update` runs `tools/check_paper_update.py`. It compares the **working tree and the index** to the **`main` branch (or `origin/main` if `main` is missing)**: if any file under `src/fightsafe_ai/` changed and **`../fusion2026/main.tex` did not**, the script **prints a reminder**; the default exit code is **0** (warning only, not a failure).
+From the repository root, `make check-paper-update` runs `tools/check_paper_update.py`. It compares the **working tree and the index** to the **`main` branch (or `origin/main` if `main` is missing)**: if any file under `src/fightsafe_ai/` changed and **`../paper1/main.tex` did not**, the script **prints a reminder**; the default exit code is **0** (warning only, not a failure).
 
 To make the process exit with status **1** in CI or a hook, pass `--fail` (e.g. `make check-paper-update PAPER_CHECK_FLAGS=--fail` or `python tools/check_paper_update.py --fail`).
 
@@ -72,7 +72,7 @@ Examples: `feat/interpretable-risk-export`, `fix/keypoint-csv-ordering`, `docs/c
 2. **Describe intent** — Title + short summary: *what* changed, *why* it matters, and any **breaking** API or config changes.
 3. **Tests** — Call out new tests or update existing ones; if a test is skipped in some environments, document why.
 4. **Config & docs** — If you add YAML keys, add comments in `configs/*.yaml` and mention them in the PR.
-5. **Paper** — If your change affects **architecture, methods, experiments, evaluation, or design** (see **Section 11** in [engineering-standards.md](engineering-standards.md)), update **`../fusion2026/main.tex`** in the same PR or note a follow-up in the description.
+5. **Paper** — If your change affects **architecture, methods, experiments, evaluation, or design** (see **Section 11** in [engineering-standards.md](engineering-standards.md)), update **`../paper1/main.tex`** in the same PR or note a follow-up in the description.
 6. **Review** — Maintainers may request smaller follow-ups; keeping the first diff focused speeds merge.
 
 **Before submitting**
@@ -94,7 +94,7 @@ pre-commit run --all-files
 - [ ] Public functions/modules have docstrings where behavior is non-obvious.
 - [ ] New configuration keys are documented in YAML or in code.
 - [ ] Risk-related changes restate **non-clinical** scope where appropriate.
-- [ ] Updated `../fusion2026/main.tex` if this change affects architecture, methods, experiments, evaluation, or design decisions. (If not applicable, state why, e.g. typo-only or test-only with no conceptual impact; see **Section 11** in [engineering-standards.md](engineering-standards.md).)
+- [ ] Updated `../paper1/main.tex` if this change affects architecture, methods, experiments, evaluation, or design decisions. (If not applicable, state why, e.g. typo-only or test-only with no conceptual impact; see **Section 11** in [engineering-standards.md](engineering-standards.md).)
 - [ ] No identifying media or credentials in the diff or PR description.
 
 ---

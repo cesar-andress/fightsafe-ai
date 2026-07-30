@@ -21,7 +21,7 @@ def _run(cmd: list[str], *, cwd: Path | None = None) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     root = _repo_root()
-    fusion_dir = root / "../fusion2026"
+    fusion_dir = root / "../legacy/fusion2026"
     ablation_csv = root / "runs/case_studies/ablation_summary/ablation_all_runs.csv"
     repro_dir = root / "outputs/repro/fusion2026"
     figures_data = fusion_dir / "figures/data"

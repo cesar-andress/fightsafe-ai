@@ -1704,7 +1704,7 @@ def cmd_evaluate_case_studies(
         help="Also write the TeX fragment for the fusion manuscript (see --paper-tex-path).",
     ),
     paper_tex_path: Path = typer.Option(
-        Path("../fusion2026/tables/evaluation_all_cases.tex"),
+        Path("../legacy/fusion2026/tables/evaluation_all_cases.tex"),
         "--paper-tex-path",
         help="LaTeX table path when --write-paper-tex is set.",
     ),

@@ -924,7 +924,7 @@ def main(argv: list[str] | None = None) -> int:
         nargs="+",
         default=[f"V{i}" for i in range(1, 11)],
     )
-    p.add_argument("--paper-dir", type=Path, default=Path("../fusion2026"))
+    p.add_argument("--paper-dir", type=Path, default=Path("../legacy/fusion2026"))
     p.add_argument(
         "--output-dir",
         type=Path,

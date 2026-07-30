@@ -1,64 +1,48 @@
-# FightSafe AI — LaTeX: build fusion2026/main.pdf when the manuscript directory is present.
-
-name: Paper (LaTeX)
+# FightSafe AI — optional LaTeX build for archived IF manuscript (legacy/fusion2026).
+# Active EAAI manuscript lives outside this GitHub repo in sibling ../paper1/.
+name: paper
 
 on:
   push:
     branches: [main]
   pull_request:
 
-concurrency:
-  group: paper-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
-defaults:
-  run:
-    shell: bash
-
 jobs:
   fusion-pdf:
-    name: build fusion2026 PDF
+    name: build archived fusion2026 PDF (optional)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    permissions:
-      contents: read
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Check for fusion manuscript
-        id: fusion
+      - name: Locate manuscript
+        id: ms
         run: |
-          if [[ -f ../fusion2026/main.tex ]]; then
-            echo "dir=../fusion2026" >> "$GITHUB_OUTPUT"
+          if [[ -f ../legacy/fusion2026/main.tex ]]; then
+            echo "dir=../legacy/fusion2026" >> "$GITHUB_OUTPUT"
+            echo "found=true" >> "$GITHUB_OUTPUT"
           else
-            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "legacy/fusion2026/main.tex not found — skipping LaTeX build (expected on GitHub-only checkouts)."
           fi
 
-      - name: Skip when manuscript unavailable
-        if: steps.fusion.outputs.skip == 'true'
-        run: |
-          echo "fusion2026/main.tex not found — skipping LaTeX build."
-          echo "In the monorepo layout, place fusion2026/ next to this repository."
-
-      - name: Install TeX Live (minimal)
-        if: steps.fusion.outputs.skip != 'true'
+      - name: Install TeX Live
+        if: steps.ms.outputs.found == 'true'
         run: |
           sudo apt-get update
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-fonts-recommended \
-            texlive-pictures
+          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-bibtex-extra
 
       - name: Build fusion2026 PDF
-        if: steps.fusion.outputs.skip != 'true'
-        run: make fusion-pdf FUSION_DIR="${{ steps.fusion.outputs.dir }}"
+        if: steps.ms.outputs.found == 'true'
+        working-directory: ${{ steps.ms.outputs.dir }}
+        run: |
+          pdflatex -interaction=nonstopmode main.tex || true
+          bibtex main || true
+          pdflatex -interaction=nonstopmode main.tex || true
+          pdflatex -interaction=nonstopmode main.tex
 
       - name: Upload PDF
-        if: steps.fusion.outputs.skip != 'true'
+        if: steps.ms.outputs.found == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: fusion2026-main-pdf
-          path: ${{ steps.fusion.outputs.dir }}/main.pdf
-          if-no-files-found: error
+          path: ${{ steps.ms.outputs.dir }}/main.pdf

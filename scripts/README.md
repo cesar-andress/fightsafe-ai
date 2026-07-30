@@ -6,7 +6,7 @@ Reproduction and dataset utilities for FightSafe AI.
 
 | Script | Manuscript | Description |
 |--------|------------|-------------|
-| `reproduce_fusion2026.sh` | `../fusion2026/` | BoxingVI batch eval, LaTeX assets, PDF |
+| `reproduce_fusion2026.sh` | `../legacy/fusion2026/` | BoxingVI batch eval, LaTeX assets, PDF |
 | `reproduce_iswa2026.sh` | `../iswa2026/` | TapKO `jedi_submissions` machine-side protocol demonstration |
 | `reproduce_sports.sh` | `../sports/` | FightSafe-Bench CSV/JSON exports |
 | `reproduce_all.sh` | all three | Best-effort; continues on missing data |
@@ -24,7 +24,7 @@ Full artefact map: [`docs/REPRODUCIBILITY.md`](../docs/REPRODUCIBILITY.md).
 ## Asset generation (fusion2026)
 
 ```bash
-python scripts/generate_paper_assets.py --paper-dir ../fusion2026
+python scripts/generate_paper_assets.py --paper-dir ../legacy/fusion2026
 ```
 
 Delegates to `tools/generate_paper_assets.py` and related helpers. Requires ablation exports under `runs/case_studies/ablation_summary/` when regenerating ablation tables.

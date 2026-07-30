@@ -6,7 +6,7 @@ The **GitHub repository root** is the canonical FightSafe AI v1.0.0 research art
 
 Use this checklist for public software releases. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts outside this repository (`../fusion2026`, `../iswa2026`, `../sports`, `../paper1`) may cite the shared software entry. The EAAI manuscript lives in sibling `../paper1/` (not inside this GitHub software repository).
+Companion LaTeX manuscripts outside this repository (`../paper1`, `../iswa2026`, `../sports`; archived IF: `../legacy/fusion2026`) may cite the shared software entry. The active EAAI manuscript lives in sibling `../paper1/` (not inside this GitHub software repository).
 
 ---
 

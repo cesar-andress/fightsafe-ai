@@ -10,7 +10,7 @@ This document also maps older companion manuscripts (outside this repo) to softw
 
 ```
 papers/fightsafe-ai/fightsafe-ai/   ← this GitHub repository (canonical v1.0.0)
-papers/fightsafe-ai/fusion2026/     ← Information Fusion manuscript
+papers/fightsafe-ai/legacy/fusion2026/  ← archived Information Fusion manuscript
 papers/fightsafe-ai/iswa2026/       ← traceability architecture manuscript
 papers/fightsafe-ai/sports/         ← FightSafe-Bench manuscript
 ```
@@ -67,7 +67,7 @@ make verify-repro
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `FUSION_DIR` | `../fusion2026` | Information Fusion LaTeX root |
+| `FUSION_DIR` | `../legacy/fusion2026` | Information Fusion LaTeX root |
 | `ISWA_DIR` | `../iswa2026` | Traceability manuscript LaTeX root |
 | `SPORTS_DIR` | `../sports` | FightSafe-Bench LaTeX root |
 | `REPO_ROOT` | auto | Software repository root |
@@ -86,7 +86,7 @@ make verify-repro
 |----------|-----------------|---------------|-----------------|
 | Ablation table A–F | `tables/ablation_selected_results.tex` | `scripts/export_fusion2026_assets.py` | `outputs/repro/fusion2026/tables/ablation_selected_results.tex` |
 | Quantitative summary | `tables/quantitative_observations.tex` | same | `outputs/repro/fusion2026/tables/quantitative_observations.tex` |
-| Ablation figures | `figures/ablation_*.pdf` | `../fusion2026/scripts/regenerate_figures.py` | `outputs/repro/fusion2026/figures/` + `fusion2026/figures/` |
+| Ablation figures | `figures/ablation_*.pdf` | `../legacy/fusion2026/scripts/regenerate_figures.py` | `outputs/repro/fusion2026/figures/` + `legacy/fusion2026/figures/` |
 | Pipeline figures | `figures/fig01_architecture.pdf`, etc. | `fusion2026/figures/build_pipeline_figures.sh` | `fusion2026/figures/` |
 | BoxingVI baselines | `tables/baseline_comparison.tex` | `make fusion-all` (needs skeleton) | `outputs/evaluation/boxingvi_batch/baseline_comparison.tex` |
 | BoxingVI pooled | `tables/boxingvi_pooled.tex` | editorial snapshot / batch exports | reference CSV in `data/repro/fusion2026/reference/boxingvi/` |
@@ -117,10 +117,10 @@ make verify-repro
 bash scripts/reproduce_fusion2026.sh
 
 # Full BoxingVI batch (when skeleton is available)
-make fusion-all FUSION_DIR=../fusion2026
+make fusion-all FUSION_DIR=../legacy/fusion2026
 
 # Regenerate ablation only
-python scripts/export_fusion2026_assets.py --fusion-dir ../fusion2026
+python scripts/export_fusion2026_assets.py --fusion-dir ../legacy/fusion2026
 ```
 
 ### Notes on manuscript numbers
@@ -231,7 +231,7 @@ Checks:
 
 ```
 outputs/repro/
-├── fusion2026/
+├── legacy/fusion2026/
 │   ├── tables/           # regenerated ablation TeX
 │   ├── figures/          # copies of ablation PDF/PNG
 │   └── main.pdf          # optional PDF copy

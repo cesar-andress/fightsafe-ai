@@ -12,9 +12,11 @@ PIP := $(PYTHON) -m pip
 export PYTHONPATH := $(abspath src):$(abspath .)
 
 # Companion manuscript directories (monorepo layout: sibling folders)
-FUSION_DIR ?= ../fusion2026
+# Information Fusion manuscript is archived under legacy/ (active EAAI paper: ../paper1).
+FUSION_DIR ?= ../legacy/fusion2026
 ISWA_DIR ?= ../iswa2026
 SPORTS_DIR ?= ../sports
+PAPER1_DIR ?= ../paper1
 
 RUFF_CFG := --config pyproject.toml
 MYPY := $(PYTHON) -m mypy --config-file pyproject.toml --show-error-codes
