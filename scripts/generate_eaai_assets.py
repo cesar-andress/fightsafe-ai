@@ -117,8 +117,8 @@ def write_tex_table(
 
 
 def fig_save(name: str) -> None:
-    for ext in ("pdf", "png"):
-        plt.savefig(FIG / f"{name}.{ext}", bbox_inches="tight", dpi=200)
+    # Manuscript includes PDF only; skip PNG previews in the paper1 workspace.
+    plt.savefig(FIG / f"{name}.pdf", bbox_inches="tight")
     plt.close()
 
 
