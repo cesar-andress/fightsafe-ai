@@ -8,8 +8,6 @@ LaTeX workspace for the manuscript targeting *Engineering Applications of Artifi
 
 ## Numerical source of truth
 
-Only:
-
 `../legacy/eaai_checkpoint_2026/run_20260730_005150/`
 
 ## Build
@@ -21,8 +19,5 @@ make
 
 ## Public reproducibility package
 
-See `../release/eaai_zenodo_staging/` (Tier A). Tier B feature caches are not redistributed pending institutional approval.
-
-## Author-internal notes
-
-Revision audits and release drafts are under `internal/` and are not part of the public deposit.
+See `../release/eaai_zenodo_staging/` (Tier A).
+Tier B feature caches are not redistributed with the public artefact.

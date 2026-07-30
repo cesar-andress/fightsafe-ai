@@ -8,7 +8,6 @@ date-released: 2026-07-30
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
-doi: 10.5281/zenodo.PENDING
 abstract: >-
   FightSafe AI research software and paper-specific reproducibility artefact for the
   EAAI manuscript “Engineering an Interpretable Temporal Event Pipeline with Explicit
@@ -45,5 +44,4 @@ preferred-citation:
       given-names: David
   year: 2026
   version: 1.0.0
-  doi: 10.5281/zenodo.PENDING
   url: "https://github.com/cesar-andress/fightsafe-ai"

@@ -54,7 +54,7 @@ interpretable AI \sep temporal event detection \sep channel availability \sep de
 \label{sec:introduction}
 
 Engineering AI systems that turn heterogeneous evidence into temporal intervals face a practical design problem before accuracy debates begin.
-In review workflows and offline analysis pipelines, perception modules emit soft channel scores at different reliabilities; some channels may drop out; and downstream users need intervals that can be audited channel by channel~\cite{duan2019ai,doshi2017towards,rudin2019interpretable}.
+In review workflows and offline analysis pipelines, perception modules emit soft channel scores at different reliabilities; some channels may drop out; and downstream users need intervals that can be inspected channel by channel~\cite{duan2019ai,doshi2017towards,rudin2019interpretable}.
 When detectors, aggregators and consolidators are stacked without an explicit contract, comparisons become unfair, missing channels are silently treated as zero evidence, and negative ablation outcomes are discarded instead of informing design~\cite{pineau2021reproducibility,kapoor2023leakage}.
 
 This paper evaluates that systems problem on BoxingVI~\cite{kumar2025boxingvi}.
@@ -75,7 +75,7 @@ Null and negative findings (equal$\approx$weighted; brittle max; synthetic-only 
 \begin{enumerate}
 \item A reproducible multi-source pipeline separating features, $(c,\alpha)$, aggregation, interaction rules, banding, and consolidation (motivated by modular decision-support and reproducibility practice~\cite{duan2019ai,pineau2021reproducibility}).
 \item A same-input comparison of equal, weighted, and max aggregation (max as stress test) under a frozen consolidator and matcher, isolating aggregation as an engineering design variable rather than embedding it in end-to-end training~\cite{wang2023tal}.
-\item An interaction-rule ablation with firing audits ($n{=}10$; borderline paired evidence), aligning with interpretable-by-design evaluation~\cite{rudin2019interpretable,guidotti2018survey}.
+\item An interaction-rule ablation with firing-incidence counts ($n{=}10$; borderline paired evidence), aligning with interpretable-by-design evaluation~\cite{rudin2019interpretable,guidotti2018survey}.
 \item A controlled \emph{synthetic} missingness contrast of explicit $\alpha{=}0$ availability masking versus naive zero-valued evidence, connecting industrial missing-sensor practice to video pipelines~\cite{emmanuel2021missing,ma2021smil,dzaferagic2021missing}.
 \end{enumerate}
 
@@ -117,7 +117,7 @@ The case study motivates the pipeline design questions; it does not validate cli
 \subsection{Positioning of the present study}
 Existing work provides powerful learned temporal models, multimodal systems and rule-oriented decision tools.
 Controlled evidence is less frequently reported on how explicit source availability, simple aggregation choices and interpretable interaction rules behave inside a fixed temporal engineering pipeline when perception is held constant.
-This paper addresses that gap through same-input ablations, synthetic availability interventions, firing audits and disclosed negative findings, with reproducibility artefacts aligned to community expectations for inspectable ML research~\cite{pineau2021reproducibility,kapoor2023leakage}.
+This paper addresses that gap through same-input ablations, synthetic availability interventions, firing-incidence records and disclosed negative findings, with reproducibility artefacts aligned to community expectations for inspectable ML research~\cite{pineau2021reproducibility,kapoor2023leakage}.
 It does not claim a new fusion calculus, a general theory of partial observability, an external state-of-the-art detector, or a deployment-ready safety product.
 
 %% ------------------------------------------------------------------
@@ -322,7 +322,7 @@ It shows how allowing one channel to dominate can saturate high bands and collap
 No velocity-threshold or independent deep detector is claimed under matching provenance constraints; absence of such baselines is intentional honesty rather than omission of available comparable runs.
 
 \paragraph{Interaction ablation.}
-Enabling configured interactions changes band occupancy, event counts and macro-F1, with auditable firings.
+Enabling configured interactions changes band occupancy, event counts and macro-F1, with exportable firing-incidence records.
 The borderline paired $p{=}0.048$ at $n{=}10$ and the lack of a pre-specified multiplicity correction mean the result should be read as protocol evidence, not a general causal law.
 
 \paragraph{Explicit availability masking.}
@@ -351,7 +351,7 @@ That stance is consistent with engineering AI practice: controlled interventions
 \item Hand-authored weights, thresholds and rules; historical tuning leakage cannot be ruled out.
 \item Permissive matcher (IoU~$0.01$, $d_{\min}{=}0$); stricter matching lowers F1 in post-hoc checks.
 \item No independent external dataset; no operator study; no deployment claim.
-\item Tier~B full re-execution awaits institutional approval for redistributing derived feature caches (Section~\ref{sec:reproducibility}).
+\item Tier~B full re-execution requires redistributable derived feature caches that are outside the public Tier~A artefact (Section~\ref{sec:reproducibility}).
 \item One interaction rule cannot fire; another records zero firings.
 \end{itemize}
 
@@ -363,8 +363,8 @@ The public artefact supports regeneration and verification of the reported table
 Canonical run identifier: \texttt{run\_20260730\_005150}.
 Figures and tables are regenerated with \texttt{scripts/generate\_assets.py} using package-relative paths.
 Configs, aggregation implementations, environment freeze and SHA-256 checksums are included.
-BoxingVI punch-interval annotations are redistributed with attribution; skeleton keypoints, raw video and derived \texttt{features\_cache} pickles are \emph{not} included pending upstream/institutional clearance (Tier~B).
-A Zenodo DOI is pending (\texttt{10.5281/zenodo.PENDING}); this revision does not claim end-to-end feature reconstruction from raw media.
+BoxingVI punch-interval annotations are redistributed with attribution; skeleton keypoints, raw video and derived \texttt{features\_cache} pickles are not redistributed with the public Tier~A artefact and require separate upstream or institutional clearance for Tier~B re-execution.
+A software archive accompanying this manuscript will be deposited in a public repository; this manuscript does not claim end-to-end feature reconstruction from raw media.
 
 %% ------------------------------------------------------------------
 \section{Conclusion}
@@ -372,7 +372,7 @@ A Zenodo DOI is pending (\texttt{10.5281/zenodo.PENDING}); this revision does no
 
 An availability-aware, interpretable temporal event pipeline was evaluated on BoxingVI as an engineering case study with disclosed limits.
 Equal and weighted aggregation perform similarly; max is a brittle stress test; interaction rules show a protocol-limited effect; explicit availability masking is less degraded than naive zero-valued evidence under synthetic dropout only; and pooled metrics are dominated by one stem and shaped by a fixed strike component.
-These findings support an EAAI-oriented narrative in which auditable contracts, controlled ablations and published negative results are central engineering contributions.
+These findings support an EAAI-oriented narrative in which inspectable contracts, controlled ablations and published negative results are central engineering contributions.
 
 \section*{Acknowledgements}
 Institutional affiliations are as listed on the title page.
@@ -380,9 +380,9 @@ This manuscript is not a medical-device evaluation.
 
 \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 During the preparation of this work, the authors used generative artificial intelligence tools and AI-assisted editorial tools solely to support manuscript writing and editorial quality control.
-Assistance was limited to language improvement, grammar and style refinement, restructuring of sections for clarity, readability edits, consistency checking, bibliography auditing, literature exploration for Related Work positioning, verification of bibliographic and DOI metadata, preparation of reproducibility documentation, and editorial review of draft text.
+Assistance was limited to language improvement, grammar and style refinement, restructuring of sections for clarity, readability edits, consistency checking, bibliography consistency checks, literature exploration for Related Work positioning, checking of bibliographic and DOI metadata, preparation of reproducibility documentation, and editorial review of manuscript text.
 Generative AI was not used to generate experimental data, execute experiments, modify canonical numerical results, produce figures or tables without subsequent author verification, make scientific decisions, derive statistical conclusions, or replace scientific judgement.
-All experiments were designed and executed by the authors; all software implementations were produced and validated by the authors; and all reported numerical results were independently verified against the frozen canonical checkpoint.
+All experiments were designed and executed by the authors; all software implementations were produced and validated by the authors; and all reported numerical results were checked independently against the frozen canonical checkpoint.
 All scientific interpretations and conclusions are the sole responsibility of the authors.
 The authors reviewed and validated every AI-assisted contribution before its inclusion in the manuscript and take full responsibility for the content of the article.
 
@@ -390,8 +390,8 @@ The authors reviewed and validated every AI-assisted contribution before its inc
 BoxingVI punch-interval annotations used for evaluation may be redistributed with the software under the data notice; skeleton keypoints must be obtained from the dataset authors~\cite{kumar2025boxingvi}.
 Experimental aggregates are archived under the canonical identifier \texttt{run\_20260730\_005150}.
 Software context:~\cite{fightsafe_ai_2026}.
-The public Tier~A package regenerates manuscript tables and figures from frozen CSVs; Tier~B inputs (\texttt{features\_cache}) require separate approval and are not claimed as publicly redistributable in this revision.
-A paper-specific Zenodo DOI is pending.
+The public Tier~A package regenerates manuscript tables and figures from frozen CSVs; Tier~B inputs (\texttt{features\_cache}) are not redistributed with the public artefact.
+A software archive accompanying this manuscript will be deposited in a public repository.
 
 %% Supplementary tables (printed for completeness in this preprint build)
 \clearpage

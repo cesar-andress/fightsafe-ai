@@ -2,12 +2,11 @@ cff-version: 1.2.0
 message: "If you use this reproducibility package, please cite it as follows."
 title: "FightSafe AI — EAAI reproducibility package (availability-aware temporal event pipeline)"
 type: software
-version: 1.0.0
+version: 0.2.0-eaai-rc1
 date-released: 2026-07-30
 license: MIT
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
 url: "https://github.com/cesar-andress/fightsafe-ai"
-doi: 10.5281/zenodo.PENDING
 abstract: >-
   Paper-specific reproducibility artefact for the EAAI manuscript
   "Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study".
@@ -44,5 +43,4 @@ preferred-citation:
     - family-names: Martin Moncunill
       given-names: David
   year: 2026
-  version: 1.0.0
-  doi: 10.5281/zenodo.PENDING
+  version: 0.2.0-eaai-rc1

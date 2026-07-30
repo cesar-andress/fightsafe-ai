@@ -15,7 +15,7 @@ Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Avail
 - **Tier A (this package, mandatory):** regenerate/verify figures and tables from frozen CSVs;
   inspect configs, aggregation code, environment metadata and checksums.
 - **Tier B (optional):** re-run the experimental layer from `features_cache` + strike baselines.
-  Feature pickles are **not included** (pending institutional approval). See `optional_tier_b/`.
+  Feature pickles are not included in the public Tier A package. See `optional_tier_b/`.
 
 ## 5. Directory structure
 ```
@@ -30,7 +30,7 @@ figures/, tables/, supplementary/
 manuscript/           # main.tex, refs.bib, Makefile
 annotations/boxingvi/ # punch-interval labels (with NOTICE_DATA.md)
 checksums/, manifests/
-optional_tier_b/      # placeholders + strike baselines
+optional_tier_b/      # optional Tier B notes and strike baselines
 validation/           # filled by validate_tier_a.py
 ```
 
@@ -89,4 +89,4 @@ unapproved feature caches, dashboards, Git history, LaTeX auxiliaries.
 - Tier B re-execution is not validated in this deposit.
 
 ## 16. Citation
-See `CITATION.cff`. Zenodo DOI placeholder: `10.5281/zenodo.PENDING`.
+See `CITATION.cff`. A DOI will be assigned when this package is deposited in a public archive.

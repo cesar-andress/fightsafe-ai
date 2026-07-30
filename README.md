@@ -14,8 +14,8 @@ Paper-specific artefact for:
 | `src/fightsafe_ai/evaluation/aggregation_schemes.py` | Equal / weighted / max aggregators with availability masking |
 
 Canonical checkpoint identifier: `run_20260730_005150`.  
-Tier A: regenerate tables/figures from frozen CSVs. Tier B (`features_cache`) is not redistributed pending institutional approval.  
-See `release/eaai_zenodo_staging/README.md` for commands. Zenodo DOI: pending (`10.5281/zenodo.PENDING`).
+Tier A: regenerate tables/figures from frozen CSVs. Tier B (`features_cache`) is not redistributed with the public package.  
+See `release/eaai_zenodo_staging/README.md` for commands.
 
 ---
 

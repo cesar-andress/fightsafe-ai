@@ -4,9 +4,8 @@
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",
-  "version": "1.0.0",
+  "version": "0.2.0-eaai-rc1",
   "language": "eng",
-  "doi": "10.5281/zenodo.PENDING",
   "creators": [
     {
       "name": "Andr\u00e9s, C\u00e9sar",

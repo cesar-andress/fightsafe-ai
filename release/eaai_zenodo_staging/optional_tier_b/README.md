@@ -4,7 +4,7 @@ Tier B is **not required** for regenerating paper tables and figures.
 
 | Item | Status |
 |------|--------|
-| `inputs/features_cache/*.pkl` | PENDING INSTITUTIONAL APPROVAL — not included |
+| `inputs/features_cache/*.pkl` | not included in the public package |
 | `inputs/strike_baselines/*.json` | APPROVED FOR RELEASE — included |
 | `scripts/run_eaai_checkpoint.py` (package root) | Present (relative paths); requires Tier B inputs |
 | BoxingVI annotations | In Tier A (`annotations/boxingvi/`) |
