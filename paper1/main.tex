@@ -35,7 +35,7 @@ Universidad Camilo Jos\'e Cela, Madrid, Spain}
 Multi-source temporal event detection for engineering decision support requires pipelines that remain interpretable when individual evidence channels are noisy or intermittently unavailable.
 This study evaluates a modular, availability-aware pipeline that separates held-fixed perception features, soft channel confidences~$c$, binary availability masks~$\alpha$, frame-wise aggregation, optional interaction-rule boosts, score banding, and temporal consolidation.
 Unavailable channels ($\alpha{=}0$) are treated as distinct from zero-valued evidence ($c{=}0$, $\alpha{=}1$).
-On BoxingVI stems V1--V10 ($n{=}10$) with punch/impact \emph{proxy} labels, under a frozen matching protocol and a \emph{combined timeline} in which only the risk component is re-aggregated while a strike component remains fixed, equal and weighted aggregation yield nearly identical pooled micro-F1 ($0.502$), whereas an aggressive max-score stress test collapses to micro-F1~$0.178$.
+On BoxingVI stems V1--V10 ($n{=}10$) with punch/impact \emph{proxy} labels, under a frozen matching protocol and a \emph{combined timeline} in which only the risk component is re-aggregated while a strike component remains fixed, equal and weighted aggregation yield nearly identical pooled micro-F1 ($0.502$), whereas an aggressive max aggregation stress test collapses to micro-F1~$0.178$.
 Enabling configured interaction rules raises macro-F1 from $0.444$ to $0.567$ (paired permutation $p{=}0.048$; $n{=}10$), a protocol-limited effect.
 Under synthetic frame$\times$channel dropout at $p{=}0.5$, explicit availability masking remains near the no-dropout baseline (mean micro-F1~$0.509$) and is less degraded than naive zero-valued evidence ($0.471$); natural availability on these matrices is $\alpha{\equiv}1$.
 Pooled micro-F1 is strongly influenced by stem~V6 ($\approx$72\% of ground-truth events and $\approx$80\% of true positives).
@@ -54,7 +54,7 @@ interpretable AI \sep temporal event detection \sep channel availability \sep de
 \label{sec:positioning}
 
 Engineering AI systems that turn heterogeneous evidence into temporal intervals face a practical design problem before accuracy debates begin.
-In review workflows and offline analysis pipelines, perception modules emit soft channel scores at different reliabilities; some channels may drop out; and downstream users need intervals that can be inspected channel by channel~\cite{duan2019ai,doshi2017towards,rudin2019interpretable}.
+In review workflows and offline analysis pipelines, perception stages emit soft channel confidences at different reliabilities; some channels may drop out; and downstream users need intervals that can be inspected channel by channel~\cite{duan2019ai,doshi2017towards,rudin2019interpretable}.
 When detectors, aggregators and consolidators are stacked without an explicit contract, comparisons become unfair, missing channels are silently treated as zero evidence, and negative ablation outcomes are discarded instead of informing design~\cite{pineau2021reproducibility,kapoor2023leakage}.
 
 This manuscript targets \emph{Engineering Applications of Artificial Intelligence}, a venue that regularly publishes applied AI system evaluations and engineering analyses of learning pipelines~\cite{ganaie2022ensemble}.
@@ -75,7 +75,7 @@ All numerical claims below are taken from the canonical checkpoint \texttt{run\_
 
 Deep temporal action localisation and temporal proposal generation provide strong learned detectors when labels and end-to-end training are available~\cite{lin2019bmn,lin2020dbg,xia2020tal,wang2023tal}.
 In sports video, action-spotting protocols such as SoccerNet emphasise sparse temporal events under shared evaluation discipline~\cite{giancola2018soccernet}, while human action recognition surveys place combat and team-sport analytics within broader video understanding~\cite{morshed2023har,yin2024teamsports}.
-BoxingVI supplies multi-modal boxing footage with temporal annotations suitable for interval studies and is adopted here as an engineering case study with punch/impact \emph{proxy} labels~\cite{kumar2025boxingvi}.
+BoxingVI supplies multimodal boxing footage with temporal annotations suitable for interval studies and is adopted here as an engineering case study with punch/impact \emph{proxy} labels~\cite{kumar2025boxingvi}.
 These lines establish what high-capacity temporal models can achieve when perception and detection are trained jointly.
 They leave aggregation, availability handling and rule interactions rarely isolated as controlled engineering variables.
 The present study does not propose a new localisation architecture or compete for BoxingVI detection leaderboards; it uses a held-fixed perception stage so that aggregation and availability contracts can be compared under one matcher, without validating clinical safety monitoring or automated officiating.
@@ -83,7 +83,7 @@ The present study does not propose a new localisation architecture or compete fo
 Decision-support reviews emphasise that organisational value depends on transparency, process integration and evaluability as much as on isolated accuracy gains~\cite{duan2019ai,dwivedi2021ai}.
 Surveys of post-hoc explanation catalogue attribution methods and their limits~\cite{guidotti2018survey}, while position papers argue for models that are interpretable by design~\cite{rudin2019interpretable,doshi2017towards,lipton2018mythos}.
 Applied AI venues such as EAAI likewise host engineering analyses of learning systems and their practical trade-offs~\cite{ganaie2022ensemble}.
-Named channels, declared weights, interaction rules and exportable firing traces instantiate that design stance in a temporal pipeline.
+Named channels, declared weights, interaction rules and exportable firing-incidence records instantiate that design stance in a temporal pipeline.
 What remains comparatively less evaluated is whether those structured levers change interval outcomes when perception is frozen.
 
 Missing data and degraded sensors are routine in machine learning and industrial monitoring~\cite{emmanuel2021missing,teh2020sensorquality,lei2020fault}.
@@ -91,27 +91,27 @@ Industrial IoT studies examine classification when sensor readings are absent~\c
 Across these literatures, a recurring systems distinction is often under-specified in video pipelines: a channel may be \emph{unavailable} ($\alpha{=}0$) or \emph{available but zero-valued} ($c{=}0$, $\alpha{=}1$).
 Conflating the two silently reweights or imputes evidence.
 The experiments therefore compare explicit availability masking against naive zero-valued evidence under \emph{synthetic} dropout, while disclosing that natural availability on the BoxingVI matrices is $\alpha{\equiv}1$.
-This is an interface evaluation rather than a claim of natural-world missing-stream robustness.
+This is an interface evaluation rather than a claim of robustness under natural channel missingness.
 
 Existing work therefore provides powerful learned temporal models, multimodal systems and rule-oriented decision tools, yet controlled evidence remains scarce on how explicit source availability, simple aggregation choices and interpretable interaction rules behave inside a fixed temporal engineering pipeline when perception is held constant.
 This paper addresses that gap through same-input ablations, synthetic availability interventions, firing-incidence records and disclosed negative findings, with reproducibility artefacts aligned to community expectations for inspectable ML research~\cite{pineau2021reproducibility,kapoor2023leakage}.
-It does not claim a new fusion calculus, a general theory of partial observability, an external state-of-the-art detector, or a deployment-ready safety product.
+It does not claim a new multi-source aggregation calculus, a general theory of partial observability, an external state-of-the-art detector, or a deployment-ready safety product.
 
 %% ------------------------------------------------------------------
 \section{System model and pipeline methodology}
 \label{sec:problem}
 \label{sec:method}
 
-For each video stem and frame~$t$, perception yields a fixed feature row.
-A shared rule layer maps features to channel confidences $c_{i,t}\in[0,1]$ and availability $\alpha_{i,t}\in\{0,1\}$.
-Zero evidence is $(c_{i,t}{=}0,\alpha_{i,t}{=}1)$; unavailable evidence is $\alpha_{i,t}{=}0$ and is excluded from renormalisation.
+For each BoxingVI stem (video) and frame~$t$, perception yields a fixed feature row.
+A shared rule layer maps features to channel confidences $c_{i,t}\in[0,1]$ and binary availability masks $\alpha_{i,t}\in\{0,1\}$.
+Zero-valued evidence is $(c_{i,t}{=}0,\alpha_{i,t}{=}1)$; unavailable evidence is $\alpha_{i,t}{=}0$ and is excluded from renormalisation.
 Ground-truth masks derived from annotated punch/impact intervals are stored for evaluation only and are never used to build channels or to tune weights in the checkpoint.
-An aggregator $A$ maps active channels to a score $s_t\in[0,1]$.
-Optional interaction rules may add bounded boosts when required channels jointly exceed thresholds.
+Frame-wise aggregation maps the active set $A_t=\{i:\alpha_{i,t}{=}1\}$ to a score $s_t\in[0,1]$.
+Optional interaction rules may add bounded boosts when all required channels jointly exceed thresholds.
 Scores map to bands $\{\mathrm{LOW},\mathrm{MEDIUM},\mathrm{HIGH},\mathrm{CRITICAL}\}$ with fixed cutoffs.
 A consolidator merges high-band risk runs into intervals, while a held-fixed strike detector contributes strike intervals independently.
 The \emph{combined timeline} merges risk and strike intervals (legacy implementation identifier: \texttt{full\_fusion}).
-A matcher then compares predicted and reference intervals under fixed IoU and temporal tolerance.
+A matcher then compares predicted and reference intervals under fixed intersection-over-union (IoU) and temporal tolerance.
 Aggregation methods change only the risk component; the strike component is identical across methods; reported metrics use the combined timeline, so a shared strike mass can attenuate visible aggregation differences (Section~\ref{sec:res-timelines}).
 
 Figure~\ref{fig:architecture} summarises fixed versus varied components.
@@ -125,32 +125,31 @@ Supplementary Tables~\ref{tab:si-channels}--\ref{tab:si-protocol} list channels,
 \label{fig:architecture}
 \end{figure}
 
-On channels with positive configured weights and $\alpha_{i,t}{=}1$, the three aggregation schemes are
+On channels with configured weights $w_i>0$ and $\alpha_{i,t}{=}1$, the three aggregation schemes are
 \begin{align}
 s^{\mathrm{eq}}_t &= \frac{1}{|A_t|}\sum_{i\in A_t} c_{i,t}, \\
 s^{\mathrm{w}}_t &= \frac{\sum_{i\in A_t} w_i c_{i,t}}{\sum_{i\in A_t} w_i}, \\
-s^{\mathrm{max}}_t &= \max_{i\in A_t} c_{i,t},
+s^{\mathrm{max}}_t &= \max_{i\in A_t} c_{i,t}.
 \end{align}
-where $A_t=\{i:\alpha_{i,t}{=}1\}$.
 Max is an intentional aggressive stress test that allows one channel to dominate rather than a competitive external baseline.
 The primary three-way comparison uses interactions enabled.
 Declarative interaction rules add boosts when all required channels are available and exceed thresholds (Supplementary Table~\ref{tab:si-rules}).
 A \emph{firing incidence} is one frame in which a rule's predicate holds.
-Rules whose required signals are absent cannot fire; thresholds are not retuned.
-In the checkpoint, the \texttt{surrender\_gesture} channel is absent (one rule inactive) and the fall-like inactivity rule records zero firings despite present channels.
+Rules whose required channels are absent cannot fire; thresholds are not retuned.
+In the checkpoint, the \texttt{surrender\_gesture} channel is absent (one rule inactive) and the fall-like inactivity rule records zero firing incidences despite present channels.
 
-Frozen temporal and matching parameters are fps~$=30$, risk merge gap~$=2$ frames, $d_{\min}{=}0$\,s, combined-timeline merge~$=8$ frames, IoU~$=0.01$ and tolerance~$=0.5$\,s, with evaluation on the combined timeline under risk re-aggregation and a fixed strike path.
+Frozen temporal and matching parameters are frames per second (fps)~$=30$, risk merge gap~$=2$ frames, minimum event duration $d_{\min}{=}0$\,s, combined-timeline merge~$=8$ frames, IoU threshold~$=0.01$ and temporal tolerance~$=0.5$\,s, with evaluation on the combined timeline under risk re-aggregation and a fixed strike path.
 Permissive IoU/$d_{\min}$ favour recall-oriented matching for short proxy punches; post-hoc stricter matching is reported as sensitivity only (Supplementary Table~\ref{tab:si-matching}).
 
 %% ------------------------------------------------------------------
 \section{Experimental protocol}
 \label{sec:protocol}
 
-BoxingVI stems V1--V10~\cite{kumar2025boxingvi} provide punch-interval proxy labels (Table~\ref{tab:dataset}).
+BoxingVI stems V1--V10~\cite{kumar2025boxingvi} provide punch-interval proxy labels (Table~\ref{tab:dataset}); hereafter each stem is treated as one video.
 Skeleton keypoints are obtained externally and are not redistributed here.
 Video is the inferential unit ($n{=}10$).
-Reported metrics include pooled micro and video-macro precision/recall/F1, video-level bootstrap 95\% intervals ($B{=}1000$ resamples of videos), paired mean/median $\Delta$F1, Cliff's~$\delta$~\cite{cliff1993dominance}, and paired permutation two-sided $p$-values~\cite{efron1994introduction}.
-Seeds for synthetic dropout are $0,\ldots,9$ at each $p{>}0$.
+Reported metrics include pooled micro-precision, micro-recall and micro-F1, video-level macro-precision/recall/F1 (macro-F1), video-level bootstrap 95\% intervals ($B{=}1000$ resamples of videos), paired mean/median $\Delta$F1, Cliff's~$\delta$~\cite{cliff1993dominance}, and paired permutation two-sided $p$-values~\cite{efron1994introduction}.
+Synthetic frame$\times$channel dropout uses probabilities $p\in\{0.0,0.1,0.3,0.5\}$ with seeds $0,\ldots,9$ whenever $p{>}0$.
 Power is limited and population generalisation is not claimed.
 Primary pre-specified contrasts are equal versus weighted versus max, and interactions ON versus OFF; dropout contrasts and leave-one-video-out or matching grids are exploratory or descriptive.
 Inputs and outputs are checksummed in the checkpoint; a double-run of weighted scoring on V2 is numerically identical; experimental-layer runtime is approximately $81$\,s after caches are available.
@@ -167,12 +166,11 @@ Tier~A regeneration of tables and figures from frozen canonical CSVs is document
 \label{sec:res-v6}
 
 Table~\ref{tab:aggregation} and Figure~\ref{fig:aggregation} compare equal, weighted and max with interactions on.
-Equal and weighted are nearly tied on pooled micro-F1 ($0.502$).
-Max achieves high precision but very low recall (micro-F1~$0.178$), consistent with near-ubiquitous high-band occupancy under single-channel domination.
-Paired tests (Table~\ref{tab:paired}) show no separable weighted-versus-equal difference ($p{=}0.489$) and a large weighted-versus-max gap ($p{=}0.007$).
+Equal and weighted remain nearly tied on pooled micro-F1, whereas max trades high precision for collapsed recall, consistent with near-ubiquitous high-band occupancy under single-channel domination.
+Paired tests (Table~\ref{tab:paired}) separate weighted from max but not from equal.
 Figure~\ref{fig:pervideo} shows per-video F1 under the shared protocol.
-These pooled summaries must be read together with strong video imbalance: stem~V6 contributes approximately $72\%$ of pooled ground-truth events and $\approx$80\% of pooled true positives under weighted aggregation (Supplementary Table~\ref{tab:si-video-contribution}; Figure~\ref{fig:video-contribution}).
-Leave-one-video-out recomputation of pooled micro-F1 from existing predictions yields $0.514$ when V6 is excluded versus $0.502$ on all videos (Supplementary Table~\ref{tab:si-lovo}).
+These pooled summaries must be read together with strong video imbalance: stem~V6 accounts for most pooled ground-truth events and true positives under weighted aggregation (Supplementary Table~\ref{tab:si-video-contribution}; Figure~\ref{fig:video-contribution}).
+Leave-one-video-out recomputation of pooled micro-F1 from existing predictions shifts only modestly when V6 is excluded (Supplementary Table~\ref{tab:si-lovo}).
 Pooled micro-F1 is therefore not an equal-video average; macro-F1 and paired per-video analyses are emphasised when discussing general behaviour.
 
 \input{tables/tab_aggregation}
@@ -202,9 +200,9 @@ Pooled micro-F1 is therefore not an equal-video average; macro-F1 and paired per
 \label{sec:res-int}
 
 Table~\ref{tab:interactions} and Figure~\ref{fig:interactions} compare weighted aggregation with interactions off versus on.
-Macro-F1 rises from $0.444$ to $0.567$; mean predicted events and HIGH/CRITICAL occupancy increase.
-The paired mean $\Delta$F1 is $0.123$ (Cliff $\delta{=}0.40$) with permutation $p{=}0.048$ at $n{=}10$: evidence under the fixed protocol, sensitive to the small sample, not a general causal claim.
-Four of six configured rules fire; one cannot activate because \texttt{surrender\_gesture} is absent; one records zero firings (Table~\ref{tab:firings}).
+Macro-F1 rises and mean predicted events and HIGH/CRITICAL occupancy increase.
+The paired mean $\Delta$F1 is positive with moderate Cliff~$\delta$ and a borderline permutation $p$ at $n{=}10$: evidence under the fixed protocol, sensitive to the small sample, not a general causal claim.
+Four of six configured rules fire; one cannot activate because \texttt{surrender\_gesture} is absent; one records zero firing incidences (Table~\ref{tab:firings}).
 
 \input{tables/tab_interactions}
 \input{tables/tab_firings}
@@ -221,8 +219,7 @@ Four of six configured rules fire; one cannot activate because \texttt{surrender
 
 Table~\ref{tab:dropout} and Figure~\ref{fig:dropout} report synthetic frame$\times$channel dropout.
 Natural availability is $\alpha{\equiv}1$; missingness is induced.
-At $p{=}0.5$, explicit availability masking yields mean micro-F1~$0.509$, versus~$0.471$ for naive zero-valued evidence.
-Explicit masking remains near the no-dropout result ($0.502$) and is less degraded than naive encoding.
+At $p{=}0.5$, explicit availability masking remains near the no-dropout baseline and is less degraded than naive zero-valued evidence.
 Descriptive diagnostics (Section~\ref{sec:disc-dropout}) associate the small explicit increase with higher pooled recall and higher false-positive mass, concentrated on V6; no unique causal mechanism is established from the frozen artefacts.
 
 \input{tables/tab_dropout}
@@ -241,11 +238,11 @@ Descriptive diagnostics (Section~\ref{sec:disc-dropout}) associate the small exp
 \label{sec:res-fail}
 \label{sec:res-match}
 
-Using frozen prediction exports, strike-only and risk-only timelines evaluate to pooled micro-F1 $0.466$ and $0.410$ respectively, versus $0.502$ for the combined timeline under the canonical matcher (Supplementary Table~\ref{tab:si-timelines}).
+Using frozen prediction exports, strike-only and risk-only timelines evaluate below the combined timeline under the canonical matcher (Supplementary Table~\ref{tab:si-timelines}).
 The fixed strike component therefore carries substantial matched mass and can dilute risk-only aggregation differences on the reported metric.
 Exported failure types are dominated by false negatives and false positives, with additional fragmentation and merged-interval errors (Table~\ref{tab:failures}; Figure~\ref{fig:failures}).
 Max suppresses many positives (high FN) with few predictions, so raw counts are not comparable across methods without denominators.
-Re-scoring frozen weighted combined-timeline predictions under stricter IoU or zero temporal tolerance reduces pooled micro-F1 (for example, IoU~$0.5$: $0.277$; IoU~$0.01$ with tolerance~$0$: $0.384$; Supplementary Table~\ref{tab:si-matching}).
+Re-scoring frozen weighted combined-timeline predictions under stricter IoU or zero temporal tolerance reduces pooled micro-F1 (Supplementary Table~\ref{tab:si-matching}).
 These matching analyses are post-hoc and do not replace the canonical protocol.
 
 \input{tables/tab_failures}
@@ -263,12 +260,12 @@ These matching analyses are post-hoc and do not replace the canonical protocol.
 \label{sec:disc-dropout}
 \label{sec:limitations}
 
-Under this protocol, reweighting does not separate pooled micro-F1 from a uniform average ($p{=}0.489$).
+Under this protocol, reweighting does not separate pooled micro-F1 from a uniform average.
 Once channels and consolidator are fixed, fine weight tuning may therefore be lower priority than validating interaction logic, availability contracts, consolidator parameters or label definitions, especially given V6 dominance and the fixed strike mass.
 Max is not proposed as a production default or external state-of-the-art baseline; it shows how allowing one channel to dominate can saturate high bands and collapse recall.
 No velocity-threshold or independent deep detector is claimed under matching provenance constraints; absence of such baselines is intentional honesty rather than omission of available comparable runs.
 Enabling configured interactions changes band occupancy, event counts and macro-F1, with exportable firing-incidence records.
-The borderline paired $p{=}0.048$ at $n{=}10$ and the lack of a pre-specified multiplicity correction mean the interaction result should be read as protocol evidence, not a general causal law.
+The borderline paired $p$ at $n{=}10$ and the lack of a pre-specified multiplicity correction mean the interaction result should be read as protocol evidence, not a general causal law.
 
 Industrial sensing and multimodal learning treat missing measurements as routine rather than exceptional~\cite{emmanuel2021missing,teh2020sensorquality,ma2021smil}.
 The synthetic contrast supports keeping an explicit $\alpha$ interface even when natural $\alpha{\equiv}1$ on the present matrices.
@@ -276,7 +273,7 @@ Under this intervention, explicit masking did not reduce pooled micro-F1 and rec
 Descriptive exports show higher pooled recall together with more false positives, with large absolute TP/FP mass on V6 and per-video F1 gains on V4/V5.
 Candidate explanations include renormalisation under fewer active channels, altered merges with the fixed strike path and permissive matching; the frozen artefacts do not identify a single proven mechanism.
 Figure~\ref{fig:dropout} must not be read as evidence of graceful degradation under natural missingness.
-Near-ties, brittle baselines and unresolved mechanisms are retained because they reduce wasted tuning and clarify which modules deserve instrumentation~\cite{lipton2018mythos,pineau2021reproducibility,kapoor2023leakage}.
+Near-ties, brittle baselines and unresolved mechanisms are retained because they reduce wasted tuning and clarify which pipeline stages deserve instrumentation~\cite{lipton2018mythos,pineau2021reproducibility,kapoor2023leakage}.
 
 Several limits follow directly from the frozen protocol.
 The sample comprises $n{=}10$ videos, so statistical power is limited and the interaction $p{=}0.048$ is borderline and multiplicity-unadjusted.
@@ -285,8 +282,8 @@ The combined timeline includes a fixed strike component that can attenuate risk-
 Labels are punch/impact proxies rather than clinical or safety ground truth.
 Natural availability is $\alpha{\equiv}1$, missingness results are synthetic, and the small explicit micro-F1 increase is descriptive only.
 Weights, thresholds and rules are hand-authored, so historical tuning leakage cannot be ruled out.
-The matcher is permissive (IoU~$0.01$, $d_{\min}{=}0$) and stricter matching lowers F1 in post-hoc checks.
-There is no independent external dataset, operator study or deployment claim; one interaction rule cannot fire and another records zero firings; and Tier~B full re-execution requires redistributable derived feature caches outside the public Tier~A artefact (Section~\ref{sec:reproducibility}).
+The matcher is permissive (IoU threshold~$0.01$, $d_{\min}{=}0$) and stricter matching lowers F1 in post-hoc checks.
+There is no independent external dataset, operator study or deployment claim; one interaction rule cannot fire and another records zero firing incidences; and Tier~B full re-execution requires redistributable derived feature caches outside the public Tier~A artefact (Section~\ref{sec:reproducibility}).
 
 %% ------------------------------------------------------------------
 \section{Conclusion}
