@@ -126,16 +126,15 @@ def fig_save(name: str) -> None:
 
 
 def architecture_figure() -> None:
-    # Column-width figure for iicol: readable labels (>=7 pt) without excess height.
-    _fig, ax = plt.subplots(figsize=(3.35, 3.45))
+    # Column-width figure for iicol: readable labels, inset from edges to avoid clip.
+    _fig, ax = plt.subplots(figsize=(3.2, 3.5))
     ax.set_xlim(0, 10)
     ax.set_ylim(0, 10)
     ax.axis("off")
 
     def box(x, y, w, h, lines, fc="#F5F5F5", ec="#333", fs=7.5):
-        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.1)
+        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.05)
         ax.add_patch(rect)
-        # Place lines with explicit vertical spacing to avoid overlap after shrink.
         n = len(lines)
         for i, line in enumerate(lines):
             yy = y + h * (1.0 - (i + 0.5) / n)
@@ -146,52 +145,55 @@ def architecture_figure() -> None:
             "",
             xy=(x, y1),
             xytext=(x, y0),
-            arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.05},
+            arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.0},
         )
 
-    box(0.35, 8.3, 4.4, 1.4, ["Fixed feature", "matrices"], fc="#E8E8E8", fs=8.0)
+    # Leave ~0.45 data-units margin on both sides so bbox/tight save does not clip.
+    box(0.55, 8.25, 4.15, 1.4, ["Fixed feature", "matrices"], fc="#E8E8E8", fs=7.8)
     box(
-        5.25,
-        8.3,
-        4.4,
+        5.3,
+        8.25,
+        4.15,
         1.4,
         ["Evidence channels", r"$(c_{i,t},\alpha_{i,t})$"],
         fc="#E8E8E8",
-        fs=8.0,
+        fs=7.8,
     )
     ax.annotate(
         "",
-        xy=(5.25, 9.0),
-        xytext=(4.75, 9.0),
-        arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.05},
+        xy=(5.3, 8.95),
+        xytext=(4.7, 8.95),
+        arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.0},
     )
-    varrow(5.0, 8.3, 7.5)
+    varrow(5.0, 8.25, 7.45)
 
     box(
-        0.35,
-        5.25,
-        4.4,
-        2.25,
-        ["Varied risk path", "equal / weighted / max", "(+ interactions ON/OFF)"],
+        0.55,
+        5.15,
+        4.15,
+        2.3,
+        ["Varied risk path", "equal / weighted / max", "int. ON/OFF"],
         fc="#D9E8F5",
         fs=7.2,
     )
     box(
-        5.25,
-        5.25,
-        4.4,
-        2.25,
-        ["Fixed strike path", "baseline intervals", "unchanged"],
+        5.3,
+        5.15,
+        4.15,
+        2.3,
+        ["Fixed strike path", "baseline intervals", "held fixed"],
         fc="#F5E6D3",
         fs=7.2,
     )
-    varrow(2.55, 5.25, 4.25)
-    varrow(7.45, 5.25, 4.25)
+    varrow(2.62, 5.15, 4.15)
+    varrow(7.38, 5.15, 4.15)
 
-    box(1.2, 2.7, 7.6, 1.55, ["Bands + merge", "combined timeline"], fc="#EDEDED", fs=8.0)
-    varrow(5.0, 2.7, 1.7)
-    box(1.2, 0.15, 7.6, 1.55, ["Fixed matcher", "IoU / tolerance"], fc="#EDEDED", fs=8.0)
-    fig_save("fig_architecture")
+    box(1.4, 2.55, 7.2, 1.6, ["Bands + merge", "combined timeline"], fc="#EDEDED", fs=7.8)
+    varrow(5.0, 2.55, 1.55)
+    box(1.4, 0.2, 7.2, 1.35, ["Fixed matcher", "IoU / tolerance"], fc="#EDEDED", fs=7.8)
+    # Extra pad so vector text is not clipped at the PDF crop box.
+    plt.savefig(FIG / "fig_architecture.pdf", bbox_inches="tight", pad_inches=0.08)
+    plt.close()
 
 def main() -> None:
     summary = pd.read_csv(CANON / "experiment_summary.csv")
