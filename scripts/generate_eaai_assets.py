@@ -128,18 +128,28 @@ def fig_save(name: str) -> None:
 
 def architecture_figure() -> None:
     # Column-width figure for iicol: readable labels, inset from edges to avoid clip.
-    _fig, ax = plt.subplots(figsize=(3.2, 3.5))
+    # Flow: features -> evidence -> varied risk; strike path held fixed in parallel;
+    # both merge into the combined timeline, then fixed matcher.
+    _fig, ax = plt.subplots(figsize=(3.4, 4.0))
     ax.set_xlim(0, 10)
-    ax.set_ylim(0, 10)
+    ax.set_ylim(0, 10.2)
     ax.axis("off")
 
-    def box(x, y, w, h, lines, fc="#F5F5F5", ec="#333", fs=7.5):
-        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.05)
+    def box(x, y, w, h, lines, fc="#F5F5F5", ec="#333", fs=7.0, linespacing=1.65):
+        """Centered multiline label; linespacing keeps rows from colliding."""
+        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.05, zorder=2)
         ax.add_patch(rect)
-        n = len(lines)
-        for i, line in enumerate(lines):
-            yy = y + h * (1.0 - (i + 0.5) / n)
-            ax.text(x + w / 2, yy, line, ha="center", va="center", fontsize=fs)
+        ax.text(
+            x + w / 2,
+            y + h / 2,
+            "\n".join(lines),
+            ha="center",
+            va="center",
+            fontsize=fs,
+            linespacing=linespacing,
+            family="sans-serif",
+            zorder=3,
+        )
 
     def varrow(x, y0, y1):
         ax.annotate(
@@ -147,54 +157,92 @@ def architecture_figure() -> None:
             xy=(x, y1),
             xytext=(x, y0),
             arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.0},
+            zorder=1,
         )
 
-    # Leave ~0.45 data-units margin on both sides so bbox/tight save does not clip.
-    box(0.55, 8.25, 4.15, 1.4, ["Fixed feature", "matrices"], fc="#E8E8E8", fs=7.8)
+    left, gap, w = 0.40, 0.70, 4.25
+    right = left + w + gap
+    cx_l, cx_r = left + w / 2, right + w / 2
+    cx = 5.0
+
+    # Top: fixed features -> evidence channels (risk inputs).
+    y_top, h_top = 8.45, 1.45
+    box(left, y_top, w, h_top, ["Fixed feature", "matrices"], fc="#E8E8E8", fs=7.4, linespacing=1.55)
     box(
-        5.3,
-        8.25,
-        4.15,
-        1.4,
+        right,
+        y_top,
+        w,
+        h_top,
         ["Evidence channels", r"$(c_{i,t},\alpha_{i,t})$"],
         fc="#E8E8E8",
-        fs=7.8,
+        fs=7.4,
+        linespacing=1.55,
     )
     ax.annotate(
         "",
-        xy=(5.3, 8.95),
-        xytext=(4.7, 8.95),
+        xy=(right, y_top + h_top / 2),
+        xytext=(left + w, y_top + h_top / 2),
         arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.0},
+        zorder=1,
     )
-    varrow(5.0, 8.25, 7.45)
 
+    # Middle: risk varies from evidence; strike is a separate fixed path.
+    y_path, h_path = 5.15, 2.55
+    varrow(cx_r, y_top, y_path + h_path)
     box(
-        0.55,
-        5.15,
-        4.15,
-        2.3,
-        ["Varied risk path", "equal / weighted / max", "int. ON/OFF"],
+        right,
+        y_path,
+        w,
+        h_path,
+        ["Varied risk path", "equal / weighted / max", "interactions ON/OFF"],
         fc="#D9E8F5",
-        fs=7.2,
+        fs=6.9,
+        linespacing=1.75,
     )
     box(
-        5.3,
-        5.15,
-        4.15,
-        2.3,
+        left,
+        y_path,
+        w,
+        h_path,
         ["Fixed strike path", "baseline intervals", "held fixed"],
         fc="#F5E6D3",
-        fs=7.2,
+        fs=6.9,
+        linespacing=1.75,
     )
-    varrow(2.62, 5.15, 4.15)
-    varrow(7.38, 5.15, 4.15)
 
-    box(1.4, 2.55, 7.2, 1.6, ["Bands + merge", "combined timeline"], fc="#EDEDED", fs=7.8)
-    varrow(5.0, 2.55, 1.55)
-    box(1.4, 0.2, 7.2, 1.35, ["Fixed matcher", "IoU / tolerance"], fc="#EDEDED", fs=7.8)
-    # Extra pad so vector text is not clipped at the PDF crop box.
-    plt.savefig(FIG / "fig_architecture.pdf", bbox_inches="tight", pad_inches=0.08)
+    # Merge both paths, then matcher.
+    y_merge, h_merge = 2.55, 1.55
+    varrow(cx_l, y_path, y_merge + h_merge)
+    varrow(cx_r, y_path, y_merge + h_merge)
+    box(
+        1.25,
+        y_merge,
+        7.5,
+        h_merge,
+        ["Bands + merge", "combined timeline"],
+        fc="#EDEDED",
+        fs=7.3,
+        linespacing=1.6,
+    )
+    y_match, h_match = 0.25, 1.35
+    varrow(cx, y_merge, y_match + h_match)
+    box(
+        1.25,
+        y_match,
+        7.5,
+        h_match,
+        ["Fixed matcher", "IoU / tolerance"],
+        fc="#EDEDED",
+        fs=7.3,
+        linespacing=1.6,
+    )
+
+    out = FIG / "fig_architecture.pdf"
+    plt.savefig(out, bbox_inches="tight", pad_inches=0.12)
     plt.close()
+    sivp_fig = PAPER1 / "manuscript_sivp" / "figures" / "fig_architecture.pdf"
+    if sivp_fig.parent.is_dir():
+        sivp_fig.write_bytes(out.read_bytes())
 
 def main() -> None:
     summary = pd.read_csv(CANON / "experiment_summary.csv")
