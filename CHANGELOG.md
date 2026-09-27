@@ -6,7 +6,7 @@
 
 - Journal-neutral project presentation: FightSafe AI as an independent research-software artefact for an availability-aware interpretable temporal event pipeline.
 - Public metadata (`README.md`, `CITATION.cff`, `.zenodo.json`, `pyproject.toml`) updated to version **2.0.0**.
-- Citation guidance uses the Zenodo **concept / all-versions** DOI (`10.5281/zenodo.20622868`) until the version-specific DOI for this tag is known.
+- Official Zenodo **version** DOI for v2.0.0: https://doi.org/10.5281/zenodo.23003746 (concept / all-versions DOI `10.5281/zenodo.20622868`).
 
 ### Pipeline and reproducibility (unchanged core artefact)
 

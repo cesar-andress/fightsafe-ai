@@ -1,6 +1,6 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v2.0.0` (Zenodo concept DOI [`10.5281/zenodo.20622868`](https://doi.org/10.5281/zenodo.20622868); version-specific DOI is assigned by Zenodo after GitHub Release ingestion).
+**Current release:** `v2.0.0` (Zenodo version DOI [`10.5281/zenodo.23003746`](https://doi.org/10.5281/zenodo.23003746); concept / all-versions [`10.5281/zenodo.20622868`](https://doi.org/10.5281/zenodo.20622868)).
 
 The **GitHub repository root** is the canonical FightSafe AI research-software artefact. There is no nested Zenodo staging directory.
 
@@ -35,7 +35,7 @@ Confirm on GitHub:
 2. Open **Account → GitHub** and grant Zenodo access to `cesar-andress/fightsafe-ai`.
 3. Ensure the repository toggle is **ON** so Zenodo can archive GitHub releases.
 
-After a new GitHub Release is published, Zenodo assigns a **version-specific** DOI under the concept record `10.5281/zenodo.20622868`. Keep `.zenodo.json` journal-neutral; do not invent the new version DOI before Zenodo creates it.
+After a new GitHub Release is published, Zenodo assigns a **version-specific** DOI under the concept record `10.5281/zenodo.20622868`. For the published `v2.0.0` archive the version DOI is `10.5281/zenodo.23003746`. Keep `.zenodo.json` journal-neutral; do not invent a future version DOI before Zenodo creates it.
 
 ---
 
@@ -107,7 +107,8 @@ cd ../paper1 && latexmk -pdf -interaction=nonstopmode main.tex
 
 | Artifact | Identifier |
 |----------|------------|
-| Software (Zenodo concept + GitHub) | concept DOI `10.5281/zenodo.20622868` |
+| Software (Zenodo v2.0.0) | version DOI `10.5281/zenodo.23003746` |
+| Software (Zenodo concept / all versions) | concept DOI `10.5281/zenodo.20622868` |
 | GitHub release tag | `v2.0.0` |
 | CFF / package version | `2.0.0` |
 | Canonical scientific run | `canonical_results/run_20260730_005150/` |

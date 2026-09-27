@@ -1,6 +1,6 @@
 # Reproducibility guide
 
-**Software artifact:** FightSafe AI **v2.0.0** (Zenodo concept DOI [10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868)).
+**Software artifact:** FightSafe AI **v2.0.0** (Zenodo version DOI [10.5281/zenodo.23003746](https://doi.org/10.5281/zenodo.23003746); concept / all-versions [10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868)).
 
 This repository **root** is the official research-software artefact. Canonical frozen results live under `canonical_results/run_20260730_005150/`. Restricted video, skeleton keypoints and `features_cache` binaries are **not** redistributed (see `NOTICE_DATA.md`).
 

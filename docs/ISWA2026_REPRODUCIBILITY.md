@@ -2,7 +2,7 @@
 
 Documentation for the ISWA 2026 traceability manuscript (*Information Systems and e-Business Management*).
 
-**Current canonical software artefact (this repository):** FightSafe AI **v2.0.0** — Zenodo concept DOI [`10.5281/zenodo.20622868`](https://doi.org/10.5281/zenodo.20622868), GitHub tag `v2.0.0`. Use that release for all new work and for citations of the public software package.
+**Current canonical software artefact (this repository):** FightSafe AI **v2.0.0** — Zenodo version DOI [`10.5281/zenodo.23003746`](https://doi.org/10.5281/zenodo.23003746), concept / all-versions [`10.5281/zenodo.20622868`](https://doi.org/10.5281/zenodo.20622868), GitHub tag `v2.0.0`. Use that release for all new work and for citations of the public software package.
 
 A historical ISWA-aligned GitHub snapshot remains available as tag **`v0.1.4`** for provenance of that manuscript’s original reproducibility bundle; it must **not** be cited as the current public artefact.
 
@@ -22,7 +22,8 @@ General installation, environment variables, and cross-manuscript notes: [`REPRO
 |-------|-------|
 | Canonical artefact title | **FightSafe AI: Availability-Aware Interpretable Temporal Event Pipeline** |
 | Current repository release | **v2.0.0** (`pyproject.toml`, `CITATION.cff`, `src/fightsafe_ai/__version__.py`) |
-| Zenodo concept DOI (current) | [10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868) |
+| Zenodo version DOI (v2.0.0) | [10.5281/zenodo.23003746](https://doi.org/10.5281/zenodo.23003746) |
+| Zenodo concept / all-versions DOI | [10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868) |
 | GitHub tag (current) | `v2.0.0` (see [`docs/release_checklist.md`](release_checklist.md)) |
 | Historical ISWA snapshot tag | `v0.1.4` (provenance only; not the current citation) |
 

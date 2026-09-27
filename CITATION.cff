@@ -6,18 +6,19 @@ type: software
 version: 2.0.0
 date-released: 2026-09-28
 license: MIT
-doi: "10.5281/zenodo.20622868"
+doi: "10.5281/zenodo.23003746"
 repository-code: "https://github.com/cesar-andress/fightsafe-ai"
-url: "https://doi.org/10.5281/zenodo.20622868"
+url: "https://doi.org/10.5281/zenodo.23003746"
 abstract: >-
   FightSafe AI v2.0.0 research software for an availability-aware interpretable
   temporal event pipeline. The GitHub repository is the official package: Tier A
   verification and regeneration of reported tables and figures from frozen
   canonical result files (run_20260730_005150), configs, aggregation schemes with
   explicit availability masking, environment metadata and checksums. The DOI
-  above is the Zenodo concept (all-versions) identifier. Not a safety-certified
-  system; not a state-of-the-art detector claim; not a medical device. Synthetic
-  missingness only.
+  above is the Zenodo version-specific identifier for v2.0.0. Concept/all-versions
+  DOI: 10.5281/zenodo.20622868. Not a safety-certified system; not a
+  state-of-the-art detector claim; not a medical device. Synthetic missingness
+  only.
 authors:
   - family-names: Andrés
     given-names: César
@@ -29,6 +30,13 @@ authors:
     email: david.martinm@ucjc.edu
     orcid: "https://orcid.org/0000-0003-2422-9005"
     affiliation: "CRIA-BDHS Research Group, Higher Polytechnic School of Technology and Science, Universidad Camilo José Cela, Madrid, Spain"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23003746"
+    description: "This version (v2.0.0)"
+  - type: doi
+    value: "10.5281/zenodo.20622868"
+    description: "Concept / all-versions DOI"
 keywords:
   - interpretable AI
   - temporal event detection
@@ -49,5 +57,5 @@ preferred-citation:
       orcid: "https://orcid.org/0000-0003-2422-9005"
   year: 2026
   version: 2.0.0
-  doi: "10.5281/zenodo.20622868"
-  url: "https://doi.org/10.5281/zenodo.20622868"
+  doi: "10.5281/zenodo.23003746"
+  url: "https://doi.org/10.5281/zenodo.23003746"

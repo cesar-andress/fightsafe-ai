@@ -1,6 +1,10 @@
 # FightSafe AI
 
-**v2.0.0 — availability-aware interpretable temporal event pipeline**
+**FightSafe AI: Availability-Aware Interpretable Temporal Event Pipeline**
+
+Current release: **v2.0.0**
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23003746.svg)](https://doi.org/10.5281/zenodo.23003746)
 
 Research software for interpretable multi-channel temporal event processing from video-derived evidence.
 Upstream perception features can be held fixed while downstream aggregation, optional interaction rules, score banding, temporal consolidation and availability encoding are varied under an explicit availability mask \(\alpha\) distinct from observed zero-valued evidence.
@@ -8,6 +12,7 @@ Upstream perception features can be held fixed while downstream aggregation, opt
 | Resource | Location |
 |----------|----------|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
+| Zenodo (this version, v2.0.0) | [https://doi.org/10.5281/zenodo.23003746](https://doi.org/10.5281/zenodo.23003746) |
 | Zenodo (all versions) | [https://doi.org/10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868) |
 | Tag | `v2.0.0` |
 
@@ -136,7 +141,7 @@ pytest tests/unit -q
 
 ## Citation
 
-Cite the software version you used. The Zenodo concept DOI resolves to the latest archived version:
+Cite **FightSafe AI v2.0.0** with the version-specific Zenodo DOI:
 
 ```bibtex
 @software{fightsafe_ai_2026,
@@ -145,13 +150,13 @@ Cite the software version you used. The Zenodo concept DOI resolves to the lates
   year         = {2026},
   version      = {2.0.0},
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.20622868},
-  url          = {https://doi.org/10.5281/zenodo.20622868},
-  note         = {GitHub: https://github.com/cesar-andress/fightsafe-ai (tag v2.0.0); concept/all-versions DOI}
+  doi          = {10.5281/zenodo.23003746},
+  url          = {https://doi.org/10.5281/zenodo.23003746},
+  note         = {GitHub: https://github.com/cesar-andress/fightsafe-ai (tag v2.0.0)}
 }
 ```
 
-Also see `CITATION.cff`. After Zenodo archives this tag, prefer the version-specific DOI shown on the Zenodo record for that release.
+Also see `CITATION.cff`. Concept / all-versions DOI: [https://doi.org/10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868).
 
 ---
 
