@@ -1,8 +1,9 @@
 #!/usr/bin/env python3.12
-"""Generate EAAI manuscript figures and tables from the canonical checkpoint only.
+"""Generate manuscript figures and tables from the canonical frozen run only.
 
 LaTeX lives in the sibling manuscript workspace ``../paper1`` (or ``FIGHTSAFE_PAPER1_DIR``).
-This software repository does not ship manuscript sources.
+This software repository does not ship manuscript sources. Historical script name retained
+for reproducibility path stability.
 """
 
 from __future__ import annotations

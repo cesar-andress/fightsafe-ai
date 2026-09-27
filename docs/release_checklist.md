@@ -1,12 +1,12 @@
 # Release checklist — GitHub releases and Zenodo archive
 
-**Current release:** `v1.0.0` (Zenodo DOI [`10.5281/zenodo.21698326`](https://doi.org/10.5281/zenodo.21698326)).
+**Current release:** `v2.0.0` (Zenodo concept DOI [`10.5281/zenodo.20622868`](https://doi.org/10.5281/zenodo.20622868); version-specific DOI is assigned by Zenodo after GitHub Release ingestion).
 
-The **GitHub repository root** is the canonical FightSafe AI v1.0.0 research artefact. There is no nested Zenodo staging directory.
+The **GitHub repository root** is the canonical FightSafe AI research-software artefact. There is no nested Zenodo staging directory.
 
 Use this checklist for public software releases. All documentation updates must stay in **English**.
 
-Companion LaTeX manuscripts outside this repository (`../paper1`, `../iswa2026`, `../sports`; archived IF: `../legacy/fusion2026`) may cite the shared software entry. The active EAAI manuscript lives in sibling `../paper1/` (not inside this GitHub software repository).
+Companion LaTeX manuscripts outside this repository (`../paper1`, `../iswa2026`, `../sports`; archived workspaces under `../legacy/`) may cite the shared software entry. Manuscripts are not shipped inside this GitHub software repository.
 
 ---
 
@@ -35,7 +35,7 @@ Confirm on GitHub:
 2. Open **Account → GitHub** and grant Zenodo access to `cesar-andress/fightsafe-ai`.
 3. Ensure the repository toggle is **ON** so Zenodo can archive GitHub releases.
 
-For v1.0.0 the version DOI is already assigned: `10.5281/zenodo.21698326`. Keep `.zenodo.json` and `CITATION.cff` aligned with that DOI.
+After a new GitHub Release is published, Zenodo assigns a **version-specific** DOI under the concept record `10.5281/zenodo.20622868`. Keep `.zenodo.json` journal-neutral; do not invent the new version DOI before Zenodo creates it.
 
 ---
 
@@ -43,15 +43,15 @@ For v1.0.0 the version DOI is already assigned: `10.5281/zenodo.21698326`. Keep 
 
 | Field | Value |
 |-------|--------|
-| Tag | `v1.0.0` |
+| Tag | `v2.0.0` |
 | Target | final commit on `main` |
-| Title | `FightSafe v1.0.0 — EAAI Reproducibility Artefact` |
-| Description | Repository root is the canonical artefact; link Zenodo DOI; point to root `README.md` for Tier A; note restricted-data exclusions |
+| Title | `FightSafe AI v2.0.0` |
+| Description | Repository root is the canonical artefact; link Zenodo concept DOI; point to root `README.md` for Tier A; note restricted-data exclusions |
 
 ```bash
-git tag -a v1.0.0 -m "FightSafe v1.0.0 — canonical EAAI reproducibility artefact"
-git push origin v1.0.0
-gh release create v1.0.0 --title "FightSafe v1.0.0 — EAAI Reproducibility Artefact" --notes-file -
+git tag -a v2.0.0 -m "FightSafe AI v2.0.0"
+git push origin v2.0.0
+gh release create v2.0.0 --title "FightSafe AI v2.0.0" --notes-file -
 ```
 
 ---
@@ -60,11 +60,11 @@ gh release create v1.0.0 --title "FightSafe v1.0.0 — EAAI Reproducibility Arte
 
 | File | Required fields |
 |------|-----------------|
-| [`CITATION.cff`](../CITATION.cff) | `version: 1.0.0`, `doi: "10.5281/zenodo.21698326"` |
-| [`README.md`](../README.md) | Version badge/table, citation block, Zenodo URL |
+| [`CITATION.cff`](../CITATION.cff) | `version: 2.0.0`, concept DOI if version DOI unknown |
+| [`README.md`](../README.md) | Version table, citation block, Zenodo URL |
 | [`.zenodo.json`](../.zenodo.json) | `version`, creators, licence, related identifiers, description of the **repository itself** |
-| [`pyproject.toml`](../pyproject.toml) / [`src/fightsafe_ai/__version__.py`](../src/fightsafe_ai/__version__.py) | `1.0.0` |
-| [`CHANGELOG.md`](../CHANGELOG.md) | `[1.0.0]` entry |
+| [`pyproject.toml`](../pyproject.toml) / [`src/fightsafe_ai/__version__.py`](../src/fightsafe_ai/__version__.py) | `2.0.0` |
+| [`CHANGELOG.md`](../CHANGELOG.md) | `[2.0.0]` entry |
 
 Do **not** commit placeholder DOIs (`10.5281/zenodo.PENDING` / `XXXXXXX`) or placeholder ORCIDs.
 
@@ -85,9 +85,7 @@ Expected: Tier A `overall: PASS`; checksums match; no nested `release/` tree.
 
 ## 6. Companion manuscripts (optional monorepo)
 
-Recompile external companion papers if they cite this software entry, and ensure bibliography DOIs match `10.5281/zenodo.21698326` / version `1.0.0`.
-
-EAAI manuscript (sibling `../paper1/`):
+Recompile external companion papers if they cite this software entry, and update bibliography DOIs after Zenodo publishes the version-specific record for `v2.0.0`.
 
 ```bash
 python3.12 scripts/generate_eaai_assets.py
@@ -109,8 +107,8 @@ cd ../paper1 && latexmk -pdf -interaction=nonstopmode main.tex
 
 | Artifact | Identifier |
 |----------|------------|
-| Software (Zenodo + GitHub) | `fightsafe_ai_2026` / DOI `10.5281/zenodo.21698326` |
-| GitHub release tag | `v1.0.0` |
-| CFF / package version | `1.0.0` |
+| Software (Zenodo concept + GitHub) | concept DOI `10.5281/zenodo.20622868` |
+| GitHub release tag | `v2.0.0` |
+| CFF / package version | `2.0.0` |
 | Canonical scientific run | `canonical_results/run_20260730_005150/` |
-| EAAI manuscript | sibling `../paper1/` |
+| Companion manuscript (optional) | sibling `../paper1/` |

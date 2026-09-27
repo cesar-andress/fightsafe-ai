@@ -16,4 +16,4 @@ This module is part of a research-oriented system for human-in-the-loop safety a
 Package version (single source of truth for imports and metadata).
 """
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"

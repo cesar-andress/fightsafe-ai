@@ -1,16 +1,16 @@
 # Reproducibility guide
 
-**Software artifact:** FightSafe AI **v1.0.0** (Zenodo [10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326)).
+**Software artifact:** FightSafe AI **v2.0.0** (Zenodo concept DOI [10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868)).
 
-This repository **root** is the official reproducibility artefact. Canonical EAAI results live under `canonical_results/run_20260730_005150/`. Restricted video, skeleton keypoints and `features_cache` binaries are **not** redistributed (see `NOTICE_DATA.md`).
+This repository **root** is the official research-software artefact. Canonical frozen results live under `canonical_results/run_20260730_005150/`. Restricted video, skeleton keypoints and `features_cache` binaries are **not** redistributed (see `NOTICE_DATA.md`).
 
 This document also maps older companion manuscripts (outside this repo) to software commands where applicable.
 
 **Layout assumption (monorepo siblings, optional):**
 
 ```
-papers/fightsafe-ai/fightsafe-ai/   ← this GitHub repository (canonical v1.0.0)
-papers/fightsafe-ai/legacy/fusion2026/  ← archived Information Fusion manuscript
+papers/fightsafe-ai/fightsafe-ai/   ← this GitHub repository (canonical v2.0.0)
+papers/fightsafe-ai/legacy/fusion2026/  ← archived historical manuscript workspace
 papers/fightsafe-ai/iswa2026/       ← traceability architecture manuscript
 papers/fightsafe-ai/sports/         ← FightSafe-Bench manuscript
 ```
@@ -19,7 +19,7 @@ Override paths with environment variables (see [Environment variables](#environm
 
 ---
 
-## EAAI Tier A (canonical, from repository root)
+## Tier A (canonical, from repository root)
 
 ```bash
 pip install -e ".[dev]"
@@ -67,7 +67,7 @@ make verify-repro
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `FUSION_DIR` | `../legacy/fusion2026` | Information Fusion LaTeX root |
+| `FUSION_DIR` | `../legacy/fusion2026` | Archived legacy manuscript LaTeX root |
 | `ISWA_DIR` | `../iswa2026` | Traceability manuscript LaTeX root |
 | `SPORTS_DIR` | `../sports` | FightSafe-Bench LaTeX root |
 | `REPO_ROOT` | auto | Software repository root |
@@ -78,7 +78,7 @@ make verify-repro
 
 ---
 
-## fusion2026 — Information Fusion
+## fusion2026 — archived legacy manuscript workspace
 
 ### Scientific artefacts
 

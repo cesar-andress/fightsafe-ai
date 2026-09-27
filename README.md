@@ -1,28 +1,32 @@
 # FightSafe AI
 
-**v1.0.0 — canonical EAAI reproducibility artefact**
+**v2.0.0 — availability-aware interpretable temporal event pipeline**
 
-Research software for interpretable multi-source temporal event pipelines, with an accompanying manuscript for *Engineering Applications of Artificial Intelligence* (EAAI):
-
-*Engineering an Interpretable Temporal Event Pipeline with Explicit Channel Availability: A Combat-Sports Case Study*
-
-This GitHub repository **is** the official v1.0.0 artefact. There is no nested staging or release subdirectory.
+Research software for interpretable multi-channel temporal event processing from video-derived evidence.
+Upstream perception features can be held fixed while downstream aggregation, optional interaction rules, score banding, temporal consolidation and availability encoding are varied under an explicit availability mask \(\alpha\) distinct from observed zero-valued evidence.
 
 | Resource | Location |
 |----------|----------|
 | Source code | [https://github.com/cesar-andress/fightsafe-ai](https://github.com/cesar-andress/fightsafe-ai) |
-| Zenodo DOI | [https://doi.org/10.5281/zenodo.21698326](https://doi.org/10.5281/zenodo.21698326) |
-| Tag | `v1.0.0` |
+| Zenodo (all versions) | [https://doi.org/10.5281/zenodo.20622868](https://doi.org/10.5281/zenodo.20622868) |
+| Tag | `v2.0.0` |
 
 **Not** a medical device, clinical diagnostic tool, autonomous officiating system, or deployment-ready safety product.
 
 ---
 
-## Engineering problem
+## What the software implements
 
-Perception modules emit soft channel confidences at uneven reliability; channels may be unavailable; and review workflows need intervals that remain inspectable. FightSafe AI separates held-fixed perception features from interpretable aggregation, optional interaction rules, score banding and temporal consolidation, with an explicit availability mask \(\alpha\) distinct from zero-valued evidence.
+Perception modules emit soft channel confidences at uneven reliability; channels may be unavailable; and review workflows need intervals that remain inspectable. FightSafe AI provides:
 
-The EAAI case study freezes perception, varies aggregation / interaction / synthetic availability encoding, and reports protocol-limited findings on BoxingVI punch/impact *proxy* labels (canonical checkpoint `run_20260730_005150`).
+- named evidence channels with soft confidence \(c\) and binary availability \(\alpha\);
+- availability-aware equal, weighted and max aggregation;
+- optional configured interaction-rule boosts with exportable firings;
+- HIGH/CRITICAL banding and temporal consolidation into risk intervals;
+- a separate strike-interval path that can be held fixed while the risk path is re-aggregated;
+- combined-timeline matching against proxy temporal labels for controlled evaluation.
+
+A frozen BoxingVI case-study run (`canonical_results/run_20260730_005150`) supports Tier A regeneration of tables/figures from canonical CSVs under synthetic channel dropout. Findings are protocol-limited (\(n{=}10\) videos; proxy punch/impact labels).
 
 ---
 
@@ -35,7 +39,7 @@ pyproject.toml, .zenodo.json, environment.yml, requirements.txt
 src/fightsafe_ai/          # Python package
 tests/                     # unit / integration / e2e tests
 configs/                   # YAML rules and weights (incl. risk_fusion.yaml)
-scripts/                   # EAAI asset regeneration and Tier A validation
+scripts/                   # asset regeneration and Tier A validation
 annotations/               # BoxingVI punch-interval proxies + case-study labels
 canonical_results/         # frozen CSVs/matrices for run_20260730_005150
 checksums/                 # SHA-256 manifests for the public tree
@@ -44,7 +48,7 @@ docs/                      # architecture and reproducibility notes
 environment/               # Tier A freeze notes
 ```
 
-The EAAI LaTeX manuscript lives in the sibling monorepo directory `../paper1/` (not in this GitHub repository).
+Companion LaTeX manuscripts, when used, live outside this GitHub software repository (sibling workspaces in a local monorepo layout).
 
 ---
 
@@ -55,7 +59,7 @@ The EAAI LaTeX manuscript lives in the sibling monorepo directory `../paper1/` (
 ```bash
 git clone https://github.com/cesar-andress/fightsafe-ai.git
 cd fightsafe-ai
-git checkout v1.0.0
+git checkout v2.0.0
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -U pip wheel
@@ -66,23 +70,24 @@ Verify:
 
 ```bash
 fightsafe --help
+fightsafe --version
 make test-unit
 ```
 
 ---
 
-## Tier A reproducibility (EAAI)
+## Tier A reproducibility
 
-Tier A regenerates and verifies manuscript tables/figures from **frozen** canonical CSVs. It does **not** re-run perception or require skeleton keypoints / raw video / `features_cache`.
+Tier A regenerates and verifies reported tables/figures from **frozen** canonical CSVs. It does **not** re-run perception or require skeleton keypoints / raw video / `features_cache`.
 
 ```bash
-# Regenerate manuscript figures/tables into sibling ../paper1/
+# Regenerate manuscript figures/tables into sibling ../paper1/ (if present)
 python3.12 scripts/generate_eaai_assets.py
 
 # Verify package checksums
 python3.12 scripts/verify_checksums.py
 
-# End-to-end Tier A checks (imports, numbers, regeneration, tests; builds paper1 if present)
+# End-to-end Tier A checks (imports, numbers, regeneration, tests)
 python3.12 scripts/validate_tier_a.py
 
 # Aggregation unit tests
@@ -91,14 +96,6 @@ PYTHONPATH=src python3.12 -m pytest tests/unit/test_aggregation_schemes.py -q
 
 Canonical path: `canonical_results/run_20260730_005150/`.  
 Frozen numbers mirror: `canonical_results/analysis/numbers.json`.
-
-Compile the manuscript (sibling workspace):
-
-```bash
-cd ../paper1
-latexmk -pdf -interaction=nonstopmode main.tex
-# bibliography: bibtex main   (not bibtex main.aux)
-```
 
 Override manuscript location with `FIGHTSAFE_PAPER1_DIR` if needed.
 
@@ -132,29 +129,29 @@ pytest tests/unit -q
 - pooled metrics dominated by stem V6;
 - combined timeline includes a fixed strike component;
 - natural availability \(\alpha{\equiv}1\); missingness results are synthetic;
-- proxy punch/impact labels, not clinical ground truth;
+- proxy punch/impact labels, not validated safety ground truth;
 - not a deployment or operator-outcome study.
-
-Full limits are stated in the manuscript.
 
 ---
 
 ## Citation
 
+Cite the software version you used. The Zenodo concept DOI resolves to the latest archived version:
+
 ```bibtex
-@misc{fightsafe_ai_2026,
+@software{fightsafe_ai_2026,
   author       = {Andr\'{e}s, C\'{e}sar and Martin Moncunill, David},
-  title        = {{FightSafe AI} --- {EAAI} reproducibility artefact (availability-aware temporal event pipeline)},
+  title        = {{FightSafe AI}: Availability-Aware Interpretable Temporal Event Pipeline},
   year         = {2026},
-  version      = {1.0.0},
+  version      = {2.0.0},
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.21698326},
-  url          = {https://doi.org/10.5281/zenodo.21698326},
-  note         = {GitHub: https://github.com/cesar-andress/fightsafe-ai (tag v1.0.0)}
+  doi          = {10.5281/zenodo.20622868},
+  url          = {https://doi.org/10.5281/zenodo.20622868},
+  note         = {GitHub: https://github.com/cesar-andress/fightsafe-ai (tag v2.0.0); concept/all-versions DOI}
 }
 ```
 
-Also see `CITATION.cff`.
+Also see `CITATION.cff`. After Zenodo archives this tag, prefer the version-specific DOI shown on the Zenodo record for that release.
 
 ---
 

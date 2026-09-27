@@ -2,9 +2,9 @@
 
 Small CSV/JSON files shipped with the repository so verification scripts can run **without** large videos or BoxingVI skeleton keypoints.
 
-## fusion2026 (archived IF reference CSVs)
+## fusion2026 (archived legacy reference CSVs)
 
-The Information Fusion manuscript tree itself is at `../legacy/fusion2026/`.
+The archived manuscript tree itself is at `../legacy/fusion2026/`.
 
 `fusion2026/reference/boxingvi/`
 

@@ -75,6 +75,28 @@ report_app = typer.Typer(
 )
 
 
+def _version_callback(value: bool) -> None:
+    if value:
+        from fightsafe_ai import __version__
+
+        typer.echo(__version__)
+        raise typer.Exit()
+
+
+@app.callback()
+def _root(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        help="Show package version and exit.",
+        callback=_version_callback,
+        is_eager=True,
+    ),
+) -> None:
+    """FightSafe AI CLI root callback."""
+    _ = version
+
+
 # --- Validation & UX helpers (CLI-only; no domain rules) ---
 
 

@@ -1,5 +1,5 @@
-# FightSafe AI — optional LaTeX build for archived IF manuscript (legacy/fusion2026).
-# Active EAAI manuscript lives outside this GitHub repo in sibling ../paper1/.
+# FightSafe AI — optional LaTeX build for archived legacy manuscript (legacy/fusion2026).
+# Active companion manuscripts may live outside this GitHub repo in sibling ../paper1/.
 name: paper
 
 on:

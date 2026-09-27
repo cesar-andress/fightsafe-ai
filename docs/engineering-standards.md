@@ -126,7 +126,7 @@ For contribution workflow and ethical context, see [contributing.md](contributin
 
 ## 11. Living research document (paper1/main.tex)
 
-The **EAAI manuscript** (`../paper1/main.tex` in the monorepo layout) is the **authoritative, version-controlled research narrative** for the current FightSafe AI line (motivation, architecture, evaluation posture, and design decisions). It must stay **aligned** with the codebase and experiments. The rejected Information Fusion draft lives under `../legacy/fusion2026/` and is not maintained.
+Companion manuscripts (`../paper1/main.tex` in the monorepo layout, when present) are the **authoritative, version-controlled research narrative** for the current FightSafe AI line (motivation, architecture, evaluation posture, and design decisions). They must stay **aligned** with the codebase and experiments. Historical draft workspaces under `../legacy/` are not maintained as the public software identity.
 
 - **When an update is required** — Any **meaningful** architectural, methodological, experimental, **evaluation**, or **design** change should be reflected in `../paper1/main.tex` in the same PR (or a tightly coupled follow-up that lands before the next release), so readers can cite one coherent document.
 
@@ -147,7 +147,7 @@ The **EAAI manuscript** (`../paper1/main.tex` in the monorepo layout) is the **a
   - **Internal refactors** with **no** conceptual or user-visible impact.
   - **Minor test-only** changes (assertions, fixtures) that do not document new research or evaluation policy.
 
-- **Build:** Build the EAAI PDF from `../paper1/` (e.g. `latexmk -pdf main.tex`). Historical IF builds may use `make fusion-pdf` with `FUSION_DIR=../legacy/fusion2026`. See [contributing.md](contributing.md) for the PR checklist item on `../paper1/main.tex`.
+- **Build:** Build companion PDFs from `../paper1/` when present (e.g. `latexmk -pdf main.tex`). Historical legacy builds may use `make fusion-pdf` with `FUSION_DIR=../legacy/fusion2026`. See [contributing.md](contributing.md) for the PR checklist item on `../paper1/main.tex`.
 
 **Rationale:** The paper is the single place where **research intent, limitations, and design trade-offs** stay traceable alongside `git` history, without duplicating the whole of `docs/` in prose.
 

@@ -25,7 +25,7 @@ Thank you for taking time to improve this project. FightSafe AI is an **open-sou
 
 For a high-level data flow, see [architecture.md](architecture.md). For direction of travel, see [roadmap.md](roadmap.md).
 
-The **EAAI manuscript** (`../paper1/main.tex` in the monorepo layout) must stay aligned with meaningful product and research changes; see **Section 11** in [engineering-standards.md](engineering-standards.md) for the normative rule, examples, and exceptions.
+Companion manuscripts (`../paper1/main.tex` in the monorepo layout, when present) must stay aligned with meaningful product and research changes; see **Section 11** in [engineering-standards.md](engineering-standards.md) for the normative rule, examples, and exceptions.
 
 ---
 

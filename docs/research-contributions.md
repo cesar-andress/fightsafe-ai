@@ -72,4 +72,4 @@ FightSafe AI contributes: (1) a safety- and review-oriented problem framing, inc
 
 ---
 
-*This document is a drafting aid. The final submission must support comparative claims with peer-reviewed citations; adjust tone and length to the target Q1 journal (e.g. sports informatics, multimedia, or HCI with applications).*
+*This document is a drafting aid. Comparative claims must be supported with peer-reviewed citations; adjust tone and length to the intended research venue (e.g. sports informatics, multimedia, or HCI with applications).*

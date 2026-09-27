@@ -82,7 +82,8 @@ def main() -> int:
         failed = True
 
     agg = ROOT / "src/fightsafe_ai/evaluation/aggregation_schemes.py"
-    expect = "4d19f0f69238c9afdf365b6baeae26986a2d7086fb2b24170f5b2ce5b6209281"
+    # SHA-256 of the shipped aggregation_schemes.py (updated for v2.0.0 release tree).
+    expect = "7b42c46ea9abee2f951339d19942a3fc65b4b6816a68b9d9f169a0df6b92586f"
     got = sha256(agg)
     results["aggregation_hash"] = "PASS" if got == expect else f"FAIL {got}"
     if got != expect:
@@ -243,10 +244,13 @@ def main() -> int:
                 "outputs/",
                 "runs/",
                 ".git/",
+                ".ruff_cache/",
+                ".mypy_cache/",
+                ".pytest_cache/",
             )
         ):
             continue
-        if "__pycache__" in rel or ".venv" in rel:
+        if "__pycache__" in rel or ".venv" in rel or ".ruff_cache" in rel:
             continue
         if Path(rel).suffix.lower() in skip_suffixes:
             continue
