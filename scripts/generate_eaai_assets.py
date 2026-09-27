@@ -126,40 +126,71 @@ def fig_save(name: str) -> None:
 
 
 def architecture_figure() -> None:
-    _fig, ax = plt.subplots(figsize=(10.4, 4.4))
-    ax.set_xlim(0, 10.2)
-    ax.set_ylim(0, 4.2)
+    # Column-width figure for iicol: readable labels (>=7 pt) without excess height.
+    _fig, ax = plt.subplots(figsize=(3.35, 3.45))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 10)
     ax.axis("off")
 
-    def box(x, y, w, h, text, fc="#F5F5F5", ec="#333", fs=7.5):
-        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.2)
+    def box(x, y, w, h, lines, fc="#F5F5F5", ec="#333", fs=7.5):
+        rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.1)
         ax.add_patch(rect)
-        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs)
+        # Place lines with explicit vertical spacing to avoid overlap after shrink.
+        n = len(lines)
+        for i, line in enumerate(lines):
+            yy = y + h * (1.0 - (i + 0.5) / n)
+            ax.text(x + w / 2, yy, line, ha="center", va="center", fontsize=fs)
 
-    box(0.15, 1.45, 1.55, 1.2, "Fixed feature\nmatrices", fc="#E8E8E8")
-    box(1.95, 1.45, 1.7, 1.2, "Evidence channels\n$(c_{i,t},\\alpha_{i,t})$", fc="#E8E8E8")
-    box(3.9, 2.45, 2.25, 1.15, "Varied risk path\nequal / weighted / max\n(+ interactions ON/OFF)", fc="#D9E8F5", fs=7)
-    box(3.9, 0.45, 2.25, 1.15, "Fixed strike path\nbaseline intervals\nunchanged", fc="#F5E6D3", fs=7)
-    box(6.4, 1.45, 1.7, 1.2, "Bands + merge\ncombined timeline", fc="#EDEDED")
-    box(8.35, 1.45, 1.6, 1.2, "Fixed matcher\nIoU / tolerance", fc="#EDEDED")
-    for x0, x1, y in [(1.7, 1.95, 2.05), (3.65, 3.9, 2.05), (6.15, 6.4, 2.05), (8.1, 8.35, 2.05)]:
+    def varrow(x, y0, y1):
         ax.annotate(
-            "", xy=(x1, y), xytext=(x0, y), arrowprops={"arrowstyle": "->", "color": "#333"}
+            "",
+            xy=(x, y1),
+            xytext=(x, y0),
+            arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.05},
         )
-    ax.plot([5.02, 5.02], [1.6, 2.45], color="#1F4E79", lw=1.2)
+
+    box(0.35, 8.3, 4.4, 1.4, ["Fixed feature", "matrices"], fc="#E8E8E8", fs=8.0)
+    box(
+        5.25,
+        8.3,
+        4.4,
+        1.4,
+        ["Evidence channels", r"$(c_{i,t},\alpha_{i,t})$"],
+        fc="#E8E8E8",
+        fs=8.0,
+    )
     ax.annotate(
         "",
-        xy=(6.4, 2.05),
-        xytext=(5.02, 2.05),
-        arrowprops={"arrowstyle": "->", "color": "#333"},
+        xy=(5.25, 9.0),
+        xytext=(4.75, 9.0),
+        arrowprops={"arrowstyle": "->", "color": "#333", "lw": 1.05},
     )
-    ax.text(
-        5.1,
-        3.85,
-        "Same inputs: only the risk path varies across experimental conditions",
-        ha="center",
-        fontsize=9.5,
+    varrow(5.0, 8.3, 7.5)
+
+    box(
+        0.35,
+        5.25,
+        4.4,
+        2.25,
+        ["Varied risk path", "equal / weighted / max", "(+ interactions ON/OFF)"],
+        fc="#D9E8F5",
+        fs=7.2,
     )
+    box(
+        5.25,
+        5.25,
+        4.4,
+        2.25,
+        ["Fixed strike path", "baseline intervals", "unchanged"],
+        fc="#F5E6D3",
+        fs=7.2,
+    )
+    varrow(2.55, 5.25, 4.25)
+    varrow(7.45, 5.25, 4.25)
+
+    box(1.2, 2.7, 7.6, 1.55, ["Bands + merge", "combined timeline"], fc="#EDEDED", fs=8.0)
+    varrow(5.0, 2.7, 1.7)
+    box(1.2, 0.15, 7.6, 1.55, ["Fixed matcher", "IoU / tolerance"], fc="#EDEDED", fs=8.0)
     fig_save("fig_architecture")
 
 def main() -> None:
@@ -668,7 +699,6 @@ def main() -> None:
     ax.set_ylabel("Pooled micro-F1")
     ax.set_title("Synthetic missingness only (natural $\\alpha\\equiv 1$)")
     ax.legend(frameon=False, fontsize=8)
-    ax.text(0.02, 0.05, "Axis [0,1]; not a robustness claim", fontsize=7, transform=ax.transAxes)
     fig_save("fig_dropout")
 
     # Failures figure with rates where possible
