@@ -126,37 +126,41 @@ def fig_save(name: str) -> None:
 
 
 def architecture_figure() -> None:
-    _fig, ax = plt.subplots(figsize=(10.2, 4.2))
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 4)
+    _fig, ax = plt.subplots(figsize=(10.4, 4.4))
+    ax.set_xlim(0, 10.2)
+    ax.set_ylim(0, 4.2)
     ax.axis("off")
 
-    def box(x, y, w, h, text, fc="#F5F5F5", ec="#333"):
+    def box(x, y, w, h, text, fc="#F5F5F5", ec="#333", fs=7.5):
         rect = plt.Rectangle((x, y), w, h, facecolor=fc, edgecolor=ec, lw=1.2)
         ax.add_patch(rect)
-        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=8)
+        ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs)
 
-    box(0.2, 1.4, 1.6, 1.2, "Held-fixed\nfeatures", fc="#E8E8E8")
-    box(2.1, 1.4, 1.8, 1.2, "Channels\n$(c_i,\\alpha_i)$", fc="#E8E8E8")
-    box(4.2, 2.35, 2.0, 1.0, "Varied risk path\nagg. + interactions", fc="#D9E8F5")
-    box(4.2, 0.55, 2.0, 1.0, "Fixed strike path\n(held constant)", fc="#F5E6D3")
-    box(6.5, 1.4, 1.6, 1.2, "Combined\ntimeline", fc="#EDEDED")
-    box(8.3, 1.4, 1.5, 1.2, "Matcher\nIoU / tol.", fc="#EDEDED")
-    for x0, x1, y in [(1.8, 2.1, 2.0), (3.9, 4.2, 2.0), (6.2, 6.5, 2.0), (8.1, 8.3, 2.0)]:
+    box(0.15, 1.45, 1.55, 1.2, "Fixed feature\nmatrices", fc="#E8E8E8")
+    box(1.95, 1.45, 1.7, 1.2, "Evidence channels\n$(c_{i,t},\\alpha_{i,t})$", fc="#E8E8E8")
+    box(3.9, 2.45, 2.25, 1.15, "Varied risk path\nequal / weighted / max\n(+ interactions ON/OFF)", fc="#D9E8F5", fs=7)
+    box(3.9, 0.45, 2.25, 1.15, "Fixed strike path\nbaseline intervals\nunchanged", fc="#F5E6D3", fs=7)
+    box(6.4, 1.45, 1.7, 1.2, "Bands + merge\ncombined timeline", fc="#EDEDED")
+    box(8.35, 1.45, 1.6, 1.2, "Fixed matcher\nIoU / tolerance", fc="#EDEDED")
+    for x0, x1, y in [(1.7, 1.95, 2.05), (3.65, 3.9, 2.05), (6.15, 6.4, 2.05), (8.1, 8.35, 2.05)]:
         ax.annotate(
             "", xy=(x1, y), xytext=(x0, y), arrowprops={"arrowstyle": "->", "color": "#333"}
         )
+    ax.plot([5.02, 5.02], [1.6, 2.45], color="#1F4E79", lw=1.2)
     ax.annotate(
         "",
-        xy=(5.2, 2.35),
-        xytext=(5.2, 2.6),
-        arrowprops={"arrowstyle": "-", "color": "#1F4E79"},
+        xy=(6.4, 2.05),
+        xytext=(5.02, 2.05),
+        arrowprops={"arrowstyle": "->", "color": "#333"},
     )
-    ax.plot([5.2, 5.2], [1.55, 2.35], color="#1F4E79", lw=1)
-    ax.plot([5.2, 6.5], [2.0, 2.0], color="#333", lw=1)
-    ax.text(5.2, 3.55, "Fixed vs varied components (canonical protocol)", ha="center", fontsize=10)
+    ax.text(
+        5.1,
+        3.85,
+        "Same inputs: only the risk path varies across experimental conditions",
+        ha="center",
+        fontsize=9.5,
+    )
     fig_save("fig_architecture")
-
 
 def main() -> None:
     summary = pd.read_csv(CANON / "experiment_summary.csv")
